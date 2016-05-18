@@ -12,4 +12,9 @@ $vin-red: #ff0000;
 body {
   font-family: "微軟正黑體";
   overflow: hidden;
+  height: 100%;
+}
+
+html,div[data-reactroot],#app{
+    height: 100%;
 }

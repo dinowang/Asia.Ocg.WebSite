@@ -1,0 +1,33 @@
+.search-input{
+  position: relative;
+  input{
+    background-color: #374850;
+    border:0;
+    border-radius: 5px;
+    height:40px;
+    width:90%;
+    margin:0 10px;
+    font-size: 1rem;
+    color: #fff;
+    outline: none;
+    padding:0 10px 0 5px;
+    transition: all .5s;
+    text-transform: uppercase;
+    &:focus{
+      background-color: #fff;
+      color:#333;
+      width:78%;
+      ~ a{
+        display: block;
+      }
+    }
+  }
+  a{
+    position: absolute;
+    right:16px;
+    top:10px;
+    color:#fff;
+    display: none;
+    transform: scale(1.3);
+  }
+}
