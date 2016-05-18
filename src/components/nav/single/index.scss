@@ -1,0 +1,19 @@
+.single-menu{
+  padding:10px 15px;
+  height:50px;
+  border-left: 5px solid rgba(0,0,0,0);
+  line-height: 2rem;
+  transition: all .2s;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:1px;
+  &:hover{
+    background-color: #374850;
+    border-left: 5px solid #3c8dbc;
+    cursor: pointer;
+    color:#fff;
+  }
+  span{
+    margin-right:10px;
+  }
+
+}

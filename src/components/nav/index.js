@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon} from 'react-fa'
 import SearchInput from '../searchInput'
+import Single from './single'
 import './index.scss';
 
 class Nav extends React.Component {
@@ -21,6 +22,9 @@ class Nav extends React.Component {
           </div>
         </div>
         <SearchInput onChange={this.test} placeholder="卡號、卡片名稱"  />
+        <Single value="牌組區" icon="list"/>
+        <Single value="禁卡表" icon="ban"/>
+        <Single value="進階搜尋" icon="search-plus"/>
 
       </div>
     );
