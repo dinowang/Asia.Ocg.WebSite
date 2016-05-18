@@ -1,0 +1,22 @@
+.header{
+  color:#fff;
+  width:100%;
+  div{
+    // display: inline-block;
+    padding:5px;
+    height: 35px;
+  }
+  .logo{
+    width:150px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #337ab7;
+    float: left;
+  }
+  .info-bar{
+    background-color: #3c8dbc;
+    overflow:hidden;
+    // width:100%;
+  }
+}
