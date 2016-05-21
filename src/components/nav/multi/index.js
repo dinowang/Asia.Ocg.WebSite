@@ -3,6 +3,13 @@ import {Icon} from 'react-fa'
 import './index.scss';
 
 const Multi = (props) => {
+  let renderli =(data) =>{
+    return (
+      <li>
+        <Icon name="dot-circle-o"/>{data}
+      </li>
+    )
+  }
   return (
     <div className="multi-menu">
     <input type="checkbox" id="test1" />
@@ -13,16 +20,9 @@ const Multi = (props) => {
       <Icon name="arrow-left"/>
     </label>
       <ul>
-        <li>
-          <Icon name="dot-circle-o"/>test1
-        </li>
-        <li>
-          <Icon name="dot-circle-o"/>test1
-        </li>
+        {props.values.map(renderli)}
       </ul>
       <div className="border"/>
-
-
     </div>
   );
 };

@@ -3,15 +3,19 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import HomePage from './components/HomePage';
-import FuelSavingsPage from './containers/FuelSavingsPage'; // eslint-disable-line import/no-named-as-default
-import AboutPage from './components/AboutPage.js';
+import DeckPage from './containers/DeckPage';
+import BanPage from './containers/BanPage';
+import SearchPage from './containers/SearchPage';
+
 import NotFoundPage from './components/NotFoundPage.js';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
-    <Route path="fuel-savings" component={FuelSavingsPage}/>
-    <Route path="about" component={AboutPage}/>
+    <Route path="deck" component={DeckPage}/>
+    <Route path="ban" component={BanPage}/>
+    <Route path="search" component={SearchPage}/>
+
     <Route path="*" component={NotFoundPage}/>
   </Route>
 );

@@ -14,8 +14,18 @@ body {
   font-family: "微軟正黑體";
   overflow: hidden;
   height: 100%;
+  background-color: #ecf0f5
+
 }
 
 html,div[data-reactroot],#app{
     height: 100%;
+}
+.container{
+  display: inline-block;
+  position: absolute;
+  width:84%;
+  height:100%;
+  padding: 30px;
+  overflow: scroll;
 }

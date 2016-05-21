@@ -1,0 +1,37 @@
+.search-tableR{
+  // border:1px solid #;
+  .card-list{
+    height:125px;
+    margin-bottom: 10px;
+    img{
+      height: 120px;
+    }
+    .card-info{
+      display: inline-block;
+      height:125px;
+      overflow: auto;
+      width:calc(100% - 118px);
+    }
+    p{
+      line-height: 1.5rem;
+      padding-left: 10px;
+      font-size: 1.3rem;
+    }
+    ul{
+      li{
+        display: inline-block;
+        border:1px solid #aaa;
+        padding: 10px;
+        width:16.666%;
+      }
+    }
+    span{
+      border: 1px solid #aaa;
+      border-top: none;
+      display: block;
+      padding: 10px;
+      height: 49%;
+    }
+  }
+
+}
