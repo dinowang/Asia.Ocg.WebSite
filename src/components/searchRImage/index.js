@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import './index.scss';
 
-const SearchResult = (props) => {
+const SearchRImage = (props) => {
   // const handleChange = (e) => {
   //   props.onChange(e.target.value);
   // };
@@ -31,15 +31,15 @@ const SearchResult = (props) => {
   let test = [1,2,3,4,5,6,7,8,9,10];
 
   return (
-    <div className="search-tableR">
+    <div className="search-RImage">
       {test.map(renderLi)}
     </div>
   );
 };
 
-SearchResult.propTypes = {
+SearchRImage.propTypes = {
   // onChange: PropTypes.func.isRequired,
   // placeholder: PropTypes.string
 };
 
-export default SearchResult;
+export default SearchRImage;

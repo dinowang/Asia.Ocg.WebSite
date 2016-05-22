@@ -1,5 +1,6 @@
 import React from 'react';
-import SearchTableR from '../../components/searchTableR';
+import SearchRImage from '../../components/searchRImage';
+import SearchRText from '../../components/searchRText';
 import './index.scss';
 
 export const SearchPage = () => {
@@ -7,9 +8,13 @@ export const SearchPage = () => {
     <div className="search-page">
     <h1>搜尋：DREV-JP001</h1>
     <div className="board">
-    <SearchTableR></SearchTableR>
+      <hr/>
+        <SearchRText></SearchRText>
+
     </div>
     </div>
   );
 };
+// <SearchRImage></SearchRImage>
+// <SearchRText></SearchRText>
 export default SearchPage;

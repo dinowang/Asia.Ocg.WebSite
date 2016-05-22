@@ -1,0 +1,14 @@
+.search-RText{
+  table{
+    border-collapse: collapse;
+    width:100%;
+  }
+  td{
+    padding: 10px;
+    border:1px solid #aaa;
+    &:first-child{
+      // background-color: red;
+      width:40%;
+    }
+  }
+}

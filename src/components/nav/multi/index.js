@@ -3,9 +3,9 @@ import {Icon} from 'react-fa'
 import './index.scss';
 
 const Multi = (props) => {
-  let renderli =(data) =>{
+  let renderli =(data, index) =>{
     return (
-      <li>
+      <li key={index}>
         <Icon name="dot-circle-o"/>{data}
       </li>
     )
