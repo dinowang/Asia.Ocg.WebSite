@@ -1,7 +1,7 @@
 {
-  "name": "react-slingshot",
-  "version": "4.0.0",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "asiaocg",
+  "version": "0.0.1",
+  "description": "http://xpg.cards",
   "scripts": {
     "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
@@ -19,8 +19,7 @@
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "Cory House",
-  "license": "MIT",
+  "author": "ChRick",
   "dependencies": {
     "object-assign": "4.1.0",
     "react": "15.0.2",
@@ -70,24 +69,5 @@
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
-  },
-  "keywords:": [
-    "react",
-    "reactjs",
-    "react-router",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack",
-    "redux",
-    "flux",
-    "boilerplate",
-    "starter"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/coryhouse/react-slingshot"
   }
 }
