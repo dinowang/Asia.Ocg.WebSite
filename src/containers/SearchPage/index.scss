@@ -3,10 +3,29 @@
     margin-bottom:20px;
   }
   .board{
+    display: inline-block;
     background-color: #fff;
     border-top:5px solid #ddd;
     width:80%;
     padding: 10px;
+    overflow: auto;
+  }
+  .other{
+    width:18%;
+    float: right;
+    padding: 10px;
+    border-top:5px solid #3c8dbc;
+    background-color: #fff;
+  }
+  .sort{
+    float: left;
+    span{
+      margin:10px;
+      color:#333;
+    }
+  }
+  .page-list{
+    float: right;
   }
 
 }
