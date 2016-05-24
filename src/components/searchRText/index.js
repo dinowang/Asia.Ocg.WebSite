@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import React from 'react';
 import './index.scss';
 
-const SearchRText = (props) => {
+const SearchRText = () => {
   let renderLi = (data, index)=>{
     return(
       <tr key={index}>
@@ -30,8 +29,6 @@ const SearchRText = (props) => {
 };
 
 SearchRText.propTypes = {
-  // onChange: PropTypes.func.isRequired,
-  // placeholder: PropTypes.string
 };
 
 export default SearchRText;

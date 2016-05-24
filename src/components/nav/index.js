@@ -28,6 +28,8 @@ class Nav extends React.Component {
         <Single value="進階搜尋" icon="search-plus" href="/search"/>
         <Multi icon="ban" title="Test" values={t}/>
         <Single value="進階搜尋" icon="search-plus" href="/search" />
+        <Single value="積分換商品" icon="search-plus" href="/search" />
+
 
       </div>
     );

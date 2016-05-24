@@ -37,7 +37,7 @@ export default {
       {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
         test: /(\.css|\.scss)$/,
-        include: path.join(__dirname, 'src'),
+        // include: path.join(__dirname, 'src'),
         loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
       }
     ]

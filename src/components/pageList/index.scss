@@ -1,0 +1,40 @@
+.page-list{
+  margin:10px;
+  ul{
+    li{
+      display: inline-block;
+      border: 1px solid #aaa;
+      border-right:none;
+      text-align: center;
+      min-width:30px;
+      line-height:1rem;
+      &:first-child{
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-child{
+        border-radius: 0 5px 5px 0;
+        border-right: 1px solid #aaa;
+      }
+      &:hover{
+        background-color: #ddd;
+      }
+
+    }
+    .active{
+      border:1px solid #337ab7;
+      a{
+        color:#fff;
+        background-color: #337ab7;
+      }
+    }
+
+  }
+  a{
+    color:#777;
+    text-decoration: none;
+    display: block;
+    padding:5px;
+    font-size: 1rem;
+  }
+
+}

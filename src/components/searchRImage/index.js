@@ -1,11 +1,7 @@
-import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import React from 'react';
 import './index.scss';
 
-const SearchRImage = (props) => {
-  // const handleChange = (e) => {
-  //   props.onChange(e.target.value);
-  // };
+const SearchRImage = () => {
   let renderLi =()=>{
     return (
       <div className="card-list">
@@ -38,8 +34,6 @@ const SearchRImage = (props) => {
 };
 
 SearchRImage.propTypes = {
-  // onChange: PropTypes.func.isRequired,
-  // placeholder: PropTypes.string
 };
 
 export default SearchRImage;
