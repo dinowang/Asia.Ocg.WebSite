@@ -1,39 +1,39 @@
-import React from 'react';
+import React, {PropTypes}from 'react';
 import './index.scss';
 
-const SearchRImage = () => {
-  let renderLi =()=>{
+const SearchRImage = (props) => {
+  let renderLi =(item, index)=>{
+    const {name, image_url, kind, level, property, race, attack, defence, effect} = item;
     return (
-      <div className="card-list">
-        <img src="http://www.toretoku.jp/images/items/l/104246jbt.jpg?20151210183254"></img>
+      <div className="card-list" key={index}>
+        <img src={image_url}></img>
         <div className="card-info">
-          <p>效果分隔士</p>
+          <p>{name}</p>
           <ul>
-            <li>同步怪獸</li>
-            <li>等級7</li>
-            <li>光</li>
-            <li>獸族</li>
-            <li>2500</li>
-            <li>2000</li>
+            <li>{kind}</li>
+            <li>{level}</li>
+            <li>{property}</li>
+            <li>{race}</li>
+            <li>{attack}</li>
+            <li>{defence}</li>
           </ul>
-          <span>
-            獸族協調+協調以外的怪獸1體以上
-這張卡由於對方被破壞的場合，雙方玩家從牌組上將7張卡送入墓地。
+          <span dangerouslySetInnerHTML={{__html: effect}}>
+
           </span>
         </div>
       </div>
     )
   };
-  let test = [1,2,3,4,5,6,7,8,9,10];
 
   return (
     <div className="search-RImage">
-      {test.map(renderLi)}
+      {props.data.map(renderLi)}
     </div>
   );
 };
 
 SearchRImage.propTypes = {
+  data:PropTypes.array.isRequired
 };
 
 export default SearchRImage;

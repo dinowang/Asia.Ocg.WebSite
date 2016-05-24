@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import fuelSavings from './fuelSavingsReducer';
+import search from './searchReducer';
+
 
 const rootReducer = combineReducers({
-  fuelSavings
+  search
 });
 
 export default rootReducer;
