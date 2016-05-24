@@ -1,15 +1,15 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa'
+import {Icon} from 'react-fa';
 import './index.scss';
 
 const Multi = (props) => {
-  let renderli =(data, index) =>{
+  let renderli = (data, index) => {
     return (
       <li key={index}>
         <Icon name="dot-circle-o"/>{data}
       </li>
-    )
-  }
+    );
+  };
   return (
     <div className="multi-menu">
     <input type="checkbox" id="test1" />

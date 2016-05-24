@@ -1,5 +1,4 @@
-
-import { handleActions } from 'redux-actions'
+import { handleActions } from 'redux-actions';
 
 const initialState ={
     "total_page":20,
@@ -29,14 +28,9 @@ const initialState ={
         "serial_number": "12345678"
       }
     ]
-}
-
-
-
-
+};
 export default handleActions({
   'basic search' (state, action) {
-    console.log('basic search')
     return initialState;
   }
-}, initialState)
+}, initialState);

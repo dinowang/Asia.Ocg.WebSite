@@ -22,7 +22,7 @@ const SearchRImage = (props) => {
           </span>
         </div>
       </div>
-    )
+    );
   };
 
   return (

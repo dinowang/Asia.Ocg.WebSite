@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon} from 'react-fa'
+import {Icon} from 'react-fa';
 import './index.scss';
 
 class Header extends React.Component {

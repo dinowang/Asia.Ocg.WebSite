@@ -29,8 +29,7 @@ class PageList extends React.Component {
       const href = `#${i}`;
       const style = current === i ? 'active':'';
       li.push(<li key={i} className={style}><a href={href}>{i}</a></li>);
-      count++
-
+      count++;
     }
     if(count < showCount){
       for (let i = current-Math.floor(showCount/2)-1; i >0; i--) {
@@ -42,11 +41,6 @@ class PageList extends React.Component {
 
       }
     }
-
-
-
-
-
     return(
       <div className="page-list">
         <ul>
@@ -57,7 +51,7 @@ class PageList extends React.Component {
 
         </ul>
       </div>
-    )
+    );
   }
 }
 PageList.propTypes = {

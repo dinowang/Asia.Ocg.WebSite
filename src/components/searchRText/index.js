@@ -1,27 +1,28 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import './index.scss';
 
-const SearchRText = () => {
-  let renderLi = (data, index)=>{
+const SearchRText = (props) => {
+  let renderLi = (item, index)=>{
+    const {name, kind, level, property, race, attack, defence} = item;
+
     return(
       <tr key={index}>
-        <td>效果分隔士</td>
-        <td>同步怪獸</td>
-        <td>等級7</td>
-        <td>光</td>
-        <td>獸族</td>
-        <td>2500</td>
-        <td>2500</td>
+        <td>{name}</td>
+        <td>{kind}</td>
+        <td>{level}</td>
+        <td>{property}</td>
+        <td>{race}</td>
+        <td>{attack}</td>
+        <td>{defence}</td>
 
       </tr>
     );
-  }
-  let test = [1,2,3,4,5,6,7,8,9,10]
+  };
   return (
     <div className="search-RText">
       <table>
         <tbody>
-          {test.map(renderLi)}
+          {props.data.map(renderLi)}
         </tbody>
       </table>
     </div>
@@ -29,6 +30,7 @@ const SearchRText = () => {
 };
 
 SearchRText.propTypes = {
+  data:PropTypes.array.isRequired
 };
 
 export default SearchRText;
