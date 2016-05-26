@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Icon} from 'react-fa';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../actions/searchActions';
 import SearchInput from '../searchInput';
 import Single from './single';
 import Multi from './multi';
 import './index.scss';
 
 class Nav extends React.Component {
-  test(value){
-    console.log(value);
-  }
+
+  searchOnChange(value){
+    clearTimeout(this.onChangeEvent);
+    this.onChangeEvent = setTimeout(()=>{
+      this.props.actions.requestSearch(value);
+    },500);
+  };
   render() {
     let t= [1,2,3];
     return (
@@ -22,7 +29,7 @@ class Nav extends React.Component {
             </p>
           </div>
         </div>
-        <SearchInput onChange={this.test} placeholder="卡號、卡片名稱"  />
+        <SearchInput onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
         <Single value="牌組區" icon="list" href="/deck"/>
         <Single value="禁卡表" icon="ban" href="/ban"/>
         <Single value="進階搜尋" icon="search-plus" href="/search"/>
@@ -38,4 +45,23 @@ class Nav extends React.Component {
 
 
 
-export default Nav;
+Nav.propsTypes ={
+  search:PropTypes.object
+};
+
+function mapStateToProps(state) {
+  return {
+    search: state.search
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);

@@ -1,17 +1,30 @@
 {
-  "total_page":20,
-  "items":[
+  "total_page": 123,
+  "total_count": 123,
+  "items": [
     {
-      "name": "效果分隔士",
-      "image_url": "http://www.toretoku.jp/images/items/l/104246jbt.jpg?20151210183254",
+      "name": "鑽頭戰士",
+      "image_url": null,
       "kind": "同步怪獸",
-      "level": "等級7",
-      "property": "光",
-      "race": "獸族",
-      "attack": 2500,
-      "defence": 1700,
-      "effect": "獸族協調+協調以外的怪獸1體以上 這張卡由於對方被破壞的場合，雙方玩家從牌組上將7張卡送入墓地。",
-      "serial_number": "12345678"
-    }
+      "level": "等級6",
+      "property": "地",
+      "race": "戰士族",
+      "attack": 2400,
+      "defence": 2000,
+      "effect": "「鑽頭同步者」+協調以外的怪獸1體以上\r\n1回合1次，在我方的主要階段時可以發動。此卡攻擊力變為效果處理當時數值的一半，此回合此卡可以直接攻擊。1回合1次，在我方的主要階段時可以發動。捨棄1張手札，此卡移除。下個我方的準備階段時，此效果移除的此卡在我方場上特殊召喚。之後，我方墓地存在的1體怪獸加入手札。",
+      "serial_number": "03429238"
+    },
+    {
+      "name": "同步融合師",
+      "image_url": null,
+      "kind": "效果怪獸",
+      "level": "等級2",
+      "property": "闇",
+      "race": "魔法使族",
+      "attack": 800,
+      "defence": 600,
+      "effect": "此卡作為同步召喚的素材送入墓地的場合可以發動。從我方牌組將1張「融合(Fusion或Polymerization)」之名的魔法卡加入手札。",
+      "serial_number": "15839054"
+    },
   ]
 }

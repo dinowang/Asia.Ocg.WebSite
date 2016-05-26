@@ -30,7 +30,7 @@ const initialState ={
     ]
 };
 export default handleActions({
-  'basic search' (state, action) {
-    return initialState;
+  'fetch basic' (state, action) {
+  return action.payload;
   }
 }, initialState);
