@@ -10,9 +10,10 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk),
     compose(
     // Add other middleware on this line...
+    applyMiddleware(thunk),
+    
     window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
     )
   );

@@ -2,7 +2,9 @@ import React, {PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import './index.scss';
 class PageList extends React.Component {
-
+  click(page){
+    this.props.onClick(page);
+  };
   render(){
     const {total, current, showCount} = this.props;
     const li = [];
@@ -17,7 +19,7 @@ class PageList extends React.Component {
         continue;
       const href = `#${i}`;
       const style = current === i ? 'active':'';
-      li.push(<li key={i} className={style}><a href={href}>{i}</a></li>);
+      li.push(<li key={i} className={style} onClick={()=>this.click(i)}>{i}</li>);
       count++;
     }
 
@@ -28,7 +30,7 @@ class PageList extends React.Component {
         continue;
       const href = `#${i}`;
       const style = current === i ? 'active':'';
-      li.push(<li key={i} className={style}><a href={href}>{i}</a></li>);
+      li.push(<li key={i} className={style} onClick={()=>this.click(i)}>{i}</li>);
       count++;
     }
     if(count < showCount){
@@ -36,19 +38,20 @@ class PageList extends React.Component {
         if(count>=showCount)
           break;
         const href = `#${i}`;
-        li.splice(0,0,<li key={i+'c'}><a href={href}>{i}</a></li>);
+        li.splice(0,0,<li key={i+'c'} onClick={()=>this.click(i)}>{i}</li>);
         count++;
 
       }
     }
+    const prevStyle = current-1 <=0 ? 'disabled' : '';
+    const nextStyle = current+1 >total ? 'disabled' : '';
+
     return(
       <div className="page-list">
         <ul>
-          <li><a href="#"><Icon name="angle-double-left"/></a></li>
+          <li className={prevStyle} onClick={prevStyle===''?()=>this.click(current-1):''}><Icon name="angle-double-left"/></li>
           {li}
-
-          <li><a href="#"><Icon name="angle-double-right"/></a></li>
-
+          <li className={nextStyle} onClick={nextStyle===''?()=>this.click(this.props.current+1):''}><Icon name="angle-double-right"/></li>
         </ul>
       </div>
     );
@@ -57,7 +60,8 @@ class PageList extends React.Component {
 PageList.propTypes = {
   current: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  showCount: PropTypes.number
+  showCount: PropTypes.number,
+  onClick: PropTypes.func.isRequired
 };
 
 export default PageList;

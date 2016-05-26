@@ -11,9 +11,15 @@ import './index.scss';
 class Nav extends React.Component {
 
   searchOnChange(value){
+    value = value.toUpperCase();
+    this.props.actions.inputSearch({
+      query: value,
+      current_page:
+    1});
+
     clearTimeout(this.onChangeEvent);
     this.onChangeEvent = setTimeout(()=>{
-      this.props.actions.requestSearch(value);
+      this.props.actions.requestSearch(this.props.search);
     },500);
   };
   render() {
