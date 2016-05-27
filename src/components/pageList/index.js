@@ -8,7 +8,7 @@ class PageList extends React.Component {
     this.props.onClick(page);
   };
   render(){
-    const {total, current, showCount,query} = this.props;
+    const {totalPage, current, showCount,query} = this.props;
     const li = [];
     let count = 0;
     let start =0;
@@ -25,7 +25,7 @@ class PageList extends React.Component {
       count++;
     }
 
-    for (let i=current+1; i <=total; i++) {
+    for (let i=current+1; i <=totalPage; i++) {
       if(count>=showCount)
         break;
       if(i===0)
@@ -45,10 +45,11 @@ class PageList extends React.Component {
       }
     }
     const prevStyle = current-1 <=0 ? 'disabled' : '';
-    const nextStyle = current+1 >total ? 'disabled' : '';
+    const nextStyle = current+1 >totalPage ? 'disabled' : '';
 
     return(
       <div className="page-list">
+          <span>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>
         <ul>
           <li className={prevStyle} onClick={prevStyle===''?()=>this.click(current-1):''}><Icon name="angle-double-left"/></li>
           {li}
@@ -60,9 +61,10 @@ class PageList extends React.Component {
 }
 PageList.propTypes = {
   current: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  totalPage: PropTypes.number.isRequired,
   showCount: PropTypes.number,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  totalCount: PropTypes.number
 };
 
 export default PageList;

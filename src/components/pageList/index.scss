@@ -1,6 +1,11 @@
 .page-list{
   margin:10px;
+  >span{
+    margin-right: 20px;
+  }
   ul{
+    display: inline-block;
+
     li,a{
       text-decoration: none;
       color:#000;

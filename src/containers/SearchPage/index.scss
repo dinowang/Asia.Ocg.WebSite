@@ -19,9 +19,13 @@
   }
   .sort{
     float: left;
+    font-size: 1.2rem;
     span{
       margin:10px;
       color:#333;
+    }
+    .active{
+      color:#3c8dbc;
     }
   }
   .page-list{
