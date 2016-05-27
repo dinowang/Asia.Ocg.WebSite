@@ -21,6 +21,9 @@ class SearchPage extends React.Component {
     actions.changePage(page);
     actions.requestSearch();
   };
+  changeMode(mode){
+    this.props.actions.changeMode(mode)
+  }
   render(){
     const { search, actions } = this.props;
     return (
@@ -29,13 +32,31 @@ class SearchPage extends React.Component {
         <div className="board">
           <div className="sort">
             排列方式：
-            <Icon name="picture-o"/>
-            <Icon name="th-list"/>
+            <Icon className={search.display_mode=== 0 ? 'active' :''} onMouseOver={()=>this.changeMode(0)} name="picture-o"/>
+            <Icon className={search.display_mode=== 1 ? 'active' :''}  onMouseOver={()=>this.changeMode(1)} name="th-list"/>
           </div>
-          <PageList query={search.query} current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
+          <PageList
+            query={search.query}
+            current={search.current_page}
+            totalPage={search.total_page}
+            totalCount={search.total_count}
+            showCount={5}
+            onClick={(page)=>this.handlePageList(page)}/>
           <div className="clear"></div>
-          <SearchRText data={search.items}/>
-          <PageList query={search.query} current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
+            {(() => {
+          switch (search.display_mode) {
+            case 0:   return <SearchRImage data={search.items}/>;
+            case 1:   return <SearchRText data={search.items}/>;
+          }
+            })()}
+            <PageList
+              query={search.query}
+              current={search.current_page}
+              totalPage={search.total_page}
+              totalCount={search.total_count}
+              showCount={5}
+              onClick={(page)=>this.handlePageList(page)}/>
+
         </div>
         <div className="other">
           other
@@ -44,7 +65,7 @@ class SearchPage extends React.Component {
     );
   }
 }
-
+// <SearchRImage data={search.items}/>
 SearchPage.propsTypes ={
   search:PropTypes.object
 };
