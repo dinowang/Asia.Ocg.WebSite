@@ -11,7 +11,7 @@ const SearchInput = (props) => {
   }
   return (
     <div className="search-input">
-      <input onFocus={handleFocus} onChange={handleChange} className="search" type="search" placeholder={props.placeholder} />
+      <input onFocus={handleFocus} onChange={handleChange} className="search" type="search" placeholder={props.placeholder} value={props.value} />
     </div>
   );
 };
@@ -19,7 +19,8 @@ const SearchInput = (props) => {
 SearchInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+  value: PropTypes.string
 };
 
 export default SearchInput;

@@ -20,7 +20,7 @@ class Nav extends React.Component {
 
     clearTimeout(this.onChangeEvent);
     this.onChangeEvent = setTimeout(()=>{
-      this.props.actions.requestSearch(this.props.search);
+      this.props.actions.requestSearch();
       this.handleInputFoucs();
     },500);
   };
@@ -42,7 +42,7 @@ class Nav extends React.Component {
             </p>
           </div>
         </div>
-        <SearchInput onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
+        <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
         <Single value="牌組區" icon="list" href="/deck"/>
         <Single value="禁卡表" icon="ban" href="/ban"/>
         <Single value="進階搜尋" icon="search-plus" href="/ban"/>

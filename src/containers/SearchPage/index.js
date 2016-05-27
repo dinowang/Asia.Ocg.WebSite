@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { browserHistory } from 'react-router';
 import PageList from '../../components/pageList';
 import * as actions from '../../actions/searchActions';
 import SearchRText from '../../components/searchRText';
@@ -9,12 +10,18 @@ import SearchRImage from '../../components/searchRImage';
 import './index.scss';
 
 class SearchPage extends React.Component {
+  componentWillMount(){
+    let {query} = this.props.params;
+    this.props.actions.inputSearch({query:query.toUpperCase()});
+    this.handlePageList(1);
+  };
   handlePageList(page){
-    const {actions,search} = this.props;
+    let {actions,search} = this.props;
     actions.changePage(page);
-    actions.requestSearch(search);
+    actions.requestSearch();
   };
   render(){
+    console.log('render')
     const { search, actions } = this.props;
     return (
       <div className="search-page">
@@ -44,7 +51,8 @@ SearchPage.propsTypes ={
 
 function mapStateToProps(state) {
   return {
-    search: state.search
+    search: state.search,
+    nav: browserHistory
   };
 }
 
