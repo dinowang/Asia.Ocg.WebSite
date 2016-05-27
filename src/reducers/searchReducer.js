@@ -16,7 +16,6 @@ export default handleActions({
     return Object.assign({},state,action.payload);
   },
   'change page' (state, action){
-    console.log('changePage')
     state.current_page = action.payload;
     return Object.assign({},state);
   }

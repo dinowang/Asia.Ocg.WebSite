@@ -1,12 +1,14 @@
 import React, {PropTypes} from 'react';
 import {Icon} from 'react-fa';
+import { IndexLink, Link } from 'react-router';
+
 import './index.scss';
 class PageList extends React.Component {
   click(page){
     this.props.onClick(page);
   };
   render(){
-    const {total, current, showCount} = this.props;
+    const {total, current, showCount,query} = this.props;
     const li = [];
     let count = 0;
     let start =0;
@@ -17,9 +19,9 @@ class PageList extends React.Component {
     for (let i=start; i <=current; i++) {
       if(i===0)
         continue;
-      const href = `#${i}`;
+      const href = `/search/${query}/${i}`;
       const style = current === i ? 'active':'';
-      li.push(<li key={i} className={style} onClick={()=>this.click(i)}>{i}</li>);
+      li.push(<Link className={style} to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
 
@@ -28,19 +30,18 @@ class PageList extends React.Component {
         break;
       if(i===0)
         continue;
-      const href = `#${i}`;
+      const href = `/search/${query}/${i}`;
       const style = current === i ? 'active':'';
-      li.push(<li key={i} className={style} onClick={()=>this.click(i)}>{i}</li>);
+      li.push(<Link className={style} to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
     if(count < showCount){
       for (let i = current-Math.floor(showCount/2)-1; i >0; i--) {
         if(count>=showCount)
           break;
-        const href = `#${i}`;
-        li.splice(0,0,<li key={i+'c'} onClick={()=>this.click(i)}>{i}</li>);
-        count++;
-
+          const href = `/search/${query}/${i}`;
+          li.splice(0,0,<Link to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
+          count++;
       }
     }
     const prevStyle = current-1 <=0 ? 'disabled' : '';

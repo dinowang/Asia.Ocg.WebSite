@@ -11,9 +11,10 @@ import './index.scss';
 
 class SearchPage extends React.Component {
   componentWillMount(){
-    let {query} = this.props.params;
+    let {query, page} = this.props.params;
     this.props.actions.inputSearch({query:query.toUpperCase()});
-    this.handlePageList(1);
+    page = page ? page : 1;
+    this.handlePageList(parseInt(page));
   };
   handlePageList(page){
     let {actions,search} = this.props;
@@ -21,7 +22,6 @@ class SearchPage extends React.Component {
     actions.requestSearch();
   };
   render(){
-    console.log('render')
     const { search, actions } = this.props;
     return (
       <div className="search-page">
@@ -32,10 +32,10 @@ class SearchPage extends React.Component {
             <Icon name="picture-o"/>
             <Icon name="th-list"/>
           </div>
-          <PageList current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
+          <PageList query={search.query} current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
           <div className="clear"></div>
           <SearchRText data={search.items}/>
-          <PageList current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
+          <PageList query={search.query} current={search.current_page} total={search.total_page} showCount={5} onClick={(page)=>this.handlePageList(page)}/>
         </div>
         <div className="other">
           other

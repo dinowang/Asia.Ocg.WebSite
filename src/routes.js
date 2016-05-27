@@ -15,6 +15,8 @@ export default (
     <Route path="deck" component={DeckPage}/>
     <Route path="ban" component={BanPage}/>
     <Route path="search/:query" component={SearchPage}/>
+    <Route path="search/:query/:page" component={SearchPage}/>
+
 
     <Route path="*" component={NotFoundPage}/>
   </Route>

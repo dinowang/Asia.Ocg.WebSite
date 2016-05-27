@@ -26,7 +26,7 @@ class Nav extends React.Component {
   };
   handleInputFoucs(){
     if(this.props.search.query){
-      this.props.nav.push(`/search/${this.props.search.query}`);
+      this.props.nav.push(`/search/${this.props.search.query}/${this.props.search.current_page}`);
     }
   };
   render() {
