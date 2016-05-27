@@ -3,7 +3,8 @@ import './index.scss';
 
 const SearchRImage = (props) => {
   let renderLi =(item, index)=>{
-    const {name, image_url, kind, level, property, race, attack, defence, effect} = item;
+    let {name, image_url, kind, level, property, race, attack, defence, effect} = item;
+    image_url = image_url ? image_url :"https://xpgcards.blob.core.windows.net/image/null.jpg";
     return (
       <div className="card-list" key={index}>
         <img src={image_url}></img>
