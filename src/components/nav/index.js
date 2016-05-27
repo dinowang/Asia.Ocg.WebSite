@@ -45,7 +45,7 @@ class Nav extends React.Component {
         <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
         <Single value="牌組區" icon="list" href="/deck"/>
         <Single value="禁卡表" icon="ban" href="/ban"/>
-        <Single value="進階搜尋" icon="search-plus" href="/ban"/>
+        <Single value="進階搜尋" icon="search-plus" href="/card"/>
         <Multi icon="ban" title="Test" values={t}/>
         <Single value="進階搜尋" icon="search-plus" href="/ban" />
         <Single value="積分換商品" icon="search-plus" href="/ban" />

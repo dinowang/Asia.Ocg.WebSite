@@ -6,6 +6,7 @@ import HomePage from './components/HomePage';
 import DeckPage from './containers/DeckPage';
 import BanPage from './containers/BanPage';
 import SearchPage from './containers/SearchPage';
+import CardPage from './containers/CardPage';
 
 import NotFoundPage from './components/NotFoundPage.js';
 
@@ -16,6 +17,7 @@ export default (
     <Route path="ban" component={BanPage}/>
     <Route path="search/:query" component={SearchPage}/>
     <Route path="search/:query/:page" component={SearchPage}/>
+    <Route path="card" component={CardPage}/>
 
 
     <Route path="*" component={NotFoundPage}/>

@@ -1,0 +1,77 @@
+.card{
+  .content{
+    margin-top:20px;
+  }
+  img{
+    width:200px;
+  }
+  .other{
+    float: right;
+    background-color: #fff;
+    border:1px solid #ddd;
+    border-top:5px solid #00a65a;
+    width:20%;
+  }
+  .detail{
+    display: inline-block;
+    background-color: #fff;
+    border:1px solid #ddd;
+    // float: right;
+    width:55%;
+    position: absolute;
+    ul{
+      li{
+        display: inline-block;
+        margin:0 5px;
+        padding:15px;
+        float: right;
+        border-top:3px solid transparent;
+        &:first-child{
+          padding:10px;
+          float: left;
+        }
+        .fa{
+          position: absolute;
+          color: #444;
+        }
+      }
+      .active{
+        border:1px solid #ddd;
+        border-top:3px solid #3c8dbc;
+        border-bottom:1px solid #fff;
+      }
+    }
+    .box{
+      margin-top:-1px;
+      border-top:1px solid #ddd;
+    }
+
+  }
+  .info{
+    display: inline-block;
+    text-align: center;
+    width:20%;
+    // float: left;
+    ul{
+      text-align: left;
+      margin-top:20px;
+      background-color: #fff;
+      border:1px solid #ddd;
+      li{
+        padding: 10px;
+        border-top:1px solid #ddd;
+        &:first-child{
+          border:none;
+          font-size: 1.5rem;
+        }
+        .fa{
+          margin-left:5px;
+          color:#00a65a;
+        }
+        .price{
+          float:right;
+        }
+      }
+    }
+  }
+}
