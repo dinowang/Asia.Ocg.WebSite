@@ -1,5 +1,6 @@
 import React from 'react';
 import {Icon} from 'react-fa';
+import CardPack from '../cardPack'
 import './index.scss';
 
 class CardInfo extends React.Component {
@@ -9,22 +10,13 @@ class CardInfo extends React.Component {
         <table>
           <tbody>
             <tr>
-              <th>種類</th>
-              <th>等級</th>
-              <th>屬性</th>
-              <th>種族</th>
-              <th>攻擊力</th>
-              <th>守備力</th>
-              <th>密碼</th>
-            </tr>
-            <tr>
-              <td>效果怪獸</td>
-              <td>等級3</td>
-              <td>闇</td>
-              <td>惡魔族</td>
-              <td>1000</td>
-              <td>600</td>
-              <td>10802915</td>
+              <td>效果怪獸<span>種類</span></td>
+              <td>等級3<span>等級</span></td>
+              <td>闇<span>屬性</span></td>
+              <td>惡魔族<span>種族</span></td>
+              <td>1000<span>攻擊力</span></td>
+              <td>600<span>守備力</span></td>
+              <td>10802915<span>序號</span></td>
             </tr>
 
           </tbody>
@@ -33,6 +25,7 @@ class CardInfo extends React.Component {
           這張卡召喚成功時，可以從我方手牌或是牌組特殊召喚1隻等級3的惡魔族怪獸。
 用這個效果特殊召喚的怪獸效果無效化，不能作為同步素材。　
         </div>
+        <CardPack/>
       </div>
     );
   }

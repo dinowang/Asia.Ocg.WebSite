@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/searchActions';
 import CardInfo from '../../components/cardInfo';
+
 import {Icon} from 'react-fa';
 import './index.scss';
 
@@ -42,13 +43,11 @@ class CardPage extends React.Component {
               </li>
               <li>留言</li>
               <li>牌組</li>
-              <li>卡包分類</li>
               <li className="active">卡片效果</li>
             </ul>
             <div className="clear"></div>
             <div className="box">
               <CardInfo/>
-
             </div>
           </div>
           <div className="other">
