@@ -10,6 +10,11 @@ import {Icon} from 'react-fa';
 import './index.scss';
 
 class CardPage extends React.Component {
+  componentWillMount(){
+    let {serialNumber} = this.props.params;
+    let {actions} = this.props;
+    actions.requestCardInfo(serialNumber)
+  };
   changeTab(tab){
     this.props.actions.changeTab(tab);
   };
@@ -20,7 +25,7 @@ class CardPage extends React.Component {
         <h1>{card.name}</h1>
         <div className="content">
           <div className="info">
-            <img src={card.image_url}></img>
+            <img src={card.image_url?'':'https://xpgcards.blob.core.windows.net/image/null.jpg'}></img>
               <ul>
                 <li>價格情報</li>
                 <li>

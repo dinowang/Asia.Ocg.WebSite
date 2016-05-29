@@ -5,12 +5,20 @@
     border-collapse: collapse;
     width:100%;
   }
-  th,td{
+  td{
     padding: 10px;
-    border-top:1px solid #ddd;
+    &:last-child{
+      text-align: right;
+    }
+  }
+  tr{
+    &:first-child{
+      border-bottom:1px solid #ddd;
+    }
   }
   th{
     text-align: left;
+    padding: 10px;
     border: none;
   }
 }

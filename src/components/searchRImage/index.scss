@@ -2,7 +2,7 @@
   // border:1px solid #;
   .card-list{
     height:125px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     img{
       height: 120px;
     }
@@ -12,15 +12,17 @@
       overflow: auto;
       width:calc(100% - 118px);
     }
-    p{
+    a{
       line-height: 1.5rem;
       padding-left: 10px;
       font-size: 1.3rem;
+      color:#3c8dbc;
+      text-decoration: none;
     }
     ul{
       li{
         display: inline-block;
-        border:1px solid #aaa;
+        border:1px solid #ddd;
         border-bottom: none;
         padding: 10px;
         width:16.666%;
@@ -31,7 +33,7 @@
       }
     }
     span{
-      border: 1px solid #aaa;
+      border: 1px solid #ddd;
       overflow: hidden;
       display: block;
       padding: 10px;

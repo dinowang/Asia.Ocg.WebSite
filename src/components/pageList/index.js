@@ -4,11 +4,12 @@ import { IndexLink, Link } from 'react-router';
 
 import './index.scss';
 class PageList extends React.Component {
+
   click(page){
     this.props.onClick(page);
   };
   render(){
-    const {totalPage, current, showCount,query} = this.props;
+    const {totalPage, current, showCount, query} = this.props;
     const li = [];
     let count = 0;
     let start =0;
@@ -44,16 +45,17 @@ class PageList extends React.Component {
           count++;
       }
     }
-    const prevStyle = current-1 <=0 ? 'disabled' : '';
-    const nextStyle = current+1 >totalPage ? 'disabled' : '';
-
+    const prevStyle = current-1 <=0 ? 'disabled' : null;
+    const nextStyle = current+1 >totalPage ? 'disabled' : null;
+    const prevHref =  prevStyle ? `/search/${query}/${current}`:`/search/${query}/${current-1}`;
+    const nextHref = nextStyle ? `/search/${query}/${current}`: `/search/${query}/${current+1}`;
     return(
       <div className="page-list">
           <span>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>
         <ul>
-          <li className={prevStyle} onClick={prevStyle===''?()=>this.click(current-1):''}><Icon name="angle-double-left"/></li>
+          <Link to={prevHref} className={prevStyle} onClick={prevStyle===null?()=>this.click(current-1):null}><Icon name="angle-double-left"/></Link>
           {li}
-          <li className={nextStyle} onClick={nextStyle===''?()=>this.click(this.props.current+1):''}><Icon name="angle-double-right"/></li>
+          <Link to={nextHref} className={nextStyle} onClick={nextStyle===null?()=>this.click(this.props.current+1):null}><Icon name="angle-double-right"/></Link>
         </ul>
       </div>
     );

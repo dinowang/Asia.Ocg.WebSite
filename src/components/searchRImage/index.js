@@ -1,15 +1,18 @@
 import React, {PropTypes}from 'react';
+import {Link} from 'react-router';
 import './index.scss';
 
 const SearchRImage = (props) => {
   let renderLi =(item, index)=>{
-    let {name, image_url, kind, level, property, race, attack, defence, effect} = item;
+    let {name, image_url, kind, level, property, race, attack, defence, effect, serial_number} = item;
     image_url = image_url ? image_url :"https://xpgcards.blob.core.windows.net/image/null.jpg";
+    const href = `/card/${serial_number}`
     return (
       <div className="card-list" key={index}>
         <img src={image_url}></img>
         <div className="card-info">
-          <p>{name}</p>
+        <Link to={href}>{name}</Link>
+
           <ul>
             <li>{kind}</li>
             <li>{level}</li>

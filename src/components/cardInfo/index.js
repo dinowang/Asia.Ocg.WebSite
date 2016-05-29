@@ -12,11 +12,11 @@ class CardInfo extends React.Component {
           <tbody>
             <tr>
               <td>{kind}<span>種類</span></td>
-              <td>{level}<span>等級</span></td>
-              <td>{property}<span>屬性</span></td>
-              <td>{race}<span>種族</span></td>
-              <td>{attack}<span>攻擊力</span></td>
-              <td>{defence}<span>守備力</span></td>
+              <td className={level? '':'none'}>{level}<span>等級</span></td>
+              <td className={property? '':'none'}>{property}<span>屬性</span></td>
+              <td className={race? '':'none'}>{race}<span>種族</span></td>
+              <td className={attack? '':'none'}>{attack}<span>攻擊力</span></td>
+              <td className={defence? '':'none'}>{defence}<span>守備力</span></td>
               <td>{serial_number}<span>序號</span></td>
             </tr>
 

@@ -3,14 +3,6 @@ import {Icon} from 'react-fa';
 import './index.scss';
 
 class CardPack extends React.Component {
-  renderItem(){
-    return(
-      <tr>
-        <td>【補充包】(GS06)黃金系列2014	</td>
-        <td>GS06-JP010</td>
-      </tr>
-    )
-  };
   renderTable(data, index){
     let tr = data.items.map((items,index)=>{
       return (
@@ -32,7 +24,6 @@ class CardPack extends React.Component {
     )
   };
   render() {
-    console.log(this.props.data,'data')
     return (
       <div className="card-pack">
         {this.props.data.map(this.renderTable)}

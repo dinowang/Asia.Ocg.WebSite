@@ -23,10 +23,14 @@
       &:hover{
         span{
           transition: all .5s;
-          
+
           opacity: 1;
         }
       }
+
+    }
+    .none{
+      display: none;
     }
     th{
       color:#444;
