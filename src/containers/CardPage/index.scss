@@ -7,10 +7,11 @@
   }
   .other{
     float: right;
-    background-color: #fff;
     border:1px solid #ddd;
     border-top:5px solid #00a65a;
     width:20%;
+    background-color: #fff;
+    padding: 10px;
   }
   .detail{
     display: inline-block;
@@ -22,7 +23,7 @@
     ul{
       li{
         display: inline-block;
-        margin:0 5px;
+        margin:0 0 0 5px;
         padding:15px;
         float: right;
         border-top:3px solid transparent;
@@ -44,6 +45,7 @@
     .box{
       margin-top:-1px;
       border-top:1px solid #ddd;
+      padding: 20px;
     }
 
   }
@@ -51,10 +53,9 @@
     display: inline-block;
     text-align: center;
     width:20%;
-    // float: left;
     ul{
+      margin:20px 5px;
       text-align: left;
-      margin-top:20px;
       background-color: #fff;
       border:1px solid #ddd;
       li{
@@ -73,5 +74,6 @@
         }
       }
     }
+
   }
 }

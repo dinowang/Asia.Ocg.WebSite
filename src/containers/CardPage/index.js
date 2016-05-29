@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/searchActions';
+import CardInfo from '../../components/cardInfo';
 import {Icon} from 'react-fa';
 import './index.scss';
 
@@ -14,23 +15,24 @@ class CardPage extends React.Component {
         <div className="content">
           <div className="info">
             <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <ul>
-              <li>價格情報</li>
-              <li>
-                卡司魔
-                <Icon name="check-circle"/>
-                <span className="price">$30</span>
-              </li>
-              <li>
-                卡司魔
-                <span className="price">$30</span>
-              </li>
-              <li>
-                露天
+              <ul>
+                <li>價格情報</li>
+                <li>
+                  卡司魔
+                  <Icon name="check-circle"/>
+                  <span className="price">$30</span>
+                </li>
+                <li>
+                  卡司魔
+                  <span className="price">$30</span>
+                </li>
+                <li>
+                  露天
 
-              </li>
+                </li>
 
-            </ul>
+              </ul>
+
           </div>
 
           <div className="detail">
@@ -39,13 +41,14 @@ class CardPage extends React.Component {
                 <Icon name="list-alt" size="2x"/>
               </li>
               <li>留言</li>
-              <li className="active">牌組</li>
+              <li>牌組</li>
               <li>卡包分類</li>
-              <li>卡片效果</li>
+              <li className="active">卡片效果</li>
             </ul>
             <div className="clear"></div>
             <div className="box">
-              test
+              <CardInfo/>
+
             </div>
           </div>
           <div className="other">

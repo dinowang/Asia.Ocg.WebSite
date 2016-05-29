@@ -1,0 +1,20 @@
+.card-info{
+  // min-height: 300px;
+  table{
+    background-color: #fff;
+
+    border-collapse: collapse;
+    width:100%;
+  }
+  td{
+    padding: 10px;
+    border:1px solid #ddd;
+  }
+  th{
+    color:#444;
+    padding: 10px;
+  }
+  .effect{
+    padding:30px 0;
+  }
+}
