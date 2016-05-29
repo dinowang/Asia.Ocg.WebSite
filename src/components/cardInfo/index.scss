@@ -19,10 +19,11 @@
         color: #fff;
         border-radius: 5px;
         font-size: .5rem;
-        transition: all .5s;
       }
       &:hover{
         span{
+          transition: all .5s;
+          
           opacity: 1;
         }
       }

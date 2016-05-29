@@ -1,6 +1,5 @@
-GET
-URI：http：//api.xpg.cards/card?serialNumber=123
-{
+import { handleActions } from 'redux-actions';
+const initialState ={
   "display_tab":0,
   "name": "鑽頭戰士",
   "image_url": "https://xpgcards.blob.core.windows.net/image/null.jpg",
@@ -32,4 +31,10 @@ URI：http：//api.xpg.cards/card?serialNumber=123
       ]
     }
   ]
-}
+};
+export default handleActions({
+  'change tab' (state, action) {
+    state.display_tab = action.payload;
+  return Object.assign({},state);
+  },
+}, initialState);

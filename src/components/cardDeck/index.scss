@@ -1,0 +1,16 @@
+.card-deck{
+  table{
+    background-color: #fff;
+
+    border-collapse: collapse;
+    width:100%;
+  }
+  th,td{
+    padding: 10px;
+    border-top:1px solid #ddd;
+  }
+  th{
+    text-align: left;
+    border: none;
+  }
+}
