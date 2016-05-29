@@ -17,7 +17,7 @@ export default (
     <Route path="ban" component={BanPage}/>
     <Route path="search/:query" component={SearchPage}/>
     <Route path="search/:query/:page" component={SearchPage}/>
-    <Route path="card" component={CardPage}/>
+    <Route path="card/:serialNumber" component={CardPage}/>
 
 
     <Route path="*" component={NotFoundPage}/>
