@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
 import './index.scss';
 
 class CardPack extends React.Component {
@@ -10,8 +9,8 @@ class CardPack extends React.Component {
           <td>{items.name}</td>
           <td>{items.card_number}</td>
         </tr>
-      )
-    })
+      );
+    });
     return(
       <table key={index}>
         <tbody>
@@ -21,8 +20,8 @@ class CardPack extends React.Component {
           {tr}
         </tbody>
       </table>
-    )
-  };
+    );
+  }
   render() {
     return (
       <div className="card-pack">

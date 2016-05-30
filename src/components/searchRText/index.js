@@ -6,7 +6,7 @@ import './index.scss';
 const SearchRText = (props) => {
   let renderLi = (item, index)=>{
     const {name, kind, level, property, race, attack, defence, serial_number} = item;
-    const href = `/card/${serial_number}`
+    const href = `/card/${serial_number}`;
 
     return(
       <tr key={index}>

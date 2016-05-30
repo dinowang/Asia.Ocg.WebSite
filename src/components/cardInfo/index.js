@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
-import CardPack from '../cardPack'
+import CardPack from '../cardPack';
 import './index.scss';
 
 class CardInfo extends React.Component {

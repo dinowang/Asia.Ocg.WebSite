@@ -23,12 +23,12 @@ class Nav extends React.Component {
       this.props.actions.requestSearch();
       this.handleInputFoucs();
     },500);
-  };
+  }
   handleInputFoucs(){
     if(this.props.search.query){
       this.props.nav.push(`/search/${this.props.search.query}/${this.props.search.current_page}`);
     }
-  };
+  }
   render() {
     let t= [1,2,3];
     const {user} = this.props;

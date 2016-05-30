@@ -5,9 +5,9 @@ export const requestLogin = (serialNumber) => {
   return (dispatch) => {
     fetch(`http://api.xpg.cards/card?serialNumber=${serialNumber}`)
       .then((response)=> {
-        return response.json()
+        return response.json();
     }).then((json)=> {
       dispatch(fetchCardInfo(json));
     });
   };
-}
+};

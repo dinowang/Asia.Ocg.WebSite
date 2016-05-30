@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Icon} from 'react-fa';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -10,22 +10,23 @@ import SearchRImage from '../../components/searchRImage';
 import './index.scss';
 
 class SearchPage extends React.Component {
+
   componentWillMount(){
     let {query, page} = this.props.params;
     this.props.actions.inputSearch({query:query.toUpperCase()});
     page = page ? page : 1;
     this.handlePageList(parseInt(page));
-  };
+  }
   handlePageList(page){
-    let {actions,search} = this.props;
+    let {actions} = this.props;
     actions.changePage(page);
     actions.requestSearch();
-  };
+  }
   changeMode(mode){
-    this.props.actions.changeMode(mode)
+    this.props.actions.changeMode(mode);
   }
   render(){
-    const { search, actions } = this.props;
+    const { search } = this.props;
     return (
       <div className="search-page">
         <h1>搜尋：{search.query}</h1>
@@ -65,9 +66,6 @@ class SearchPage extends React.Component {
     );
   }
 }
-SearchPage.propsTypes ={
-  search:PropTypes.object
-};
 
 function mapStateToProps(state) {
   return {

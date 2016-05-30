@@ -8,9 +8,9 @@ export const requestSearch = () => {
     const {search} = state();
     fetch(`http://api.xpg.cards/basicSearch?query=${search.query}&page=${search.current_page}`)
       .then((response)=> {
-        return response.json()
+        return response.json();
     }).then((json)=> {
       dispatch(fetchBasic(json));
     });
   };
-}
+};

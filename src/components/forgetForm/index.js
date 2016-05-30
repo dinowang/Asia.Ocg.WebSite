@@ -6,7 +6,7 @@ import './index.scss';
 class ForgetForm extends React.Component {
   changeMode(mode){
     this.props.actions.changeMode({mode:mode});
-  };
+  }
   render() {
     return (
       <div className="forget-form" style={this.props.style}>
@@ -18,7 +18,7 @@ class ForgetForm extends React.Component {
         </div>
         <div className="input">
           <input type="text" placeholder="Email"></input>
-          <Icon name='envelope'/>
+          <Icon name="envelope"/>
         </div>
         <div className="login-btn">
           <Icon name="envelope" size="2x"/>

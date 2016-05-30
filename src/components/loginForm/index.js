@@ -6,7 +6,7 @@ import './index.scss';
 class LoginForm extends React.Component {
   changeMode(mode){
     this.props.actions.changeMode({mode:mode});
-  };
+  }
   render() {
     return (
       <div className="login-form">
@@ -18,11 +18,11 @@ class LoginForm extends React.Component {
         </div>
         <div className="input">
           <input type="text" placeholder="Email"></input>
-          <Icon name='envelope'/>
+          <Icon name="envelope"/>
         </div>
         <div className="input">
           <input type="password" placeholder="password"></input>
-          <Icon name='lock'/>
+          <Icon name="lock"/>
         </div>
         <div className="login-btn">
           <Icon name="arrow-right" size="2x"/>

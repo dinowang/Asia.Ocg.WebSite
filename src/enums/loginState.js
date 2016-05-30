@@ -4,5 +4,5 @@ const LoginStateEnum ={
   Success:2,
   Register:3,
   Forget:4
-}
+};
 export default LoginStateEnum;

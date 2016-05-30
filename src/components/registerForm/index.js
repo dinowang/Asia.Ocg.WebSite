@@ -6,7 +6,7 @@ import './index.scss';
 class RegisterForm extends React.Component {
   changeMode(mode){
     this.props.actions.changeMode({mode:mode});
-  };
+  }
   render() {
     return (
       <div className="register-form">
@@ -18,11 +18,11 @@ class RegisterForm extends React.Component {
         </div>
         <div className="input">
           <input type="text" placeholder="Email"></input>
-          <Icon name='envelope'/>
+          <Icon name="envelope"/>
         </div>
         <div className="input">
           <input type="text" placeholder="暱稱"></input>
-          <Icon name='pencil'/>
+          <Icon name="pencil"/>
         </div>
         <div className="login-btn">
           <Icon name="user-plus" size="2x"/>

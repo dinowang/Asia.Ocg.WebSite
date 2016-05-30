@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from 'react-fa';
 import LoginState from '../../enums/loginState';
 import LoginForm from '../../components/loginForm';
 import ForgetForm from '../../components/forgetForm';
@@ -13,7 +12,7 @@ import './index.scss';
 class LoginPage extends React.Component {
   componentWillMount(){
     this.props.actions.changeMode({mode:LoginState.Loging});
-  };
+  }
   render(){
     const {actions, login} = this.props;
     return (

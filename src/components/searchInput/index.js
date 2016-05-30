@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
 import './index.scss';
 
 const SearchInput = (props) => {
@@ -8,7 +7,7 @@ const SearchInput = (props) => {
   };
   const handleFocus = ()=>{
     props.onFocus();
-  }
+  };
   return (
     <div className="search-input">
       <input onFocus={handleFocus} onChange={handleChange} className="search" type="search" placeholder={props.placeholder} value={props.value} />
