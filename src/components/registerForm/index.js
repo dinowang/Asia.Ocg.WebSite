@@ -22,7 +22,7 @@ class RegisterForm extends React.Component {
         </div>
         <div className="input">
           <input type="text" placeholder="暱稱"></input>
-          <Icon name='lock'/>
+          <Icon name='pencil'/>
         </div>
         <div className="login-btn">
           <Icon name="user-plus" size="2x"/>

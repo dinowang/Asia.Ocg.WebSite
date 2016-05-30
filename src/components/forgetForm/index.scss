@@ -3,14 +3,4 @@
   background-color: #fff;
   position: relative;
   animation: toRight 1s;
-  @keyframes toRight{
-    0%{
-      left:-50px;
-      opacity: 0;
-    }
-    100%{
-      left:0;
-      opacity: 1;
-    }
-  }
 }

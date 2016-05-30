@@ -3,14 +3,5 @@
   position: relative;
   background-color: #fff;
   animation: toLeft 1s;
-  @keyframes toLeft{
-    0%{
-      left:50px;
-      opacity: 0;
-    }
-    100%{
-      left:0;
-      opacity: 1;
-    }
-  }
+  
 }

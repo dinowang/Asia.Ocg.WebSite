@@ -11,6 +11,9 @@ import * as actions from '../../actions/loginActions';
 import './index.scss';
 
 class LoginPage extends React.Component {
+  componentWillMount(){
+    this.props.actions.changeMode({mode:LoginState.Loging});
+  };
   render(){
     const {actions, login} = this.props;
     return (
@@ -30,7 +33,7 @@ class LoginPage extends React.Component {
   }
 }
 LoginPage.propsTypes ={
-  search:PropTypes.object
+  login:PropTypes.object
 };
 
 function mapStateToProps(state) {
