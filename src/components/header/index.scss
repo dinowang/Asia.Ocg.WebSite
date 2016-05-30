@@ -18,6 +18,15 @@
   .info-bar{
     background-color: #3c8dbc;
     overflow:hidden;
+    .right-bar{
 
+      display: inline-block;
+      float: right;
+      line-height: 10px;
+
+      .fa{
+        padding: 0 10px;
+      }
+    }
   }
 }
