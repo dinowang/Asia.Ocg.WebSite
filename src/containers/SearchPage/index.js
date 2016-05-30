@@ -65,7 +65,6 @@ class SearchPage extends React.Component {
     );
   }
 }
-// <SearchRImage data={search.items}/>
 SearchPage.propsTypes ={
   search:PropTypes.object
 };

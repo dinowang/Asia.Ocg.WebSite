@@ -31,14 +31,16 @@ class Nav extends React.Component {
   };
   render() {
     let t= [1,2,3];
+    const {user} = this.props;
+    const userStyle = user.token? 'user':'hide';
     return (
       <div className="nav">
-        <div className="user">
-        <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/p320x320/12717366_1140077189343966_8221115824378901544_n.jpg?oh=382682b03755dbaf37ae830c64c668bc&oe=57A0F709"/>
+        <div className={userStyle}>
+          <img src={user.image_url}/>
           <div className="info">
-            <p>Ch Rick</p>
+            <p>{user.nickname}</p>
             <p>
-              <Icon name="usd"/>10000
+              <Icon name="usd"/>{user.score}
             </p>
           </div>
         </div>
@@ -65,6 +67,7 @@ Nav.propsTypes ={
 function mapStateToProps(state) {
   return {
     search: state.search,
+    user: state.user,
     nav : browserHistory
   };
 }
