@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import {Icon} from 'react-fa';
 import './index.scss';
 
@@ -6,7 +7,9 @@ const Multi = (props) => {
   let renderli = (data, index) => {
     return (
       <li key={index}>
-        <Icon name="dot-circle-o"/>{data}
+        <Link to="ben">
+          <Icon name="dot-circle-o"/>{data}
+        </Link>
       </li>
     );
   };
@@ -14,7 +17,6 @@ const Multi = (props) => {
     <div className="multi-menu">
     <input type="checkbox" id="test1" />
     <label htmlFor="test1">
-
       <Icon name={props.icon}/>
       <span>{props.title}</span>
       <Icon name="arrow-left"/>

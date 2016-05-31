@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 const initialState ={
-  "token":null,
+  "token":"null",
   "account":"test@gmail.com",
   "score": 50,
   "nickname":"Ch Rick",

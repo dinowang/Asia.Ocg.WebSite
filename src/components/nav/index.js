@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router';
 import * as actions from '../../actions/searchActions';
 import SearchInput from '../searchInput';
 import Single from './single';
-import Multi from './multi';
 import './index.scss';
 
 class Nav extends React.Component {
@@ -30,7 +29,6 @@ class Nav extends React.Component {
     }
   }
   render() {
-    let t= [1,2,3];
     const {user} = this.props;
     const userStyle = user.token? 'user':'hide';
     return (
@@ -45,12 +43,10 @@ class Nav extends React.Component {
           </div>
         </div>
         <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
-        <Single value="牌組區" icon="list" href="/deck"/>
-        <Single value="禁卡表" icon="ban" href="/ban"/>
-        <Single value="進階搜尋" icon="search-plus" href="/card"/>
-        <Multi icon="ban" title="Test" values={t}/>
-        <Single value="進階搜尋" icon="search-plus" href="/ban" />
-        <Single value="積分換商品" icon="search-plus" href="/ban" />
+        <Single title="牌組區" icon="list" href="deck"/>
+        <Single title="禁卡表" icon="ban" href="/ban"/>
+        <Single title="進階搜尋" icon="search-plus" href="/card"/>
+        <Single title="積分換商品" icon="search-plus" href="/ban" />
 
 
       </div>

@@ -17,7 +17,8 @@
     "prebuild": "npm run clean-dist && npm run build:html && npm run lint && npm run test",
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "static-file":"babel-node tools/build.js"
   },
   "author": "ChRick",
   "dependencies": {

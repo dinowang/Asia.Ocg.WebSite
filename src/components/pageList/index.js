@@ -20,8 +20,7 @@ class PageList extends React.Component {
       if(i===0)
         continue;
       const href = `/search/${query}/${i}`;
-      const style = current === i ? 'active':'';
-      li.push(<Link className={style} to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
+      li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
 
@@ -31,8 +30,7 @@ class PageList extends React.Component {
       if(i===0)
         continue;
       const href = `/search/${query}/${i}`;
-      const style = current === i ? 'active':'';
-      li.push(<Link className={style} to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
+      li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
     if(count < showCount){
