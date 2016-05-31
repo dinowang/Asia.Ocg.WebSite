@@ -65,7 +65,8 @@ PageList.propTypes = {
   totalPage: PropTypes.number.isRequired,
   showCount: PropTypes.number,
   onClick: PropTypes.func.isRequired,
-  totalCount: PropTypes.number
+  totalCount: PropTypes.number,
+  query: PropTypes.string.isRequired
 };
 
 export default PageList;

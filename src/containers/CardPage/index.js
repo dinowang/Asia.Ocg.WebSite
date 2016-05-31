@@ -75,8 +75,10 @@ class CardPage extends React.Component {
   }
 }
 
-CardPage.propsTypes ={
-  card:PropTypes.object
+CardPage.propTypes ={
+  card:PropTypes.object.isRequired,
+  params:PropTypes.object.isRequired,
+  actions:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

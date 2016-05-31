@@ -31,8 +31,9 @@ class LoginPage extends React.Component {
     );
   }
 }
-LoginPage.propsTypes ={
-  login:PropTypes.object
+LoginPage.propTypes ={
+  login:PropTypes.object.isRequired,
+  actions:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

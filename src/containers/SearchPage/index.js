@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -79,6 +79,12 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   };
 }
+
+SearchPage.propTypes = {
+  params: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  search: PropTypes.object.isRequired
+};
 
 export default connect(
   mapStateToProps,

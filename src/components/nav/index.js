@@ -60,8 +60,11 @@ class Nav extends React.Component {
 
 
 
-Nav.propsTypes ={
-  search:PropTypes.object
+Nav.propTypes ={
+  search:PropTypes.object.isRequired,
+  actions:PropTypes.object.isRequired,
+  nav:PropTypes.object.isRequired,
+  user:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

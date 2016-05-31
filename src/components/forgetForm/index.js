@@ -9,7 +9,7 @@ class ForgetForm extends React.Component {
   }
   render() {
     return (
-      <div className="forget-form" style={this.props.style}>
+      <div className="forget-form">
         <div className="header">
           <h1>
             <Icon name="unlock"/>
