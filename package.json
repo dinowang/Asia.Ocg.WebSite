@@ -18,7 +18,7 @@
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:watch": "npm run test -- --watch",
-    "static-file":"babel-node tools/build.js"
+    "static-file":"babel-node tools/build.js && npm run build:html"
   },
   "author": "ChRick",
   "dependencies": {
