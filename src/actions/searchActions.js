@@ -10,7 +10,7 @@ export const requestSearch = () => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      dispatch(fetchBasic(json));
+      dispatch(fetchBasic(json.data));
     });
   };
 };

@@ -7,7 +7,7 @@ export const requestCardInfo = (serialNumber) => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      dispatch(fetchCardInfo(json));
+      dispatch(fetchCardInfo(json.data));
     });
   };
 };
