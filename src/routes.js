@@ -15,12 +15,14 @@ import NotFoundPage from './components/NotFoundPage.js';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
-    <Route path="deck" component={DeckPage}/>
+    <Route path="deck/:deck_type" component={DeckPage}/>
     <Route path="ban" component={BanPage}/>
     <Route path="login" component={LoginPage}/>
     <Route path="search/:query" component={SearchPage}/>
     <Route path="search/:query/:page" component={SearchPage}/>
     <Route path="card/:serialNumber" component={CardPage}/>
+    <Route path="card/:serialNumber/:name" component={CardPage}/>
+
 
 
     <Route path="*" component={NotFoundPage}/>

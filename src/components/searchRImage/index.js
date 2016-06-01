@@ -6,13 +6,12 @@ const SearchRImage = (props) => {
   let renderLi =(item, index)=>{
     let {name, image_url, kind, level, property, race, attack, defence, effect, serial_number} = item;
     image_url = image_url ? image_url :"https://xpgcards.blob.core.windows.net/image/null.jpg";
-    const href = `/card/${serial_number}`;
+    const href = `/card/${serial_number}/${name}`;
     return (
       <div className="card-list" key={index}>
-        <img src={image_url}></img>
+        <Link to={href}><img src={image_url}></img></Link>
         <div className="card-info">
         <Link to={href}>{name}</Link>
-
           <ul>
             <li>{kind}</li>
             <li>{level}</li>
