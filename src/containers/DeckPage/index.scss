@@ -1,0 +1,39 @@
+.deck-page{
+  .list{
+    background-color: #fff;
+    // border-top:5px solid #3c8dbc;
+    // border:1px solid #ddd;
+    width: 80%;
+    float: left;
+  }
+  .other{
+    background-color: #fff;
+    border-top:5px solid #ddd;
+    width:18%;
+    float: right;
+  }
+  .deck-nav{
+    margin-bottom: 5px;
+    border-bottom:1px solid #ddd;
+    a{
+      display: inline-block;
+      color:#444;
+      padding:10px;
+      &:first-child{
+        border-left:none;
+      }
+    }
+    .active{
+      position: relative;
+      border:1px solid #ddd;
+      border-top:5px solid #3c8dbc;
+      &:after{
+        content: '';
+        position: absolute;
+        bottom:-2px;left:0;
+        width:100%;height:2px;
+        background-color: #fff;
+      }
+    }
+  }
+}

@@ -3,12 +3,14 @@ import search from './searchReducer';
 import card from './cardReducer';
 import user from './userReducer';
 import login from './loginReducer';
+import deck from './deckReducer';
 
 const rootReducer = combineReducers({
   search,
   card,
   user,
-  login
+  login,
+  deck
 });
 
 export default rootReducer;

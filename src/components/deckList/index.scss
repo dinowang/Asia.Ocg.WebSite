@@ -1,0 +1,28 @@
+.deck-list{
+  padding: 10px;
+  table{
+    border-collapse: collapse;
+    width:100%;
+  }
+  td,th{
+    color: #444;
+    padding: 10px;
+    border:1px solid #444;
+  }
+  tr{
+    th{
+      &:first-child{
+        width:70%;
+      }
+      &:nth-child(2){
+        width:10%;
+      }
+      &:nth-child(3){
+        width:20%;
+      }
+      &:nth-child(4){
+        width:30%;
+      }
+    }
+  }
+}
