@@ -25,7 +25,6 @@ const initialState ={
 export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
-    console.log(action.payload);
   return Object.assign({},state);
   }
 }, initialState);

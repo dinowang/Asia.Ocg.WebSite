@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{PropTypes}from 'react';
 import DeckList from '../../components/deckList';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -8,15 +8,14 @@ import './index.scss';
 
 
 export const DeckPage = (props) => {
-  const test = (e)=>{
-    // console.log('test',e.target.value);
+  const changeType = (e)=>{
     props.actions.changeType(e.target.value);
-  }
+  };
   const renderNav = (data)=>{
     const href = `/deck/${data.name}`;
     return(
-      <Link onClick={test} key={data.id} to={href} activeClassName="active" value={data.id}>{data.name}</Link>
-    )
+      <Link onClick={changeType} key={data.id} to={href} activeClassName="active" value={data.id}>{data.name}</Link>
+    );
   };
   return (
     <div className="deck-page">
@@ -44,6 +43,11 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   };
 }
+
+DeckPage.propTypes ={
+  actions:PropTypes.object.isRequired,
+  deck:PropTypes.object.isRequired
+};
 
 export default connect(
   mapStateToProps,

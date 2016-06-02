@@ -1,12 +1,6 @@
-import React from 'react';
-import './index.scss'
+import React,{PropTypes} from 'react';
+import './index.scss';
 class DeckList extends React.Component{
-  componentWillMount(){
-    console.log('componentWillMount');
-  }
-  componentWillMount(){
-    console.log('componentWillMount');
-  }
   renderData(data){
     const {id, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
     return(
@@ -18,7 +12,7 @@ class DeckList extends React.Component{
         <td>{deck_kind}</td>
         <td>{deck_ben}</td>
       </tr>
-    )
+    );
   }
   render(){
     // console.log(this.props,'deck')
@@ -37,8 +31,11 @@ class DeckList extends React.Component{
           </tbody>
         </table>
       </div>
-    )
+    );
   }
 }
+DeckList.propTypes = {
+  deck:PropTypes.object.isRequired
+};
 
 export default DeckList;
