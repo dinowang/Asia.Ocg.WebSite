@@ -1,10 +1,17 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import { Link } from 'react-router';
 
 import './index.scss';
 
 class Header extends React.Component {
+  constructor(props){
+    super(props);
+    this.changeMode = this.changeMode.bind(this);
+  }
+  changeMode(){
+    this.props.actions.changeMode({mode:0});
+  }
   render() {
     return (
       <div className="header">
@@ -12,7 +19,7 @@ class Header extends React.Component {
         <div className="info-bar">
           <Icon name="bars" size="2x" />
           <div className="right-bar">
-            <Link to="/login">
+            <Link to="/login" onClick={this.changeMode}>
               <Icon name="sign-in"/>
               登入
             </Link>
@@ -22,5 +29,8 @@ class Header extends React.Component {
     );
   }
 }
+Header.propTypes = {
+  actions: PropTypes.object.isRequired
+};
 
 export default Header;

@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Header from './header';
 import Nav from './nav';
+import * as actions from '../actions/loginActions';
+
 const App = (props) => {
   return (
     <div>
-      <Header/>
+      <Header actions={props.actions}/>
       <Nav/>
       <div className="container">
         {props.children}
@@ -12,14 +16,25 @@ const App = (props) => {
     </div>
   );
 };
-// <IndexLink to="/">Home</IndexLink>
-// {' | '}
-// <Link to="/fuel-savings">Example App</Link>
-// {' | '}
-// <Link to="/about">About</Link>
-// <br/>
-App.propTypes = {
-  children: PropTypes.element
-};
 
-export default App;
+App.propTypes = {
+  children: PropTypes.element,
+  actions: PropTypes.object.isRequired
+};
+function mapStateToProps(state) {
+  return {
+    login: state.login,
+    actions:PropTypes.object.isRequired
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

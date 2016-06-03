@@ -5,13 +5,19 @@ import LoginState from '../../enums/loginState';
 import LoginForm from '../../components/loginForm';
 import ForgetForm from '../../components/forgetForm';
 import RegisterFomr from '../../components/registerForm';
+import ResetPwdForm from '../../components/resetpwdForm';
 
 import * as actions from '../../actions/loginActions';
 import './index.scss';
 
 class LoginPage extends React.Component {
   componentWillMount(){
-    this.props.actions.changeMode({mode:LoginState.Loging});
+    let {code} = this.props.params;
+    if(code){
+      this.props.actions.changeMode({mode:LoginState.RegisterSetPassword});
+    }else{
+      this.props.actions.changeMode({mode:LoginState.Loging});
+    }
   }
   render(){
     const {actions, login} = this.props;
@@ -24,6 +30,7 @@ class LoginPage extends React.Component {
             case LoginState.Loging:   return <LoginForm actions={actions}/>;
             case LoginState.Forget:   return <ForgetForm actions={actions}/>;
             case LoginState.Register:   return <RegisterFomr actions={actions}/>;
+            case LoginState.RegisterSetPassword: return <ResetPwdForm actions={actions}/>;
           }
             })()}
         </div>

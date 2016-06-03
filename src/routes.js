@@ -22,6 +22,8 @@ export default (
     <Route path="search/:query/:page" component={SearchPage}/>
     <Route path="card/:serialNumber" component={CardPage}/>
     <Route path="card/:serialNumber/:name" component={CardPage}/>
+    <Route path="register/setpassword/:code" component={LoginPage}/>
+
 
 
 
