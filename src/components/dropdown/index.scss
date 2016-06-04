@@ -1,0 +1,44 @@
+.dropdown{
+  color:#444;
+  min-width: 100px;
+  display: inline-block;
+  border:1px solid #ddd;
+  height:35px;
+  position: relative;
+  top:-8px;
+  margin:0 10px;
+  padding-right:20px;
+  cursor: pointer;
+  .default{
+    margin:0 10px;
+    line-height: 35px;
+  }
+  .all{
+    position: absolute;
+    top:34px;
+    left:-1%;
+    display: none;
+    width:102%;
+    border:1px solid #ddd;
+    border-top:none;
+    ul{
+      background-color: #fff;
+      li{
+        padding: 10px;
+        // border-top: 1px solid #ddd;
+        // &:first-child{
+        //   border:none;
+        // }
+        &:hover{
+          background-color: #f9f9f9;
+        }
+      }
+    }
+  }
+  .fa{
+    position: absolute;
+    right:5px;
+    top:0;
+    color:#ddd;
+  }
+}
