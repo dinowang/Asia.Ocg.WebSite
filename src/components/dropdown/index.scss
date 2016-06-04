@@ -9,15 +9,17 @@
   margin:0 10px;
   padding-right:20px;
   cursor: pointer;
+  opacity: 1;
   .default{
     margin:0 10px;
     line-height: 35px;
   }
   .all{
     position: absolute;
+    transition: all .3s;
     top:34px;
     left:-1%;
-    display: none;
+    opacity: 0;
     width:102%;
     border:1px solid #ddd;
     border-top:none;
@@ -25,10 +27,6 @@
       background-color: #fff;
       li{
         padding: 10px;
-        // border-top: 1px solid #ddd;
-        // &:first-child{
-        //   border:none;
-        // }
         &:hover{
           background-color: #f9f9f9;
         }

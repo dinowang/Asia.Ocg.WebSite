@@ -1,38 +1,32 @@
-.button{
-  transition: all .3s;
-
+.btn-component{
+  position: relative;
   display: inline-block;
-  background-color: #3c8dbc;
-  color:#fff;
-  min-width:80px;
-  height:30px;
-  cursor: pointer;
-  // border:1px solid #ddd;
-  border-radius: 5px;
-  line-height: 30px;
-  text-align: center;
-  padding: 0 5px;
+  .button{
+    transition: all .3s;
+    display: inline-block;
+    background-color: #3c8dbc;
+    color:#fff;
+    min-width:70px;
+    height:35px;
+    cursor: pointer;
+    // border:1px solid #ddd;
+    border-radius: 5px;
+    line-height: 35px;
+    text-align: center;
+    padding: 0 5px;
 
-  .fa{
-    margin:0 5px;
-  }
-  &.loading{
-    cursor:wait;
-    transition: all .5s;
-    padding: 0 10px;
+    .fa{
+      margin:0 5px;
+    }
+    &.loading{
+      cursor:wait;
+      transition: all .5s;
+      padding: 0 10px;
 
-    background-color: rgba(243,156,18,.5);
-  }
-  &.fail{
-    background-color: #dd4b39;
+      background-color: rgba(243,156,18,.5);
+    }
+    &.fail{
+      background-color: #dd4b39;
+    }
   }
 }
-
-
-//
-// {(() => {
-// switch (card.display_tab) {
-// case 0:   return <CardInfo data={card}/>;
-// case 1:   return <CardDeck/>;
-// }
-// })()}

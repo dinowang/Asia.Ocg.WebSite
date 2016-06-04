@@ -15,11 +15,13 @@ class Button extends React.Component {
     this.props.onClick();
   }
   normal(){
+    const lIcon = this.props.lIcon? <Icon name={this.props.lIcon}/> :'';
+    const rIcon = this.props.rIcon? <Icon name={this.props.rIcon}/> :'';
     return(
       <div className="button" onClick={this.onClick}>
-        <Icon name={this.props.lIcon}/>
+        {lIcon}
         {this.props.value}
-        <Icon name={this.props.rIcon}/>
+        {rIcon}
       </div>
     )
   }
@@ -43,9 +45,8 @@ class Button extends React.Component {
   }
 
   render() {
-    console.log(this.props.state)
     return (
-      <div>
+      <div className="btn-component" style={this.props.style}>
         {(() => {
         switch (this.props.state) {
         case ButtonStateEnum.None:   return this.normal();

@@ -7,8 +7,8 @@ const Multi = (props) => {
   let renderli = (data, index) => {
     return (
       <li key={index}>
-        <Link to="ben">
-          <Icon name="dot-circle-o"/>{data}
+        <Link to={data.href}>
+          <Icon name="dot-circle-o"/>{data.title}
         </Link>
       </li>
     );

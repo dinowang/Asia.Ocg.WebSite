@@ -18,12 +18,14 @@
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:watch": "npm run test -- --watch",
-    "static-file":"babel-node tools/build.js && npm run build:html"
+    "static-file": "babel-node tools/build.js && npm run build:html"
   },
   "author": "ChRick",
   "dependencies": {
+    "moment": "2.13.0",
     "object-assign": "4.1.0",
     "react": "15.0.2",
+    "react-datepicker": "0.27.0",
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",

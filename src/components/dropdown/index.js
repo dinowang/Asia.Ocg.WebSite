@@ -1,6 +1,6 @@
-import React,{PropTypes}from 'react';
-import './index.scss';
+import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
+import './index.scss';
 
 class DropDown extends React.Component {
   constructor(props) {
@@ -10,36 +10,33 @@ class DropDown extends React.Component {
    this.select = this.select.bind(this);
    let defaultValue  = this.props.values.filter(data=>data.key === this.props.default);
    this.state = {
-     isShow : 'none',
+     isShow : '0',
      defaultValue:defaultValue[0]
    }
 
    console.log('-----',defaultValue[0])
   }
   show(){
-    this.setState({isShow:'block'})
+    this.setState({isShow:'1'})
   }
   hide(){
-    this.setState({isShow:'none'})
+    this.setState({isShow:'0'})
   }
   select(e){
     let defaultValue  = this.props.values.filter(data=>data.key === e.target.value);
-    this.setState({isShow:'none',defaultValue:defaultValue[0]});
+    this.setState({isShow:'0',defaultValue:defaultValue[0]});
     this.props.getValue(defaultValue[0]);
   }
 
   render(){
-    const isShow = {display:this.state.isShow};
-    // let defaultValue  = this.props.values.filter(data=>data.key === this.props.default);
-    //
-    // if(defaultValue[0])
-    //   defaultValue = defaultValue[0].value;
+    const isShow = {opacity:this.state.isShow};
+
 
     return (
-        <div className="dropdown" style={this.props.style}>
-        <Icon name="angle-down" size="2x"/>
+        <div className="dropdown" style={this.props.style}  >
+        <Icon name="angle-down" size="2x" onClick={this.show}/>
           <div className="default" onClick={this.show}>{this.state.defaultValue.value}</div>
-          <div className="all" style={isShow} onMouseOver={this.show} onMouseLeave={this.hide}>
+          <div className="all" style={isShow} onMouseLeave={this.hide}>
             <ul>
             {this.props.values.map((data)=>{return <li key={data.key} onClick={this.select} value={data.key}>{data.value}</li>})}
             </ul>

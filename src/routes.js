@@ -8,6 +8,7 @@ import BanPage from './containers/BanPage';
 import SearchPage from './containers/SearchPage';
 import CardPage from './containers/CardPage';
 import LoginPage from './containers/LoginPage';
+import BanCreatePage from './containers/BanCreatePage';
 
 
 import NotFoundPage from './components/NotFoundPage.js';
@@ -23,6 +24,10 @@ export default (
     <Route path="card/:serialNumber" component={CardPage}/>
     <Route path="card/:serialNumber/:name" component={CardPage}/>
     <Route path="register/setpassword/:code" component={LoginPage}/>
+
+
+    // ManageMent
+    <Route path="banManage/Create" component={BanCreatePage}/>
 
 
 

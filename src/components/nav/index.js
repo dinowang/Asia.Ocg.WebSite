@@ -6,6 +6,8 @@ import { browserHistory } from 'react-router';
 import * as actions from '../../actions/searchActions';
 import SearchInput from '../searchInput';
 import Single from './single';
+import Multi from './multi';
+
 import './index.scss';
 
 class Nav extends React.Component {
@@ -31,6 +33,10 @@ class Nav extends React.Component {
   render() {
     const {user} = this.props;
     const userStyle = user.token? 'user':'hide';
+    const manageList = [{
+        title:'禁卡表',
+        href:'/banManage/Create'
+    }];
     return (
       <div className="nav">
         <div className={userStyle}>
@@ -43,11 +49,13 @@ class Nav extends React.Component {
           </div>
         </div>
         <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
+        <Single title="首頁" icon="list" href="/ban"/>
         <Single title="牌組區" icon="list" href="/deck/最新上傳"/>
         <Single title="禁卡表" icon="ban" href="/ban"/>
         <Single title="進階搜尋" icon="search-plus" href="/card"/>
         <Single title="積分換商品" icon="search-plus" href="/ban" />
         <Single title="管理功能" icon="search-plus" href="/ban" />
+        <Multi title="管理功能" icon="search-plus" values={manageList}/>
 
 
 
