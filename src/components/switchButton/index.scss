@@ -1,0 +1,42 @@
+
+  .switch-buttton{
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+    span{
+      margin-left:15px;
+    }
+    .switch{
+      transition: .5s;
+      position: relative;
+      display: inline-block;
+      min-width:60px;
+      min-height:30px;
+      border-radius:20px;
+      background-color: #00a65a;
+      box-shadow: 0 5px 5px rgba(0,0,0,.5) inset;
+      .btn{
+        position: absolute;
+        width:30px;
+        height:30px;
+        background-color: #fff;
+        border-radius:50%;
+        box-shadow:0 0 10px black;
+        left:-3px;
+        transition: .3s;
+      }
+    }
+    .checkbox{
+      position: absolute;
+      opacity: 0;
+    }
+    input{
+      &:checked + .switch{
+        background-color: #ddd;
+      }
+      &:checked + .switch > .btn{
+        left:30px;
+      }
+    }
+
+  }
