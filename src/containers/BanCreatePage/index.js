@@ -8,6 +8,7 @@ import SwitchButton from '../../components/switchButton';
 import DropDown from '../../components/dropdown';
 import Button from '../../components/button';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
+import SearchListPanel from '../../components/searchListPanel';
 
 
 import './index.scss';
@@ -40,9 +41,7 @@ export const BanCreatePage = (props) => {
         </div>
       </div>
       <div className="list">
-        <input type="text" placeholder="卡號、卡片名稱"/>
-
-        list
+        <SearchListPanel data={props.ban.searchForm.list}/>
       </div>
     </div>
   );

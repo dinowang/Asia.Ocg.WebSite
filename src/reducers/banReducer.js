@@ -18,17 +18,16 @@ const initialState ={
     list:[
       {
         name:'',
-        image:''
-      }
+        image_url:''
+      },
     ]
   },
   sumbitBtn: ButtonStateEnum.None
 
 };
 export default handleActions({
-  'search card' (state, action) {
-    // state.display_tab = action.payload;
-  return Object.assign({},state);
+  'fetch cardlist' (state, action) {
+    return Object.assign({},state,action.payload);
   },
   'change btntype' (state, action) {
     state.sumbitBtn = action.payload;

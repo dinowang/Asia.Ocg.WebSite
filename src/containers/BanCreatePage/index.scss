@@ -11,6 +11,7 @@
     display: inline-block;
   }
   .form{
+
     background-color: #fff;
     width:75%;
     padding: 10px;
@@ -26,9 +27,11 @@
     }
   }
   .list{
-    float: right;
     background-color: #fff;
+    float: right;
     padding: 10px;
     width:20%;
+    text-align: center;
+
   }
 }
