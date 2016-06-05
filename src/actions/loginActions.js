@@ -9,7 +9,7 @@ export const fetchRegister = createAction('fetch register');
 export const requestRegister = (email,nickname) => {
   return (dispatch) => {
     fetch(
-      `http://asia.xpg.cards/account/register`,{
+      `http://api.xpg.cards/account/register`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
