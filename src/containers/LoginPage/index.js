@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import LoginState from '../../enums/loginState';
+import {Icon} from 'react-fa';
+import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
 import LoginForm from '../../components/loginForm';
 import ForgetForm from '../../components/forgetForm';
 import RegisterFomr from '../../components/registerForm';
@@ -14,25 +15,37 @@ class LoginPage extends React.Component {
   componentWillMount(){
     let {code} = this.props.params;
     if(code){
-      this.props.actions.changeMode({mode:LoginState.RegisterSetPassword});
+      this.props.actions.changeMode({mode:LoginStateEnum.RegisterSetPassword});
     }else{
-      this.props.actions.changeMode({mode:LoginState.Loging});
+      this.props.actions.changeMode({mode:LoginStateEnum.Loging});
     }
   }
   render(){
     const {actions, login} = this.props;
+    const {title, text, color, icon, spin} = this.props.login.processForm;
+    let boxStyle = this.props.login.process === LoginProcessEnum.None ? 'box': 'box process' ;
     return (
       <div className="login-page">
-        <div className="box">
-
+        <div className={boxStyle}>
             {(() => {
           switch (login.mode) {
-            case LoginState.Loging:   return <LoginForm actions={actions}/>;
-            case LoginState.Forget:   return <ForgetForm actions={actions}/>;
-            case LoginState.Register:   return <RegisterFomr actions={actions}/>;
-            case LoginState.RegisterSetPassword: return <ResetPwdForm actions={actions}/>;
+            case LoginStateEnum.Loging:   return <LoginForm actions={actions}/>;
+            case LoginStateEnum.Forget:   return <ForgetForm actions={actions}/>;
+            case LoginStateEnum.Register:   return <RegisterFomr actions={actions} data={login}/>;
+            case LoginStateEnum.RegisterSetPassword: return <ResetPwdForm actions={actions}/>;
           }
             })()}
+          <div className='process'>
+            <div className={color}>
+              <h1>
+                <Icon name="user"/>
+                {title}
+              </h1>
+            </div>
+            <Icon name={icon} spin={spin} size="5x"/>
+            <p>{text}</p>
+          </div>
+
         </div>
       </div>
     );
