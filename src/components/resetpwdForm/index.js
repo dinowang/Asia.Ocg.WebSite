@@ -23,7 +23,7 @@ class ResetpPwdFrom extends React.Component {
           <input type="text" placeholder="*****"></input>
           <Icon name="lock"/>
         </div>
-        <div className="login-btn">
+        <div className="btn">
           <Icon name="arrow-right" size="2x"/>
         </div>
       </div>

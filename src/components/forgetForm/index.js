@@ -20,7 +20,7 @@ class ForgetForm extends React.Component {
           <input type="text" placeholder="Email"></input>
           <Icon name="envelope"/>
         </div>
-        <div className="login-btn">
+        <div className="btn">
           <Icon name="envelope" size="2x"/>
         </div>
         <span className="right" onClick={()=>this.changeMode(LoginState.Loging)}>註冊</span>

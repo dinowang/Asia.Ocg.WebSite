@@ -11,6 +11,7 @@ class Header extends React.Component {
   }
   changeMode(){
     this.props.actions.changeMode({mode:0});
+
   }
   render() {
     return (
