@@ -6,7 +6,9 @@ import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
 import LoginForm from '../../components/loginForm';
 import ForgetForm from '../../components/forgetForm';
 import RegisterFomr from '../../components/registerForm';
-import ResetPwdForm from '../../components/resetpwdForm';
+import SetPwdForm from '../../components/setpwdForm';
+import ReSendEmailForm from '../../components/resendEmailForm';
+
 
 import * as actions from '../../actions/loginActions';
 import './index.scss';
@@ -14,10 +16,11 @@ import './index.scss';
 class LoginPage extends React.Component {
   componentWillMount(){
     let {code} = this.props.params;
+    const {actions} = this.props;
     if(code){
-      this.props.actions.changeMode({mode:LoginStateEnum.RegisterSetPassword});
+      actions.changeMode({mode:LoginStateEnum.RegisterSetPassword});
     }else{
-      this.props.actions.changeMode({mode:LoginStateEnum.Loging});
+      actions.changeMode({mode:LoginStateEnum.Loging});
     }
   }
   render(){
@@ -32,7 +35,8 @@ class LoginPage extends React.Component {
             case LoginStateEnum.Loging:   return <LoginForm actions={actions}/>;
             case LoginStateEnum.Forget:   return <ForgetForm actions={actions}/>;
             case LoginStateEnum.Register:   return <RegisterFomr actions={actions} data={login}/>;
-            case LoginStateEnum.RegisterSetPassword: return <ResetPwdForm actions={actions}/>;
+            case LoginStateEnum.RegisterSetPassword: return <SetPwdForm actions={actions} data={login} code={this.props.params.code}/>;
+            case LoginStateEnum.ReSendEmail: return <ReSendEmailForm actions={actions} data={login}/>;
           }
             })()}
           <div className='process'>

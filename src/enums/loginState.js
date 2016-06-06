@@ -3,7 +3,8 @@ export const LoginStateEnum ={
   Success: 1,
   Register: 2,
   Forget: 3,
-  RegisterSetPassword: 4
+  RegisterSetPassword: 4,
+  ReSendEmail: 5
 };
 
 

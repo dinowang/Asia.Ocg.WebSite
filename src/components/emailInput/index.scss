@@ -1,0 +1,36 @@
+.email-input{
+  position: relative;
+  margin:20px 0;
+  .fa{
+    position: absolute;
+    color:#ddd;
+    right:5%;
+    top: 28%;
+  }
+  .fa-lock{
+    right:6%;
+  }
+
+  input{
+    padding: 0 10px;
+    height:40px;
+    width:100%;
+    font-size: 1rem;
+    border:1px solid #ddd;
+    &:focus{
+      outline:none;
+      border:1px solid #3c8dbc;
+
+      &~ .fa{
+        transition: all .5s;
+        color:#444;
+      }
+    }
+    &.error{
+      border:1.5px solid #dd4b39;
+    }
+    &.success{
+      border:1.5px solid #00a65a;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import StatusCode from '../enums/statusCode';
-import {LoginProcessEnum} from '../enums/loginState';
+import {LoginProcessEnum, LoginStateEnum} from '../enums/loginState';
 export const changeMode = createAction('change mode');
 export const changeProcess = createAction('change process');
 export const changeProcessForm = createAction('change processform');
@@ -9,7 +9,7 @@ export const fetchRegister = createAction('fetch register');
 export const requestRegister = (email,nickname) => {
   return (dispatch) => {
     fetch(
-      `http://api.xpg.cards/account/register`,{
+      `http://10.211.55.3/Asia.Ocg.WebAPI/account/register`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -26,7 +26,7 @@ export const requestRegister = (email,nickname) => {
       if(status_code === StatusCode.registerExist){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
         dispatch(setMessage("帳號已存在"));
-      }else if(status_code === StatusCode.registerSuccess)
+      }else if(status_code === StatusCode.Success)
         dispatch(changeProcessForm({processForm:{
           title: '完成',
           color: 'header grean',
@@ -35,6 +35,75 @@ export const requestRegister = (email,nickname) => {
           text: `請至 ${email} 收取確認信件`
         }}));
     }).catch(function(ex) {
+      dispatch(changeProcess({process:LoginProcessEnum.None}));
+      dispatch(setMessage("網路發生錯誤"));
+    });
+
+  };
+};
+export const requestCheckCode = (code) => {
+  return (dispatch) => {
+    fetch(
+      `http://10.211.55.3/Asia.Ocg.WebAPI/check/register_code/${code}`)
+    .then((response)=> {
+      return response.json();
+    }).then((json)=> {
+      let {status_code} = json;
+      if(status_code === StatusCode.Success){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+      }else if(status_code === StatusCode.registerCodeExpired){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}))
+        dispatch(setMessage("驗證已過期，輸入 Email 寄發確認信件。"));
+      }else  if(status_code === StatusCode.registerCodeFail){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(changeMode({mode:LoginStateEnum.Loging}))
+      }
+    }).catch(function(ex) {
+      dispatch(changeProcess({process:LoginProcessEnum.None}));
+      dispatch(setMessage("網路發生錯誤"));
+    });
+
+  };
+};
+export const requestRegSetPwd = (register_code, password) => {
+  return (dispatch) => {
+    fetch(
+      `http://10.211.55.3/Asia.Ocg.WebAPI/account/setpassword`,{
+        method:'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        register_code: register_code,
+        password: password
+        })
+      })
+    .then((response)=> {return response.json();})
+    .then((json)=> {
+      let {status_code} = json;
+      console.log(status_code === StatusCode.Success,status_code,'json')
+      if(status_code === StatusCode.Success){
+        console.log('test');
+        dispatch(changeProcessForm({processForm:{
+          title: '完成',
+          color: 'header grean',
+          icon: 'check-circle-o',
+          spin: false,
+          text: `您現在可以登入了唷！`
+        }}));
+        dispatch(setMessage(''));
+      }else if(status_code === StatusCode.registerCodeFail){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}))
+        dispatch(setMessage("驗證已過期，輸入 Email 寄發確認信件。"));
+      }else  if(status_code === StatusCode.registerCodeFail){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(changeMode({mode:LoginStateEnum.Loging}))
+      }
+    })
+    .catch(function(ex) {
       dispatch(changeProcess({process:LoginProcessEnum.None}));
       dispatch(setMessage("網路發生錯誤"));
     });
