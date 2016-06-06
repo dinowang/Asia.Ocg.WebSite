@@ -13,4 +13,4 @@ const StatusCode ={
   loginFail: 223
 };
 
-export default StatusCode
+export default StatusCode;

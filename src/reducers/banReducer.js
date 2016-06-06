@@ -19,7 +19,7 @@ const initialState ={
       {
         name:'',
         image_url:''
-      },
+      }
     ]
   },
   sumbitBtn: ButtonStateEnum.None
@@ -35,7 +35,6 @@ export default handleActions({
   },
   'change date' (state, action) {
     state.banform.date = action.payload;
-    console.log('date');
     return Object.assign({},state);
   }
 }, initialState);

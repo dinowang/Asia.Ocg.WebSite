@@ -39,7 +39,7 @@ class LoginPage extends React.Component {
             case LoginStateEnum.ReSendEmail: return <ReSendEmailForm actions={actions} data={login}/>;
           }
             })()}
-          <div className='process'>
+          <div className="process">
             <div className={color}>
               <h1>
                 <Icon name="user"/>
@@ -57,7 +57,8 @@ class LoginPage extends React.Component {
 }
 LoginPage.propTypes ={
   login:PropTypes.object.isRequired,
-  actions:PropTypes.object.isRequired
+  actions:PropTypes.object.isRequired,
+  params:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
