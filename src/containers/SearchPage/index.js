@@ -23,7 +23,7 @@ class SearchPage extends React.Component {
     actions.requestSearch();
   }
   changeMode(mode){
-    this.props.actions.changeMode(mode);
+    this.props.actions.changeSearchMode(mode);
   }
   render(){
     const { search } = this.props;

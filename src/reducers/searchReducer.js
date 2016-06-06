@@ -19,7 +19,7 @@ export default handleActions({
     state.current_page = action.payload;
     return Object.assign({},state);
   },
-  'change mode'(state, action){
+  'change searchmode'(state, action){
     state.display_mode = action.payload;
     return Object.assign({},state);
   }

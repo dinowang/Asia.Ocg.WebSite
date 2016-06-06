@@ -1,6 +1,6 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
-import LoginState from '../../enums/loginState';
+import {LoginStateEnum} from '../../enums/loginState';
 import './index.scss';
 
 class ForgetForm extends React.Component {
@@ -23,7 +23,7 @@ class ForgetForm extends React.Component {
         <div className="btn">
           <Icon name="envelope" size="2x"/>
         </div>
-        <span className="right" onClick={()=>this.changeMode(LoginState.Loging)}>註冊</span>
+        <span className="right" onClick={()=>this.changeMode(LoginStateEnum.Loging)}>註冊</span>
       </div>
     );
   }
