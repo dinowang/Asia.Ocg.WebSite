@@ -10,7 +10,8 @@ const StatusCode ={
 
   // Login
   unRegister: 222,
-  loginFail: 223
+  loginFail: 223,
+  unCheckEMail: 224
 };
 
 export default StatusCode;

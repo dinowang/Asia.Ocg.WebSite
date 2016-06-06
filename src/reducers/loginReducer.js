@@ -20,6 +20,7 @@ const initialState ={
 export default handleActions({
   'change mode' (state, action){
     state.process = LoginProcessEnum.None;
+    state.message = '';
     return Object.assign({},state,action.payload);
   },
   'change process' (state, action){

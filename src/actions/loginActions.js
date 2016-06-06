@@ -10,7 +10,7 @@ export const fetchRegister = createAction('fetch register');
 export const requestRegister = (email,nickname) => {
   return (dispatch) => {
     fetch(
-      `http://10.211.55.3/Asia.Ocg.WebAPI/account/register`,{
+      `http://api.xpg.cards/account/register`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -45,7 +45,7 @@ export const requestRegister = (email,nickname) => {
 export const requestCheckCode = (code) => {
   return (dispatch) => {
     fetch(
-      `http://10.211.55.3/Asia.Ocg.WebAPI/check/register_code/${code}`)
+      `http://api.xpg.cards/check/register_code/${code}`)
     .then((response)=> {
       return response.json();
     }).then((json)=> {
@@ -70,7 +70,7 @@ export const requestCheckCode = (code) => {
 export const requestRegSetPwd = (register_code, password) => {
   return (dispatch) => {
     fetch(
-      `http://10.211.55.3/Asia.Ocg.WebAPI/account/setpassword`,{
+      `http://api.xpg.cards/account/setpassword`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -113,7 +113,7 @@ export const requestLogin = (account, password) => {
   return (dispatch) => {
     //
     fetch(
-      `http://10.211.55.3/Asia.Ocg.WebAPI/account/login`,{
+      `http://api.xpg.cards/account/login`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -143,6 +143,9 @@ export const requestLogin = (account, password) => {
       }else  if(status_code === StatusCode.loginFail){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
         dispatch(setMessage("帳號或密碼失敗"));
+      }else  if(status_code === StatusCode.unCheckEMail){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(setMessage("請至信箱收取認證信"));
       }
     })
     .catch(function(ex) {
