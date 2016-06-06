@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import StatusCode from '../enums/statusCode';
 import {LoginProcessEnum, LoginStateEnum} from '../enums/loginState';
+import {setUserData} from './userActions';
 export const changeMode = createAction('change mode');
 export const changeProcess = createAction('change process');
 export const changeProcessForm = createAction('change processform');
@@ -83,9 +84,7 @@ export const requestRegSetPwd = (register_code, password) => {
     .then((response)=> {return response.json();})
     .then((json)=> {
       let {status_code} = json;
-      console.log(status_code === StatusCode.Success,status_code,'json')
       if(status_code === StatusCode.Success){
-        console.log('test');
         dispatch(changeProcessForm({processForm:{
           title: '完成',
           color: 'header grean',
@@ -101,6 +100,49 @@ export const requestRegSetPwd = (register_code, password) => {
       }else  if(status_code === StatusCode.registerCodeFail){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
         dispatch(changeMode({mode:LoginStateEnum.Loging}))
+      }
+    })
+    .catch(function(ex) {
+      dispatch(changeProcess({process:LoginProcessEnum.None}));
+      dispatch(setMessage("網路發生錯誤"));
+    });
+
+  };
+};
+export const requestLogin = (account, password) => {
+  return (dispatch) => {
+    //
+    fetch(
+      `http://10.211.55.3/Asia.Ocg.WebAPI/account/login`,{
+        method:'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        account: account,
+        password: password
+        })
+      })
+    .then((response)=> {return response.json();})
+    .then((json)=> {
+      let {status_code,data} = json;
+      if(status_code === StatusCode.Success){
+        dispatch(changeProcessForm({processForm:{
+          title: '登入成功',
+          color: 'header grean',
+          icon: 'check-circle-o',
+          spin: false,
+          text: ``
+        }}));
+        dispatch(setUserData(data));
+        dispatch(setMessage(""));
+      }else if(status_code === StatusCode.unRegister){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(setMessage("帳號尚未註冊"));
+      }else  if(status_code === StatusCode.loginFail){
+        dispatch(changeProcess({process:LoginProcessEnum.None}));
+        dispatch(setMessage("帳號或密碼失敗"));
       }
     })
     .catch(function(ex) {

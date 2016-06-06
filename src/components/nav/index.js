@@ -32,7 +32,8 @@ class Nav extends React.Component {
   }
   render() {
     const {user} = this.props;
-    const userStyle = user.token? 'user':'hide';
+    const image_url = user.image_url? user.image_url:'https://xpgcards.blob.core.windows.net/user-image/user.png';
+    const userStyle = user.account? 'user':'hide';
     const manageList = [{
         title:'禁卡表',
         href:'/banManage/Create'
@@ -40,7 +41,7 @@ class Nav extends React.Component {
     return (
       <div className="nav">
         <div className={userStyle}>
-          <img src={user.image_url}/>
+          <img src={image_url}/>
           <div className="info">
             <p>{user.nickname}</p>
             <p>

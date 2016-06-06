@@ -8,7 +8,7 @@ import * as actions from '../actions/loginActions';
 const App = (props) => {
   return (
     <div>
-      <Header actions={props.actions}/>
+      <Header/>
       <Nav/>
       <div className="container">
         {props.children}

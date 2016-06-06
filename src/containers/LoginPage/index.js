@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
         <div className={boxStyle}>
             {(() => {
           switch (login.mode) {
-            case LoginStateEnum.Loging:   return <LoginForm actions={actions}/>;
+            case LoginStateEnum.Loging:   return <LoginForm actions={actions} data={login}/>;
             case LoginStateEnum.Forget:   return <ForgetForm actions={actions}/>;
             case LoginStateEnum.Register:   return <RegisterFomr actions={actions} data={login}/>;
             case LoginStateEnum.RegisterSetPassword: return <SetPwdForm actions={actions} data={login} code={this.props.params.code}/>;

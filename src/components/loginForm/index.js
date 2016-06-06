@@ -1,12 +1,32 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
-import {LoginStateEnum} from '../../enums/loginState';
+import EmailInput from '../emailInput';
+import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
 import './index.scss';
 
 class LoginForm extends React.Component {
+  constructor(){
+    super();
+    this.login = this.login.bind(this);
+  }
   changeMode(mode){
     console.log('test',mode,LoginStateEnum.Forget);
     this.props.actions.changeMode({mode:mode});
+  }
+  login(){
+    const account = this.refs.account.value();
+    const password = this.refs.password.value;
+    const {actions} = this.props;
+    if(this.refs.account.isEmail() && password){
+      actions.changeProcessForm({processForm:{
+        title: '登入中...',
+        color: 'header orange',
+        icon: 'spinner',
+        spin: true,
+      }});
+      actions.changeProcess({process:LoginProcessEnum.Processing});
+      actions.requestLogin(account,password)
+    }
   }
   render() {
     return (
@@ -17,15 +37,13 @@ class LoginForm extends React.Component {
             登入
           </h1>
         </div>
+        <EmailInput ref="account" />
         <div className="input">
-          <input type="text" placeholder="Email"></input>
-          <Icon name="envelope"/>
-        </div>
-        <div className="input">
-          <input type="password" placeholder="password"></input>
+          <input type="password" placeholder="password" ref="password"></input>
           <Icon name="lock"/>
         </div>
-        <div className="btn">
+        <p className="message">{this.props.data.message}</p>
+        <div className="btn" onClick={this.login}>
           <Icon name="arrow-right" size="2x"/>
         </div>
         <span className="left" onClick={()=>this.changeMode(LoginStateEnum.Forget)}>忘記密碼</span>

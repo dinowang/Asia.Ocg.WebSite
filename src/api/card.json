@@ -33,3 +33,41 @@ URI：http：//api.xpg.cards/card?serialNumber=123
     }
   ]
 }
+
+
+
+
+GET
+URI：http：//api.xpg.cards/card/comment/{cardSerialNumber}
+Response:
+{
+  [{
+    "image_url":"http://",
+    "nickname":"Rick",
+    "time":""
+  },{
+    "image_url":"http://",
+    "nickname":"Clark",
+    "time":""
+    }]
+}
+
+
+
+POST
+URI：http：//api.xpg.cards/card/comment
+Request:
+  header:{
+    "token":"GUID"
+  }
+  BODY:{
+    "card_serialnumber":"1",
+    "comment":"克拉克好帥"
+  }
+Response:
+  {
+    "success": true,
+    "status_code": 0,
+    "data": null,
+    "message": null
+  }
