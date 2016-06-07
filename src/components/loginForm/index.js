@@ -9,8 +9,10 @@ class LoginForm extends React.Component {
     super();
     this.login = this.login.bind(this);
   }
+  componentDidMount(){
+    this.refs.account.refs.email.focus();
+  }
   changeMode(mode){
-    console.log('test',mode,LoginStateEnum.Forget);
     this.props.actions.changeMode({mode:mode});
   }
   login(){

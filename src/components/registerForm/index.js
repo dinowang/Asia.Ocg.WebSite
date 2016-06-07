@@ -15,6 +15,9 @@ class RegisterForm extends React.Component {
      nicknameStyle:''
    }
   }
+  componentDidMount(){
+    this.refs.email.refs.email.focus();
+  }
   changeMode(mode) {
     this.props.actions.changeMode({mode:mode});
   }
