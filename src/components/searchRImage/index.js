@@ -1,8 +1,11 @@
-import React, {PropTypes}from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import './index.scss';
 
 const SearchRImage = (props) => {
+  const preFetch = (e) =>{
+    props.actions.checkinList(e);
+  }
   let renderLi =(item, index)=>{
     let {name, image_url, kind, level, property, race, attack, defence, effect, serial_number} = item;
     image_url = image_url ? image_url :"https://xpgcards.blob.core.windows.net/image/null.jpg";
@@ -10,8 +13,8 @@ const SearchRImage = (props) => {
     return (
       <div className="card-list" key={index}>
         <Link to={href}><img src={image_url}></img></Link>
-        <div className="card-info">
-        <Link to={href}>{name}</Link>
+        <div className="card-info" >
+        <Link onMouseOver={()=>{preFetch(serial_number)}} to={href}>{name}</Link>
           <ul>
             <li>{kind}</li>
             <li>{level}</li>

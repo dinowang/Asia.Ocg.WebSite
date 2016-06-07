@@ -13,7 +13,8 @@ class CardPage extends React.Component {
   componentWillMount(){
     let {serialNumber} = this.props.params;
     let {actions} = this.props;
-    actions.requestCardInfo(serialNumber);
+    // actions.requestCardInfo(serialNumber);
+    actions.checkinList(serialNumber);
   }
   changeTab(tab){
     this.props.actions.changeTab(tab);

@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
 import PageList from '../../components/pageList';
-import * as actions from '../../actions/searchActions';
+import * as searchActions from '../../actions/searchActions';
+import * as cardActions from '../../actions/cardActions';
 import SearchRText from '../../components/searchRText';
 import SearchRImage from '../../components/searchRImage';
 import './index.scss';
@@ -13,20 +14,20 @@ class SearchPage extends React.Component {
 
   componentWillMount(){
     let {query, page} = this.props.params;
-    this.props.actions.inputSearch({query:query.toUpperCase()});
+    this.props.searchActions.inputSearch({query:query.toUpperCase()});
     page = page ? page : 1;
     this.handlePageList(parseInt(page));
   }
   handlePageList(page){
-    let {actions} = this.props;
-    actions.changePage(page);
-    actions.requestSearch();
+    let {searchActions} = this.props;
+    searchActions.changePage(page);
+    searchActions.requestSearch();
   }
   changeMode(mode){
-    this.props.actions.changeSearchMode(mode);
+    this.props.searchActions.changeSearchMode(mode);
   }
   render(){
-    const { search } = this.props;
+    const { search, cardActions} = this.props;
     return (
       <div className="search-page">
         <h1>搜尋：{search.query}</h1>
@@ -46,7 +47,7 @@ class SearchPage extends React.Component {
           <div className="clear"></div>
             {(() => {
           switch (search.display_mode) {
-            case 0:   return <SearchRImage data={search.items}/>;
+            case 0:   return <SearchRImage data={search.items} actions={cardActions}/>;
             case 1:   return <SearchRText data={search.items}/>;
           }
             })()}
@@ -76,13 +77,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    searchActions: bindActionCreators(searchActions, dispatch),
+    cardActions: bindActionCreators(cardActions, dispatch)
+
   };
 }
 
 SearchPage.propTypes = {
   params: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  searchActions: PropTypes.object.isRequired,
+  cardActions: PropTypes.object.isRequired,
   search: PropTypes.object.isRequired
 };
 
