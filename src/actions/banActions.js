@@ -8,7 +8,9 @@ export const requestSearch = (value) => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      dispatch(fetchCardList(json.data.items));
+      if(json.data){
+        dispatch(fetchCardList(json.data.items));
+      }
     });
   };
 };
