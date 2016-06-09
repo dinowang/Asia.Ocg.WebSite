@@ -3,19 +3,26 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Header from './header';
 import Nav from './nav';
-import * as actions from '../actions/loginActions';
+import * as actions from '../actions/appActions';
+import CookieHelper from '../businessLogic/cookieHelper';
 
-const App = (props) => {
-  return (
-    <div>
-      <Header/>
-      <Nav/>
-      <div className="container">
-        {props.children}
+class App extends React.Component{
+  componentWillMount(){
+    this.props.actions.requestGetInfo(CookieHelper.Get('session'));
+  }
+  render(){
+    const {props} = this;
+    return(
+      <div>
+        <Header/>
+        <Nav/>
+        <div className="container">
+          {props.children}
+        </div>
       </div>
-    </div>
-  );
-};
+    )
+  }
+}
 
 App.propTypes = {
   children: PropTypes.element,
