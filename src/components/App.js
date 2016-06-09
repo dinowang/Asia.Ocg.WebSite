@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Helmet from "react-helmet";
 import Header from './header';
 import Nav from './nav';
 import * as actions from '../actions/appActions';
@@ -11,13 +12,14 @@ class App extends React.Component{
     this.props.actions.requestGetInfo(CookieHelper.Get('session'));
   }
   render(){
-    const {props} = this;
+    const {app} = this.props;
     return(
       <div>
+        <Helmet title={app.title} />
         <Header/>
         <Nav/>
         <div className="container">
-          {props.children}
+          {this.props.children}
         </div>
       </div>
     )
@@ -31,6 +33,7 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     login: state.login,
+    app: state.app,
     actions:PropTypes.object.isRequired
   };
 }

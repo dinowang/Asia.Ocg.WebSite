@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/cardActions';
+import * as cardActions from '../../actions/cardActions';
+import * as appActions from '../../actions/appActions';
 import CardInfo from '../../components/cardInfo';
 import CardDeck from '../../components/cardDeck';
 
@@ -12,12 +13,15 @@ import './index.scss';
 class CardPage extends React.Component {
   componentWillMount(){
     let {serialNumber} = this.props.params;
-    let {actions} = this.props;
-    // actions.requestCardInfo(serialNumber);
-    actions.checkinList(serialNumber);
+    let {cardActions} = this.props;
+    // cardActions.requestCardInfo(serialNumber);
+    cardActions.checkinList(serialNumber);
   }
   changeTab(tab){
-    this.props.actions.changeTab(tab);
+    this.props.cardActions.changeTab(tab);
+  }
+  componentWillUpdate(){
+    this.props.appActions.setTitle(this.props.card.name);
   }
   render(){
     const { card } = this.props;
@@ -79,7 +83,8 @@ class CardPage extends React.Component {
 CardPage.propTypes ={
   card:PropTypes.object.isRequired,
   params:PropTypes.object.isRequired,
-  actions:PropTypes.object.isRequired
+  cardActions:PropTypes.object.isRequired,
+  appActions:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -90,7 +95,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    cardActions: bindActionCreators(cardActions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch),
+
   };
 }
 

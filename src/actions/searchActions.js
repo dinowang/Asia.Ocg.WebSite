@@ -6,7 +6,7 @@ export const changeSearchMode = createAction('change searchmode');
 export const requestSearch = () => {
   return (dispatch,state) => {
     const {search} = state();
-    fetch(`http://api.xpg.cards/search/${search.query}?page=${search.current_page}&lucene=true`)
+    fetch(`http://api.xpg.cards/search/${search.query}?page=${search.current_page}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {

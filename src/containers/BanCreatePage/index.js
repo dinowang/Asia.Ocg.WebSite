@@ -18,7 +18,7 @@ export const BanCreatePage = (props) => {
   const createBtn =()=>{
   };
   const onDateChange = (e)=>{
-    props.actions.changeDate(e);
+    props.actions.changeBanDate(e);
   };
   const dropValue = (e)=>{
     props.actions.setBanType(e.key);
@@ -30,7 +30,7 @@ export const BanCreatePage = (props) => {
   };
   const save = ()=>{
     props.actions.changeBtnType(ButtonStateEnum.Loading)
-    
+
     props.actions.requestCreateBan();
   };
   let onChangeEvent;

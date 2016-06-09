@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
-import {setUserData} from './userActions';
+import { setUserData } from './userActions';
+export const setTitle = createAction('set title');
 export const requestGetInfo = (token) => {
   return (dispatch,state) => {
     fetch(`http://api.xpg.cards/account/getinfo`,{

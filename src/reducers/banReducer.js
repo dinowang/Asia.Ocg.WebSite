@@ -32,6 +32,10 @@ export default handleActions({
     state.sumbitBtn = action.payload;
     return Object.assign({},state);
   },
+  'change bandate' (state, action) {
+    state.banform.date = action.payload;
+    return Object.assign({},state);
+  },
   'add tolist' (state, action) {
     action.payload.type = state.banform.type;
     let IsExist = state.banform.list.filter(data=>data.serial_number === action.payload.serial_number)
