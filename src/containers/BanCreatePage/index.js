@@ -9,9 +9,11 @@ import DropDown from '../../components/dropdown';
 import Button from '../../components/button';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
 import SearchListPanel from '../../components/searchListPanel';
-
+import BanListText from '../../components/banlistText';
+import BanTypeEnum from '../../enums/banTypeEnum';
 
 import './index.scss';
+
 export const BanCreatePage = (props) => {
   const createBtn =()=>{
     props.actions.changeBtnType(ButtonStateEnum.Loading)
@@ -20,7 +22,21 @@ export const BanCreatePage = (props) => {
     props.actions.changeDate(e);
   };
   const dropValue = (e)=>{
-    console.log('drovalue',e)
+    props.actions.setBanType(e.key);
+  };
+  const panelOnClick = (cardData)=>{
+    if(props.ban.banform.type >=0){
+      props.actions.addToList(cardData);
+    }
+  };
+  let onChangeEvent;
+  const searchOnChange = (value)=>{
+    value = value.toUpperCase();
+    clearTimeout(onChangeEvent);
+    onChangeEvent = setTimeout(()=>{
+      props.actions.requestSearch(value);
+    },500);
+
   };
   const switchStyle = {top:"10px"};
   return (
@@ -31,17 +47,17 @@ export const BanCreatePage = (props) => {
     dateFormat="YYYY/MM/DD"
     selected={props.ban.banform.date}
     onChange={onDateChange} />
-  <DropDown style={{top:'1px'}} getValue={dropValue} default={0} values={[{key:0,value:'請選擇'},{key:1,value:'禁止'},{key:2,value:'限制'},{key:3,value:'準限制'}]}/>
+  <DropDown style={{top:'1px'}} getValue={dropValue} default={-1} values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
           <SwitchButton style={switchStyle}/>
             <Button style={{float:'right',top:'5px'}} state={props.ban.sumbitBtn} onClick={createBtn} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
 
         <hr/>
         <div className="data">
-
+          <BanListText data={props.ban.banform}/>
         </div>
       </div>
-      <div className="list">
-        <SearchListPanel data={props.ban.searchForm.list}/>
+      <div className="search-list">
+        <SearchListPanel itemOnClick={panelOnClick} onChange={searchOnChange} data={props.ban.searchForm.list}/>
       </div>
     </div>
   );

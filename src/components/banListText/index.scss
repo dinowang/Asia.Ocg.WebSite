@@ -1,0 +1,18 @@
+.ban-listtext{
+  .list{
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+    float: left;
+    p{
+      border-bottom: 2px solid #3c8dbc;
+      padding:5px;
+    }
+    ul{
+      margin:5px;
+      li{
+        padding: 5px;
+      }
+    }
+  }
+}

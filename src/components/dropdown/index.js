@@ -13,8 +13,6 @@ class DropDown extends React.Component {
      isShow : '0',
      defaultValue:defaultValue[0]
    }
-
-   console.log('-----',defaultValue[0])
   }
   show(){
     this.setState({isShow:'1'})
@@ -29,7 +27,7 @@ class DropDown extends React.Component {
   }
 
   render(){
-    const isShow = {opacity:this.state.isShow};
+    const isShow = {opacity:this.state.isShow, zIndex:this.state.isShow === "0" ?'-2':'10'};
 
 
     return (
