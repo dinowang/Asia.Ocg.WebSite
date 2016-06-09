@@ -28,6 +28,10 @@ export default handleActions({
     state.banform.type = action.payload;
     return Object.assign({},state);
   },
+  'change btntype' (state, action) {
+    state.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },
   'add tolist' (state, action) {
     action.payload.type = state.banform.type;
     let IsExist = state.banform.list.filter(data=>data.serial_number === action.payload.serial_number)

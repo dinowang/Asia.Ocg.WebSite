@@ -9,7 +9,6 @@ class SearchListPanel extends React.Component {
    this.renderList = this.renderList.bind(this);
   }
   liOnClick(value){
-    // console.log('add',value)
     this.props.itemOnClick(value);
   }
   renderList(data,key){

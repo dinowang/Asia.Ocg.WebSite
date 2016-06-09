@@ -16,7 +16,6 @@ import './index.scss';
 
 export const BanCreatePage = (props) => {
   const createBtn =()=>{
-    props.actions.changeBtnType(ButtonStateEnum.Loading)
   };
   const onDateChange = (e)=>{
     props.actions.changeDate(e);
@@ -28,6 +27,11 @@ export const BanCreatePage = (props) => {
     if(props.ban.banform.type >=0){
       props.actions.addToList(cardData);
     }
+  };
+  const save = ()=>{
+    props.actions.changeBtnType(ButtonStateEnum.Loading)
+    
+    props.actions.requestCreateBan();
   };
   let onChangeEvent;
   const searchOnChange = (value)=>{
@@ -49,7 +53,7 @@ export const BanCreatePage = (props) => {
     onChange={onDateChange} />
   <DropDown style={{top:'1px'}} getValue={dropValue} default={-1} values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
           <SwitchButton style={switchStyle}/>
-            <Button style={{float:'right',top:'5px'}} state={props.ban.sumbitBtn} onClick={createBtn} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
+          <Button onClick={save} style={{float:'right',top:'5px'}} state={props.ban.sumbitBtn} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
 
         <hr/>
         <div className="data">
