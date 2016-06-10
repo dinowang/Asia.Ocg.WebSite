@@ -20,8 +20,8 @@ class CardPage extends React.Component {
   changeTab(tab){
     this.props.cardActions.changeTab(tab);
   }
-  componentWillUpdate(){
-    this.props.appActions.setTitle(this.props.card.name);
+  componentWillUpdate(netState){
+    this.props.appActions.setTitle(netState.card.name);
   }
   render(){
     const { card } = this.props;

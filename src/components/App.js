@@ -15,7 +15,7 @@ class App extends React.Component{
     const {app} = this.props;
     return(
       <div>
-        <Helmet title={app.title} />
+        <Helmet title={app.title}/>
         <Header/>
         <Nav/>
         <div className="container">

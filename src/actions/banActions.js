@@ -1,11 +1,12 @@
 import { createAction } from 'redux-actions';
 export const fetchCardList = createAction('fetch cardlist');
 export const setBanType = createAction('set bantype');
-export const addToList = createAction('add tolist')
-export const changeBtnType = createAction('change btntype')
+export const addToList = createAction('add tolist');
+export const changeBtnType = createAction('change btntype');
+export const changeBanDate = createAction('change bandate');
 export const requestSearch = (value) => {
   return (dispatch) => {
-    fetch(`http://api.xpg.cards/search/${value}`)
+    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/search/${value}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
