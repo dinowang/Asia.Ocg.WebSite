@@ -45,7 +45,7 @@ class BanFormPage extends React.Component {
     }
   };
   save(){
-    // this.props.actions.changeBtnType(ButtonStateEnum.Loading)
+    this.props.actions.changeBtnType(ButtonStateEnum.Loading)
 
     this.props.actions.requestCreateBan();
   };
@@ -73,7 +73,7 @@ class BanFormPage extends React.Component {
               onChange={this.onDateChange} />
             <DropDown style={{top:'1px'}} getValue={this.dropValue} default={-1} values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
             <SwitchButton style={switchStyle} checked={this.props.ban.banform.enable}/>
-            <Button onClick={this.save} style={{float:'right',top:'5px'}} state={this.props.ban.sumbitBtn} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
+            <Button onClick={this.save} style={{float:'right',top:'5px'}} state={this.props.ban} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
 
           <hr/>
           <div className="data">

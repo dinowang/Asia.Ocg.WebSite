@@ -12,8 +12,16 @@ import moment from 'moment';
 import './index.scss';
 
 class BanListPage extends React.Component {
+  constructor(){
+    super();
+    this.renderData = this.renderData.bind(this);
+  }
   componentWillMount(){
     this.props.actions.requestManageBanList();
+  }
+  delete(e){
+    this.props.actions.requestManageDeleteBan(e);
+
   }
   renderData(data, index) {
     const href = `/banManage/Form/${data.id}`
@@ -31,7 +39,7 @@ class BanListPage extends React.Component {
           <Link to={href}>
             <Icon name="pencil"/>
           </Link>
-          <Icon name="trash-o"/>
+          <Icon onClick={()=>this.delete(data.id)} name="trash-o"/>
         </td>
 
       </tr>

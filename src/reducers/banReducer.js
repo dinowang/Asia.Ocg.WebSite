@@ -18,6 +18,7 @@ const initialState ={
     list:[]
   },
   sumbitBtn: ButtonStateEnum.None,
+  submitBtnText:'',
   list:[]
 
 };
@@ -37,8 +38,14 @@ export default handleActions({
     state.banform.type = action.payload;
     return Object.assign({},state);
   },
+  // 設定按鈕狀態
   'change btntype' (state, action) {
     state.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },
+  // 設定按鈕錯誤文字
+  'change banerrmsg' (state, action) {
+    state.submitBtnText = action.payload;
     return Object.assign({},state);
   },
   // 更改禁卡表日期
@@ -67,8 +74,8 @@ export default handleActions({
   },
   // 讀取禁卡表單
   'fetch banform' (state, action) {
-    state.banform = action.payload;
-    state.banform.date = moment(state.banform.date);
-    return Object.assign({},state);
+
+    action.payload.date = moment(action.payload.date);
+    return Object.assign({},state,action.payload);
   }
 }, initialState);
