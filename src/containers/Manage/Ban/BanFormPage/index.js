@@ -3,18 +3,18 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import * as actions from '../../actions/banActions';
-import SwitchButton from '../../components/switchButton';
-import DropDown from '../../components/dropdown';
-import Button from '../../components/button';
-import ButtonStateEnum from '../../enums/buttonStateEnum';
-import SearchListPanel from '../../components/searchListPanel';
-import BanListText from '../../components/banlistText';
-import BanTypeEnum from '../../enums/banTypeEnum';
+import * as actions from '../../../../actions/banActions';
+import SwitchButton from '../../../../components/switchButton';
+import DropDown from '../../../../components/dropdown';
+import Button from '../../../../components/button';
+import ButtonStateEnum from '../../../../enums/buttonStateEnum';
+import SearchListPanel from '../../../../components/searchListPanel';
+import BanListText from '../../../../components/banlistText';
+import BanTypeEnum from '../../../../enums/banTypeEnum';
 
 import './index.scss';
 
-export const BanCreatePage = (props) => {
+export const BanFormPage = (props) => {
   const createBtn =()=>{
   };
   const onDateChange = (e)=>{
@@ -67,7 +67,7 @@ export const BanCreatePage = (props) => {
   );
 };
 
-BanCreatePage.propTypes = {
+BanFormPage.propTypes = {
   actions: PropTypes.object.isRequired,
   ban: PropTypes.object.isRequired
 };
@@ -87,4 +87,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BanCreatePage);
+)(BanFormPage);

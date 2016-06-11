@@ -36,7 +36,7 @@ class Nav extends React.Component {
     const userStyle = user.account? 'user':'hide';
     const manageList = [{
         title:'禁卡表',
-        href:'/banManage/Create'
+        href:'/banManage/List'
     }];
     return (
       <div className="nav">

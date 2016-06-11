@@ -6,7 +6,8 @@ import moment from 'moment';
 
 const initialState ={
   banform :{
-    name: 'tes',
+    id:0,
+    name: '',
     date: moment(),
     type: -1,
     enable:true,
@@ -16,7 +17,24 @@ const initialState ={
     query:'',
     list:[]
   },
-  sumbitBtn: ButtonStateEnum.None
+  sumbitBtn: ButtonStateEnum.None,
+  list:[{
+    id: 1,
+    name: "Test1",
+    date: "2016.01.01",
+    enable: true,
+    ban: 20,
+    limit: 10,
+    prelimit: 4
+  },{
+    id: 2,
+    name: "Test2",
+    date: "2016.02.02",
+    enable: false,
+    ban: 30,
+    limit: 20,
+    prelimit: 8
+  }]
 
 };
 export default handleActions({

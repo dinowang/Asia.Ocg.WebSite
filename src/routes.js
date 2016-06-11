@@ -8,7 +8,8 @@ import BanPage from './containers/BanPage';
 import SearchPage from './containers/SearchPage';
 import CardPage from './containers/CardPage';
 import LoginPage from './containers/LoginPage';
-import BanCreatePage from './containers/BanCreatePage';
+import BanFormPage from './containers/Manage/Ban/BanFormPage';
+import BanListPage from './containers/Manage/Ban/BanListPage';
 
 
 import NotFoundPage from './components/NotFoundPage.js';
@@ -27,7 +28,10 @@ export default (
 
 
     // ManageMent
-    <Route path="banManage/Create" component={BanCreatePage}/>
+    <Route path="banManage/Form" component={BanFormPage}/>
+    <Route path="banManage/Form/:id" component={BanFormPage}/>
+    <Route path="banManage/List" component={BanListPage}/>
+
 
 
 
