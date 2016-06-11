@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import {Host} from './url';
 export const changeTab = createAction('change tab');
 export const fetchCardInfo = createAction('fetch cardinfo');
 export const checkinList = (serialNumber)=>{
@@ -20,7 +21,7 @@ export const checkinList = (serialNumber)=>{
 };
 export const requestCardInfo = (serialNumber) => {
   return (dispatch) => {
-    fetch(`http://api.xpg.cards/card/${serialNumber}`)
+    fetch(`${Host}/card/${serialNumber}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {

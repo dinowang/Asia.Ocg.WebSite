@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import {Host} from './url';
 import ButtonStateEnum from '../enums/buttonStateEnum';
 import StatusCode from '../enums/statusCode';
 export const fetchCardList = createAction('fetch cardlist');
@@ -13,7 +14,7 @@ export const changeBanDate = createAction('change bandate');
 export const changeName = createAction('change name');
 export const requestSearch = (value) => {
   return (dispatch) => {
-    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/search/${value}`)
+    fetch(`${Host}/search/${value}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -28,7 +29,7 @@ export const requestCreateBan = () => {
   return (dispatch, state) => {
     const {ban} = state();
     console.log('ban',ban.banform);
-    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/manage/ban`,{
+    fetch(`${Host}/manage/ban`,{
       method:'POST',
       headers: {
         'Accept': 'application/json',
@@ -58,7 +59,7 @@ export const requestCreateBan = () => {
 };
 export const requestManageBanList = (value) => {
   return (dispatch) => {
-    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/manage/ban`)
+    fetch(`${Host}/manage/ban`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -70,7 +71,7 @@ export const requestManageBanList = (value) => {
 };
 export const requestManageBanForm = (id) => {
   return (dispatch) => {
-    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/manage/ban/${id}`)
+    fetch(`${Host}/manage/ban/${id}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -84,7 +85,7 @@ export const requestManageDeleteBan = (id) => {
   return (dispatch, state) => {
     const {ban} = state();
     console.log('ban',ban.banform);
-    fetch(`http://10.211.55.3/Asia.Ocg.WebAPI/manage/ban/${id}`,{
+    fetch(`${Host}/manage/ban/${id}`,{
         method:'DELETE',
         headers: {'Content-Type': 'application/json'},
       }

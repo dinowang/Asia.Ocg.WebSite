@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import {Host} from './url';
 import StatusCode from '../enums/statusCode';
 import {LoginProcessEnum, LoginStateEnum} from '../enums/loginState';
 import {setUserData} from './userActions';
@@ -10,7 +11,7 @@ export const fetchRegister = createAction('fetch register');
 export const requestRegister = (email,nickname) => {
   return (dispatch) => {
     fetch(
-      `http://api.xpg.cards/account/register`,{
+      `${Host}/account/register`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -45,7 +46,7 @@ export const requestRegister = (email,nickname) => {
 export const requestCheckCode = (code) => {
   return (dispatch) => {
     fetch(
-      `http://api.xpg.cards/check/register_code/${code}`)
+      `${Host}/check/register_code/${code}`)
     .then((response)=> {
       return response.json();
     }).then((json)=> {
@@ -70,7 +71,7 @@ export const requestCheckCode = (code) => {
 export const requestRegSetPwd = (register_code, password) => {
   return (dispatch) => {
     fetch(
-      `http://api.xpg.cards/account/setpassword`,{
+      `${Host}/account/setpassword`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
@@ -113,7 +114,7 @@ export const requestLogin = (account, password) => {
   return (dispatch) => {
     //
     fetch(
-      `http://api.xpg.cards/account/login`,{
+      `${Host}/account/login`,{
         method:'POST',
         headers: {
           'Accept': 'application/json',
