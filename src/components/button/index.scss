@@ -26,7 +26,13 @@
       background-color: rgba(243,156,18,.5);
     }
     &.fail{
+      cursor: default;
       background-color: #dd4b39;
+    }
+    &.success{
+      cursor: default;
+      opacity: .5;
+      background-color: #00a65a;
     }
   }
 }

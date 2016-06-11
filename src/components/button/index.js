@@ -9,6 +9,8 @@ class Button extends React.Component {
    this.onClick = this.onClick.bind(this);
    this.loading = this.loading.bind(this);
    this.fail = this.fail.bind(this);
+   this.success = this.success.bind(this);
+
 
   }
   onClick(){
@@ -38,8 +40,17 @@ class Button extends React.Component {
     return(
       <div className="button fail">
         <Icon name="" spin={true}/>
-        失敗
+        {this.props.state.submitBtnText}
         <Icon name="exclamation"/>
+      </div>
+    )
+  }
+  success(){
+    return(
+      <div className="button success">
+        <Icon name="" spin={true}/>
+        成功
+        <Icon name="check"/>
       </div>
     )
   }
@@ -48,10 +59,11 @@ class Button extends React.Component {
     return (
       <div className="btn-component" style={this.props.style}>
         {(() => {
-        switch (this.props.state) {
+        switch (this.props.state.sumbitBtn) {
         case ButtonStateEnum.None:   return this.normal();
         case ButtonStateEnum.Loading:   return this.loading();
         case ButtonStateEnum.Fail:   return this.fail();
+        case ButtonStateEnum.Success:   return this.success();
         }
         })()}
       </div>
