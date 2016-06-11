@@ -77,6 +77,6 @@ export default handleActions({
 
     action.payload.date = moment(action.payload.date);
     state.banform = Object.assign({},state.banform,action.payload);
-    return Object.assign({},state,action.payload);
+    return Object.assign({},state);
   }
 }, initialState);
