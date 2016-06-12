@@ -13,7 +13,7 @@ class RegisterForm extends React.Component {
    this.state = {
      btnStyle:'btn disable',
      nicknameStyle:''
-   }
+   };
   }
   componentDidMount(){
     this.refs.email.refs.email.focus();
@@ -32,7 +32,7 @@ class RegisterForm extends React.Component {
         title: '處理中...',
         color: 'header orange',
         icon: 'spinner',
-        spin: true,
+        spin: true
       }});
     }else{
       this.props.actions.setMessage('信箱與暱稱必填');
@@ -40,18 +40,18 @@ class RegisterForm extends React.Component {
   }
   onChange(){
     if(this.refs.email.isEmail() && this.nicknameonChange()){
-      this.setState({btnStyle:'btn'})
+      this.setState({btnStyle:'btn'});
     }
     else{
-      this.setState({btnStyle:'btn disable'})
+      this.setState({btnStyle:'btn disable'});
     }
   }
   nicknameonChange(){
     if(this.refs.nickname.value){
-      this.setState({nicknameStyle:'success'})
+      this.setState({nicknameStyle:'success'});
       return true;
     }else{
-      this.setState({nicknameStyle:'error'})
+      this.setState({nicknameStyle:'error'});
       return false;
     }
   }
@@ -80,6 +80,7 @@ class RegisterForm extends React.Component {
   }
 }
 RegisterForm.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired
 };
 export default RegisterForm;

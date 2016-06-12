@@ -20,7 +20,7 @@ export default handleActions({
   return Object.assign({},state);
   },
   'fetch cardinfo' (state, action){
-    let IsExist = state.list.filter(data=>data.serial_number === action.payload.serial_number)
+    let IsExist = state.list.filter(data=>data.serial_number === action.payload.serial_number);
     if(IsExist.length === 0){
       state.list = state.list.concat(action.payload);
     }

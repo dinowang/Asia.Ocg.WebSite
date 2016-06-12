@@ -3,7 +3,7 @@ import {Host} from './url';
 import { setUserData } from './userActions';
 export const setTitle = createAction('set title');
 export const requestGetInfo = (token) => {
-  return (dispatch,state) => {
+  return (dispatch) => {
     fetch(`${Host}/account/getinfo`,{
       method:'POST',
       headers: {

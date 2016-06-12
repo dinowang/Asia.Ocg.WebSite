@@ -25,7 +25,7 @@ class Button extends React.Component {
         {this.props.value}
         {rIcon}
       </div>
-    )
+    );
   }
   loading(){
     return(
@@ -34,7 +34,7 @@ class Button extends React.Component {
         讀取中..
         <Icon name="spinner" spin={true}/>
       </div>
-    )
+    );
   }
   fail(){
     return(
@@ -43,7 +43,7 @@ class Button extends React.Component {
         {this.props.state.submitBtnText}
         <Icon name="exclamation"/>
       </div>
-    )
+    );
   }
   success(){
     return(
@@ -52,7 +52,7 @@ class Button extends React.Component {
         成功
         <Icon name="check"/>
       </div>
-    )
+    );
   }
 
   render() {
@@ -70,7 +70,12 @@ class Button extends React.Component {
     );
   }
 }
-// Button.propTypes = {
-//
-// };
+Button.propTypes = {
+  lIcon: PropTypes.string,
+  rIcon: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  style: PropTypes.object,
+  state: PropTypes.object,
+  onClick: PropTypes.func
+};
 export default Button;

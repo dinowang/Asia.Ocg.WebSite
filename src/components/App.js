@@ -22,13 +22,14 @@ class App extends React.Component{
           {this.props.children}
         </div>
       </div>
-    )
+    );
   }
 }
 
 App.propTypes = {
   children: PropTypes.element,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  props: PropTypes.object.isRequired
 };
 function mapStateToProps(state) {
   return {

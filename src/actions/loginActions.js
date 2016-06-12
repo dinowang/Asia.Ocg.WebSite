@@ -6,7 +6,7 @@ import {setUserData} from './userActions';
 export const changeMode = createAction('change mode');
 export const changeProcess = createAction('change process');
 export const changeProcessForm = createAction('change processform');
-export const setMessage = createAction('set message')
+export const setMessage = createAction('set message');
 export const fetchRegister = createAction('fetch register');
 export const requestRegister = (email,nickname) => {
   return (dispatch) => {
@@ -36,7 +36,7 @@ export const requestRegister = (email,nickname) => {
           spin: false,
           text: `請至 ${email} 收取確認信件`
         }}));
-    }).catch(function(ex) {
+    }).catch(()=>{
       dispatch(changeProcess({process:LoginProcessEnum.None}));
       dispatch(setMessage("網路發生錯誤"));
     });
@@ -55,13 +55,13 @@ export const requestCheckCode = (code) => {
         dispatch(changeProcess({process:LoginProcessEnum.None}));
       }else if(status_code === StatusCode.registerCodeExpired){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
-        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}))
+        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}));
         dispatch(setMessage("驗證已過期，輸入 Email 寄發確認信件。"));
       }else  if(status_code === StatusCode.registerCodeFail){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
-        dispatch(changeMode({mode:LoginStateEnum.Loging}))
+        dispatch(changeMode({mode:LoginStateEnum.Loging}));
       }
-    }).catch(function(ex) {
+    }).catch(()=> {
       dispatch(changeProcess({process:LoginProcessEnum.None}));
       dispatch(setMessage("網路發生錯誤"));
     });
@@ -96,14 +96,14 @@ export const requestRegSetPwd = (register_code, password) => {
         dispatch(setMessage(''));
       }else if(status_code === StatusCode.registerCodeFail){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
-        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}))
+        dispatch(changeMode({mode:LoginStateEnum.ReSendEmail}));
         dispatch(setMessage("驗證已過期，輸入 Email 寄發確認信件。"));
       }else  if(status_code === StatusCode.registerCodeFail){
         dispatch(changeProcess({process:LoginProcessEnum.None}));
-        dispatch(changeMode({mode:LoginStateEnum.Loging}))
+        dispatch(changeMode({mode:LoginStateEnum.Loging}));
       }
     })
-    .catch(function(ex) {
+    .catch(()=> {
       dispatch(changeProcess({process:LoginProcessEnum.None}));
       dispatch(setMessage("網路發生錯誤"));
     });
@@ -149,7 +149,7 @@ export const requestLogin = (account, password) => {
         dispatch(setMessage("請至信箱收取認證信"));
       }
     })
-    .catch(function(ex) {
+    .catch(()=> {
       dispatch(changeProcess({process:LoginProcessEnum.None}));
       dispatch(setMessage("網路發生錯誤"));
     });

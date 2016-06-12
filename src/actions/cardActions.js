@@ -10,7 +10,7 @@ export const checkinList = (serialNumber)=>{
       if(data.serial_number === serialNumber){
         value = data;
       }
-    })
+    });
     if(value){
       dispatch(fetchCardInfo(value));
 

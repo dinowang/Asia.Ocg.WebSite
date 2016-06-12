@@ -24,7 +24,7 @@ class BanListPage extends React.Component {
 
   }
   renderData(data, index) {
-    const href = `/banManage/Form/${data.id}`
+    const href = `/banManage/form/${data.id}`
     const enableStyle = data.enable ? {backgroundColor:'#00a65a'} :{backgroundColor:'#dd4b39'};
     const date = moment(data.date).format("YYYY.MM.DD");
     return (

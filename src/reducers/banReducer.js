@@ -1,6 +1,5 @@
 import { handleActions } from 'redux-actions';
 import ButtonStateEnum from '../enums/buttonStateEnum';
-import BanTypeEnum from '../enums/banTypeEnum';
 
 import moment from 'moment';
 
@@ -24,7 +23,7 @@ const initialState ={
 };
 export default handleActions({
   // 重置表單
-  'fetch init' (state, action) {
+  'fetch init' (state) {
     state.banform = initialState.banform;
     return Object.assign({},state);
   },
@@ -61,7 +60,7 @@ export default handleActions({
   // 加入至禁卡表表單
   'add tolist' (state, action) {
     action.payload.type = state.banform.type;
-    let IsExist = state.banform.list.filter(data=>data.serial_number === action.payload.serial_number)
+    let IsExist = state.banform.list.filter(data=>data.serial_number === action.payload.serial_number);
     if(IsExist.length ===0){
       state.banform.list.push(action.payload);
     }

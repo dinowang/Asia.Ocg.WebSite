@@ -1,26 +1,26 @@
 import React from 'react';
 import BanTypeEnum from '../../enums/banTypeEnum';
-import './index.scss'
+import './index.scss';
 class BanListText extends React.Component {
   renderBan(data, index){
     if(data.type === BanTypeEnum.Ban){
       return(
         <li key={index}>{data.name}</li>
-      )
+      );
     }
   }
   renderLimit(data, index){
     if(data.type === BanTypeEnum.Limit){
       return(
         <li key={index}>{data.name}</li>
-      )
+      );
     }
   }
   renderPreLimit(data, index){
     if(data.type === BanTypeEnum.PreLimit){
       return(
         <li key={index}>{data.name}</li>
-      )
+      );
     }
   }
   render(){
@@ -48,5 +48,5 @@ class BanListText extends React.Component {
       </div>
     );
   }
-};
+}
 export default BanListText;

@@ -35,20 +35,19 @@ class BanFormPage extends React.Component {
   }
   onDateChange(e){
     this.props.actions.changeBanDate(e);
-  };
+  }
   dropValue(e){
     this.props.actions.setBanType(e.key);
-  };
+  }
   panelOnClick(cardData){
     if(this.props.ban.banform.type >=0){
       this.props.actions.addToList(cardData);
     }
-  };
+  }
   save(){
-    this.props.actions.changeBtnType(ButtonStateEnum.Loading)
-
+    this.props.actions.changeBtnType(ButtonStateEnum.Loading);
     this.props.actions.requestCreateBan();
-  };
+  }
   searchOnChange(value){
     value = value.toUpperCase();
     clearTimeout(this.onChangeEvent);
@@ -56,9 +55,8 @@ class BanFormPage extends React.Component {
       this.props.actions.requestSearch(value);
     },500);
 
-  };
+  }
   nameOnChange(e){
-    console.log('nameOnChange',e.target.value)
     this.props.actions.changeName(e.target.value);
   }
   render(){
@@ -86,11 +84,12 @@ class BanFormPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 BanFormPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  ban: PropTypes.object.isRequired
+  ban: PropTypes.object.isRequired,
+  params: PropTypes.object
 };
 
 function mapStateToProps(state) {

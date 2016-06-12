@@ -12,13 +12,13 @@ class DropDown extends React.Component {
    this.state = {
      isShow : '0',
      defaultValue:defaultValue[0]
-   }
+   };
   }
   show(){
-    this.setState({isShow:'1'})
+    this.setState({isShow:'1'});
   }
   hide(){
-    this.setState({isShow:'0'})
+    this.setState({isShow:'0'});
   }
   select(e){
     let defaultValue  = this.props.values.filter(data=>data.key === e.target.value);
@@ -49,6 +49,6 @@ DropDown.propTypes ={
   default: PropTypes.number.isRequired,
   getValue: PropTypes.func,
   values:PropTypes.array.isRequired,
-};
+}
 
 export default DropDown;
