@@ -28,7 +28,6 @@ export const requestSearch = (value) => {
 };
 // Manage
 export const requestCreateBan = (nav) => {
-  // console.log(nav,'nav')
   return (dispatch, state) => {
     const {ban} = state();
     fetch(`${Host}/manage/ban`,{
@@ -62,8 +61,16 @@ export const requestCreateBan = (nav) => {
   };
 };
 export const requestManageBanList = () => {
-  return (dispatch) => {
-    fetch(`${Host}/manage/ban`)
+  return (dispatch, state) => {
+    const {user} = state();
+    console.log('user',user);
+    fetch(`${Host}/manage/ban`,{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token':user.token
+      },
+    })
       .then((response)=> {
         return response.json();
     }).then((json)=> {
