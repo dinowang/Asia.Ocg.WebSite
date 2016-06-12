@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const initialState ={
   banform :{
-    id:0,
+    id:null,
     name: '',
     date: moment(),
     type: -1,
@@ -73,9 +73,20 @@ export default handleActions({
   },
   // 讀取禁卡表單
   'fetch banform' (state, action) {
-
     action.payload.date = moment(action.payload.date);
     state.banform = Object.assign({},state.banform,action.payload);
     return Object.assign({},state);
+  },
+  // 刪除項目
+  'remove banitem' (state, action) {
+    state.banform.list = state.banform.list.filter(list => list.id !== action.payload )
+    return Object.assign({},state);
+  },
+  // 變更啟用狀態
+  'change banenable' (state, action) {
+    state.banform.enable = !state.banform.enable;
+    return Object.assign({},state);
   }
+
+
 }, initialState);

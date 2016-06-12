@@ -8,10 +8,12 @@ export const fetchBanForm = createAction('fetch banform');
 export const fetchInit = createAction('fetch init');
 export const setBanType = createAction('set bantype');
 export const addToList = createAction('add tolist');
+export const removeItem = createAction('remove banitem');
 export const changeBtnType = createAction('change btntype');
 export const changeBanErrMsg = createAction('change banerrmsg');
 export const changeBanDate = createAction('change bandate');
 export const changeName = createAction('change name');
+export const changeEnable = createAction('change banenable');
 export const requestSearch = (value) => {
   return (dispatch) => {
     fetch(`${Host}/search/${value}`)
@@ -25,7 +27,8 @@ export const requestSearch = (value) => {
   };
 };
 // Manage
-export const requestCreateBan = () => {
+export const requestCreateBan = (nav) => {
+  // console.log(nav,'nav')
   return (dispatch, state) => {
     const {ban} = state();
     fetch(`${Host}/manage/ban`,{
@@ -51,6 +54,8 @@ export const requestCreateBan = () => {
         setTimeout(()=>{
           dispatch(changeBtnType(ButtonStateEnum.None));
         },1500);
+        nav.push(`/banManage/form/${ban.banform.id}`);
+
       }
     });
 
@@ -96,6 +101,34 @@ export const requestManageDeleteBan = (id) => {
       }else if(json.status_code === StatusCode.NoData){
         alert('NODATA');
         dispatch(requestManageBanList());
+      }
+    });
+
+  };
+};
+export const requestManageUpdateBan = () => {
+  return (dispatch, state) => {
+    const {ban} = state();
+    fetch(`${Host}/manage/ban`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(ban.banform)
+    })
+    .then((response)=> {
+        return response.json();
+    })
+    .then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchBanForm(json.data));
+        dispatch(changeBtnType(ButtonStateEnum.Success));
+        setTimeout(()=>{
+          dispatch(changeBtnType(ButtonStateEnum.None));
+        },1500);
+      }else if(json.status_code === StatusCode.NoData){
+        alert('NODATA');
       }
     });
 

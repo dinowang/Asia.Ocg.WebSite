@@ -12,6 +12,11 @@
       margin:5px;
       li{
         padding: 5px;
+        .fa-close{
+          cursor: pointer;
+          color:red;
+          float: right;
+        }
       }
     }
   }

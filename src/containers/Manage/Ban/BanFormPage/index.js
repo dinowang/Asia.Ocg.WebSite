@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { browserHistory } from 'react-router';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as actions from '../../../../actions/banActions';
@@ -20,9 +21,10 @@ class BanFormPage extends React.Component {
     this.onDateChange = this.onDateChange.bind(this);
     this.dropValue = this.dropValue.bind(this);
     this.panelOnClick = this.panelOnClick.bind(this);
-    this.save = this.save.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.searchOnChange = this.searchOnChange.bind(this);
     this.nameOnChange = this.nameOnChange.bind(this);
+    this.onEnableChange = this.onEnableChange.bind(this);
 
   }
   componentWillMount(){
@@ -36,6 +38,9 @@ class BanFormPage extends React.Component {
   onDateChange(e){
     this.props.actions.changeBanDate(e);
   }
+  onEnableChange(){
+    this.props.actions.changeEnable();
+  }
   dropValue(e){
     this.props.actions.setBanType(e.key);
   }
@@ -44,9 +49,16 @@ class BanFormPage extends React.Component {
       this.props.actions.addToList(cardData);
     }
   }
-  save(){
+  onClick(){
     this.props.actions.changeBtnType(ButtonStateEnum.Loading);
-    this.props.actions.requestCreateBan();
+    if(this.props.ban.banform.id){
+      this.props.actions.requestManageUpdateBan();
+    }else{
+      this.props.actions.requestCreateBan(this.props.nav);
+    }
+  }
+  remove(id){
+    this.props.actions.removeItem(id);
   }
   searchOnChange(value){
     value = value.toUpperCase();
@@ -70,12 +82,12 @@ class BanFormPage extends React.Component {
               selected={this.props.ban.banform.date}
               onChange={this.onDateChange} />
             <DropDown style={{top:'1px'}} getValue={this.dropValue} default={-1} values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
-            <SwitchButton style={switchStyle} checked={this.props.ban.banform.enable}/>
-            <Button onClick={this.save} style={{float:'right',top:'5px'}} state={this.props.ban} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
+            <SwitchButton onClick={this.onEnableChange} style={switchStyle} checked={this.props.ban.banform.enable}/>
+            <Button onClick={this.onClick} style={{float:'right',top:'5px'}} state={this.props.ban} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
 
           <hr/>
           <div className="data">
-            <BanListText data={this.props.ban.banform}/>
+            <BanListText onClick={(e)=>this.remove(e)} data={this.props.ban.banform}/>
           </div>
         </div>
         <div className="search-list">
@@ -94,7 +106,8 @@ BanFormPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    ban: state.ban
+    ban: state.ban,
+    nav: browserHistory
   };
 }
 

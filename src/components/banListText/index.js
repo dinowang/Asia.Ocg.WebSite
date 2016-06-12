@@ -1,25 +1,46 @@
 import React from 'react';
 import BanTypeEnum from '../../enums/banTypeEnum';
+import {Icon} from 'react-fa';
 import './index.scss';
 class BanListText extends React.Component {
+  constructor(props){
+    super(props)
+    this.renderBan = this.renderBan.bind(this);
+    this.renderLimit = this.renderLimit.bind(this);
+    this.renderPreLimit = this.renderPreLimit.bind(this);
+    this.itemClick = this.itemClick.bind(this);
+
+  }
+  itemClick(id){
+    this.props.onClick(id)
+  }
   renderBan(data, index){
     if(data.type === BanTypeEnum.Ban){
       return(
-        <li key={index}>{data.name}</li>
+        <li key={index}>
+          {data.name}
+          <Icon name="close" onClick={()=>this.itemClick(data.id)}/>
+        </li>
       );
     }
   }
   renderLimit(data, index){
     if(data.type === BanTypeEnum.Limit){
       return(
-        <li key={index}>{data.name}</li>
+        <li key={index}>
+          {data.name}
+          <Icon name="close" onClick={()=>this.itemClick(data.id)}/>
+        </li>
       );
     }
   }
   renderPreLimit(data, index){
     if(data.type === BanTypeEnum.PreLimit){
       return(
-        <li key={index}>{data.name}</li>
+        <li key={index}>
+          {data.name}
+          <Icon name="close" onClick={()=>this.itemClick(data.id)}/>
+        </li>
       );
     }
   }
