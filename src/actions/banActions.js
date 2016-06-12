@@ -64,14 +64,8 @@ export const requestManageBanList = () => {
   return (dispatch, state) => {
     const {user} = state();
     console.log('user',user);
-    fetch(`${Host}/manage/ban`,{
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Token':user.token
-      },
-    })
-      .then((response)=> {
+    fetch(`${Host}/manage/ban`,{headers: {'Token':user.token}})
+    .then((response)=> {
         return response.json();
     }).then((json)=> {
       if(json.data){
@@ -81,9 +75,10 @@ export const requestManageBanList = () => {
   };
 };
 export const requestManageBanForm = (id) => {
-  return (dispatch) => {
-    fetch(`${Host}/manage/ban/${id}`)
-      .then((response)=> {
+  return (dispatch, state) => {
+    const {user} = state();
+    fetch(`${Host}/manage/ban/${id}`,{headers: {'Token':user.token}})
+    .then((response)=> {
         return response.json();
     }).then((json)=> {
       if(json.data){
@@ -93,10 +88,11 @@ export const requestManageBanForm = (id) => {
   };
 };
 export const requestManageDeleteBan = (id) => {
-  return (dispatch) => {
+  return (dispatch, state) => {
+    const {user} = state();
     fetch(`${Host}/manage/ban/${id}`,{
         method:'DELETE',
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Token': user.token}
       }
     )
     .then((response)=> {
@@ -115,12 +111,13 @@ export const requestManageDeleteBan = (id) => {
 };
 export const requestManageUpdateBan = () => {
   return (dispatch, state) => {
-    const {ban} = state();
+    const {ban, user} = state();
     fetch(`${Host}/manage/ban`,{
       method:'PUT',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Token': user.token
       },
       body: JSON.stringify(ban.banform)
     })
