@@ -1,16 +1,24 @@
 import React, {PropTypes} from 'react';
 import './index.scss';
 
-
-export const SwitchButton = (props) => {
-  return (
-      <label className="switch-buttton" style={props.style}>
-        <input type="checkbox" className="checkbox" defaultChecked={props.checked}/>
-        <div className="switch">
-          <div className="btn"></div>
-        </div>
-      </label>
-  );
+class SwitchButton extends React.Component {
+  constructor(){
+    super()
+    this.onChange = this.onChange.bind(this);
+  }
+  onChange(){
+    this.props.onClick();
+  }
+  render(){
+    return (
+        <label onChange={this.onChange} className="switch-buttton" style={this.props.style}>
+          <input checked={!this.props.checked} ref="checkbox" type="checkbox" className="checkbox"/>
+          <div className="switch">
+            <div className="btn"></div>
+          </div>
+        </label>
+    );
+  }
 };
 
 SwitchButton.propTypes ={
