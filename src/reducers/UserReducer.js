@@ -15,5 +15,9 @@ export default handleActions({
       action.payload.image_url = 'https://xpgcards.blob.core.windows.net/user-image/user.png';
     }
     return Object.assign({},state,action.payload);
+  },
+  'init userdata' (state, action){
+    CookieHelper.Set('token',null);
+    return Object.assign({},initialState);
   }
 }, initialState);

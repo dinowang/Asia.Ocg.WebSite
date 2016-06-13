@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions';
 import {Host} from './url';
 import StatusCode from '../enums/statusCode';
 import {LoginProcessEnum, LoginStateEnum} from '../enums/loginState';
-import {setUserData} from './userActions';
+import {setUserData,initUserData} from './userActions';
 export const changeMode = createAction('change mode');
 export const changeProcess = createAction('change process');
 export const changeProcessForm = createAction('change processform');
@@ -154,5 +154,16 @@ export const requestLogin = (account, password) => {
       dispatch(setMessage("網路發生錯誤"));
     });
 
+  };
+};
+export const requestLogout = () => {
+  return (dispatch, state) => {
+    const {user} = state();
+    fetch(`${Host}/account/logout`,{headers: {'Token':user.token}})
+    .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      dispatch(initUserData());
+    });
   };
 };

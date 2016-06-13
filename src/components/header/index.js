@@ -6,18 +6,20 @@ import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as loginActions from '../../actions/loginActions';
-
-
-
 import './index.scss';
 
 class Header extends React.Component {
   constructor(){
     super();
     this.changeMode = this.changeMode.bind(this);
+    this.clickLogout = this.clickLogout.bind(this);
+
   }
   changeMode(){
     this.props.loginActions.changeMode({mode:0});
+  }
+  clickLogout(){
+    this.props.loginActions.requestLogout();
   }
   renderLogin(){
     return(
@@ -32,16 +34,16 @@ class Header extends React.Component {
   renderInfoBar(){
     const image_url = this.props.user.image_url;
     return(
-      <div className="user-bar">
+      <div className="user-bar noselect">
         <img src={image_url}/>
         <span>{this.props.user.account}</span>
-        <div className="user-menu">
+        <div className="user-menu noselect">
           <ul>
             <li>
               個人資料設定
               <Icon name="cog"/>
             </li>
-            <li>
+            <li onClick={this.clickLogout}>
               登出
               <Icon name="sign-out"/>
             </li>
