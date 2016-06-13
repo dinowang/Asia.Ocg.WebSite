@@ -31,10 +31,9 @@ class Header extends React.Component {
   }
   renderInfoBar(){
     const image_url = this.props.user.image_url;
-    const src = image_url? image_url  : 'https://xpgcards.blob.core.windows.net/user-image/user.png';
     return(
       <div className="user-bar">
-        <img src={src}/>
+        <img src={image_url}/>
         <span>{this.props.user.account}</span>
       </div>
     )

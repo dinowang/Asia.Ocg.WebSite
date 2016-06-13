@@ -11,6 +11,10 @@ const initialState ={
 export default handleActions({
   'set userdata' (state, action){
     CookieHelper.Set('token',action.payload.token);
+    if(!action.payload.image_url){
+      console.log('-')
+      action.payload.image_url = 'https://xpgcards.blob.core.windows.net/user-image/user.png';
+    }
     return Object.assign({},state,action.payload);
   }
 }, initialState);
