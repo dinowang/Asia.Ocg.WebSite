@@ -64,7 +64,6 @@ class CardPage extends React.Component {
                   case 0:   return <CardInfo data={card}/>;
                   case 1:   return <CardDeck/>;
                   case 2:   return <CardComment data={card} actions={cardActions}/>;
-
                 }
                   })()}
               </div>

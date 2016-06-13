@@ -35,6 +35,18 @@ class Header extends React.Component {
       <div className="user-bar">
         <img src={image_url}/>
         <span>{this.props.user.account}</span>
+        <div className="user-menu">
+          <ul>
+            <li>
+              個人資料設定
+              <Icon name="cog"/>
+            </li>
+            <li>
+              登出
+              <Icon name="sign-out"/>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }
@@ -71,11 +83,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Header);
-
-
-
-//
-// <div className="user-bar">
-//   <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/p320x320/12717366_1140077189343966_8221115824378901544_n.jpg?oh=382682b03755dbaf37ae830c64c668bc&oe=57A0F709"/>
-//   <span>mr.sunboss@gmail.com</span>
-// </div>

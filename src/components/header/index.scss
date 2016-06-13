@@ -18,7 +18,6 @@
   }
   .info-bar{
     background-color: #3c8dbc;
-    overflow:hidden;
     .fa-bars{
       padding: 10px;
     }
@@ -41,6 +40,7 @@
         }
       }
       .user-bar{
+        position: relative;
         cursor: pointer;
         padding: 10px;
         img{
@@ -51,8 +51,30 @@
         span{
           vertical-align:super;
         }
-        &:hover{
+        &:hover .user-menu{
+          transition: height .5s;
+          height: 90px;
+        }
+        .user-menu{
+          border-radius: 0 0 0 5px ;
+          overflow: hidden;
+          text-align: right;
+          position: absolute;
+          top:50px;
+          left:0;
           background-color: #337ab7;
+          opacity: .9;
+          height: 0;
+          width:100%;
+          z-index: 2;
+          li{
+            height:30px;
+            margin:10px;
+            .fa{
+              position: relative;
+              top:6px;
+            }
+          }
         }
       }
     }
