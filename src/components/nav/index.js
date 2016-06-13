@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
 import * as actions from '../../actions/searchActions';
+import PermissionEnum from '../../enums/PermissionEnum';
+
 import SearchInput from '../searchInput';
 import Single from './single';
 import Multi from './multi';
@@ -37,6 +39,7 @@ class Nav extends React.Component {
         title:'禁卡表',
         href:'/banManage/List'
     }];
+    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
     return (
       <div className="nav">
         <div className={userStyle}>
@@ -54,8 +57,7 @@ class Nav extends React.Component {
         <Single title="禁卡表" icon="ban" href="/ban"/>
         <Single title="進階搜尋" icon="search-plus" href="/card"/>
         <Single title="積分換商品" icon="search-plus" href="/ban" />
-        <Single title="管理功能" icon="search-plus" href="/ban" />
-        <Multi title="管理功能" icon="search-plus" values={manageList}/>
+        <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
 
 
 

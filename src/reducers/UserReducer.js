@@ -1,12 +1,14 @@
 import { handleActions } from 'redux-actions';
 import CookieHelper from '../businessLogic/cookieHelper';
+import PermissionEnum from '../enums/PermissionEnum';
 
 const initialState ={
   "token": null,
   "account":null,
   "score": 0,
   "nickname": null,
-  "image_url": null
+  "image_url": null,
+  "privilege": PermissionEnum.User,
 };
 export default handleActions({
   'set userdata' (state, action){

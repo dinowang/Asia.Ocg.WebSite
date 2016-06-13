@@ -14,13 +14,13 @@ const Multi = (props) => {
     );
   };
   return (
-    <div className="multi-menu">
-    <input type="checkbox" id="test1" />
-    <label htmlFor="test1">
-      <Icon name={props.icon}/>
-      <span>{props.title}</span>
-      <Icon name="arrow-left"/>
-    </label>
+    <div style={props.style} className="multi-menu">
+      <input type="checkbox" id="test1" />
+      <label htmlFor="test1">
+        <Icon name={props.icon}/>
+        <span>{props.title}</span>
+        <Icon name="arrow-left"/>
+      </label>
       <ul>
         {props.values.map(renderli)}
       </ul>
