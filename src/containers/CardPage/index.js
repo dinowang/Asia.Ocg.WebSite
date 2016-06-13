@@ -6,9 +6,6 @@ import * as appActions from '../../actions/appActions';
 import CardInfo from '../../components/cardInfo';
 import CardDeck from '../../components/cardDeck';
 import CardComment from '../../components/cardComment';
-
-
-
 import {Icon} from 'react-fa';
 import './index.scss';
 
@@ -25,7 +22,7 @@ class CardPage extends React.Component {
     this.props.appActions.setTitle(netState.card.name);
   }
   render(){
-    const { card } = this.props;
+    const { card, cardActions } = this.props;
     return (
       <div className="card">
         <h1>{card.name}</h1>
@@ -66,7 +63,7 @@ class CardPage extends React.Component {
                 switch (card.display_tab) {
                   case 0:   return <CardInfo data={card}/>;
                   case 1:   return <CardDeck/>;
-                  case 2:   return <CardComment/>;
+                  case 2:   return <CardComment data={card} actions={cardActions}/>;
 
                 }
                   })()}

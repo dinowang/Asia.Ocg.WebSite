@@ -12,7 +12,8 @@ const initialState ={
   "effect": "",
   "serial_number": "",
   "pack":[],
-  "list":[]
+  "list":[],
+  "comment":{items:[]}
 };
 export default handleActions({
   'change tab' (state, action) {
@@ -25,5 +26,16 @@ export default handleActions({
       state.list = state.list.concat(action.payload);
     }
     return Object.assign({},state,action.payload);
-  }
+  },
+  'fetch cardcomment' (state, action) {
+    state.comment = action.payload;
+    state.items = action.payload.items.map((data)=>{
+      if(data.image_url){
+        return data;
+      }else{
+        data.image_url = "https://xpgcards.blob.core.windows.net/user-image/user.png";
+      }
+    })
+    return Object.assign({},state);
+  },
 }, initialState);
