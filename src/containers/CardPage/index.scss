@@ -19,8 +19,8 @@
     border:1px solid #ddd;
     width:55%;
     position: absolute;
-    ul{
-      li{
+    .tab{
+      >li{
         display: inline-block;
         margin:0 0 0 5px;
         padding:15px;

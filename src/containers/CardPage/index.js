@@ -5,6 +5,8 @@ import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
 import CardInfo from '../../components/cardInfo';
 import CardDeck from '../../components/cardDeck';
+import CardComment from '../../components/cardComment';
+
 
 
 import {Icon} from 'react-fa';
@@ -14,7 +16,6 @@ class CardPage extends React.Component {
   componentWillMount(){
     let {serialNumber} = this.props.params;
     let {cardActions} = this.props;
-    // cardActions.requestCardInfo(serialNumber);
     cardActions.checkinList(serialNumber);
   }
   changeTab(tab){
@@ -52,7 +53,7 @@ class CardPage extends React.Component {
           </div>
 
           <div className="detail">
-            <ul>
+            <ul className="tab">
               <li>
                 <Icon name="list-alt" size="2x"/>
               </li>
@@ -65,6 +66,8 @@ class CardPage extends React.Component {
                 switch (card.display_tab) {
                   case 0:   return <CardInfo data={card}/>;
                   case 1:   return <CardDeck/>;
+                  case 2:   return <CardComment/>;
+
                 }
                   })()}
               </div>
