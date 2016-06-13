@@ -4,7 +4,8 @@ import {bindActionCreators} from 'redux';
 import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
 import LinkButton from '../../../../components/linkButton';
-import * as actions from '../../../../actions/banActions';
+import * as banActions from '../../../../actions/banActions';
+import * as appActions from '../../../../actions/appActions';
 import {Link} from 'react-router';
 import moment from 'moment';
 
@@ -17,11 +18,14 @@ class ManBanListPage extends React.Component {
     this.renderData = this.renderData.bind(this);
   }
   componentWillMount(){
-    this.props.actions.requestManageBanList();
+    if(this.props.user.token){
+      this.props.banActions.requestManageBanList();
+    }else{
+      this.props.appActions.requestGetInfo(this.props.banActions.requestManageBanList);
+    }
   }
   delete(e){
-    this.props.actions.requestManageDeleteBan(e);
-
+    this.props.banActions.requestManageDeleteBan(e);
   }
   renderData(data, index) {
     const href = `/banManage/form/${data.id}`
@@ -73,19 +77,21 @@ class ManBanListPage extends React.Component {
 };
 
 ManBanListPage.propTypes = {
-  actions: PropTypes.object.isRequired,
+  banActions: PropTypes.object.isRequired,
   ban: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    ban: state.ban
+    ban: state.ban,
+    user: state.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    banActions: bindActionCreators(banActions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 

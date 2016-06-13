@@ -1,8 +1,10 @@
 import { createAction } from 'redux-actions';
 import {Host} from './url';
 import { setUserData } from './userActions';
+import CookieHelper from '../businessLogic/cookieHelper';
 export const setTitle = createAction('set title');
-export const requestGetInfo = (token) => {
+export const requestGetInfo = (func) => {
+  const token = CookieHelper.Get('token');
   return (dispatch) => {
     fetch(`${Host}/account/getinfo`,{
       method:'POST',
@@ -18,6 +20,8 @@ export const requestGetInfo = (token) => {
     }).then((json)=> {
       if(json.data !== null) {
         dispatch(setUserData(json.data));
+        func();
+
       }
     });
   };
