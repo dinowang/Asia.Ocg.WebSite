@@ -75,6 +75,13 @@ export default handleActions({
   'fetch banform' (state, action) {
     action.payload.date = moment(action.payload.date);
     state.banform = Object.assign({},state.banform,action.payload);
+    state.banform.items = action.payload.list.map((data)=>{
+      if(data.image_url){
+        return data;
+      }else{
+        data.image_url = "https://xpgcards.blob.core.windows.net/image/null.jpg";
+      }
+    })
     return Object.assign({},state);
   },
   // 刪除項目

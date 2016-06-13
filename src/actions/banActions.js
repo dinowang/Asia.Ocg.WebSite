@@ -26,6 +26,18 @@ export const requestSearch = (value) => {
     });
   };
 };
+export const requestBan = (id) => {
+  return (dispatch) => {
+    fetch(`${Host}/ban/${id}`)
+    .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.data){
+        dispatch(fetchBanForm(json.data));
+      }
+    });
+  };
+};
 // Manage
 export const requestCreateBan = (nav) => {
   return (dispatch, state) => {
