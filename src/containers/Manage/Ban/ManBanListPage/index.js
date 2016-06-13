@@ -11,7 +11,7 @@ import moment from 'moment';
 
 import './index.scss';
 
-class BanListPage extends React.Component {
+class ManBanListPage extends React.Component {
   constructor(){
     super();
     this.renderData = this.renderData.bind(this);
@@ -47,7 +47,7 @@ class BanListPage extends React.Component {
   };
   render(){
     return (
-      <div className="banlist-page">
+      <div className="manbanlist-page">
         <div className="fun-bar">
           <LinkButton value="新增" to="/banManage/form" lIcon="plus-square-o"/>
         </div>
@@ -72,7 +72,7 @@ class BanListPage extends React.Component {
   }
 };
 
-BanListPage.propTypes = {
+ManBanListPage.propTypes = {
   actions: PropTypes.object.isRequired,
   ban: PropTypes.object.isRequired
 };
@@ -92,4 +92,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BanListPage);
+)(ManBanListPage);
