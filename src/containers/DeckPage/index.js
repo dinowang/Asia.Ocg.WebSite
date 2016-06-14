@@ -1,5 +1,7 @@
-import React,{PropTypes}from 'react';
+import React,{PropTypes} from 'react';
 import DeckList from '../../components/deckList';
+import LinkButton from '../../components/linkButton';
+
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
@@ -22,6 +24,9 @@ export const DeckPage = (props) => {
       <div className="list">
         <ul className="deck-nav">
           {props.deck.deck_type.map(renderNav)}
+          <li>
+            <LinkButton style={{margin:"10px",height:"40px",lineHeight:"23px"}} value="新增牌組" to="/deckform"/>
+          </li>
         </ul>
         <DeckList deck={props.deck}/>
       </div>

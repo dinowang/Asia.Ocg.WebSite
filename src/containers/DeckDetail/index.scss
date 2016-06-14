@@ -1,0 +1,67 @@
+.deck-detail{
+  h1{
+  }
+  .deck{
+    display: inline-block;
+    width:80%;
+
+  }
+  .main{
+    margin-top:45px;
+    position: relative;
+    padding:5px;
+    // background-color: rgba(0,0,0,.1);
+    background-color: #fff;
+    img{
+      width:80px;
+      margin:2px 5px;
+    }
+    .title{
+      letter-spacing: 2px;
+      padding: 5px;
+      color:#000;
+      font-weight: bold;
+      font-size: 1.2rem;
+      position: absolute;
+      left:0;
+      top:-34px;
+      // background-color: rgba(0,0,0,.1);
+      background-color: #fff
+    }
+  }
+  .blue{
+    border-top:3px solid #3c8dbc;
+  }
+  .orange{
+    border-top:3px solid #f39c12;
+  }
+  .red{
+    border-top:3px solid #dd4b39;
+  }
+  .green{
+    border-top:3px solid #00a65a;
+  }
+  .extra{
+    img{
+      width:60px;
+      margin:10px 0;
+    }
+  }
+  .deck-info{
+    
+    float: right;
+    width:19%;
+
+  }
+  .info{
+    margin-bottom:20px;
+    padding:10px;
+    background-color: #fff;
+    p{
+      margin: 10px 0 ;
+      span{
+        font-size: .9rem;
+      }
+    }
+  }
+}

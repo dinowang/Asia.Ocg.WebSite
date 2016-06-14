@@ -20,6 +20,14 @@ const initialState ={
     "preparation_count": 15,
     "deck_kind": "DD",
     "deck_ben": "16.4"
+  },{
+    "id": 2,
+    "name": "test",
+    "main_count": 10,
+    "extra_count": 20,
+    "preparation_count": 15,
+    "deck_kind": "DD",
+    "deck_ben": "16.4"
   }]
 };
 export default handleActions({

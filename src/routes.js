@@ -9,6 +9,7 @@ import SearchPage from './containers/SearchPage';
 import CardPage from './containers/CardPage';
 import LoginPage from './containers/LoginPage';
 import BanPage from './containers/BanPage';
+import DeckDetail from './containers/DeckDetail';
 
 //
 import BanFormPage from './containers/Manage/Ban/BanFormPage';
@@ -29,6 +30,11 @@ export default (
     <Route path="card/:serialNumber" component={CardPage}/>
     <Route path="card/:serialNumber/:name" component={CardPage}/>
     <Route path="register/setpassword/:code" component={LoginPage}/>
+
+    //
+    <Route path="deckdetail/:id/:name" component={DeckDetail}/>
+
+
 
 
     // ManageMent

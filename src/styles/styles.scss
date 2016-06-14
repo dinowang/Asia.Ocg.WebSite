@@ -26,7 +26,7 @@ html,div[data-reactroot],#app{
   position: absolute;
   width:84%;
   height:100%;
-  padding: 30px;
+  padding: 20px 30px;
   overflow: scroll;
   padding-bottom:100px;
 }
@@ -48,4 +48,7 @@ a{
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
+}
+.text-left{
+  text-align: left;
 }

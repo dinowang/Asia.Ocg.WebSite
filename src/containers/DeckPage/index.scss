@@ -15,6 +15,15 @@
   .deck-nav{
     margin-bottom: 5px;
     border-bottom:1px solid #ddd;
+    height: 56px;
+    line-height: 30px;
+    li{
+      float: right;
+      display: inline-block;
+      a{
+        color:#fff;
+      }
+    }
     a{
       display: inline-block;
       color:#444;
