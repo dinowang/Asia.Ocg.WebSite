@@ -20,8 +20,8 @@ const SearchRImage = (props) => {
             <li>{level}</li>
             <li>{property}</li>
             <li>{race}</li>
-            <li>{attack}</li>
-            <li>{defence}</li>
+            <li className="number">{attack}</li>
+            <li className="number">{defence}</li>
           </ul>
           <span dangerouslySetInnerHTML={{__html: effect}}>
 

@@ -9,7 +9,6 @@
     .card-info{
       display: inline-block;
       height:125px;
-      overflow: auto;
       width:calc(100% - 118px);
     }
     a{
@@ -30,6 +29,14 @@
           background-color: red;
           display: none;
         }
+
+      }
+      .number{
+        top: 5px;
+        height: 42px;
+        line-height: 20px;
+        vertical-align:top;
+        // min-height: 42.5px;
       }
     }
     span{
