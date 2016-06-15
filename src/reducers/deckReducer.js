@@ -2,6 +2,33 @@ import { handleActions } from 'redux-actions';
 const initialState ={
   edit_mode: false,
   current_type:0,
+  deckform:{
+    name:"test",
+    kind_id:0,
+    ban_id:0,
+    main_list:[{
+      image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg",
+      serial_number:"123",
+      card_detail_id:1,
+      sort:0
+    }],
+    extra_list:[],
+    preparation_list:[]
+  },
+  deck_kind:[{
+    key:0,
+    value:"大法師"
+  },{
+    key:1,
+    value:"大法師2"
+  }],
+  ban_list:[{
+    key:0,
+    value:"2016.06",
+  },{
+    key:1,
+    value:"2016.09"
+  }],
   deck_type:[
     {
       id: 1,
@@ -35,5 +62,5 @@ export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
   return Object.assign({},state);
-  }
+}
 }, initialState);

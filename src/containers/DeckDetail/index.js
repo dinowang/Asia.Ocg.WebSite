@@ -64,20 +64,17 @@ class DeckDetail extends React.Component {
         <div className="info">
           <h2>牌組資訊</h2>
           <p>分類：<span>大法師</span></p>
+          <p>適用禁卡表：<span>2016.06</span></p>
           <p>怪獸：<span>19枚 / 9種類</span></p>
           <p>魔法：<span>19枚 / 9種類</span></p>
           <p>陷阱：<span>19枚 / 9種類</span></p>
 
-          <p>適用禁卡表：<span>2016.06</span></p>
           <p>最後更新日：<span>2016.06.01</span></p>
           <p>點閱率：<span>100</span></p>
           <p>留言數：<span>10</span></p>
         </div>
         <div className="info green">
           <h2>玩家資訊</h2>
-          <p>暱稱：<span>Ch Rick</span></p>
-          <p>牌組數：<span>20</span></p>
-
         </div>
       </div>
       </div>

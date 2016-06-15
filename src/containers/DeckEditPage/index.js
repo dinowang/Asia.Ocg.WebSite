@@ -10,14 +10,20 @@ import './index.scss';
 
 class DeckEditPage extends React.Component {
   render(){
+    const {deck} = this.props;
+    deck.deck_kind.splice(0,0,{key:-1,value:"請選擇"});
+    deck.ban_list.splice(0,0,{key:-1,value:"請選擇"});
+
     return (
       <div className="deck-detailedit">
-        <input className="name" value="混沌帝龍2入り銀河眼"/>
+        <input className="name" value={deck.deckform.name}/>
         <div className="deck">
+          <div className="func-bar">
+            <LinkButton value="存擋" to="/deckdetail/1/test"/>
+          </div>
           <div className="main">
             <div className="title blue">主牌組：40</div>
             <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-
           </div>
           <div className="main extra">
             <div className="title orange">額外牌組：15</div>
@@ -35,33 +41,17 @@ class DeckEditPage extends React.Component {
             <DropDown
               style={{top:'1px',width:"70%"}}
               default={-1}
-              values={[{
-                key:-1,value:'請選擇'},{
-                key:2,value:'禁止'},{
-                key:3,value:'限制'},{
-                key:4,value:'限制'},{
-                key:5,value:'限制'},{
-                key:6,value:'限制'},{
-                key:7,value:'限制'},{
-                key:8,value:'限制'},{
-                key:9,value:'限制'},{
-                key:10,value:'限制'},{
-                key:11,value:'限制'},{
-                key:12,value:'限制'},{
-                key:13,value:'限制'},{
-                key:14,value:'限制'},{
-                key:15,value:'限制'},{
-                key:16,value:'限制'},{
-                key:17,value:'限制'},{
-
-                key:18,value:'準限制'}]}/>
+              values={deck.deck_kind}/>
           </p>
+          <p>禁卡表：<DropDown
+            style={{top:'1px',width:"20%"}}
+            default={-1}
+            values={deck.ban_list}/></p>
 
           <p>怪獸：<span>19枚 / 9種類</span></p>
           <p>魔法：<span>19枚 / 9種類</span></p>
           <p>陷阱：<span>19枚 / 9種類</span></p>
 
-          <p>適用禁卡表：<span>2016.06</span></p>
           <p>最後更新日：<span>2016.06.01</span></p>
           <p>點閱率：<span>100</span></p>
           <p>留言數：<span>10</span></p>
@@ -72,6 +62,20 @@ class DeckEditPage extends React.Component {
           <p>牌組數：<span>20</span></p>
 
         </div>
+      </div>
+      <div className="card-list">
+        <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>
+        <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+        <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+          <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+                    <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+
+            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+
       </div>
       </div>
     );

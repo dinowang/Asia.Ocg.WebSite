@@ -1,4 +1,20 @@
 .deck-detailedit{
+  .func-bar{
+    float: right;
+  }
+  .card-list{
+    color:#fff;
+    padding: 10px;
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    bottom:0;left:0;
+    position: fixed;
+    height:150px;
+    img{
+      width:80px;
+      margin:5px;
+    }
+  }
   .name{
     display: block;
     padding: 10px;
@@ -6,7 +22,6 @@
     width: 60%;
     height: 40px;
     outline: 1px solid #3c8dbc;
-    // border: 1px solid #ddd;
   }
   .deck{
     display: inline-block;
@@ -17,7 +32,6 @@
     margin-top:45px;
     position: relative;
     padding:5px;
-    // background-color: rgba(0,0,0,.1);
     background-color: #fff;
     img{
       width:80px;
