@@ -18,9 +18,9 @@ class DeckEditPage extends React.Component {
     this.renderSearchReult = this.renderSearchReult.bind(this);
     this.listOnDragStart = this.listOnDragStart.bind(this);
     this.onDragEnterArea = this.onDragEnterArea.bind(this);
-    this.onDragLevalClearArea = this.onDragLevalClearArea.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.renderPreAdd = this.renderPreAdd.bind(this);
+    this.renderDeckCard = this.renderDeckCard.bind(this);
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
@@ -34,30 +34,39 @@ class DeckEditPage extends React.Component {
   listOnDragStart(e){
     this.props.actions.setDragItem(e.target.value);
   }
-  onDragLevalClearArea(){
-    this.props.actions.clearArea();
-  }
   onDragEnd(){
     this.props.actions.setToList();
-    this.onDragLevalClearArea();
+    this.props.actions.clearArea();
   }
   onDragEnterArea(e){
     this.props.actions.setDragArea(e);
   }
   renderSearchReult(data){
     return(
-      <img draggable={true} onDragEnd={this.onDragEnd} key={data.card_detail_id} value={data.card_detail_id} onDragStart={this.listOnDragStart} src={data.image_url}></img>
+      <img
+        key={data.card_detail_id}
+        draggable={true}
+        value={data.card_detail_id}
+        onDragStart={this.listOnDragStart}
+        onDragEnd={this.onDragEnd}
+        src={data.image_url}/>
     );
   }
   renderDeckCard(data,index){
     return(
-      <img key={index} src={data.image_url}></img>
+      <img
+        key={index}
+        draggable={true}
+        value={data.card_detail_id}
+        onDragStart={this.listOnDragStart}
+        onDragEnd={this.onDragEnd}
+        src={data.image_url}/>
     );
   }
   renderPreAdd(type){
     if(type === this.props.deck.on_drag_area){
       return (
-        <img className="card-preadd" src={this.props.deck.on_drag_item.image_url}/>
+        <img draggable={true}  className="card-preadd" src={this.props.deck.on_drag_item.image_url}/>
       )
     }else{
       return null;
