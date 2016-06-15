@@ -4,6 +4,7 @@ import LinkButton from '../../components/linkButton';
 import DropDown from '../../components/dropdown';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import DeckDetailTypeEnum from '../../enums/DeckDetailTypeEnum';
 import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
 import './index.scss';
@@ -14,7 +15,11 @@ class DeckEditPage extends React.Component {
     this.changeName = this.changeName.bind(this);
     this.changeKind = this.changeKind.bind(this);
     this.changeBan = this.changeBan.bind(this);
-
+    this.renderSearchReult = this.renderSearchReult.bind(this);
+    this.listOnDragStart = this.listOnDragStart.bind(this);
+    this.onDragEnterArea = this.onDragEnterArea.bind(this);
+    this.onDragLevalClearArea = this.onDragLevalClearArea.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
@@ -25,6 +30,30 @@ class DeckEditPage extends React.Component {
   changeBan(e){
     this.props.actions.changeDeckBan(e.key);
   }
+  listOnDragStart(e){
+    this.onDragLevalClearArea();
+    this.props.actions.setDragItem(e.target.value);
+    // console.log('listOnDragStart',e.target.value)
+  }
+  onDragLevalClearArea(){
+    this.props.actions.clearArea();
+  }
+  onDragEnd(){
+    this.props.actions.setToList();
+  }
+  onDragEnterArea(e){
+    this.props.actions.setDragArea(e);
+  }
+  renderSearchReult(data){
+    return(
+      <img onDragEnd={this.onDragEnd} key={data.card_detail_id} value={data.card_detail_id} onDragStart={this.listOnDragStart} src={data.image_url}></img>
+    );
+  }
+  renderDeckCard(){
+    return(
+      <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+    );
+  }
   render(){
     const {deck} = this.props;
     return (
@@ -34,17 +63,17 @@ class DeckEditPage extends React.Component {
           <div className="func-bar">
             <LinkButton value="存擋" to="/deckdetail/1/test"/>
           </div>
-          <div className="main">
-            <div className="title blue">主牌組：40</div>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+          <div className="main" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Main)}>
+            <div className="title blue">主牌組：{deck.deckform.main_list.length}</div>
+            {deck.deckform.main_list.map(this.renderDeckCard)}
           </div>
-          <div className="main extra">
-            <div className="title orange">額外牌組：15</div>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+          <div className="main extra" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Extra)}>
+            <div className="title orange">額外牌組：{deck.deckform.extra_list.length}</div>
+              {deck.deckform.extra_list.map(this.renderDeckCard)}
           </div>
-          <div className="main extra">
-            <div className="title red">備牌：15</div>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+          <div className="main extra" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Preparation)}>
+            <div className="title red">備牌：{deck.deckform.preparation_list.length}</div>
+              {deck.deckform.preparation_list.map(this.renderDeckCard)}
           </div>
         </div>
       <div className="deck-info">
@@ -80,17 +109,7 @@ class DeckEditPage extends React.Component {
       </div>
       <div className="card-list">
         <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>
-        <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-        <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-          <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                    <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-
+        {deck.search_result.map(this.renderSearchReult)}
       </div>
       </div>
     );

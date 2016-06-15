@@ -1,7 +1,10 @@
 import { handleActions } from 'redux-actions';
+import DeckDetailTypeEnum from '../enums/DeckDetailTypeEnum';
 const initialState ={
   edit_mode: false,
   current_type:0,
+  on_drag_item:{},
+  on_drag_area: DeckDetailTypeEnum.None,
   deckform:{
     name:"test",
     kind_id:0,
@@ -15,6 +18,12 @@ const initialState ={
     extra_list:[],
     preparation_list:[]
   },
+  search_result:[{
+    image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg",
+    serial_number:"123",
+    card_detail_id:2,
+    sort:0
+  }],
   deck_kind:[{
     key:-1,
     value:"請選擇"
@@ -76,6 +85,38 @@ export default handleActions({
     return Object.assign({},state);
   },'change deckban' (state, action) {
     state.deckform.ban_id = action.payload;
+    return Object.assign({},state);
+  },'set dragitem' (state, action) {
+    const g = state.search_result.filter(data =>
+      data.card_detail_id === action.payload
+    )
+    state.on_drag_item = g[0];
+    return Object.assign({},state);
+  },'set dragarea' (state, action) {
+    console.log(action.payload);
+    state.on_drag_area = action.payload;
+    return Object.assign({},state);
+  },'clear dragarea' (state) {
+    state.on_drag_area = DeckDetailTypeEnum.None;
+    return Object.assign({},state);
+  },'set todecklist' (state) {
+    if(state.on_drag_area !== DeckDetailTypeEnum){
+      console.log('-----',state.on_drag_area)
+      switch (state.on_drag_area) {
+        case DeckDetailTypeEnum.Main:
+          state.deckform.main_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          break;
+        case DeckDetailTypeEnum.Extra:
+          state.deckform.extra_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          break;
+        case DeckDetailTypeEnum.Preparation:
+          state.deckform.preparation_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          break;
+        default:
+
+      }
+    }
+    console.log('todecklist');
     return Object.assign({},state);
   }
 }, initialState);
