@@ -10,54 +10,18 @@ import './index.scss';
 
 class DeckDetail extends React.Component {
   render(){
-
     return (
       <div className="deck-detail">
         <h1>混沌帝龍入り銀河眼</h1>
-        <div className="deck">
 
+        <div className="deck">
+          <div className="func-bar">
+            <LinkButton value="進入編輯模式" to="/deckdetail/edit/1"/>
+          </div>
           <div className="main">
             <div className="title blue">主牌組：40</div>
             <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-            <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-              <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
-                  <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+
           </div>
           <div className="main extra">
             <div className="title orange">額外牌組：15</div>

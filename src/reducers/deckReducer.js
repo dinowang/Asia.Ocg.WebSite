@@ -1,33 +1,34 @@
 import { handleActions } from 'redux-actions';
 const initialState ={
-  "current_type":0,
-  "deck_type":[
+  edit_mode: false,
+  current_type:0,
+  deck_type:[
     {
-      "id": 1,
-      "name": "最新上傳"
+      id: 1,
+      name: "最新上傳"
     },{
-      "id": 2,
-      "name": "日本牌組"
+      id: 2,
+      name: "日本牌組"
     },{
-      "id": 3,
-      "name": "玩家分享"
+      id: 3,
+      name: "玩家分享"
     }],
-  "deck_list":[{
-    "id": 1,
-    "name": "test",
-    "main_count": 10,
-    "extra_count": 20,
-    "preparation_count": 15,
-    "deck_kind": "DD",
-    "deck_ben": "16.4"
+  deck_list:[{
+    id: 1,
+    name: "test",
+    main_count: 10,
+    extra_count: 20,
+    preparation_count: 15,
+    deck_kind: "DD",
+    deck_ben: "16.4"
   },{
-    "id": 2,
-    "name": "test",
-    "main_count": 10,
-    "extra_count": 20,
-    "preparation_count": 15,
-    "deck_kind": "DD",
-    "deck_ben": "16.4"
+    id: 2,
+    name: "test",
+    main_count: 10,
+    extra_count: 20,
+    preparation_count: 15,
+    deck_kind: "DD",
+    deck_ben: "16.4"
   }]
 };
 export default handleActions({

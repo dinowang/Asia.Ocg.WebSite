@@ -10,6 +10,8 @@ import CardPage from './containers/CardPage';
 import LoginPage from './containers/LoginPage';
 import BanPage from './containers/BanPage';
 import DeckDetail from './containers/DeckDetail';
+import DeckEditPage from './containers/DeckEditPage';
+
 
 //
 import BanFormPage from './containers/Manage/Ban/BanFormPage';
@@ -32,7 +34,9 @@ export default (
     <Route path="register/setpassword/:code" component={LoginPage}/>
 
     //
+    <Route path="deckdetail/edit/:id" component={DeckEditPage}/>
     <Route path="deckdetail/:id/:name" component={DeckDetail}/>
+
 
 
 

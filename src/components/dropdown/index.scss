@@ -16,6 +16,8 @@
   }
   .all{
     position: absolute;
+    overflow: scroll;
+    max-height: 250px;
     transition: all .3s;
     top:34px;
     left:-1%;
