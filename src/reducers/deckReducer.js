@@ -74,5 +74,8 @@ export default handleActions({
   },'change deckkind' (state, action) {
     state.deckform.kind_id = action.payload;
     return Object.assign({},state);
+  },'change deckban' (state, action) {
+    state.deckform.ban_id = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);

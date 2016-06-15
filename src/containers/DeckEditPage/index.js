@@ -13,12 +13,17 @@ class DeckEditPage extends React.Component {
     super();
     this.changeName = this.changeName.bind(this);
     this.changeKind = this.changeKind.bind(this);
+    this.changeBan = this.changeBan.bind(this);
+
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
   }
   changeKind(e){
     this.props.actions.changeDeckKind(e.key);
+  }
+  changeBan(e){
+    this.props.actions.changeDeckBan(e.key);
   }
   render(){
     const {deck} = this.props;
@@ -53,6 +58,7 @@ class DeckEditPage extends React.Component {
               values={deck.deck_kind}/>
           </p>
           <p>禁卡表：<DropDown
+            getValue={this.changeBan}
             style={{top:'1px',width:"20%"}}
             default={-1}
             values={deck.ban_list}/></p>
