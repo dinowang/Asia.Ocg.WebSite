@@ -13,22 +13,6 @@ const initialState ={
     extra_list:[],
     preparation_list:[]
   },
-  search_result:[{
-    image_url:"http://ocg.xpg.tw/card_img/SD25-JP031.jpg",
-    serial_number:"123",
-    card_detail_id:2,
-    sort:0
-  },{
-    image_url:"http://ocg.xpg.tw/card_img/SD25-JP001.jpg",
-    serial_number:"123",
-    card_detail_id:3,
-    sort:0
-  },{
-    image_url:"http://ocg.xpg.tw/card_img/BE01-JP207.jpg",
-    serial_number:"123",
-    card_detail_id:4,
-    sort:0
-  }],
   deck_kind:[{
     key:-1,
     value:"請選擇"
@@ -81,7 +65,10 @@ const initialState ={
 export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
-  return Object.assign({},state);
+    return Object.assign({},state);
+  },'set deckmode' (state, action) {
+    state.edit_mode = action.payload;
+    return Object.assign({},state);
   },'change deckname' (state, action) {
     state.deckform.name = action.payload;
     return Object.assign({},state);
@@ -92,10 +79,7 @@ export default handleActions({
     state.deckform.ban_id = action.payload;
     return Object.assign({},state);
   },'set dragitem' (state, action) {
-    const g = state.search_result.filter(data =>
-      data.card_detail_id === action.payload
-    )
-    state.on_drag_item = g[0];
+    state.on_drag_item = action.payload;
     return Object.assign({},state);
   },'set dragarea' (state, action) {
     state.on_drag_area = action.payload;
@@ -115,11 +99,8 @@ export default handleActions({
         case DeckDetailTypeEnum.Preparation:
           state.deckform.preparation_list.push(state.on_drag_item);
           break;
-        default:
-
       }
     }
-    console.log('todecklist');
     return Object.assign({},state);
   }
 }, initialState);

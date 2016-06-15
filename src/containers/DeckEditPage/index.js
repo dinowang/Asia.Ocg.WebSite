@@ -22,6 +22,12 @@ class DeckEditPage extends React.Component {
     this.renderPreAdd = this.renderPreAdd.bind(this);
     this.renderDeckCard = this.renderDeckCard.bind(this);
   }
+  componentWillMount(){
+    this.props.actions.setDeckMode(true);
+  }
+  componentWillUnmount(){
+    this.props.actions.setDeckMode(false);
+  }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
   }
@@ -32,7 +38,10 @@ class DeckEditPage extends React.Component {
     this.props.actions.changeDeckBan(e.key);
   }
   listOnDragStart(e){
-    this.props.actions.setDragItem(e.target.value);
+    const g = this.props.search.items.filter(data =>
+      data.id === e.target.value
+    )
+    this.props.actions.setDragItem(g[0]);
   }
   onDragEnd(){
     this.props.actions.setToList();
@@ -42,38 +51,42 @@ class DeckEditPage extends React.Component {
     this.props.actions.setDragArea(e);
   }
   renderSearchReult(data){
+    const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
     return(
       <img
-        key={data.card_detail_id}
+        key={data.id}
         draggable={true}
-        value={data.card_detail_id}
+        value={data.id}
         onDragStart={this.listOnDragStart}
         onDragEnd={this.onDragEnd}
-        src={data.image_url}/>
+        src={href}/>
     );
   }
   renderDeckCard(data,index){
+    const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
+
     return(
       <img
         key={index}
         draggable={true}
-        value={data.card_detail_id}
+        value={data.id}
         onDragStart={this.listOnDragStart}
         onDragEnd={this.onDragEnd}
-        src={data.image_url}/>
+        src={href}/>
     );
   }
   renderPreAdd(type){
     if(type === this.props.deck.on_drag_area){
+      const href = this.props.deck.on_drag_item.image_url? this.props.deck.on_drag_item.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
       return (
-        <img draggable={true}  className="card-preadd" src={this.props.deck.on_drag_item.image_url}/>
+        <img draggable={true}  className="card-preadd" src={href}/>
       )
     }else{
       return null;
     }
   }
   render(){
-    const {deck} = this.props;
+    const {deck, search} = this.props;
     return (
       <div className="deck-detailedit">
         <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
@@ -138,7 +151,7 @@ class DeckEditPage extends React.Component {
       </div>
       <div className="card-list">
         <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>
-        {deck.search_result.map(this.renderSearchReult)}
+        {search.items.map(this.renderSearchReult)}
 
       </div>
       </div>
@@ -148,7 +161,8 @@ class DeckEditPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    deck: state.deck
+    deck: state.deck,
+    search: state.search
   };
 }
 

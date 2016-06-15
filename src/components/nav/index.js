@@ -28,9 +28,12 @@ class Nav extends React.Component {
     },500);
   }
   handleInputFoucs(){
-    if(this.props.search.query){
-      this.props.nav.push(`/search/${this.props.search.query}/${this.props.search.current_page}`);
+    if(this.props.deck.edit_mode === false){
+      if(this.props.search.query){
+        this.props.nav.push(`/search/${this.props.search.query}/${this.props.search.current_page}`);
+      }
     }
+
   }
   render() {
     const {user} = this.props;
@@ -79,6 +82,7 @@ function mapStateToProps(state) {
   return {
     search: state.search,
     user: state.user,
+    deck: state.deck,
     nav : browserHistory
   };
 }
