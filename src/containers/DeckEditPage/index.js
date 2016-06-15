@@ -9,6 +9,13 @@ import * as actions from '../../actions/deckActions';
 import './index.scss';
 
 class DeckEditPage extends React.Component {
+  constructor(){
+    super();
+    this.changeName = this.changeName.bind(this);
+  }
+  changeName(e){
+    this.props.actions.changeDeckName(e.target.value);
+  }
   render(){
     const {deck} = this.props;
     deck.deck_kind.splice(0,0,{key:-1,value:"請選擇"});
@@ -16,7 +23,7 @@ class DeckEditPage extends React.Component {
 
     return (
       <div className="deck-detailedit">
-        <input className="name" value={deck.deckform.name}/>
+        <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
         <div className="deck">
           <div className="func-bar">
             <LinkButton value="存擋" to="/deckdetail/1/test"/>

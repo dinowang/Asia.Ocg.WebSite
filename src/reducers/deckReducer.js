@@ -62,5 +62,8 @@ export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
   return Object.assign({},state);
-}
+},'change deckname' (state, action) {
+  state.deckform.name = action.payload;
+  return Object.assign({},state);
+  }
 }, initialState);

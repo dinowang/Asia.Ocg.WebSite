@@ -36,7 +36,7 @@ class DropDown extends React.Component {
           <div className="default" onClick={this.show}>{this.state.defaultValue.value}</div>
           <div className="all" style={isShow} onMouseLeave={this.hide}>
             <ul>
-            {this.props.values.map((data)=>{return <li key={data.key} onClick={this.select} value={data.key}>{data.value}</li>})}
+            {this.props.values.map((data)=>{return <li key={data.key+Math.random()} onClick={this.select} value={data.key}>{data.value}</li>})}
             </ul>
           </div>
         </div>
