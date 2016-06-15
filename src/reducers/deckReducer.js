@@ -16,17 +16,23 @@ const initialState ={
     preparation_list:[]
   },
   deck_kind:[{
-    key:0,
-    value:"大法師"
+    key:-1,
+    value:"請選擇"
   },{
     key:1,
+    value:"大法師"
+  },{
+    key:2,
     value:"大法師2"
   }],
   ban_list:[{
-    key:0,
-    value:"2016.06",
+    key:-1,
+    value:"請選擇"
   },{
     key:1,
+    value:"2016.06",
+  },{
+    key:2,
     value:"2016.09"
   }],
   deck_type:[
@@ -62,8 +68,11 @@ export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
   return Object.assign({},state);
-},'change deckname' (state, action) {
-  state.deckform.name = action.payload;
-  return Object.assign({},state);
+  },'change deckname' (state, action) {
+    state.deckform.name = action.payload;
+    return Object.assign({},state);
+  },'change deckkind' (state, action) {
+    state.deckform.kind_id = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);

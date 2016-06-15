@@ -12,15 +12,16 @@ class DeckEditPage extends React.Component {
   constructor(){
     super();
     this.changeName = this.changeName.bind(this);
+    this.changeKind = this.changeKind.bind(this);
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
   }
+  changeKind(e){
+    this.props.actions.changeDeckKind(e.key);
+  }
   render(){
     const {deck} = this.props;
-    deck.deck_kind.splice(0,0,{key:-1,value:"請選擇"});
-    deck.ban_list.splice(0,0,{key:-1,value:"請選擇"});
-
     return (
       <div className="deck-detailedit">
         <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
@@ -46,6 +47,7 @@ class DeckEditPage extends React.Component {
           <h2>牌組資訊</h2>
           <p>分類
             <DropDown
+              getValue={this.changeKind}
               style={{top:'1px',width:"70%"}}
               default={-1}
               values={deck.deck_kind}/>
