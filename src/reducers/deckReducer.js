@@ -9,19 +9,24 @@ const initialState ={
     name:"test",
     kind_id:0,
     ban_id:0,
-    main_list:[{
-      image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg",
-      serial_number:"123",
-      card_detail_id:1,
-      sort:0
-    }],
+    main_list:[],
     extra_list:[],
     preparation_list:[]
   },
   search_result:[{
-    image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg",
+    image_url:"http://ocg.xpg.tw/card_img/SD25-JP031.jpg",
     serial_number:"123",
     card_detail_id:2,
+    sort:0
+  },{
+    image_url:"http://ocg.xpg.tw/card_img/SD25-JP001.jpg",
+    serial_number:"123",
+    card_detail_id:3,
+    sort:0
+  },{
+    image_url:"http://ocg.xpg.tw/card_img/BE01-JP207.jpg",
+    serial_number:"123",
+    card_detail_id:4,
     sort:0
   }],
   deck_kind:[{
@@ -93,7 +98,6 @@ export default handleActions({
     state.on_drag_item = g[0];
     return Object.assign({},state);
   },'set dragarea' (state, action) {
-    console.log(action.payload);
     state.on_drag_area = action.payload;
     return Object.assign({},state);
   },'clear dragarea' (state) {
@@ -101,16 +105,15 @@ export default handleActions({
     return Object.assign({},state);
   },'set todecklist' (state) {
     if(state.on_drag_area !== DeckDetailTypeEnum){
-      console.log('-----',state.on_drag_area)
       switch (state.on_drag_area) {
         case DeckDetailTypeEnum.Main:
-          state.deckform.main_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          state.deckform.main_list.push(state.on_drag_item);
           break;
         case DeckDetailTypeEnum.Extra:
-          state.deckform.extra_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          state.deckform.extra_list.push(state.on_drag_item);
           break;
         case DeckDetailTypeEnum.Preparation:
-          state.deckform.preparation_list.push({ image_url:"https://xpgcards.blob.core.windows.net/image/null.jpg", serial_number:"123", card_detail_id:1, sort:0 });
+          state.deckform.preparation_list.push(state.on_drag_item);
           break;
         default:
 

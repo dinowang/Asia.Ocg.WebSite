@@ -2,6 +2,9 @@
   .func-bar{
     float: right;
   }
+  .card-preadd{
+    opacity: .2;
+  }
   .card-list{
     color:#fff;
     padding: 10px;
@@ -33,6 +36,7 @@
     position: relative;
     padding:5px;
     background-color: #fff;
+    min-height: 112px;
     img{
       width:80px;
       margin:2px 5px;
@@ -48,6 +52,15 @@
       top:-34px;
       // background-color: rgba(0,0,0,.1);
       background-color: #fff
+    }
+    .deck-empty:empty{
+      &:after{
+        content:'拖曳下方卡片至此';
+        width: 100%;
+        text-align: center;
+        display: block;
+        line-height: 108px;
+      }
     }
   }
   .blue{

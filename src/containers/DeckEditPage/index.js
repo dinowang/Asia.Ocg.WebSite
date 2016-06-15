@@ -20,6 +20,7 @@ class DeckEditPage extends React.Component {
     this.onDragEnterArea = this.onDragEnterArea.bind(this);
     this.onDragLevalClearArea = this.onDragLevalClearArea.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.renderPreAdd = this.renderPreAdd.bind(this);
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
@@ -31,28 +32,36 @@ class DeckEditPage extends React.Component {
     this.props.actions.changeDeckBan(e.key);
   }
   listOnDragStart(e){
-    this.onDragLevalClearArea();
     this.props.actions.setDragItem(e.target.value);
-    // console.log('listOnDragStart',e.target.value)
   }
   onDragLevalClearArea(){
     this.props.actions.clearArea();
   }
   onDragEnd(){
     this.props.actions.setToList();
+    this.onDragLevalClearArea();
   }
   onDragEnterArea(e){
     this.props.actions.setDragArea(e);
   }
   renderSearchReult(data){
     return(
-      <img onDragEnd={this.onDragEnd} key={data.card_detail_id} value={data.card_detail_id} onDragStart={this.listOnDragStart} src={data.image_url}></img>
+      <img draggable={true} onDragEnd={this.onDragEnd} key={data.card_detail_id} value={data.card_detail_id} onDragStart={this.listOnDragStart} src={data.image_url}></img>
     );
   }
-  renderDeckCard(){
+  renderDeckCard(data,index){
     return(
-      <img src="https://xpgcards.blob.core.windows.net/image/null.jpg"></img>
+      <img key={index} src={data.image_url}></img>
     );
+  }
+  renderPreAdd(type){
+    if(type === this.props.deck.on_drag_area){
+      return (
+        <img className="card-preadd" src={this.props.deck.on_drag_item.image_url}/>
+      )
+    }else{
+      return null;
+    }
   }
   render(){
     const {deck} = this.props;
@@ -65,15 +74,26 @@ class DeckEditPage extends React.Component {
           </div>
           <div className="main" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Main)}>
             <div className="title blue">主牌組：{deck.deckform.main_list.length}</div>
-            {deck.deckform.main_list.map(this.renderDeckCard)}
+            <div className="deck-empty">
+              {deck.deckform.main_list.map(this.renderDeckCard)}
+              {this.renderPreAdd(DeckDetailTypeEnum.Main)}
+            </div>
           </div>
           <div className="main extra" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Extra)}>
             <div className="title orange">額外牌組：{deck.deckform.extra_list.length}</div>
+            <div className="deck-empty">
               {deck.deckform.extra_list.map(this.renderDeckCard)}
+              {this.renderPreAdd(DeckDetailTypeEnum.Extra)}
+
+            </div>
           </div>
           <div className="main extra" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Preparation)}>
             <div className="title red">備牌：{deck.deckform.preparation_list.length}</div>
+            <div className="deck-empty">
               {deck.deckform.preparation_list.map(this.renderDeckCard)}
+              {this.renderPreAdd(DeckDetailTypeEnum.Preparation)}
+
+            </div>
           </div>
         </div>
       <div className="deck-info">
@@ -110,6 +130,7 @@ class DeckEditPage extends React.Component {
       <div className="card-list">
         <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>
         {deck.search_result.map(this.renderSearchReult)}
+
       </div>
       </div>
     );
