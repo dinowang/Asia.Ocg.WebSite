@@ -21,6 +21,10 @@ class DeckEditPage extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this);
     this.renderPreAdd = this.renderPreAdd.bind(this);
     this.renderDeckCard = this.renderDeckCard.bind(this);
+    this.onMoveStart = this.onMoveStart.bind(this);
+    this.onMoveEnter = this.onMoveEnter.bind(this);
+    this.onMoveEnd = this.onMoveEnd.bind(this);
+
   }
   componentWillMount(){
     this.props.actions.setDeckMode(true);
@@ -42,13 +46,19 @@ class DeckEditPage extends React.Component {
       data.id === e.target.value
     )
     this.props.actions.setDragItem(g[0]);
+    this.props.actions.changeDragMode(true);
   }
   onDragEnd(){
     this.props.actions.setToList();
     this.props.actions.clearArea();
+    this.props.actions.clearOnDragItem();
+
   }
   onDragEnterArea(e){
-    this.props.actions.setDragArea(e);
+    if(this.props.deck.add_mode === true){
+      this.props.actions.setDragArea(e);
+
+    }
   }
   renderSearchReult(data){
     const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
@@ -62,21 +72,47 @@ class DeckEditPage extends React.Component {
         src={href}/>
     );
   }
+  onMoveStart(e){
+    this.props.actions.clearArea();
+    this.props.actions.changeDragMode(false)
+    this.props.actions.setDragItem(e.target.value.data);
+  }
+  onMoveEnter(e){
+    const card = e.target.value.data;
+    if(card !== this.props.deck.on_drag_item && card.pre === false){
+      this.props.actions.removeAllPreItem();
+      this.props.actions.setOnMoveArray(e.target.value);
+      this.props.actions.preMove(e.target.value);
+    }
+  }
+  onMoveEnd(e){
+    if(this.props.deck.on_move_array){
+      this.props.actions.move();
+      this.props.actions.removeAllPreItem();
+      this.props.actions.removeDeckItem();
+      this.props.actions.setOnMoveArray(null);
+    }
+  }
   renderDeckCard(data,index){
-    const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
 
+    const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
+    const style = data.pre ? {opacity:.5} : {};
     return(
+      <div key={data.sort} style={{display:'inline-block'}}>
+
       <img
-        key={index}
+        style={style}
         draggable={true}
-        value={data.id}
-        onDragStart={this.listOnDragStart}
-        onDragEnd={this.onDragEnd}
+        value={{data:data,index:index}}
+        onDragStart={this.onMoveStart}
+        onDragEnter={this.onMoveEnter}
+        onDragEnd={this.onMoveEnd}
         src={href}/>
+      </div>
     );
   }
   renderPreAdd(type){
-    if(type === this.props.deck.on_drag_area){
+    if(type === this.props.deck.on_drag_area && this.props.deck.add_mode){
       const href = this.props.deck.on_drag_item.image_url? this.props.deck.on_drag_item.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
       return (
         <img draggable={true}  className="card-preadd" src={href}/>

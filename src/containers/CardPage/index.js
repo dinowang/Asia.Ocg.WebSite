@@ -28,7 +28,7 @@ class CardPage extends React.Component {
         <h1>{card.name}</h1>
         <div className="content">
           <div className="info">
-            <img src={card.image_url?'':'https://xpgcards.blob.core.windows.net/image/null.jpg'}></img>
+            <img src={card.image_url? card.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg'}></img>
               <ul>
                 <li>價格情報</li>
                 <li>

@@ -2,8 +2,11 @@ import { handleActions } from 'redux-actions';
 import DeckDetailTypeEnum from '../enums/DeckDetailTypeEnum';
 const initialState ={
   edit_mode: false,
+  add_mode: true,
   current_type:0,
   on_drag_item:{},
+  on_move_array:null,
+  move_enter:0,
   on_drag_area: DeckDetailTypeEnum.None,
   deckform:{
     name:"test",
@@ -91,16 +94,104 @@ export default handleActions({
     if(state.on_drag_area !== DeckDetailTypeEnum){
       switch (state.on_drag_area) {
         case DeckDetailTypeEnum.Main:
-          state.deckform.main_list.push(state.on_drag_item);
+        state.deckform.main_list.push(Object.assign({},state.on_drag_item,{
+          type: DeckDetailTypeEnum.Main,
+          sort: Math.random(),//state.deckform.main_list.length + 1,
+          pre: false
+        }));
           break;
         case DeckDetailTypeEnum.Extra:
-          state.deckform.extra_list.push(state.on_drag_item);
+          state.deckform.extra_list.push(Object.assign({},state.on_drag_item,{
+            type: DeckDetailTypeEnum.Extra,
+            sort:Math.random(),// state.deckform.extra_list.length +1,
+            pre: false
+          }));
           break;
         case DeckDetailTypeEnum.Preparation:
-          state.deckform.preparation_list.push(state.on_drag_item);
+          state.deckform.preparation_list.push(Object.assign({},state.on_drag_item,{
+            type: DeckDetailTypeEnum.Preparation,
+            sort:Math.random(), //state.deckform.preparation_list.length +1,
+            pre: false
+          }));
           break;
       }
     }
     return Object.assign({},state);
+  },'remove deckitem' (state,action) {
+    switch (state.on_drag_item.type) {
+      case DeckDetailTypeEnum.Main:
+        state.deckform.main_list = state.deckform.main_list.filter(data=>
+          data.sort !== state.on_drag_item.sort
+        )
+        break;
+      case DeckDetailTypeEnum.Extra:
+        state.deckform.extra_list = state.deckform.extra_list.filter(data=>
+          data.sort !== state.on_drag_item.sort
+        )
+        break;
+      case DeckDetailTypeEnum.Preparation:
+        state.deckform.preparation_list = state.deckform.preparation_list.filter(data=>
+          data.sort !== state.on_drag_item.sort
+        )
+        break;
+    }
+    return Object.assign({},state);
+  },'clear ondrawitem'(state,action){
+    state.on_drag_item = {};
+    return Object.assign({},state);
+  },'set dragmode'(state,action){
+    state.add_mode = action.payload;
+    return Object.assign({},state);
+  },'remove allpreitem'(state,action){
+    state.deckform.main_list = state.deckform.main_list.filter(data=>
+      data.pre === false
+    )
+    state.deckform.extra_list = state.deckform.extra_list.filter(data=>
+      data.pre === false
+    )
+    state.deckform.preparation_list = state.deckform.preparation_list.filter(data=>
+      data.pre === false
+    )
+    return Object.assign({},state);
+  },'pre move'(state,action){
+    switch (state.on_drag_item.type) {
+      case DeckDetailTypeEnum.Main:
+        state.deckform.main_list.splice(action.payload.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:true}));
+        break;
+      case DeckDetailTypeEnum.Extra:
+        state.deckform.extra_list.splice(action.payload.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:true}));
+        break;
+      case DeckDetailTypeEnum.Preparation:
+        state.deckform.preparation_list.splice(action.payload.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:true}));
+        break;
+    }
+    return Object.assign({},state);
+  },'set onmovearray'(state,action){
+    state.on_move_array = action.payload;
+    return Object.assign({},state);
+  },'move'(state,action){
+    switch (state.on_move_array.data.type) {
+      case DeckDetailTypeEnum.Main:
+        state.deckform.main_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+        break;
+      case DeckDetailTypeEnum.Extra:
+        state.deckform.extra_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+        break;
+      case DeckDetailTypeEnum.Preparation:
+        state.deckform.preparation_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+
+        break;
+    }
+    state.deckform.main_list.map((data)=>{
+      data.sort = Math.random();
+    })
+    state.deckform.extra_list.map((data)=>{
+      data.sort = Math.random();
+    })
+    state.deckform.preparation_list.map((data)=>{
+      data.sort = Math.random();
+    })
+    return Object.assign({},state);
   }
+
 }, initialState);
