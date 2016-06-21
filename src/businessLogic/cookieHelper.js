@@ -5,6 +5,6 @@ export default class CookieHelper {
     return (value != null) ? unescape(value[1]) : null;
   }
   static Set(key, value){
-    document.cookie = `${key}=${value}`;
+    document.cookie = `${key}=${value};path=/`;
   }
 }
