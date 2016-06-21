@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Icon} from 'react-fa';
@@ -12,16 +13,19 @@ class IndexPage extends React.Component {
     this.renderCardPop = this.renderCardPop.bind(this);
   }
   componentWillMount(){
-    console.log('test');
     this.props.indexActions.requestInfo();
   }
   renderCardPop(data, index){
     index ++;
+    const cardHref = `/card/${data.serial_number}/${data.name}`;
+    const name = data.name.length >=6 ? data.name.substring(0,6)+'...':data.name;
     return(
-      <li>
-        <img src={data.image_url}></img>
-        <p>{data.name}</p>
-        <span>{index}</span>
+      <li key={index}>
+        <Link to={cardHref}>
+          <img src={data.image_url}></img>
+          <p>{name}</p>
+          <span>{index}</span>
+        </Link>
       </li>
     )
   }
