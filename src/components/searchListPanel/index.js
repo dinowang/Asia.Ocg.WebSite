@@ -12,10 +12,9 @@ class SearchListPanel extends React.Component {
     this.props.itemOnClick(value);
   }
   renderList(data,key){
-    const href = data.image_url? data.image_url:'https://xpgcards.blob.core.windows.net/image/null.jpg'
     return(
       <li key={key} onClick={()=>this.liOnClick(data)}>
-        <img src={href}></img>
+        <img src={data.href}></img>
         <span>{data.name}</span>
       </li>
     )
