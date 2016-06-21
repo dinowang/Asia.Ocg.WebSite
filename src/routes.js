@@ -33,13 +33,9 @@ export default (
     <Route path="card/:serialNumber/:name" component={CardPage}/>
     <Route path="register/setpassword/:code" component={LoginPage}/>
 
-    //
+    // Member
     <Route path="deckdetail/edit/:id" component={DeckEditPage}/>
     <Route path="deckdetail/:id/:name" component={DeckDetail}/>
-
-
-
-
 
     // ManageMent
     <Route path="banManage/Form" component={BanFormPage}/>

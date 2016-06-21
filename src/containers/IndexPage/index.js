@@ -10,7 +10,43 @@ class IndexPage extends React.Component {
   render(){
     return (
       <div className="index-page">
-        Index
+        <div className="pop-card">
+          <p className="title">熱門卡片</p>
+          <ul>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+              <p>青眼究級龍</p>
+              <span>1</span>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+            <li>
+              <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
