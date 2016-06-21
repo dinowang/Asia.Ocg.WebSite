@@ -41,12 +41,13 @@ export const requestBan = (id) => {
 // Manage
 export const requestCreateBan = (nav) => {
   return (dispatch, state) => {
-    const {ban} = state();
+    const {ban, user} = state();
     fetch(`${Host}/manage/ban`,{
       method:'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Token': user.token
       },
       body: JSON.stringify(ban.banform)
     })
