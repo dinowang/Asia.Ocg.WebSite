@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
-import HomePage from './components/HomePage';
+import IndexPage from './containers/IndexPage';
 import DeckPage from './containers/DeckPage';
 import BanListPage from './containers/BanListPage';
 import SearchPage from './containers/SearchPage';
@@ -22,7 +22,7 @@ import NotFoundPage from './components/NotFoundPage.js';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
+    <IndexRoute component={IndexPage}/>
     <Route path="deck/:deck_type" component={DeckPage}/>
     <Route path="ban/:id" component={BanPage}/>
     <Route path="banlist" component={BanListPage}/>

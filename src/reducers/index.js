@@ -6,7 +6,7 @@ import login from './loginReducer';
 import deck from './deckReducer';
 import ban from './banReducer';
 import app from './appReducer';
-
+import index from './indexReducer'
 
 const rootReducer = combineReducers({
   search,
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
   login,
   deck,
   ban,
-  app
+  app,
+  index
 });
 
 export default rootReducer;
