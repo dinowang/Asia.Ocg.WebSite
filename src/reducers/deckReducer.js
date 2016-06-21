@@ -13,6 +13,7 @@ const initialState ={
     name:"test",
     kind_id:0,
     ban_id:0,
+    type_id:0,
     main_list:[],
     extra_list:[],
     preparation_list:[]
@@ -22,6 +23,10 @@ const initialState ={
     value:"請選擇"
   }],
   ban:[{
+    key:-1,
+    value:"請選擇"
+  }],
+  type:[{
     key:-1,
     value:"請選擇"
   }],
@@ -72,6 +77,9 @@ export default handleActions({
     return Object.assign({},state);
   },'change deckban' (state, action) {
     state.deckform.ban_id = action.payload;
+    return Object.assign({},state);
+  },'change decktype' (state, action) {
+    state.deckform.type_id = action.payload;
     return Object.assign({},state);
   },'set dragitem' (state, action) {
     state.on_drag_item = action.payload;

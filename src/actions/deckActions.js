@@ -5,6 +5,7 @@ export const setEditMode = createAction('set editmode');
 export const changeDeckName = createAction('change deckname');
 export const changeDeckKind = createAction('change deckkind');
 export const changeDeckBan = createAction('change deckban');
+export const changeDeckType = createAction('change decktype');
 export const setDragItem = createAction('set dragitem');
 export const setDragArea = createAction('set dragarea');
 export const clearArea = createAction('clear dragarea');

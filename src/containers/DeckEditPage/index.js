@@ -5,6 +5,7 @@ import DropDown from '../../components/dropdown';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
+import PermissionEnum from '../../enums/PermissionEnum';
 import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
 import './index.scss';
@@ -15,6 +16,7 @@ class DeckEditPage extends React.Component {
     this.changeName = this.changeName.bind(this);
     this.changeKind = this.changeKind.bind(this);
     this.changeBan = this.changeBan.bind(this);
+    this.changeType = this.changeType.bind(this);
     this.renderSearchReult = this.renderSearchReult.bind(this);
     this.listOnDragStart = this.listOnDragStart.bind(this);
     this.onDragEnterArea = this.onDragEnterArea.bind(this);
@@ -47,6 +49,9 @@ class DeckEditPage extends React.Component {
   }
   changeBan(e){
     this.props.actions.changeDeckBan(e.key);
+  }
+  changeType(e){
+    this.props.actions.changeDeckType(e.key);
   }
   listOnDragStart(e){
     const g = this.props.search.items.filter(data =>
@@ -130,6 +135,7 @@ class DeckEditPage extends React.Component {
   }
   render(){
     const {deck, search} = this.props;
+    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
 
     return (
       <div className="deck-detailedit">
@@ -165,7 +171,7 @@ class DeckEditPage extends React.Component {
       <div className="deck-info">
         <div className="info">
           <h2>牌組資訊</h2>
-          <p>分類
+          <p>種類
             <DropDown
               getValue={this.changeKind}
               style={{top:'1px',width:"70%"}}
@@ -177,6 +183,12 @@ class DeckEditPage extends React.Component {
             style={{top:'1px',width:"20%"}}
             default={-1}
             values={deck.ban}/></p>
+
+          <p style={adminStyle}>分類<DropDown
+            getValue={this.changeType}
+            style={{top:'1px',width:"70%"}}
+            default={-1}
+            values={deck.type}/></p>
 
           <p>怪獸：<span>19枚 / 9種類</span></p>
           <p>魔法：<span>19枚 / 9種類</span></p>
@@ -206,7 +218,8 @@ class DeckEditPage extends React.Component {
 function mapStateToProps(state) {
   return {
     deck: state.deck,
-    search: state.search
+    search: state.search,
+    user: state.user
   };
 }
 
