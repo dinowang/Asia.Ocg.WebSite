@@ -1,8 +1,9 @@
 import { handleActions } from 'redux-actions';
-import DeckDetailTypeEnum from '../enums/DeckDetailTypeEnum';
+import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
 const initialState ={
   edit_mode: false,
   add_mode: true,
+  mode : DeckModeEnum.Create,
   current_type:0,
   on_drag_item:{},
   on_move_array:null,
@@ -16,15 +17,9 @@ const initialState ={
     extra_list:[],
     preparation_list:[]
   },
-  deck_kind:[{
+  kind:[{
     key:-1,
     value:"請選擇"
-  },{
-    key:1,
-    value:"大法師"
-  },{
-    key:2,
-    value:"大法師2"
   }],
   ban_list:[{
     key:-1,
@@ -69,8 +64,11 @@ export default handleActions({
   'change type' (state, action) {
     state.current_type = action.payload;
     return Object.assign({},state);
-  },'set deckmode' (state, action) {
+  },'set editmode' (state, action) {
     state.edit_mode = action.payload;
+    return Object.assign({},state);
+  },'set deckmode' (state, action) {
+    state.mode = action.payload;
     return Object.assign({},state);
   },'change deckname' (state, action) {
     state.deckform.name = action.payload;
@@ -192,6 +190,8 @@ export default handleActions({
       data.sort = Math.random();
     })
     return Object.assign({},state);
+  },'fetch deckinfo'(state,action){
+    return Object.assign({},state,action.payload);
   }
 
 }, initialState);

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import './index.scss';
 class DeckList extends React.Component{
   renderData(data){
-    const {id, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
+    const {id, name, main_count, extra_count, preparation_count, kind, deck_ben} = data;
     const href = `/deckdetail/${id}/${name}`;
     return(
       <tr key={id}>
@@ -15,7 +15,7 @@ class DeckList extends React.Component{
         <td >{main_count}</td>
         <td>{extra_count}</td>
         <td>{preparation_count}</td>
-        <td>{deck_kind}</td>
+        <td>{kind}</td>
         <td>{deck_ben}</td>
       </tr>
     );

@@ -19,7 +19,6 @@ class IndexPage extends React.Component {
     this.props.indexActions.requestInfo();
   }
   preAddCardData(e){
-    // console.log('mouseOver',e)
     this.props.cardActions.checkinList(e)
   }
   renderCardPop(data, index){

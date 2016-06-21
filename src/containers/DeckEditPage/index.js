@@ -4,7 +4,7 @@ import LinkButton from '../../components/linkButton';
 import DropDown from '../../components/dropdown';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import DeckDetailTypeEnum from '../../enums/DeckDetailTypeEnum';
+import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
 import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
 import './index.scss';
@@ -27,10 +27,17 @@ class DeckEditPage extends React.Component {
 
   }
   componentWillMount(){
-    this.props.actions.setDeckMode(true);
+    this.props.actions.setEditMode(true);
+    let {id} = this.props.params;
+    this.props.actions.requestDeckInfo();
+    if(id){
+      this.props.actions.setDeckMode(DeckModeEnum.Edit);
+    }else{
+      this.props.actions.setDeckMode(DeckModeEnum.Create);
+    }
   }
   componentWillUnmount(){
-    this.props.actions.setDeckMode(false);
+    this.props.actions.setEditMode(false);
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
@@ -123,12 +130,13 @@ class DeckEditPage extends React.Component {
   }
   render(){
     const {deck, search} = this.props;
+
     return (
       <div className="deck-detailedit">
         <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
         <div className="deck">
           <div className="func-bar">
-            <LinkButton value="存擋" to="/deckdetail/1/test"/>
+            <LinkButton value={this.props.deck.mode} to="/deckdetail/1/test"/>
           </div>
           <div className="main" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Main)}>
             <div className="title blue">主牌組：{deck.deckform.main_list.length}</div>
@@ -162,7 +170,7 @@ class DeckEditPage extends React.Component {
               getValue={this.changeKind}
               style={{top:'1px',width:"70%"}}
               default={-1}
-              values={deck.deck_kind}/>
+              values={deck.kind}/>
           </p>
           <p>禁卡表：<DropDown
             getValue={this.changeBan}
