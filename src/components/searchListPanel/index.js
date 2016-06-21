@@ -14,7 +14,7 @@ class SearchListPanel extends React.Component {
   renderList(data,key){
     return(
       <li key={key} onClick={()=>this.liOnClick(data)}>
-        <img src={data.href}></img>
+        <img src={data.image_url}></img>
         <span>{data.name}</span>
       </li>
     )

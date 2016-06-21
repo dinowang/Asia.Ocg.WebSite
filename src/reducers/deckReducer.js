@@ -21,15 +21,9 @@ const initialState ={
     key:-1,
     value:"請選擇"
   }],
-  ban_list:[{
+  ban:[{
     key:-1,
     value:"請選擇"
-  },{
-    key:1,
-    value:"2016.06",
-  },{
-    key:2,
-    value:"2016.09"
   }],
   deck_type:[
     {

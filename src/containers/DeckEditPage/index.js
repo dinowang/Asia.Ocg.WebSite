@@ -176,7 +176,7 @@ class DeckEditPage extends React.Component {
             getValue={this.changeBan}
             style={{top:'1px',width:"20%"}}
             default={-1}
-            values={deck.ban_list}/></p>
+            values={deck.ban}/></p>
 
           <p>怪獸：<span>19枚 / 9種類</span></p>
           <p>魔法：<span>19枚 / 9種類</span></p>
