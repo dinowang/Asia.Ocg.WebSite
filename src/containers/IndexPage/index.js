@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Icon} from 'react-fa';
 import * as indexActions from '../../actions/indexActions';
+import * as cardActions from '../../actions/cardActions';
+
 
 import './index.scss';
 
@@ -11,17 +13,22 @@ class IndexPage extends React.Component {
   constructor(){
     super();
     this.renderCardPop = this.renderCardPop.bind(this);
+    this.preAddCardData - this.preAddCardData.bind(this);
   }
   componentWillMount(){
     this.props.indexActions.requestInfo();
+  }
+  preAddCardData(e){
+    // console.log('mouseOver',e)
+    this.props.cardActions.checkinList(e)
   }
   renderCardPop(data, index){
     index ++;
     const cardHref = `/card/${data.serial_number}/${data.name}`;
     const name = data.name.length >=6 ? data.name.substring(0,6)+'...':data.name;
     return(
-      <li key={index}>
-        <Link to={cardHref}>
+      <li key={index}  onMouseOver={()=>{this.preAddCardData(data.serial_number)}}>
+        <Link to={cardHref} >
           <img src={data.image_url}></img>
           <p>{name}</p>
           <span>{index}</span>
@@ -43,16 +50,10 @@ class IndexPage extends React.Component {
   }
 }
 IndexPage.propTypes ={
-  indexActions:PropTypes.object.isRequired
+  indexActions:PropTypes.object.isRequired,
+  cardActions:PropTypes.object.isRequired
 };
 
-// <ul>
-//   <li>
-//     <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JP000/5fceacac-981b-4fb2-8ab1-8d071c7d7078200X282.jpg"></img>
-//     <p>青眼究級龍</p>
-//     <span>1</span>
-//   </li>
-// </ul>
 function mapStateToProps(state) {
   return {
     index: state.index
@@ -61,7 +62,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    indexActions: bindActionCreators(indexActions, dispatch)
+    indexActions: bindActionCreators(indexActions, dispatch),
+    cardActions: bindActionCreators(cardActions, dispatch)
+
   };
 }
 
