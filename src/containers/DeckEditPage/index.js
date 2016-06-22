@@ -1,8 +1,9 @@
 import React,{PropTypes} from 'react';
+import {connect} from 'react-redux';
 import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
 import DropDown from '../../components/dropdown';
-import {connect} from 'react-redux';
+import CardHelper from '../../businessLogic/cardHelper';
 import {bindActionCreators} from 'redux';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
 import PermissionEnum from '../../enums/PermissionEnum';
@@ -136,6 +137,11 @@ class DeckEditPage extends React.Component {
   render(){
     const {deck, search} = this.props;
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
+    const monster = CardHelper.Monster(this.props.deck.deckform.main_list);
+    const magic = CardHelper.filter(this.props.deck.deckform.main_list,'魔');
+    const trap = CardHelper.filter(this.props.deck.deckform.main_list,'罠');
+
+
 
     return (
       <div className="deck-detailedit">
@@ -190,9 +196,9 @@ class DeckEditPage extends React.Component {
             default={-1}
             values={deck.type}/></p>
 
-          <p>怪獸：<span>19枚 / 9種類</span></p>
-          <p>魔法：<span>19枚 / 9種類</span></p>
-          <p>陷阱：<span>19枚 / 9種類</span></p>
+          <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
+          <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
+          <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
 
           <p>最後更新日：<span>2016.06.01</span></p>
           <p>點閱率：<span>100</span></p>
