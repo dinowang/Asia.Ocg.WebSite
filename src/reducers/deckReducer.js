@@ -193,7 +193,11 @@ export default handleActions({
     })
     return Object.assign({},state);
   },'fetch deckinfo'(state,action){
-    return Object.assign({},state,action.payload);
+    const {kind, ban, type} = initialState;
+    state.kind = kind.concat(action.payload.kind)
+    state.type = type.concat(action.payload.type)
+    state.ban = ban.concat(action.payload.ban)
+    return Object.assign({},state);
   }
 
 }, initialState);
