@@ -1,5 +1,7 @@
 import { handleActions } from 'redux-actions';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
+import ButtonStateEnum from '../enums/buttonStateEnum';
+
 const initialState ={
   edit_mode: false,
   add_mode: true,
@@ -9,8 +11,9 @@ const initialState ={
   on_move_array:null,
   move_enter:0,
   on_drag_area: DeckDetailTypeEnum.None,
+  sumbitBtn:  ButtonStateEnum.None,
   deckform:{
-    name:"test",
+    name:'',
     kind_id:0,
     ban_id:0,
     type_id:0,
@@ -197,6 +200,10 @@ export default handleActions({
     state.kind = kind.concat(action.payload.kind)
     state.type = type.concat(action.payload.type)
     state.ban = ban.concat(action.payload.ban)
+    return Object.assign({},state);
+  },
+  'change deckbtntype' (state, action) {
+    state.sumbitBtn = action.payload;
     return Object.assign({},state);
   }
 

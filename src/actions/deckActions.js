@@ -19,6 +19,7 @@ export const move = createAction('move');
 export const setOnMoveArray = createAction('set onmovearray');
 export const setDeckMode  = createAction('set deckmode');
 export const fetchInfo  = createAction('fetch deckinfo');
+export const changeBtnType = createAction('change deckbtntype');
 export const requestDeckInfo = () => {
   return (dispatch,state) => {
     const {search} = state();
@@ -28,5 +29,28 @@ export const requestDeckInfo = () => {
     }).then((json)=> {
       dispatch(fetchInfo(json.data));
     });
+  };
+};
+
+//Member
+export const requestCreateDeck= (nav) => {
+  return (dispatch, state) => {
+    const {deck, user} = state();
+    fetch(`${Host}/deck`,{
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(deck.deckform)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      
+      //nav.push(`/banManage/form/${ban.banform.id}`);
+    });
+
   };
 };

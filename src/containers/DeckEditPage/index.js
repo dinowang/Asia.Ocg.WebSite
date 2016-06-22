@@ -1,12 +1,14 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DeckList from '../../components/deckList';
-import LinkButton from '../../components/linkButton';
+
+import Button from '../../components/button';
 import DropDown from '../../components/dropdown';
 import CardHelper from '../../businessLogic/cardHelper';
 import {bindActionCreators} from 'redux';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
 import PermissionEnum from '../../enums/PermissionEnum';
+import ButtonStateEnum from '../../enums/buttonStateEnum'
 import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
 import './index.scss';
@@ -27,6 +29,7 @@ class DeckEditPage extends React.Component {
     this.onMoveStart = this.onMoveStart.bind(this);
     this.onMoveEnter = this.onMoveEnter.bind(this);
     this.onMoveEnd = this.onMoveEnd.bind(this);
+    this.onClick = this.onClick.bind(this);
 
   }
   componentWillMount(){
@@ -134,6 +137,16 @@ class DeckEditPage extends React.Component {
       return null;
     }
   }
+  onClick(){
+    this.props.actions.changeBtnType(ButtonStateEnum.Loading);
+    if(this.props.deck.deckform.id){
+      // this.props.actions.requestManageUpdateBan();
+      console.log('update')
+    }else{
+      console.log('create')
+      this.props.actions.requestCreateDeck(this.props.nav);
+    }
+  }
   render(){
     const {deck, search} = this.props;
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
@@ -148,7 +161,9 @@ class DeckEditPage extends React.Component {
         <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
         <div className="deck">
           <div className="func-bar">
-            <LinkButton value={this.props.deck.mode} to="/deckdetail/1/test"/>
+            <Button onClick={this.onClick} style={{float:'right',top:'5px'}} state={this.props.deck} rIcon="floppy-o" value={this.props.deck.mode} fail="fail" success="success"/>
+
+
           </div>
           <div className="main" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Main)}>
             <div className="title blue">主牌組：{deck.deckform.main_list.length}</div>
@@ -244,3 +259,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DeckEditPage);
+
+// <LinkButton value={this.props.deck.mode} to="/deckdetail/1/test"/>
