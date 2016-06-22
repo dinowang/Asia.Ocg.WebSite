@@ -6,6 +6,8 @@ import { browserHistory } from 'react-router';
 import PageList from '../../components/pageList';
 import * as searchActions from '../../actions/searchActions';
 import * as cardActions from '../../actions/cardActions';
+import * as appActions from '../../actions/appActions';
+
 import SearchRText from '../../components/searchRText';
 import SearchRImage from '../../components/searchRImage';
 import './index.scss';
@@ -17,6 +19,12 @@ class SearchPage extends React.Component {
     this.props.searchActions.inputSearch({query:query.toUpperCase()});
     page = page ? page : 1;
     this.handlePageList(parseInt(page));
+
+
+  }
+  componentWillUpdate(nextState){
+    // Set Titele
+    this.props.appActions.setTitle(nextState.search.query);
   }
   handlePageList(page){
     let {searchActions} = this.props;
@@ -78,8 +86,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     searchActions: bindActionCreators(searchActions, dispatch),
-    cardActions: bindActionCreators(cardActions, dispatch)
-
+    cardActions: bindActionCreators(cardActions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 
