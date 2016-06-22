@@ -56,7 +56,7 @@ class Header extends React.Component {
     const rightBar = this.props.user.account? this.renderInfoBar() : this.renderLogin();
     return (
       <div className="header">
-        <div className="logo">AsiaCards</div>
+        <div className="logo"><Link to="/">AsiaCards</Link></div>
         <div className="info-bar">
           <Icon name="bars" size="2x" />
           <div className="right-bar">
