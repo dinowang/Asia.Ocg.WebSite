@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DeckList from '../../components/deckList';
-
+import { browserHistory } from 'react-router';
 import Button from '../../components/button';
 import DropDown from '../../components/dropdown';
 import CardHelper from '../../businessLogic/cardHelper';
@@ -30,7 +30,6 @@ class DeckEditPage extends React.Component {
     this.onMoveEnter = this.onMoveEnter.bind(this);
     this.onMoveEnd = this.onMoveEnd.bind(this);
     this.onClick = this.onClick.bind(this);
-
   }
   componentWillMount(){
     this.props.actions.setEditMode(true);
@@ -47,15 +46,19 @@ class DeckEditPage extends React.Component {
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   changeKind(e){
     this.props.actions.changeDeckKind(e.key);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   changeBan(e){
     this.props.actions.changeDeckBan(e.key);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   changeType(e){
     this.props.actions.changeDeckType(e.key);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   listOnDragStart(e){
     const g = this.props.search.items.filter(data =>
@@ -68,7 +71,7 @@ class DeckEditPage extends React.Component {
     this.props.actions.setToList();
     this.props.actions.clearArea();
     this.props.actions.clearOnDragItem();
-
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   onDragEnterArea(e){
     if(this.props.deck.add_mode === true){
@@ -107,6 +110,7 @@ class DeckEditPage extends React.Component {
       this.props.actions.removeAllPreItem();
       this.props.actions.removeDeckItem();
       this.props.actions.setOnMoveArray(null);
+      this.props.actions.changeBtnType(ButtonStateEnum.None);
     }
   }
   renderDeckCard(data,index){
@@ -240,7 +244,8 @@ function mapStateToProps(state) {
   return {
     deck: state.deck,
     search: state.search,
-    user: state.user
+    user: state.user,
+    nav: browserHistory
   };
 }
 
