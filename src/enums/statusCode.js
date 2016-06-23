@@ -16,9 +16,12 @@ const StatusCode ={
 
   // DeckE
   DeckKindIsNull : 261,
-  DeckNameIsNull = 262,
-  DeckBanIsNull = 263,
-  DeckNameLimit = 264,
+  DeckNameIsNull : 262,
+  DeckBanIsNull : 263,
+  DeckNameLimit : 264,
+  DeckDescriptonLimit : 265,
+  DeckTypeIsNull : 266,
+
 
   BanDateExist: 241
 };
