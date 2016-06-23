@@ -14,6 +14,12 @@ const StatusCode ={
   loginFail: 223,
   unCheckEMail: 224,
 
+  // DeckE
+  DeckKindIsNull : 261,
+  DeckNameIsNull = 262,
+  DeckBanIsNull = 263,
+  DeckNameLimit = 264,
+
   BanDateExist: 241
 };
 
