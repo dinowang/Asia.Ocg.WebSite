@@ -1,5 +1,8 @@
 import { createAction } from 'redux-actions';
 import {Host} from './url';
+import ButtonStateEnum from '../enums/buttonStateEnum';
+import {DeckModeEnum} from '../enums/DeckEnum';
+import StatusCode from '../enums/statusCode';
 export const changeType = createAction('change type');
 export const setEditMode = createAction('set editmode');
 export const changeDeckName = createAction('change deckname');
@@ -20,6 +23,8 @@ export const setOnMoveArray = createAction('set onmovearray');
 export const setDeckMode  = createAction('set deckmode');
 export const fetchInfo  = createAction('fetch deckinfo');
 export const changeBtnType = createAction('change deckbtntype');
+export const changeBanErrMsg = createAction('change deckerrmsg');
+export const fetchDeck = createAction('fetch deck');
 export const requestDeckInfo = () => {
   return (dispatch,state) => {
     const {search} = state();
@@ -48,8 +53,29 @@ export const requestCreateDeck= (nav) => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      
-      //nav.push(`/banManage/form/${ban.banform.id}`);
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDeck(json.data));
+        dispatch(changeBtnType(ButtonStateEnum.Success));
+        dispatch(setDeckMode(DeckModeEnum.Edit));
+        nav.push(`/deckdetail/edit/${deck.deckform.id}`);
+        return true;
+      }else if(json.status_code === StatusCode.DeckKindIsNull){
+        dispatch(changeBanErrMsg("請選擇種類"));
+      }else if(json.status_code === StatusCode.DeckNameIsNull){
+        dispatch(changeBanErrMsg("請填寫牌組名稱"));
+      }else if(json.status_code === StatusCode.DeckBanIsNull){
+        dispatch(changeBanErrMsg("請選擇禁卡表"));
+      }else if(json.status_code === StatusCode.DeckNameLimit){
+        dispatch(changeBanErrMsg("牌組名稱不能超過20個字"));
+      }else if(json.status_code === StatusCode.DeckDescriptonLimit){
+        dispatch(changeBanErrMsg("敘述文字不能超過1000個字"));
+      }else if(json.status_code === StatusCode.DeckTypeIsNull){
+        dispatch(changeBanErrMsg("請選擇類型"));
+      }
+      dispatch(changeBtnType(ButtonStateEnum.Fail));
+      setTimeout(()=>{
+        dispatch(changeBtnType(ButtonStateEnum.None));
+      },2500);
     });
 
   };

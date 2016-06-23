@@ -12,6 +12,7 @@ const initialState ={
   move_enter:0,
   on_drag_area: DeckDetailTypeEnum.None,
   sumbitBtn:  ButtonStateEnum.None,
+  submitBtnText:'',
   deckform:{
     name:'',
     kind_id:0,
@@ -201,9 +202,14 @@ export default handleActions({
     state.type = type.concat(action.payload.type)
     state.ban = ban.concat(action.payload.ban)
     return Object.assign({},state);
-  },
-  'change deckbtntype' (state, action) {
+  },'change deckbtntype' (state, action) {
     state.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'fetch deck' (state, action) {
+    state.deckform = action.payload;
+    return Object.assign({},state);
+  },'change deckerrmsg' (state, action) {
+    state.submitBtnText = action.payload;
     return Object.assign({},state);
   }
 
