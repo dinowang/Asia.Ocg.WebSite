@@ -21,6 +21,7 @@ const StatusCode ={
   DeckNameLimit : 264,
   DeckDescriptonLimit : 265,
   DeckTypeIsNull : 266,
+  DeckNoUpdateData : 267,
 
 
   BanDateExist: 241

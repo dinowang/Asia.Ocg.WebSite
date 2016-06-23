@@ -146,6 +146,7 @@ class DeckEditPage extends React.Component {
     if(this.props.deck.deckform.id){
       // this.props.actions.requestManageUpdateBan();
       console.log('update')
+      this.props.actions.requestUpdateDeck(this.props.nav);
     }else{
       console.log('create')
       this.props.actions.requestCreateDeck(this.props.nav);
