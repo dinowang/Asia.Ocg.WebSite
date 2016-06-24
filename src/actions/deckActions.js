@@ -24,6 +24,7 @@ export const setDeckMode  = createAction('set deckmode');
 export const fetchInfo  = createAction('fetch deckinfo');
 export const changeBtnType = createAction('change deckbtntype');
 export const changeBanErrMsg = createAction('change deckerrmsg');
+export const setDeckFormId = createAction('set deckformid');
 export const fetchDeck = createAction('fetch deck');
 export const fetchDeckDetail = createAction('fetch deckdetail');
 export const fetchDeckList = createAction('fetch deckList');
@@ -56,18 +57,43 @@ export const requestDeckDetail = (guid) => {
   };
 };
 
-
-
 //Member
-
 export const requestDeckInfo = () => {
-  return (dispatch,state) => {
-    const {search} = state();
-    fetch(`${Host}/deck/editinfo`)
+  return (dispatch, state) => {
+    const {deck, user} = state();
+    fetch(`${Host}/deck/editinfo`,{
+      method:'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
       .then((response)=> {
         return response.json();
     }).then((json)=> {
       dispatch(fetchInfo(json.data));
+    });
+  };
+};
+
+export const requestDeckEditDetail = () => {
+  return (dispatch, state) => {
+    const {deck, user} = state();
+    fetch(`${Host}/deck/edit/${deck.deckform.id}`,{
+      method:'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDeck(json.data));
+      }
     });
   };
 };

@@ -9,7 +9,7 @@ import CookieHelper from '../businessLogic/cookieHelper';
 
 class App extends React.Component{
   componentWillMount(){
-      this.props.actions.requestGetInfo(()=>{});
+      this.props.actions.requestGetInfo([]);
   }
   render(){
     const {app} = this.props;

@@ -6,7 +6,7 @@ const initialState ={
   edit_mode: false,
   add_mode: true,
   mode : DeckModeEnum.Create,
-  current_type:1,
+  current_type:'玩家分享',
   on_drag_item:{},
   on_move_array:null,
   move_enter:0,
@@ -14,6 +14,7 @@ const initialState ={
   sumbitBtn:  ButtonStateEnum.None,
   submitBtnText:'',
   deckform:{
+    id: 0,
     name:'',
     kind_id:0,
     ban_id:0,
@@ -206,6 +207,9 @@ export default handleActions({
     return Object.assign({},state);
   },'fetch deckList' (state, action) {
     state.deck_type = action.payload;
+    return Object.assign({},state);
+  },'set deckformid' (state, action) {
+    state.deckform.id = action.payload;
     return Object.assign({},state);
   }
 

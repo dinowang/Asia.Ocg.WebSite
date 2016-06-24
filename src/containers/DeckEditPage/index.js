@@ -11,6 +11,8 @@ import PermissionEnum from '../../enums/PermissionEnum';
 import ButtonStateEnum from '../../enums/buttonStateEnum'
 import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
+import * as appActions from '../../actions/appActions';
+
 import './index.scss';
 
 class DeckEditPage extends React.Component {
@@ -34,9 +36,13 @@ class DeckEditPage extends React.Component {
   componentWillMount(){
     this.props.actions.setEditMode(true);
     let {id} = this.props.params;
-    this.props.actions.requestDeckInfo();
     if(id){
       this.props.actions.setDeckMode(DeckModeEnum.Edit);
+      this.props.actions.setDeckFormId(id);
+
+      this.props.appActions.requestGetInfo(
+        [this.props.actions.requestDeckInfo,this.props.actions.requestDeckEditDetail]
+      );
     }else{
       this.props.actions.setDeckMode(DeckModeEnum.Create);
     }
@@ -252,7 +258,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 

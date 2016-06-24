@@ -21,7 +21,7 @@ class ManBanListPage extends React.Component {
     if(this.props.user.token){
       this.props.banActions.requestManageBanList();
     }else{
-      this.props.appActions.requestGetInfo(this.props.banActions.requestManageBanList);
+      this.props.appActions.requestGetInfo([this.props.banActions.requestManageBanList]);
     }
   }
   delete(e){
