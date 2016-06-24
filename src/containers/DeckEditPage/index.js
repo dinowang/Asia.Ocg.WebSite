@@ -44,7 +44,9 @@ class DeckEditPage extends React.Component {
         [this.props.actions.requestDeckInfo,this.props.actions.requestDeckEditDetail]
       );
     }else{
-      this.props.actions.setDeckMode(DeckModeEnum.Create);
+      this.props.appActions.requestGetInfo(
+        [this.props.actions.requestDeckInfo]
+      );
     }
   }
   componentWillUnmount(){

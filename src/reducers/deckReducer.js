@@ -197,6 +197,18 @@ export default handleActions({
     state.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'fetch deck' (state, action) {
+    action.payload.main_list = action.payload.main_list.map(data=>{
+      data.pre = false;
+      return data;
+    });
+    action.payload.extra_list = action.payload.extra_list.map(data=>{
+      data.pre = false;
+      return data;
+    });
+    action.payload.preparation_list = action.payload.preparation_list.map(data=>{
+      data.pre = false;
+      return data;
+    });
     state.deckform = action.payload;
     return Object.assign({},state);
   },'change deckerrmsg' (state, action) {
