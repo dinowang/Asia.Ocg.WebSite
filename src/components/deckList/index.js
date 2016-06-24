@@ -54,6 +54,15 @@ class DeckList extends React.Component{
               {list.map(this.renderData)}
             </tbody>
           </table>
+          <PageList
+            url="/deck/"
+            query={this.props.deck.name}
+            current={this.props.deck.current_page}
+            totalPage={this.props.deck.total_page}
+            totalCount={this.props.deck.total_count}
+            showCount={5}
+            hideText={true}
+            onClick={(page)=>this.handlePageList(page)}/>
         </div>
       );
     }
