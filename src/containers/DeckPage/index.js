@@ -16,14 +16,13 @@ class DeckPage extends React.Component {
 
   changeType(e){
     this.props.actions.changeType(e.target.value);
-    this.props.actions.requestDeckTypePage(2);
   };
   componentWillMount(){
     this.props.actions.requestDeckList();
     let {deck_type, page} = this.props.params;
     if(deck_type){
       this.props.actions.changeType(deck_type);
-      this.props.actions.requestDeckTypePage(page);
+      this.props.actions.requestDeckTypePage(parseInt(page));
     }
   }
   renderNav(data){
