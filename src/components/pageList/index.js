@@ -8,7 +8,7 @@ class PageList extends React.Component {
     this.props.onClick(page);
   }
   render(){
-    const {totalPage, current, showCount, query, url} = this.props;
+    const {totalPage, current, showCount, query, url, hideText} = this.props;
     const li = [];
     let count = 0;
     let start =0;
@@ -46,9 +46,10 @@ class PageList extends React.Component {
     const nextStyle = current+1 >totalPage ? 'disabled' : null;
     const prevHref =  prevStyle ? `${url}${query}/${current}`:`${url}${query}/${current-1}`;
     const nextHref = nextStyle ? `${url}${query}/${current}`: `${url}${query}/${current+1}`;
+    const spanStyle = hideText ? {display:'none'} :{};
     return(
       <div className="page-list">
-          <span>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>
+          <span style={spanStyle}>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>
         <ul>
           <Link to={prevHref} className={prevStyle} onClick={prevStyle===null?()=>this.click(current-1):null}><Icon name="angle-double-left"/></Link>
           {li}

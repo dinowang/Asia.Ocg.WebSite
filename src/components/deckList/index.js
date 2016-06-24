@@ -41,6 +41,7 @@ class DeckList extends React.Component{
             totalPage={this.props.deck.total_page}
             totalCount={this.props.deck.total_count}
             showCount={5}
+            hideText={true}
             onClick={(page)=>this.handlePageList(page)}/>
           <table>
             <tbody>
