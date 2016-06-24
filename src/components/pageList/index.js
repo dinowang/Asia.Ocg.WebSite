@@ -8,7 +8,7 @@ class PageList extends React.Component {
     this.props.onClick(page);
   }
   render(){
-    const {totalPage, current, showCount, query} = this.props;
+    const {totalPage, current, showCount, query, url} = this.props;
     const li = [];
     let count = 0;
     let start =0;
@@ -19,7 +19,7 @@ class PageList extends React.Component {
     for (let i=start; i <=current; i++) {
       if(i===0)
         continue;
-      const href = `/search/${query}/${i}`;
+      const href = `${url}${query}/${i}`;
       li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
@@ -29,7 +29,7 @@ class PageList extends React.Component {
         break;
       if(i===0)
         continue;
-      const href = `/search/${query}/${i}`;
+      const href = `${url}${query}/${i}`;
       li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
@@ -37,15 +37,15 @@ class PageList extends React.Component {
       for (let i = current-Math.floor(showCount/2)-1; i >0; i--) {
         if(count>=showCount)
           break;
-          const href = `/search/${query}/${i}`;
+          const href = `${url}${query}/${i}`;
           li.splice(0,0,<Link to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
           count++;
       }
     }
     const prevStyle = current-1 <=0 ? 'disabled' : null;
     const nextStyle = current+1 >totalPage ? 'disabled' : null;
-    const prevHref =  prevStyle ? `/search/${query}/${current}`:`/search/${query}/${current-1}`;
-    const nextHref = nextStyle ? `/search/${query}/${current}`: `/search/${query}/${current+1}`;
+    const prevHref =  prevStyle ? `${url}${query}/${current}`:`${url}${query}/${current-1}`;
+    const nextHref = nextStyle ? `${url}${query}/${current}`: `${url}${query}/${current+1}`;
     return(
       <div className="page-list">
           <span>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>

@@ -1,7 +1,6 @@
 import React,{PropTypes} from 'react';
 import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
-
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
@@ -26,9 +25,10 @@ class DeckPage extends React.Component {
     }
   }
   renderNav(data){
-    const href = `/deck/${data.name}`;
+    const href = `/deck/${data.name}/1`;
+    const style = this.props.deck.current_type === data.name ? 'active' :'';
     return(
-      <Link onClick={this.changeType} key={data.id} to={href} activeClassName="active" value={data.name}>{data.name}</Link>
+      <Link className={style} onClick={this.changeType} key={data.id} to={href} value={data.name}>{data.name}</Link>
     );
   };
   render(){
@@ -45,7 +45,10 @@ class DeckPage extends React.Component {
           <DeckList deck={listData}/>
         </div>
         <div className="other">
-          other
+          <p className="title">
+            我的牌組
+          </p>
+
         </div>
       </div>
     );

@@ -46,6 +46,7 @@ class SearchPage extends React.Component {
             <Icon className={search.display_mode=== 1 ? 'active' :''}  onMouseOver={()=>this.changeMode(1)} name="th-list"/>
           </div>
           <PageList
+            url="/search/"
             query={search.query}
             current={search.current_page}
             totalPage={search.total_page}
@@ -60,6 +61,7 @@ class SearchPage extends React.Component {
           }
             })()}
             <PageList
+              url="/search/"
               query={search.query}
               current={search.current_page}
               totalPage={search.total_page}

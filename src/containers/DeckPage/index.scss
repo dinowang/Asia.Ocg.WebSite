@@ -8,9 +8,13 @@
   }
   .other{
     background-color: #fff;
-    border-top:5px solid #ddd;
+    border-top:5px solid #00a65a;
     width:18%;
     float: right;
+    .title{
+      margin:10px;
+      font-size: 1.2rem;
+    }
   }
   .deck-nav{
     margin-bottom: 5px;

@@ -24,6 +24,8 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={IndexPage}/>
     <Route path="deck/:deck_type" component={DeckPage}/>
+    <Route path="deck/:deck_type/:page" component={DeckPage}/>
+
     <Route path="ban/:id" component={BanPage}/>
     <Route path="banlist" component={BanListPage}/>
     <Route path="login" component={LoginPage}/>
