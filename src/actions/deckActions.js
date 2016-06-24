@@ -25,10 +25,12 @@ export const fetchInfo  = createAction('fetch deckinfo');
 export const changeBtnType = createAction('change deckbtntype');
 export const changeBanErrMsg = createAction('change deckerrmsg');
 export const fetchDeck = createAction('fetch deck');
+export const fetchDeckDetail = createAction('fetch deckdetail');
+
 export const requestDeckInfo = () => {
   return (dispatch,state) => {
     const {search} = state();
-    fetch(`${Host}/deck/info`)
+    fetch(`${Host}/deck/editinfo`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -36,6 +38,20 @@ export const requestDeckInfo = () => {
     });
   };
 };
+export const requestDeckDetail = (guid) => {
+  return (dispatch,state) => {
+    const {search} = state();
+    fetch(`${Host}/deck/detail/${guid}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDeckDetail(json.data));
+      }
+    });
+  };
+};
+
 
 //Member
 export const requestCreateDeck= (nav) => {

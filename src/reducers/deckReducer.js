@@ -22,6 +22,23 @@ const initialState ={
     extra_list:[],
     preparation_list:[]
   },
+  detail:{
+    name:'',
+    kind:'',
+    ban:{
+      name:'',
+      detail:[]
+    },
+    main_list:[],
+    extra_list:[],
+    preparation_list:[],
+    last_editdate:'',
+    views:2,
+    comment:'',
+    owner:{
+      name:''
+    }
+  },
   kind:[{
     key:-1,
     value:"請選擇"
@@ -210,6 +227,9 @@ export default handleActions({
     return Object.assign({},state);
   },'change deckerrmsg' (state, action) {
     state.submitBtnText = action.payload;
+    return Object.assign({},state);
+  },'fetch deckdetail' (state, action) {
+    state.detail = action.payload;
     return Object.assign({},state);
   }
 

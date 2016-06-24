@@ -36,7 +36,7 @@ export default (
     // Member
     <Route path="deckdetail/edit/:id" component={DeckEditPage}/>
     <Route path="deckdetail/edit/" component={DeckEditPage}/>
-    <Route path="deckdetail/:id/:name" component={DeckDetail}/>
+    <Route path="deckdetail/:guid/:name" component={DeckDetail}/>
 
     // ManageMent
     <Route path="banManage/Form" component={BanFormPage}/>
