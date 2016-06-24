@@ -25,8 +25,8 @@ class DeckList extends React.Component{
       </tr>
     );
   }
-  handlePageList(){
-    console.log('test')
+  handlePageList(page){
+    this.props.actions.requestDeckTypePage(page);
   }
   render(){
     let list = [];

@@ -16,16 +16,18 @@ class DeckPage extends React.Component {
 
   changeType(e){
     this.props.actions.changeType(e.target.value);
+    this.props.actions.requestDeckTypePage(2);
   };
   componentWillMount(){
     this.props.actions.requestDeckList();
-    let {deck_type} = this.props.params;
+    let {deck_type, page} = this.props.params;
     if(deck_type){
       this.props.actions.changeType(deck_type);
+      this.props.actions.requestDeckTypePage(page);
     }
   }
   renderNav(data){
-    const href = `/deck/${data.name}/1`;
+    const href = `/deck/${data.name}/${data.current_page}`;
     const style = this.props.deck.current_type === data.name ? 'active' :'';
     return(
       <Link className={style} onClick={this.changeType} key={data.id} to={href} value={data.name}>{data.name}</Link>
@@ -42,7 +44,7 @@ class DeckPage extends React.Component {
               <LinkButton style={{margin:"10px",height:"40px",lineHeight:"23px"}} value="新增牌組" to="/deckdetail/edit/"/>
             </li>
           </ul>
-          <DeckList deck={listData}/>
+          <DeckList deck={listData} actions={this.props.actions}/>
         </div>
         <div className="other">
           <p className="title">

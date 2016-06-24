@@ -28,10 +28,10 @@ export const setDeckFormId = createAction('set deckformid');
 export const fetchDeck = createAction('fetch deck');
 export const fetchDeckDetail = createAction('fetch deckdetail');
 export const fetchDeckList = createAction('fetch deckList');
-
+export const changeDeckTypePage = createAction('change decktypepage');
+export const fetchDeckTypePage = createAction('fetch decktypepage');
 export const requestDeckList = () => {
-  return (dispatch,state) => {
-    const {search} = state();
+  return (dispatch) => {
     fetch(`${Host}/deck/list/`)
       .then((response)=> {
         return response.json();
@@ -44,14 +44,29 @@ export const requestDeckList = () => {
 };
 
 export const requestDeckDetail = (guid) => {
-  return (dispatch,state) => {
-    const {search} = state();
+  return (dispatch) => {
     fetch(`${Host}/deck/detail/${guid}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeckDetail(json.data));
+      }
+    });
+  };
+};
+
+export const requestDeckTypePage = (page) => {
+  return (dispatch,state) => {
+    const {deck} = state();
+    fetch(`${Host}/deck/${deck.current_type}/${page}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDeckTypePage(json.data));
+        dispatch(changeDeckTypePage(page));
+
       }
     });
   };

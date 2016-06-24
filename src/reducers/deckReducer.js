@@ -223,6 +223,20 @@ export default handleActions({
   },'set deckformid' (state, action) {
     state.deckform.id = action.payload;
     return Object.assign({},state);
+  },'change decktypepage' (state, action){
+    state.deck_type.map(data=>{
+      if(data.name == state.current_type){
+        data.current_page = action.payload;
+      }
+    });
+    return Object.assign({},state);
+  },'fetch decktypepage' (state, action){
+    state.deck_type.map(data=>{
+      if(data.name == state.current_type){
+        data.list = action.payload;
+      }
+    });
+    return Object.assign({},state);
   }
 
 }, initialState);
