@@ -3,8 +3,8 @@ import {Link} from 'react-router';
 import './index.scss';
 class DeckList extends React.Component{
   renderData(data){
-    const {id, name, main_count, extra_count, preparation_count, kind, deck_ben} = data;
-    const href = `/deckdetail/${id}/${name}`;
+    const {id, guid, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
+    const href = `/deckdetail/${guid}/${name}`;
     return(
       <tr key={id}>
         <td className="text-left">
@@ -15,13 +15,16 @@ class DeckList extends React.Component{
         <td >{main_count}</td>
         <td>{extra_count}</td>
         <td>{preparation_count}</td>
-        <td>{kind}</td>
+        <td>{deck_kind}</td>
         <td>{deck_ben}</td>
       </tr>
     );
   }
   render(){
-    const {deck_list} = this.props.deck;
+    let list = [];
+    if(this.props.deck){
+      list = this.props.deck.list
+    }
     return(
       <div className="deck-list">
         <table>
@@ -32,7 +35,7 @@ class DeckList extends React.Component{
               <th>分類</th>
               <th>禁卡</th>
             </tr>
-            {deck_list.map(this.renderData)}
+            {list.map(this.renderData)}
           </tbody>
         </table>
       </div>

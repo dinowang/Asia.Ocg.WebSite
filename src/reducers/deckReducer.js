@@ -6,7 +6,7 @@ const initialState ={
   edit_mode: false,
   add_mode: true,
   mode : DeckModeEnum.Create,
-  current_type:0,
+  current_type:1,
   on_drag_item:{},
   on_move_array:null,
   move_enter:0,
@@ -51,34 +51,7 @@ const initialState ={
     key:-1,
     value:"請選擇"
   }],
-  deck_type:[
-    {
-      id: 1,
-      name: "最新上傳"
-    },{
-      id: 2,
-      name: "日本牌組"
-    },{
-      id: 3,
-      name: "玩家分享"
-    }],
-  deck_list:[{
-    id: 1,
-    name: "test",
-    main_count: 10,
-    extra_count: 20,
-    preparation_count: 15,
-    deck_kind: "DD",
-    deck_ben: "16.4"
-  },{
-    id: 2,
-    name: "test",
-    main_count: 10,
-    extra_count: 20,
-    preparation_count: 15,
-    deck_kind: "DD",
-    deck_ben: "16.4"
-  }]
+  deck_type:[]
 };
 export default handleActions({
   'change type' (state, action) {
@@ -230,6 +203,9 @@ export default handleActions({
     return Object.assign({},state);
   },'fetch deckdetail' (state, action) {
     state.detail = action.payload;
+    return Object.assign({},state);
+  },'fetch deckList' (state, action) {
+    state.deck_type = action.payload;
     return Object.assign({},state);
   }
 
