@@ -26,12 +26,12 @@ class DeckDetail extends React.Component {
     );
   }
   render(){
-    const {name, kind, ban, main_list, extra_list, preparation_list, owner} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
     const trap = CardHelper.filter(main_list,'罠');
-
+    const editHref = `/deckdetail/edit/${id}`
     return (
       <div className="deck-detail">
         <h1>{name}</h1>
@@ -39,7 +39,7 @@ class DeckDetail extends React.Component {
 
         <div className="deck">
           <div className="func-bar">
-            <LinkButton value="進入編輯模式" to="/deckdetail/edit/1"/>
+            <LinkButton value="進入編輯模式" to={editHref}/>
           </div>
           <div className="main">
             <div className="title blue">主牌組：{main_list.length}</div>
