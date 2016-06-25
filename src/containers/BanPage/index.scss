@@ -1,27 +1,57 @@
 .ban-page{
-  .title{
-    background-color: #fff;
-    padding: 5px;
-    font-size: 2rem;
-    border-radius: 5px 5px 0 0 ;
-    margin:10px 0 0 0 ;
+  h1{
+    margin:0 0 10px 0 ;
   }
-  .list{
-    padding:20px;
-    background-color: #fff;
-    img{
-      width:100px;
-      margin:0 2px;
+  .data{
+    display: inline-block;
+    width:80%;
+    .title{
+      background-color: #fff;
+      padding: 5px;
+      font-size: 2rem;
+      border-radius: 5px 5px 0 0 ;
+    }
+    .list{
+      padding:20px;
+      background-color: #fff;
+      img{
+        width:100px;
+        margin:0 2px;
+      }
+    }
+    .red{
+      border-bottom:2px solid #dd4b39;
+    }
+    .orange{
+      border-bottom:2px solid #f39c12;
+    }
+    .blue{
+      border-bottom: 2px solid #00c0ef;
     }
   }
-  .red{
-    border-bottom:2px solid #dd4b39;
+  .ban-list{
+    a{
+      padding: 10px;
+      cursor: pointer;
+      color:#444;
+      display: block;
+    }
+    display: inline-block;
+    float: right;
+    background-color: #fff;
+    width:18%;
+    border-top:2px solid #00a65a;
+    h3{
+      margin:10px;
+    }
+    li{
+      border-top:1px solid #f4f4f4;
+      &:hover{
+        background-color: #f7f7f7;
+      }
+      .fa{
+        margin:0 10px 0 0;
+      }
+    }
   }
-  .orange{
-    border-bottom:2px solid #f39c12;
-  }
-  .blue{
-    border-bottom: 2px solid #00c0ef;
-  }
-
 }

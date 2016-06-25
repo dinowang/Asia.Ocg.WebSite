@@ -34,13 +34,14 @@ class DeckPage extends React.Component {
   };
   render(){
     const listData =  this.props.deck.deck_type.filter(data=>data.name === this.props.deck.current_type)[0];
+    const createDeckHref = this.props.user.account ? '/deckdetail/edit/' :'/login';
     return (
       <div className="deck-page">
         <div className="list">
           <ul className="deck-nav">
             {this.props.deck.deck_type.map(this.renderNav)}
             <li>
-              <LinkButton style={{margin:"10px",height:"40px",lineHeight:"23px"}} value="新增牌組" to="/deckdetail/edit/"/>
+              <LinkButton style={{margin:"10px",height:"40px",lineHeight:"23px"}} value="新增牌組" to={createDeckHref}/>
             </li>
           </ul>
           <DeckList deck={listData} actions={this.props.actions}/>
@@ -58,7 +59,8 @@ class DeckPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    deck: state.deck
+    deck: state.deck,
+    user: state.user
   };
 }
 

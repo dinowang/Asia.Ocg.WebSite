@@ -14,18 +14,7 @@ export const changeBanErrMsg = createAction('change banerrmsg');
 export const changeBanDate = createAction('change bandate');
 export const changeName = createAction('change name');
 export const changeEnable = createAction('change banenable');
-export const requestSearch = (value) => {
-  return (dispatch) => {
-    fetch(`${Host}/search/${value}`)
-      .then((response)=> {
-        return response.json();
-    }).then((json)=> {
-      if(json.data){
-        dispatch(fetchCardList(json.data.items));
-      }
-    });
-  };
-};
+
 export const requestBan = (id) => {
   return (dispatch) => {
     fetch(`${Host}/ban/${id}`)

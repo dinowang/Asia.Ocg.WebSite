@@ -47,10 +47,11 @@ class PageList extends React.Component {
     const prevHref =  prevStyle ? `${url}${query}/${current}`:`${url}${query}/${current-1}`;
     const nextHref = nextStyle ? `${url}${query}/${current}`: `${url}${query}/${current+1}`;
     const spanStyle = hideText ? {display:'none'} :{};
+    const pageStyle = this.props.totalPage <=1 ?{display:'none'} :{};
     return(
       <div className="page-list">
           <span style={spanStyle}>{this.props.totalCount} 筆,共 {this.props.totalPage} 頁</span>
-        <ul>
+        <ul style={pageStyle}>
           <Link to={prevHref} className={prevStyle} onClick={prevStyle===null?()=>this.click(current-1):null}><Icon name="angle-double-left"/></Link>
           {li}
           <Link to={nextHref} className={nextStyle} onClick={nextStyle===null?()=>this.click(this.props.current+1):null}><Icon name="angle-double-right"/></Link>
