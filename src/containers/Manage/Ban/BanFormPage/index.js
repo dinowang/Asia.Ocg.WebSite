@@ -73,6 +73,10 @@ class BanFormPage extends React.Component {
   }
   render(){
     const switchStyle = {top:"10px"};
+    let dropValue = -1;
+    if(this.props.ban.banform.type !== -1){
+      dropValue =this.props.ban.banform.type;
+    }
     return (
       <div className="bancreate-page">
         <div className="form">
@@ -81,7 +85,11 @@ class BanFormPage extends React.Component {
               dateFormat="YYYY/MM/DD"
               selected={this.props.ban.banform.date}
               onChange={this.onDateChange} />
-            <DropDown style={{top:'1px'}} getValue={this.dropValue} default={-1} values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
+            <DropDown
+              style={{top:'1px'}}
+              getValue={this.dropValue}
+              default={dropValue}
+              values={[{key:-1,value:'請選擇'},{key:BanTypeEnum.Ban,value:'禁止'},{key:BanTypeEnum.Limit,value:'限制'},{key:BanTypeEnum.PreLimit,value:'準限制'}]}/>
             <SwitchButton onClick={this.onEnableChange} style={switchStyle} checked={this.props.ban.banform.enable}/>
             <Button onClick={this.onClick} style={{float:'right',top:'5px'}} state={this.props.ban} rIcon="floppy-o" value="存擋" fail="fail" success="success"/>
 
