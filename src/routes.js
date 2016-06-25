@@ -4,7 +4,6 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import IndexPage from './containers/IndexPage';
 import DeckPage from './containers/DeckPage';
-import BanListPage from './containers/BanListPage';
 import SearchPage from './containers/SearchPage';
 import CardPage from './containers/CardPage';
 import LoginPage from './containers/LoginPage';
@@ -27,7 +26,7 @@ export default (
     <Route path="deck/:deck_type/:page" component={DeckPage}/>
 
     <Route path="ban/:id" component={BanPage}/>
-    <Route path="banlist" component={BanListPage}/>
+    <Route path="ban" component={BanPage}/>
     <Route path="login" component={LoginPage}/>
     <Route path="search/:query" component={SearchPage}/>
     <Route path="search/:query/:page" component={SearchPage}/>

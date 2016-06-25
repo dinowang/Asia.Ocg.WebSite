@@ -40,7 +40,7 @@ export const requestBan = (id) => {
   };
 };
 
-export const requestBanList = (id) => {
+export const requestBanList = (id, nav) => {
   return (dispatch) => {
     fetch(`${Host}/ban/list`)
     .then((response)=> {
@@ -48,7 +48,12 @@ export const requestBanList = (id) => {
     }).then((json)=> {
       if(json.data){
         dispatch(fetchUserBanList(json.data));
-        dispatch(requestBan(id));
+        if(id){
+          dispatch(requestBan(id));
+        }else{
+          dispatch(requestBan(json.data[0].id));
+          nav.push(`/ban/${json.data[0].id}`);
+        }
 
       }
     });

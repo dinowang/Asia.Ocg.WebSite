@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { browserHistory } from 'react-router';
 import {Link} from 'react-router';
 import {Icon} from 'react-fa';
 import * as banActions from '../../actions/banActions';
@@ -14,9 +15,8 @@ class BanPage extends React.Component {
     this.renderBanList = this.renderBanList.bind(this);
   }
   componentWillMount(){
-    this.props.appActions.setTitle('____禁卡表');
     const {id} = this.props.params;
-    this.props.banActions.requestBanList(id);
+    this.props.banActions.requestBanList(id,this.props.nav);
   }
   componentWillUpdate(nextProps){
     this.props.appActions.setTitle(`${nextProps.ban.banform.name}-禁卡表`);
@@ -83,7 +83,8 @@ BanPage.propTypes ={
 
 function mapStateToProps(state) {
   return {
-    ban: state.ban
+    ban: state.ban,
+    nav: browserHistory
   };
 }
 
