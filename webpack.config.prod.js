@@ -9,7 +9,7 @@ const GLOBALS = {
 
 export default {
   debug: true,
-  devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+  // devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
   entry: ['whatwg-fetch','./src/index'],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
@@ -38,7 +38,7 @@ export default {
       {
         test: /(\.css|\.scss)$/,
         // include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
+        loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
   }

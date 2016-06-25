@@ -1,19 +1,23 @@
 import { handleActions } from 'redux-actions';
 const initialState ={
-  "display_tab":0,
-  "name": "",
-  "image_url": "https://xpgcards.blob.core.windows.net/image/null.jpg",
-  "kind": "",
-  "level": "",
-  "property": "",
-  "race": "",
-  "attack": null,
-  "defence": null,
-  "effect": "",
-  "serial_number": "",
-  "pack":[],
-  "list":[],
-  "comment":{items:[]}
+  display_tab:0,
+  name: "",
+  image_url: "https://xpgcards.blob.core.windows.net/image/null.jpg",
+  kind: "",
+  level: "",
+  property: "",
+  race: "",
+  attack: null,
+  defence: null,
+  effect: "",
+  serial_number: "",
+  pack:[],
+  list:[],
+  comment:{items:[]},
+  deck:{
+    current_page:1,
+    items:[]
+  }
 };
 export default handleActions({
   'change tab' (state, action) {
@@ -36,6 +40,10 @@ export default handleActions({
         data.image_url = "https://xpgcards.blob.core.windows.net/user-image/user.png";
       }
     })
+    return Object.assign({},state);
+  },
+  'fetch carddeck' (state, action){
+    state.deck = Object.assign({},state.deck,action.payload);
     return Object.assign({},state);
   },
 }, initialState);

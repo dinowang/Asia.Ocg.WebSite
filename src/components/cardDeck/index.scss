@@ -1,16 +1,41 @@
 .card-deck{
   table{
-    background-color: #fff;
-
+    text-align: center;
     border-collapse: collapse;
     width:100%;
   }
-  th,td{
-    padding: 10px;
-    border-top:1px solid #ddd;
-  }
   th{
-    text-align: left;
-    border: none;
+    // border:1px solid #444;
+    padding: 10px;
+  }
+  td{
+    color: #444;
+    // padding: 10px;
+    border:1px solid #ddd;
+    a{
+      padding:10px;
+      color:#3c8dbc;
+      display: block;
+      &:hover{
+        transition: all .1s;
+        background-color: #f7f7f7;
+      }
+    }
+  }
+  tr{
+    th{
+      &:first-child{
+        width:50%;
+      }
+      &:nth-child(2){
+        width:15%;
+      }
+      &:nth-child(3){
+        width:15%;
+      }
+    }
+  }
+  a{
+    color:#4f4f4f;
   }
 }

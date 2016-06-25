@@ -2,7 +2,8 @@ import { createAction } from 'redux-actions';
 import {Host} from './url';
 export const changeTab = createAction('change tab');
 export const fetchCardInfo = createAction('fetch cardinfo');
-export const fetchCardComment = createAction("fetch cardcomment");
+export const fetchCardComment = createAction('fetch cardcomment');
+export const fetchCardDeck = createAction('fetch carddeck')
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -37,6 +38,18 @@ export const requestCardComment = (serialNumber) => {
         return response.json();
     }).then((json)=> {
       dispatch(fetchCardComment(json.data));
+    });
+  };
+};
+export const requestCardDeck = () => {
+  return (dispatch,state) => {
+    const {card} = state();
+    fetch(`${Host}/card/decklist/${card.serial_number}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      dispatch(fetchCardDeck(json.data));
+
     });
   };
 };

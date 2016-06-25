@@ -62,7 +62,7 @@ class CardPage extends React.Component {
                   {(() => {
                 switch (card.display_tab) {
                   case 0:   return <CardInfo data={card}/>;
-                  case 1:   return <CardDeck/>;
+                  case 1:   return <CardDeck data={card} cardActions={cardActions}/>;
                   case 2:   return <CardComment data={card} actions={cardActions}/>;
                 }
                   })()}
