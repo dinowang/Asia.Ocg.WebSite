@@ -9,6 +9,16 @@
     width:80%;
     padding: 10px;
     overflow: auto;
+    .fa-meh-o{
+      display: block;
+      text-align: center;
+      span{
+        font-size: 2rem;
+        top: -10px;
+        left:10px;
+        position: relative;
+      }
+    }
   }
   .other{
     width:18%;

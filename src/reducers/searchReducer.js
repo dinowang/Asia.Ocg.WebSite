@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions';
 const initialState ={
-    "query":"",
-    "display_mode": 0,
-    "current_page":1,
-    "total_page":0,
-    "total_count": null,
-    "items":[
+    loading: false,
+    query:"",
+    display_mode: 0,
+    current_page:1,
+    total_page:0,
+    total_count: null,
+    items:[
     ]
 };
 export default handleActions({
@@ -21,6 +22,10 @@ export default handleActions({
   },
   'change searchmode'(state, action){
     state.display_mode = action.payload;
+    return Object.assign({},state);
+  },
+  'set loading'(state, action){
+    state.loading = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

@@ -37,8 +37,6 @@ class DropDown extends React.Component {
   }
   render(){
     const isShow = {opacity:this.state.isShow, zIndex:this.state.isShow === "0" ?'-2':'10'};
-
-
     return (
         <div className="dropdown" style={this.props.style} >
         <Icon name="angle-down" size="2x" onClick={this.show}/>
