@@ -14,8 +14,11 @@ const initialState ={
   pack:[],
   list:[],
   comment:{items:[]},
+  loading:false,
   deck:{
     current_page:1,
+    total_page:0,
+    total_count:0,
     items:[]
   }
 };
@@ -43,7 +46,18 @@ export default handleActions({
     return Object.assign({},state);
   },
   'fetch carddeck' (state, action){
-    state.deck = Object.assign({},state.deck,action.payload);
+    state.deck.total_page = action.payload.total_page;
+    state.deck.total_count = action.payload.total_count;
+    state.deck.items = state.deck.items.concat(action.payload.items);
+
     return Object.assign({},state);
   },
+  'set deckpage' (state, action){
+    state.deck.current_page = action.payload;
+    return Object.assign({},state);
+  },
+  'set loading' (state, action){
+    state.loading = action.payload;
+    return Object.assign({},state);
+  }
 }, initialState);

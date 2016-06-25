@@ -10,10 +10,15 @@ import {Icon} from 'react-fa';
 import './index.scss';
 
 class CardPage extends React.Component {
+  constructor(){
+    super();
+    this.handleScroll = this.handleScroll.bind(this);
+  }
   componentWillMount(){
     let {serialNumber} = this.props.params;
     let {cardActions} = this.props;
     cardActions.checkinList(serialNumber);
+
   }
   changeTab(tab){
     this.props.cardActions.changeTab(tab);
@@ -21,10 +26,23 @@ class CardPage extends React.Component {
   componentWillUpdate(netState){
     this.props.appActions.setTitle(netState.card.name);
   }
+  handleScroll(e){
+    const marginBottom = 100;
+    const {scrollTop, scrollHeight, clientHeight} = e.target;
+    const {loading, display_tab,deck} = this.props.card;
+    if((scrollTop + clientHeight + marginBottom )>= scrollHeight && loading === false){
+
+      if(display_tab === 1 && deck.current_page < deck.total_page){
+        this.props.cardActions.setDeckPage(deck.current_page+1);
+        this.props.cardActions.setLoading(true);
+        this.props.cardActions.requestCardDeck();
+      }
+    }
+  }
   render(){
     const { card, cardActions } = this.props;
     return (
-      <div className="card">
+      <div className="card" onScroll={this.handleScroll}>
         <h1>{card.name}</h1>
         <div className="content">
           <div className="info">
@@ -73,6 +91,7 @@ class CardPage extends React.Component {
           <div className="other">
             test
           </div>
+
         </div>
       </div>
     );

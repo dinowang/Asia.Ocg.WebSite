@@ -18,7 +18,7 @@
     background-color: #fff;
     border:1px solid #ddd;
     width:55%;
-    position: absolute;
+    float: left;
     .tab{
       >li{
         display: inline-block;
@@ -36,7 +36,6 @@
           float: left;
         }
         .fa{
-          position: absolute;
           color: #444;
         }
       }
@@ -47,7 +46,7 @@
       }
     }
     .box{
-      margin-top:-1px;
+      margin-top:-6px;
       border-top:1px solid #ddd;
       padding: 10px;
     }
@@ -56,6 +55,7 @@
   .info{
     display: inline-block;
     text-align: center;
+    float: left;
     width:20%;
     ul{
       margin:20px 5px;

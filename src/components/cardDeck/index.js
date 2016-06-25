@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import moment from 'moment';
-
 import './index.scss';
 
 class CardDeck extends React.Component {
@@ -28,7 +27,6 @@ class CardDeck extends React.Component {
     )
   }
   render() {
-
     return (
       <div className="card-deck">
         <table>

@@ -3,7 +3,9 @@ import {Host} from './url';
 export const changeTab = createAction('change tab');
 export const fetchCardInfo = createAction('fetch cardinfo');
 export const fetchCardComment = createAction('fetch cardcomment');
-export const fetchCardDeck = createAction('fetch carddeck')
+export const fetchCardDeck = createAction('fetch carddeck');
+export const setDeckPage = createAction('set deckpage');
+export const setLoading = createAction('set loading');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -44,12 +46,12 @@ export const requestCardComment = (serialNumber) => {
 export const requestCardDeck = () => {
   return (dispatch,state) => {
     const {card} = state();
-    fetch(`${Host}/card/decklist/${card.serial_number}`)
+    fetch(`${Host}/card/decklist/${card.serial_number}/${card.deck.current_page}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
       dispatch(fetchCardDeck(json.data));
-
+      dispatch(setLoading(false));
     });
   };
 };
