@@ -9,10 +9,17 @@ import BanTypeEnum from '../../enums/banTypeEnum';
 import './index.scss';
 
 class BanPage extends React.Component {
+  constructor(){
+    super();
+    this.renderBanList = this.renderBanList.bind(this);
+  }
   componentWillMount(){
     this.props.appActions.setTitle('____禁卡表');
     const {id} = this.props.params;
-    this.props.banActions.requestBan(id);
+    this.props.banActions.requestBanList(id);
+  }
+  componentWillUpdate(nextProps){
+    this.props.appActions.setTitle(`${nextProps.ban.banform.name}-禁卡表`);
   }
   renderData(data){
     const href = `/card/${data.serial_number}/${data.name}`;
@@ -22,13 +29,27 @@ class BanPage extends React.Component {
       </Link>
     );
   }
+  changeBan(data){
+        this.props.banActions.requestBan(data.id);
+  }
+  renderBanList(data){
+    const href = `/ban/${data.id}`
+    return(
+      <li key={data.id}>
+        <Link onClick={()=>this.changeBan(data)} to={href}>
+          <Icon name="link"/>
+          {data.name}
+          </Link>
+      </li>
+    )
+  }
   render(){
     const ban = this.props.ban.banform.list.filter(data => data.type === BanTypeEnum.Ban);
     const limit = this.props.ban.banform.list.filter(data => data.type === BanTypeEnum.Limit);
     const preLimit = this.props.ban.banform.list.filter(data => data.type === BanTypeEnum.PreLimit);
     return (
       <div className="ban-page">
-          <h1>2016.04 適用</h1>
+          <h1>{this.props.ban.banform.name}</h1>
           <div className="data">
             <p className="title red">禁止</p>
             <div className="list">
@@ -46,10 +67,7 @@ class BanPage extends React.Component {
           <div className="ban-list">
             <h3>其它禁卡表</h3>
             <ul>
-              <li><Link to="/1"><Icon name="link"/>2016.06</Link></li>
-              <li><Link to="/1"><Icon name="link"/>2016.06</Link></li>
-              <li><Link to="/1"><Icon name="link"/>2016.06</Link></li>
-
+              {this.props.ban.userBanList.map(this.renderBanList)}
             </ul>
           </div>
 

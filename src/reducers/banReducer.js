@@ -4,6 +4,7 @@ import ButtonStateEnum from '../enums/buttonStateEnum';
 import moment from 'moment';
 
 const initialState ={
+  userBanList:[],
   banform :{
     id:null,
     name: '',
@@ -86,6 +87,10 @@ export default handleActions({
   // 變更啟用狀態
   'change banenable' (state, action) {
     state.banform.enable = !state.banform.enable;
+    return Object.assign({},state);
+  },
+  'fetch userbanlist' (state,action){
+    state.userBanList = action.payload;
     return Object.assign({},state);
   }
 

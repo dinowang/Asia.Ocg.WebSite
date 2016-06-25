@@ -14,7 +14,19 @@ export const changeBanErrMsg = createAction('change banerrmsg');
 export const changeBanDate = createAction('change bandate');
 export const changeName = createAction('change name');
 export const changeEnable = createAction('change banenable');
-
+export const fetchUserBanList = createAction('fetch userbanlist');
+export const requestSearch = (value) => {
+  return (dispatch) => {
+    fetch(`${Host}/search/${value}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.data){
+        dispatch(fetchCardList(json.data.items));
+      }
+    });
+  };
+};
 export const requestBan = (id) => {
   return (dispatch) => {
     fetch(`${Host}/ban/${id}`)
@@ -27,6 +39,22 @@ export const requestBan = (id) => {
     });
   };
 };
+
+export const requestBanList = (id) => {
+  return (dispatch) => {
+    fetch(`${Host}/ban/list`)
+    .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.data){
+        dispatch(fetchUserBanList(json.data));
+        dispatch(requestBan(id));
+
+      }
+    });
+  };
+};
+
 // Manage
 export const requestCreateBan = (nav) => {
   return (dispatch, state) => {
