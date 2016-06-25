@@ -1,6 +1,7 @@
 .deck-detail{
+  // overflow: scroll;
   .func-bar{
-    float: right; 
+    float: right;
   }
   .deck{
     display: inline-block;
@@ -15,7 +16,7 @@
     background-color: #fff;
     img{
       width:80px;
-      margin:2px 5px;
+      margin:2px 4px;
     }
     .title{
       letter-spacing: 2px;

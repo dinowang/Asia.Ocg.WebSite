@@ -181,7 +181,7 @@ class DeckEditPage extends React.Component {
 
 
     return (
-      <div className="deck-detailedit">
+      <div className="deck-detailedit" style={{paddingBottom:'200px'}}>
         <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
         <div className="deck">
           <div className="func-bar">
