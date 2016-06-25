@@ -26,7 +26,7 @@ class DeckDetail extends React.Component {
     );
   }
   render(){
-    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
@@ -65,8 +65,8 @@ class DeckDetail extends React.Component {
           <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
 
           <p>最後更新日：<span>2016.06.01</span></p>
-          <p>點閱率：<span>100</span></p>
-          <p>留言數：<span>10</span></p>
+          <p>點閱率：<span>{views}</span></p>
+          
         </div>
         <div className="info green">
           <h2>玩家資訊</h2>

@@ -152,11 +152,8 @@ class DeckEditPage extends React.Component {
   onClick(){
     this.props.actions.changeBtnType(ButtonStateEnum.Loading);
     if(this.props.deck.deckform.id){
-      // this.props.actions.requestManageUpdateBan();
-      console.log('update')
       this.props.actions.requestUpdateDeck(this.props.nav);
     }else{
-      console.log('create')
       this.props.actions.requestCreateDeck(this.props.nav);
     }
   }
@@ -166,7 +163,21 @@ class DeckEditPage extends React.Component {
     const monster = CardHelper.Monster(this.props.deck.deckform.main_list);
     const magic = CardHelper.filter(this.props.deck.deckform.main_list,'魔');
     const trap = CardHelper.filter(this.props.deck.deckform.main_list,'罠');
+    let kind_default = -1;
+    let ban_default = -1;
+    let type_default = -1;
 
+
+
+    if(this.props.deck.deckform.kind_id !== 0){
+      kind_default = this.props.deck.deckform.kind_id;
+    }
+    if(this.props.deck.deckform.ban_id !== 0){
+      ban_default = this.props.deck.deckform.ban_id;
+    }
+    if(this.props.deck.deckform.type_id !== 0){
+      type_default = this.props.deck.deckform.type_id;
+    }
 
 
     return (
@@ -209,19 +220,19 @@ class DeckEditPage extends React.Component {
             <DropDown
               getValue={this.changeKind}
               style={{top:'1px',width:"70%"}}
-              default={-1}
+              default={kind_default}
               values={deck.kind}/>
           </p>
           <p>禁卡表：<DropDown
             getValue={this.changeBan}
             style={{top:'1px',width:"20%"}}
-            default={-1}
+            default={ban_default}
             values={deck.ban}/></p>
 
           <p style={adminStyle}>分類<DropDown
             getValue={this.changeType}
             style={{top:'1px',width:"70%"}}
-            default={-1}
+            default={type_default}
             values={deck.type}/></p>
 
           <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
