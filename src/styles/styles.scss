@@ -26,9 +26,13 @@ html,div[data-reactroot],#app{
   position: absolute;
   width:84%;
   height:100%;
-  padding: 20px 30px;
-  overflow: scroll;
-  padding-bottom:100px;
+
+  > div{
+    padding: 20px 30px;
+    padding-bottom:100px;
+    height: 100%;
+    overflow: scroll;
+  }
 }
 .clear{
   clear: both;
