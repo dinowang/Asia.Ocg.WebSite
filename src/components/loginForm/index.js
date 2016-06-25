@@ -8,6 +8,7 @@ class LoginForm extends React.Component {
   constructor(){
     super();
     this.login = this.login.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
   componentDidMount(){
     this.refs.account.refs.email.focus();
@@ -30,6 +31,11 @@ class LoginForm extends React.Component {
       actions.requestLogin(account,password)
     }
   }
+  onKeyPress(e){
+    if(e.key === 'Enter'){
+      this.login();
+    }
+  }
   render() {
     return (
       <div className="login-form">
@@ -41,7 +47,7 @@ class LoginForm extends React.Component {
         </div>
         <EmailInput ref="account" />
         <div className="input">
-          <input type="password" placeholder="password" ref="password"></input>
+          <input type="password" placeholder="password" ref="password" onKeyPress={this.onKeyPress} />
           <Icon name="lock"/>
         </div>
         <p className="message">{this.props.data.message}</p>
