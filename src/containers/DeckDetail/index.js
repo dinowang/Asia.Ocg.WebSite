@@ -16,12 +16,16 @@ class DeckDetail extends React.Component {
     }
   }
   renderDeckCard(data,index){
+    const href = `/card/${data.serial_number}/${data.name}`
     return(
       <div key={data.sort} style={{display:'inline-block'}}>
-      <img
-        draggable={false}
-        value={{data:data,index:index}}
-        src={data.image_url}/>
+        <Link to={href}>
+          <img
+          draggable={false}
+          value={{data:data,index:index}}
+          src={data.image_url}/>
+        </Link>
+
       </div>
     );
   }
@@ -66,7 +70,7 @@ class DeckDetail extends React.Component {
 
           <p>最後更新日：<span>2016.06.01</span></p>
           <p>點閱率：<span>{views}</span></p>
-          
+
         </div>
         <div className="info green">
           <h2>玩家資訊</h2>
