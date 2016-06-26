@@ -1,17 +1,12 @@
 .index-page{
+  a{
+    color: #3c8dbc;
+  }
   .pop-card{
-    margin-top:30px;
+    float: left;
+    margin-bottom: 20px;
     position: relative;
-    .title{
-      border-top:2px solid #3c8dbc;
-      padding: 6px 10px 0;
-      font-size: 1.5rem;
-      position: absolute;
-      left:0;
-      top:-35px;
-      background-color: #fff;
-      height: 35px;
-    }
+
     background-color: #fff;
     text-align: center;
     ul{
@@ -19,7 +14,7 @@
       overflow-y: hidden;
       max-height:320px;
       white-space: nowrap;
-      padding: 10px 0 15px;
+      padding: 0 0 15px;
     }
     li{
       position: relative;
@@ -44,5 +39,59 @@
       width:100px;
       height:141px;
     }
+  }
+  .pop{
+    float: left;
+    margin: 0 10px;
+    text-align: center;
+    img{
+      width:80%;
+      margin:5px 0 10px ;
+    }
+    background-color: #fff;
+    width:15%;
+    height:250px;
+  }
+  .news{
+    float: left;
+    background-color: #fff;
+    height:220px;
+    width:40%;
+    margin-bottom: 20px;
+    table{
+      text-align: center;
+      border-collapse: collapse;
+      width:100%;
+    }
+    td{
+      color: #444;
+      padding: 10px;
+      border-top:1px solid #ddd;
+      line-height: 15px;
+      &:first-child{
+        width:20%;
+      }
+      &:nth-child(2){
+        width:80%;
+      }
+    }
+  }
+  .title{
+    border-top:2px solid #3c8dbc;
+    padding: 6px 10px 0;
+    font-size: 1.5rem;
+    text-align: left;
+    background-color: #fff;
+    letter-spacing: 2px;
+    height: 40px;
+    span{
+      font-size: 1rem;
+    }
+  }
+  iframe{
+    float: left;
+    margin-right:1%;
+    height:460px;
+    width:55%;
   }
 }

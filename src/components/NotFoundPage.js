@@ -5,9 +5,9 @@ const NotFoundPage = () => {
   return (
     <div>
       <h4>
-        404 Page Not Found
+        Woops 404 !!
       </h4>
-      <Link to="/"> Go back to homepage </Link>
+      <Link style={{color:"#3c8dbc"}} to="/">回首頁</Link>
     </div>
   );
 };

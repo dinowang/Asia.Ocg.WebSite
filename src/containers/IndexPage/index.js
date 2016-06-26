@@ -5,8 +5,6 @@ import {bindActionCreators} from 'redux';
 import {Icon} from 'react-fa';
 import * as indexActions from '../../actions/indexActions';
 import * as cardActions from '../../actions/cardActions';
-
-
 import './index.scss';
 
 class IndexPage extends React.Component {
@@ -35,15 +33,60 @@ class IndexPage extends React.Component {
       </li>
     )
   }
+  renderProductInfo(data, index){
+    const name = data.url? '' : data.name;
+    return(
+      <tr key={index}>
+        <td>{data.date}</td>
+        <td>
+          {data.url? <a href={data.url}>{data.name}</a> : data.name}
+        </td>
+      </tr>
+    )
+  }
+  renderDeckPop(data, index){
+    const {guid, name, views} = data;
+    const href = `/deckdetail/${guid}/${name}`;
+
+    return(
+      <tr key={index}>
+        <td>{views}</td>
+        <td>
+          <Link to={href}>
+            {name}
+          </Link>
+        </td>
+      </tr>
+    )
+  }
   render(){
     return (
       <div className="index-page">
         <div className="pop-card">
-          <p className="title">熱門卡片</p>
+          <p className="title">熱門卡片<span>(近三天)</span></p>
           <ul>
             {this.props.index.card_pop.map(this.renderCardPop)}
           </ul>
         </div>
+        <iframe width="400" height="315" src="https://www.youtube.com/embed/5rEt5xQji5w" frameborder="0" allowfullscreen></iframe>
+        <div className="news">
+          <p className="title">新商品情報</p>
+          <table>
+            <tbody>
+              {this.props.index.product_info.map(this.renderProductInfo)}
+            </tbody>
+          </table>
+        </div>
+        <div className="news">
+          <p className="title">熱門牌組<span>(近七天)</span></p>
+          <table>
+            <tbody>
+              {this.props.index.deck_pop.map(this.renderDeckPop)}
+            </tbody>
+          </table>
+        </div>
+
+
       </div>
     );
   }
@@ -71,3 +114,10 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(IndexPage);
+
+
+
+// <div className="pop">
+//   <p className="title">本日人氣</p>
+//   <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JPM07/aeb575ba-d5af-45a8-a7ac-54f7af1eafdd200X282.jpg"/>
+// </div>
