@@ -38,7 +38,6 @@ class IndexPage extends React.Component {
   renderProductInfo(data, index){
     let {date, url, title} = data;
     date = moment(date).format("YYYY.MM.DD");
-
     return(
       <tr key={index}>
         <td>{date}</td>
@@ -72,7 +71,7 @@ class IndexPage extends React.Component {
             {this.props.index.card_pop.map(this.renderCardPop)}
           </ul>
         </div>
-        <iframe width="400" height="315" src="https://www.youtube.com/embed/5rEt5xQji5w" frameborder="0" allowfullscreen></iframe>
+        <iframe width="400" height="315" src={this.props.index.video} frameborder="0" allowfullscreen></iframe>
         <div className="news">
           <p className="title">新商品情報</p>
           <table>
