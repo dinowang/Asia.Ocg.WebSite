@@ -5,6 +5,8 @@ import {bindActionCreators} from 'redux';
 import {Icon} from 'react-fa';
 import * as indexActions from '../../actions/indexActions';
 import * as cardActions from '../../actions/cardActions';
+import moment from 'moment';
+
 import './index.scss';
 
 class IndexPage extends React.Component {
@@ -34,12 +36,14 @@ class IndexPage extends React.Component {
     )
   }
   renderProductInfo(data, index){
-    const name = data.url? '' : data.name;
+    let {date, url, title} = data;
+    date = moment(date).format("YYYY.MM.DD");
+
     return(
       <tr key={index}>
-        <td>{data.date}</td>
+        <td>{date}</td>
         <td>
-          {data.url? <a href={data.url}>{data.name}</a> : data.name}
+          {url? <a href={url}>{title}</a> : title}
         </td>
       </tr>
     )
