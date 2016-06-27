@@ -1,5 +1,7 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {Icon} from 'react-fa';
+import {Link} from 'react-router';
 import DeckList from '../../components/deckList';
 import { browserHistory } from 'react-router';
 import Button from '../../components/button';
@@ -9,7 +11,6 @@ import {bindActionCreators} from 'redux';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
 import PermissionEnum from '../../enums/PermissionEnum';
 import ButtonStateEnum from '../../enums/buttonStateEnum'
-import {Link} from 'react-router';
 import * as actions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
 
@@ -33,8 +34,7 @@ class DeckEditPage extends React.Component {
     this.onMoveEnd = this.onMoveEnd.bind(this);
     this.onClick = this.onClick.bind(this);
     this.trash = this.trash.bind(this);
-
-
+    this.triggerCollapse = this.triggerCollapse.bind(this);
   }
   componentWillMount(){
     this.props.actions.setEditMode(true);
@@ -54,6 +54,7 @@ class DeckEditPage extends React.Component {
   }
   componentWillUnmount(){
     this.props.actions.setEditMode(false);
+    this.props.actions.initDeckForm();
   }
   changeName(e){
     this.props.actions.changeDeckName(e.target.value);
@@ -166,6 +167,9 @@ class DeckEditPage extends React.Component {
       this.props.actions.requestCreateDeck(this.props.nav);
     }
   }
+  triggerCollapse(e){
+    this.props.actions.setCollapse(e.target.value);
+  }
   render(){
     const {deck, search} = this.props;
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
@@ -175,9 +179,6 @@ class DeckEditPage extends React.Component {
     let kind_default = -1;
     let ban_default = -1;
     let type_default = -1;
-
-
-
     if(this.props.deck.deckform.kind_id !== 0){
       kind_default = this.props.deck.deckform.kind_id;
     }
@@ -187,8 +188,6 @@ class DeckEditPage extends React.Component {
     if(this.props.deck.deckform.type_id !== 0){
       type_default = this.props.deck.deckform.type_id;
     }
-
-
     return (
       <div className="deck-detailedit" style={{paddingBottom:'200px'}}>
         <input className="name" value={deck.deckform.name} onChange={this.changeName} placeholder="牌組名稱"/>
@@ -223,48 +222,58 @@ class DeckEditPage extends React.Component {
           </div>
         </div>
       <div className="deck-info">
-        <div className="info">
-          <h2>牌組資訊</h2>
-          <p>種類
-            <DropDown
-              getValue={this.changeKind}
-              style={{top:'1px',width:"70%"}}
-              default={kind_default}
-              values={deck.kind}/>
-          </p>
-          <p>禁卡表：<DropDown
-            getValue={this.changeBan}
-            style={{top:'1px',width:"20%"}}
-            default={ban_default}
-            values={deck.ban}/></p>
-
-          <p style={adminStyle}>分類<DropDown
-            getValue={this.changeType}
-            style={{top:'1px',width:"70%"}}
-            default={type_default}
-            values={deck.type}/></p>
-
-          <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
-          <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
-          <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
-
-          <p>最後更新日：<span>2016.06.01</span></p>
-          <p>點閱率：<span>100</span></p>
-          <p>留言數：<span>10</span></p>
-        </div>
         <div className="info green">
           <h2>如何使用</h2>
-          <p>加入卡片：<span>左上側 "搜尋框" 輸入</span></p>
-          <p>刪除卡片：<span>雙擊卡片</span></p>
-          <p>移動卡片：<span>拖曳卡片</span></p>
-
-
+          <div className={deck.collapse.use ? 'col close':'col open'}>
+            <Icon value="use" onClick={this.triggerCollapse} name={deck.collapse.use? 'plus-square-o' : 'minus-square-o'} size="2x"/>
+            <p>加入卡片：<span>左上側 "搜尋框" 輸入</span></p>
+            <p>刪除卡片：<span>雙擊卡片</span></p>
+            <p>移動卡片：<span>拖曳卡片</span></p>
+          </div>
         </div>
+        <div className="info">
+          <h2>牌組資訊</h2>
+            <div className={deck.collapse.info ? 'col close':'col open'}>
+              <Icon value="info" onClick={this.triggerCollapse} name={deck.collapse.info? 'plus-square-o' : 'minus-square-o'} size="2x"/>
+              <p>種類
+                <DropDown
+                  getValue={this.changeKind}
+                  style={{top:'1px',width:"70%"}}
+                  default={kind_default}
+                  values={deck.kind}/>
+              </p>
+              <p>禁卡表：<DropDown
+                getValue={this.changeBan}
+                style={{top:'1px',width:"20%"}}
+                default={ban_default}
+                values={deck.ban}/></p>
+
+              <p style={adminStyle}>分類<DropDown
+                getValue={this.changeType}
+                style={{top:'1px',width:"70%"}}
+                default={type_default}
+                values={deck.type}/></p>
+
+              <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
+              <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
+              <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
+
+              <p>最後更新日：<span>2016.06.01</span></p>
+              <p>點閱率：<span>100</span></p>
+              <p>留言數：<span>10</span></p>
+              </div>
+          </div>
+        <div className="info">
+          <h2>新增分類</h2>
+            <div className={deck.collapse.kind ? 'col close':'col open'}>
+              <Icon value="kind" onClick={this.triggerCollapse} name={deck.collapse.kind? 'plus-square-o' : 'minus-square-o'} size="2x"/>
+            </div>
+        </div>
+
       </div>
       <div className="card-list">
         <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>
         {search.items.map(this.renderSearchReult)}
-
       </div>
       </div>
     );

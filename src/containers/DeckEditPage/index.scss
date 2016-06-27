@@ -90,6 +90,7 @@
     width:19%;
   }
   .info{
+    position: relative;
     margin-bottom:20px;
     padding:10px;
     background-color: #fff;
@@ -98,6 +99,40 @@
       >span{
         font-size: .8rem;
       }
+    }
+    .col{
+      &.close{
+        max-height: 0;
+        overflow: hidden;
+        transition: all .2s linear;
+        >span{
+          transition: all .2s linear;
+          transform: rotate(0deg)
+        }
+      }
+      &.open{
+        max-height: 500px;
+        transition: all .5s linear;
+        >span{
+          transition: all .2s linear;
+          transform: rotate(180deg)
+        }
+      }
+      >.fa{
+        color:#3c8dbc;
+        position: absolute;
+        right:10px;
+        top:7px;
+        transform: scale(.9);
+        cursor: pointer;
+        transform: rotate(0deg)
+      }
+    }
+
+
+    @keyframes fa-an {
+      0%{transform: rotate(0deg)}
+      100%{transform: rotate(360deg)}
     }
   }
 }

@@ -3,6 +3,11 @@ import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
 import ButtonStateEnum from '../enums/buttonStateEnum';
 
 const initialState ={
+  collapse:{
+    use:true,
+    info:false,
+    kind:true
+  },
   loading:false,
   edit_mode: false,
   add_mode: true,
@@ -246,8 +251,26 @@ export default handleActions({
   },'init detail' (state){
     state.detail = initialState.detail;
     return Object.assign({},state);
+  },'init deckform' (state){
+    state.deckform = initialState.deckform;
+    return Object.assign({},state);
   },'set deckdetailloading' (state,action){
     state.loading = action.payload;
+    return Object.assign({},state);
+  },'set deckcollapse' (state,action){
+    switch (action.payload) {
+      case 'use':
+      state.collapse.use = !state.collapse.use
+        break;
+      case 'info':
+      state.collapse.info = !state.collapse.info
+        break;
+      case 'kind':
+      state.collapse.kind = !state.collapse.kind
+        break;
+      default:
+
+    }
     return Object.assign({},state);
   }
 

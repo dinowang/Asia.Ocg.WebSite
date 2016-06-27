@@ -32,8 +32,9 @@ export const fetchDeckList = createAction('fetch deckList');
 export const changeDeckTypePage = createAction('change decktypepage');
 export const fetchDeckTypePage = createAction('fetch decktypepage');
 export const initDetail = createAction('init detail');
+export const initDeckForm = createAction('init deckform');
 export const setLoading = createAction('set deckdetailloading');
-
+export const setCollapse = createAction('set deckcollapse');
 export const requestDeckList = () => {
   return (dispatch) => {
     fetch(`${Host}/deck/list/`)
