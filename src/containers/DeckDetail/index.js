@@ -1,4 +1,5 @@
 import React,{PropTypes} from 'react';
+import {Icon} from 'react-fa';
 import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
 import CardHelper from '../../businessLogic/cardHelper';
@@ -23,6 +24,9 @@ class DeckDetail extends React.Component {
       }
     }
   }
+  componentWillUnmount(){
+    this.props.deckActions.initDetail();
+  }
   renderDeckCard(data,index){
     const href = `/card/${data.serial_number}/${data.name}`
     return(
@@ -45,6 +49,8 @@ class DeckDetail extends React.Component {
     const trap = CardHelper.filter(main_list,'罠');
     const editHref = `/deckdetail/edit/${id}`
     const ownerStyle =  owner.current_user? {}:{display:'none'};
+    const loadingStyle = this.props.deck.loading ? {}:{display:'none'};
+
     return (
       <div className="deck-detail">
         <h1>{name}</h1>
@@ -56,14 +62,18 @@ class DeckDetail extends React.Component {
           </div>
           <div className="main">
             <div className="title blue">主牌組：{main_list.length}</div>
+              <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
+
               {main_list.map(this.renderDeckCard)}
           </div>
           <div className="main extra">
             <div className="title orange">額外牌組：{extra_list.length}</div>
+              <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {extra_list.map(this.renderDeckCard)}
           </div>
           <div className="main extra">
             <div className="title red">備牌：{preparation_list.length}</div>
+              <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {preparation_list.map(this.renderDeckCard)}
 
           </div>

@@ -8,11 +8,17 @@
     width:80%;
 
   }
+
   .main{
+    width:100%;
+    a{
+      img{
+        animation: main-an .8s;
+      }
+    }
     margin-top:45px;
     position: relative;
     padding:5px;
-    // background-color: rgba(0,0,0,.1);
     background-color: #fff;
     img{
       width:80px;
@@ -27,7 +33,6 @@
       position: absolute;
       left:0;
       top:-34px;
-      // background-color: rgba(0,0,0,.1);
       background-color: #fff
     }
   }
@@ -65,5 +70,27 @@
         font-size: .9rem;
       }
     }
+  }
+  .fa-spinner{
+    display: block;
+    text-align: center;
+  }
+  .spinner{
+    text-align: center;
+    display: block;
+    animation: spinner-an 2s linear infinite;
+  }
+  @keyframes main-an {
+    0%{
+      opacity: .5;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+  @keyframes spinner-an {
+    0%{opacity: 0;}
+    50%{opacity: 1;}
+    100%{opacity: 0;}
   }
 }

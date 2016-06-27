@@ -31,6 +31,9 @@ export const setDeckDetailId = createAction('set deckdetailid');
 export const fetchDeckList = createAction('fetch deckList');
 export const changeDeckTypePage = createAction('change decktypepage');
 export const fetchDeckTypePage = createAction('fetch decktypepage');
+export const initDetail = createAction('init detail');
+export const setLoading = createAction('set deckdetailloading');
+
 export const requestDeckList = () => {
   return (dispatch) => {
     fetch(`${Host}/deck/list/`)
@@ -47,6 +50,7 @@ export const requestDeckList = () => {
 export const requestDeckDetail = () => {
   return (dispatch,state) => {
     const {deck, user} = state();
+    dispatch(setLoading(true));
 
     fetch(`${Host}/deck/detail/${deck.detail.id}`,{
       method:'GET',
@@ -62,6 +66,7 @@ export const requestDeckDetail = () => {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeckDetail(json.data));
       }
+      dispatch(setLoading(false));
     });
   };
 };

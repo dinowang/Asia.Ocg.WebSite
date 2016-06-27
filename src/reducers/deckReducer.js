@@ -3,6 +3,7 @@ import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
 import ButtonStateEnum from '../enums/buttonStateEnum';
 
 const initialState ={
+  loading:false,
   edit_mode: false,
   add_mode: true,
   mode : DeckModeEnum.Create,
@@ -241,6 +242,12 @@ export default handleActions({
     return Object.assign({},state);
   },'set deckdetailid' (state, action){
     state.detail.id = action.payload;
+    return Object.assign({},state);
+  },'init detail' (state){
+    state.detail = initialState.detail;
+    return Object.assign({},state);
+  },'set deckdetailloading' (state,action){
+    state.loading = action.payload;
     return Object.assign({},state);
   }
 
