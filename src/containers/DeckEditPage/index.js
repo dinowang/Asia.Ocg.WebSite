@@ -253,8 +253,11 @@ class DeckEditPage extends React.Component {
           <p>留言數：<span>10</span></p>
         </div>
         <div className="info green">
-          <h2>玩家資訊</h2>
-          <p>暱稱：<span>Ch Rick</span></p>
+          <h2>如何使用</h2>
+          <p>加入卡片：<span>左上側 "搜尋框" 輸入</span></p>
+          <p>刪除卡片：<span>雙擊卡片</span></p>
+          <p>移動卡片：<span>拖曳卡片</span></p>
+
 
         </div>
       </div>
