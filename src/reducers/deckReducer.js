@@ -170,13 +170,13 @@ export default handleActions({
   },'move'(state,action){
     switch (state.on_move_array.data.type) {
       case DeckDetailTypeEnum.Main:
-        state.deckform.main_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+        state.deckform.main_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false,type:1}));
         break;
       case DeckDetailTypeEnum.Extra:
-        state.deckform.extra_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+        state.deckform.extra_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false,type:2}));
         break;
       case DeckDetailTypeEnum.Preparation:
-        state.deckform.preparation_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false}));
+        state.deckform.preparation_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false,type:3}));
 
         break;
     }
