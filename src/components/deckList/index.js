@@ -6,8 +6,8 @@ import moment from 'moment';
 import './index.scss';
 class DeckList extends React.Component{
   renderData(data){
-    const {id, guid, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
-    const href = `/deckdetail/${guid}/${name}`;
+    const {id, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
+    const href = `/deckdetail/${id}/${name}`;
     const date = moment(deck_ben).format("YYYY.MM");
 
     return(

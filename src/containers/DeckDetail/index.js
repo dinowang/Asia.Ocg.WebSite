@@ -10,9 +10,9 @@ import './index.scss';
 
 class DeckDetail extends React.Component {
   componentWillMount(){
-    let {guid} = this.props.params;
-    if(guid){
-      this.props.actions.requestDeckDetail(guid);
+    let {id} = this.props.params;
+    if(id){
+      this.props.actions.requestDeckDetail(id);
     }
   }
   renderDeckCard(data,index){

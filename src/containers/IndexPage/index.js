@@ -48,8 +48,8 @@ class IndexPage extends React.Component {
     )
   }
   renderDeckPop(data, index){
-    const {guid, name, views} = data;
-    const href = `/deckdetail/${guid}/${name}`;
+    const {id, name, views} = data;
+    const href = `/deckdetail/${id}/${name}`;
 
     return(
       <tr key={index}>

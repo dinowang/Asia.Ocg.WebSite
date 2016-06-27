@@ -41,6 +41,15 @@ class Nav extends React.Component {
     const manageList = [{
         title:'禁卡表',
         href:'/banManage/List'
+    },{
+        title:'影片管理',
+        href:'/banManage/List'
+    },{
+        title:'新商品情報',
+        href:'/banManage/List'
+    },{
+        title:'會員管理',
+        href:'/banManage/List'
     }];
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
     return (
