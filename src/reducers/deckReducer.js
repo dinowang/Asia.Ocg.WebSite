@@ -24,6 +24,7 @@ const initialState ={
     preparation_list:[]
   },
   detail:{
+    id: 0,
     name:'',
     kind:'',
     ban:{
@@ -34,10 +35,11 @@ const initialState ={
     extra_list:[],
     preparation_list:[],
     last_editdate:'',
-    views:2,
+    views:0,
     comment:'',
     owner:{
-      name:''
+      name:'',
+      current_user: false
     }
   },
   kind:[{
@@ -236,6 +238,9 @@ export default handleActions({
         data.list = action.payload;
       }
     });
+    return Object.assign({},state);
+  },'set deckdetailid' (state, action){
+    state.detail.id = action.payload;
     return Object.assign({},state);
   }
 

@@ -5,14 +5,22 @@ import CardHelper from '../../businessLogic/cardHelper';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
-import * as actions from '../../actions/deckActions';
+import * as deckActions from '../../actions/deckActions';
+import * as appActions from '../../actions/appActions';
+
 import './index.scss';
 
 class DeckDetail extends React.Component {
   componentWillMount(){
-    let {id} = this.props.params;
+    const {id} = this.props.params;
+    const {deckActions, appActions, user} = this.props;
     if(id){
-      this.props.actions.requestDeckDetail(id);
+      deckActions.setDeckDetailId(id)
+      if(user.account){
+        deckActions.requestDeckDetail();
+      }else{
+        appActions.requestGetInfo([],[deckActions.requestDeckDetail]);
+      }
     }
   }
   renderDeckCard(data,index){
@@ -36,6 +44,7 @@ class DeckDetail extends React.Component {
     const magic = CardHelper.filter(main_list,'魔');
     const trap = CardHelper.filter(main_list,'罠');
     const editHref = `/deckdetail/edit/${id}`
+    const ownerStyle =  owner.current_user? {}:{display:'none'};
     return (
       <div className="deck-detail">
         <h1>{name}</h1>
@@ -43,7 +52,7 @@ class DeckDetail extends React.Component {
 
         <div className="deck">
           <div className="func-bar">
-            <LinkButton value="進入編輯模式" to={editHref}/>
+            <LinkButton style={ownerStyle} value="進入編輯模式" to={editHref}/>
           </div>
           <div className="main">
             <div className="title blue">主牌組：{main_list.length}</div>
@@ -84,18 +93,20 @@ class DeckDetail extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    deck: state.deck
+    deck: state.deck,
+    user: state.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    deckActions: bindActionCreators(deckActions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 
 DeckDetail.propTypes ={
-  actions:PropTypes.object.isRequired,
+  deckActions:PropTypes.object.isRequired,
   deck:PropTypes.object.isRequired
 };
 

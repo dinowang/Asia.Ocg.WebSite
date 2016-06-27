@@ -27,6 +27,7 @@ export const changeBanErrMsg = createAction('change deckerrmsg');
 export const setDeckFormId = createAction('set deckformid');
 export const fetchDeck = createAction('fetch deck');
 export const fetchDeckDetail = createAction('fetch deckdetail');
+export const setDeckDetailId = createAction('set deckdetailid');
 export const fetchDeckList = createAction('fetch deckList');
 export const changeDeckTypePage = createAction('change decktypepage');
 export const fetchDeckTypePage = createAction('fetch decktypepage');
@@ -43,9 +44,18 @@ export const requestDeckList = () => {
   };
 };
 
-export const requestDeckDetail = (guid) => {
-  return (dispatch) => {
-    fetch(`${Host}/deck/detail/${guid}`)
+export const requestDeckDetail = () => {
+  return (dispatch,state) => {
+    const {deck, user} = state();
+
+    fetch(`${Host}/deck/detail/${deck.detail.id}`,{
+      method:'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
       .then((response)=> {
         return response.json();
     }).then((json)=> {

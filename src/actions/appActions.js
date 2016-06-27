@@ -3,7 +3,7 @@ import {Host} from './url';
 import { setUserData } from './userActions';
 import CookieHelper from '../businessLogic/cookieHelper';
 export const setTitle = createAction('set title');
-export const requestGetInfo = (funcs) => {
+export const requestGetInfo = (funcs = [],errFuncs = []) => {
   const token = CookieHelper.Get('token');
   return (dispatch) => {
     fetch(`${Host}/account/getinfo`,{
@@ -22,6 +22,7 @@ export const requestGetInfo = (funcs) => {
         dispatch(setUserData(json.data));
         funcs.map(func=>func());
       }
+      errFuncs.map(func=>func());
     });
   };
 };
