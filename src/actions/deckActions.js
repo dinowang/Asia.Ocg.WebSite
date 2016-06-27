@@ -34,6 +34,8 @@ export const fetchDeckTypePage = createAction('fetch decktypepage');
 export const initDetail = createAction('init detail');
 export const initDeckForm = createAction('init deckform');
 export const setLoading = createAction('set deckdetailloading');
+export const changeKindMode = createAction('change deckkindmode');
+export const changeKindName = createAction('change deckkindname');
 export const setCollapse = createAction('set deckcollapse');
 export const requestDeckList = () => {
   return (dispatch) => {
@@ -146,6 +148,9 @@ export const requestCreateDeck= (nav) => {
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeck(json.data));
+        if(deck.kindMode === false){
+          dispatch(changeKindMode());
+        }
         dispatch(changeBtnType(ButtonStateEnum.Success));
         dispatch(setDeckMode(DeckModeEnum.Edit));
         nav.push(`/deckdetail/edit/${deck.deckform.id}`);
@@ -189,6 +194,9 @@ export const requestUpdateDeck= (nav) => {
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeck(json.data));
+        if(deck.kindMode === false){
+          dispatch(changeKindMode());
+        }
         dispatch(changeBtnType(ButtonStateEnum.Success));
         dispatch(setDeckMode(DeckModeEnum.Edit));
         nav.push(`/deckdetail/edit/${deck.deckform.id}`);

@@ -35,6 +35,8 @@ class DeckEditPage extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.trash = this.trash.bind(this);
     this.triggerCollapse = this.triggerCollapse.bind(this);
+    this.changeKintdDislay = this.changeKintdDislay.bind(this);
+    this.changeKindName = this.changeKindName.bind(this);
   }
   componentWillMount(){
     this.props.actions.setEditMode(true);
@@ -61,8 +63,10 @@ class DeckEditPage extends React.Component {
     this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   changeKind(e){
-    this.props.actions.changeDeckKind(e.key);
-    this.props.actions.changeBtnType(ButtonStateEnum.None);
+    if(e){
+      this.props.actions.changeDeckKind(e.key);
+      this.props.actions.changeBtnType(ButtonStateEnum.None);
+    }
   }
   changeBan(e){
     this.props.actions.changeDeckBan(e.key);
@@ -168,7 +172,16 @@ class DeckEditPage extends React.Component {
     }
   }
   triggerCollapse(e){
+
     this.props.actions.setCollapse(e.target.value);
+  }
+  changeKintdDislay(){
+    this.props.actions.changeKindMode();
+    this.props.actions.changeKindName('');
+  }
+  changeKindName(e){
+    this.props.actions.changeKindName(e.target.value);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
   render(){
     const {deck, search} = this.props;
@@ -235,13 +248,6 @@ class DeckEditPage extends React.Component {
           <h2>牌組資訊</h2>
             <div className={deck.collapse.info ? 'col close':'col open'}>
               <Icon value="info" onClick={this.triggerCollapse} name={deck.collapse.info? 'plus-square-o' : 'minus-square-o'} size="2x"/>
-              <p>種類
-                <DropDown
-                  getValue={this.changeKind}
-                  style={{top:'1px',width:"70%"}}
-                  default={kind_default}
-                  values={deck.kind}/>
-              </p>
               <p>禁卡表：<DropDown
                 getValue={this.changeBan}
                 style={{top:'1px',width:"20%"}}
@@ -253,6 +259,15 @@ class DeckEditPage extends React.Component {
                 style={{top:'1px',width:"70%"}}
                 default={type_default}
                 values={deck.type}/></p>
+              <p className="kind-p">種類
+                  <DropDown
+                    getValue={this.changeKind}
+                    style={deck.kindMode?{top:'1px',width:"73%"} :{display:'none'}}
+                    default={kind_default}
+                    values={deck.kind}/>
+                  <input onChange={this.changeKindName} style={deck.kindMode ? {display:'none'}: {}} className="kind" value={deck.deckform.kind_name}/>
+                  <span className="other" onClick={this.changeKintdDislay}>其他種類</span>
+              </p>
 
               <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
               <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
@@ -263,13 +278,6 @@ class DeckEditPage extends React.Component {
               <p>留言數：<span>10</span></p>
               </div>
           </div>
-        <div className="info">
-          <h2>新增分類</h2>
-            <div className={deck.collapse.kind ? 'col close':'col open'}>
-              <Icon value="kind" onClick={this.triggerCollapse} name={deck.collapse.kind? 'plus-square-o' : 'minus-square-o'} size="2x"/>
-            </div>
-        </div>
-
       </div>
       <div className="card-list">
         <p>直接拖曳以下 "卡片" 至以上 主牌組、額外牌組、備牌區域</p>

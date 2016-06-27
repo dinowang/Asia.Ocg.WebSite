@@ -8,6 +8,7 @@ const initialState ={
     info:false,
     kind:true
   },
+  kindMode: true,
   loading:false,
   edit_mode: false,
   add_mode: true,
@@ -23,6 +24,7 @@ const initialState ={
     id: 0,
     name:'',
     kind_id:0,
+    kind_name:'',
     ban_id:0,
     type_id:0,
     main_list:[],
@@ -205,6 +207,8 @@ export default handleActions({
     state.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'fetch deck' (state, action) {
+    state.kind = action.payload.kind;
+
     action.payload.main_list = action.payload.main_list.map(data=>{
       data.pre = false;
       return data;
@@ -217,6 +221,7 @@ export default handleActions({
       data.pre = false;
       return data;
     });
+
     state.deckform = action.payload;
     return Object.assign({},state);
   },'change deckerrmsg' (state, action) {
@@ -253,6 +258,8 @@ export default handleActions({
     return Object.assign({},state);
   },'init deckform' (state){
     state.deckform = initialState.deckform;
+    state.kind = initialState.kind;
+
     return Object.assign({},state);
   },'set deckdetailloading' (state,action){
     state.loading = action.payload;
@@ -271,6 +278,12 @@ export default handleActions({
       default:
 
     }
+    return Object.assign({},state);
+  },'change deckkindmode' (state,action){
+    state.kindMode = !state.kindMode;
+    return Object.assign({},state);
+  },'change deckkindname' (state,action){
+    state.deckform.kind_name = action.payload;
     return Object.assign({},state);
   }
 

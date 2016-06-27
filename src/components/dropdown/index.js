@@ -25,14 +25,13 @@ class DropDown extends React.Component {
     this.setState({isShow:'0',defaultValue:defaultValue[0]});
     this.props.getValue(defaultValue[0]);
   }
-  test(){
-    console.log('test')
-  }
   componentWillUpdate(nestProps,nextState){
     if(nestProps.default !== nextState.defaultValue.key){
       let defaultValue  = this.props.values.filter(data=>data.key === nestProps.default);
-      this.setState({isShow:'0',defaultValue:defaultValue[0]});
-      this.props.getValue(defaultValue[0]);
+      if(defaultValue.length > 0){
+        this.setState({isShow:'0',defaultValue:defaultValue[0]});
+      }
+      // this.props.getValue(defaultValue[0]);
     }
   }
   render(){

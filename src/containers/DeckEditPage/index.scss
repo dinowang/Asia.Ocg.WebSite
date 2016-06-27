@@ -94,7 +94,26 @@
     margin-bottom:20px;
     padding:10px;
     background-color: #fff;
+    .kind{
+        margin-left:10px;
+        line-height: 15px;
+        padding: 5px;
+        font-size: 1rem;
+        width: 70%;
+        outline: 1px solid #3c8dbc;
+    }
+    .kind-p{
+      margin-bottom:25px;
+    }
+    .other{
+      position: absolute;
+      right:0;
+      bottom:-20px;
+      color:blue;
+      cursor: pointer;
+    }
     p{
+      position: relative;
       margin: 10px 0 ;
       >span{
         font-size: .8rem;
