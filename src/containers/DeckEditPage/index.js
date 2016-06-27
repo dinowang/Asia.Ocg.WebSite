@@ -37,6 +37,7 @@ class DeckEditPage extends React.Component {
     this.triggerCollapse = this.triggerCollapse.bind(this);
     this.changeKintdDislay = this.changeKintdDislay.bind(this);
     this.changeKindName = this.changeKindName.bind(this);
+    this.changeDescription = this.changeDescription.bind(this);
   }
   componentWillMount(){
     this.props.actions.setEditMode(true);
@@ -183,6 +184,10 @@ class DeckEditPage extends React.Component {
     this.props.actions.changeKindName(e.target.value);
     this.props.actions.changeBtnType(ButtonStateEnum.None);
   }
+  changeDescription(e){
+    this.props.actions.changeDescription(e.target.value);
+    this.props.actions.changeBtnType(ButtonStateEnum.None);
+  }
   render(){
     const {deck, search} = this.props;
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
@@ -233,6 +238,11 @@ class DeckEditPage extends React.Component {
 
             </div>
           </div>
+          <div className="main description" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Preparation)}>
+            <div className="title green">描述：</div>
+            <textarea onChange={this.changeDescription} value={deck.deckform.description? deck.deckform.description :''} placeholder="限制1000字以內(非必填)"/>
+          </div>
+
         </div>
       <div className="deck-info">
         <div className="info green">

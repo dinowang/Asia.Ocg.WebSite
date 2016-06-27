@@ -75,7 +75,6 @@ class DeckDetail extends React.Component {
             <div className="title red">備牌：{preparation_list.length}</div>
               <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {preparation_list.map(this.renderDeckCard)}
-
           </div>
         </div>
       <div className="deck-info">

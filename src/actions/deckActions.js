@@ -36,6 +36,7 @@ export const initDeckForm = createAction('init deckform');
 export const setLoading = createAction('set deckdetailloading');
 export const changeKindMode = createAction('change deckkindmode');
 export const changeKindName = createAction('change deckkindname');
+export const changeDescription = createAction('change deckdesc');
 export const setCollapse = createAction('set deckcollapse');
 export const requestDeckList = () => {
   return (dispatch) => {

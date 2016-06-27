@@ -25,6 +25,7 @@ const initialState ={
     name:'',
     kind_id:0,
     kind_name:'',
+    description:'',
     ban_id:0,
     type_id:0,
     main_list:[],
@@ -285,6 +286,9 @@ export default handleActions({
   },'change deckkindname' (state,action){
     state.deckform.kind_name = action.payload;
     return Object.assign({},state);
+  },'change deckdesc'(state,action){
+    state.deckform.description = action.payload;
+    return Object.assign({},state)
   }
 
 }, initialState);
