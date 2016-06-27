@@ -1,5 +1,6 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
+import moment from 'moment';
 import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
 import CardHelper from '../../businessLogic/cardHelper';
@@ -42,7 +43,7 @@ class DeckDetail extends React.Component {
     );
   }
   render(){
-    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
@@ -50,6 +51,7 @@ class DeckDetail extends React.Component {
     const editHref = `/deckdetail/edit/${id}`
     const ownerStyle =  owner.current_user? {}:{display:'none'};
     const loadingStyle = this.props.deck.loading ? {}:{display:'none'};
+    const lastDate = moment(last_editdate).format("YYYY.MM.DD");
 
     return (
       <div className="deck-detail">
@@ -85,7 +87,7 @@ class DeckDetail extends React.Component {
           <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
           <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
 
-          <p>最後更新日：<span>2016.06.01</span></p>
+          <p>最後更新日：<span>{lastDate}</span></p>
           <p>點閱率：<span>{views}</span></p>
 
         </div>
