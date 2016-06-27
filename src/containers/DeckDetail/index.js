@@ -54,8 +54,6 @@ class DeckDetail extends React.Component {
     return (
       <div className="deck-detail">
         <h1>{name}</h1>
-
-
         <div className="deck">
           <div className="func-bar">
             <LinkButton style={ownerStyle} value="進入編輯模式" to={editHref}/>

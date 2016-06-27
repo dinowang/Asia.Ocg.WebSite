@@ -32,6 +32,9 @@ class DeckEditPage extends React.Component {
     this.onMoveEnter = this.onMoveEnter.bind(this);
     this.onMoveEnd = this.onMoveEnd.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.trash = this.trash.bind(this);
+
+
   }
   componentWillMount(){
     this.props.actions.setEditMode(true);
@@ -121,12 +124,17 @@ class DeckEditPage extends React.Component {
       this.props.actions.changeBtnType(ButtonStateEnum.None);
     }
   }
+  trash(e){
+    this.props.actions.setDragItem(e.target.value.data);
+    this.props.actions.removeDeckItem();
+
+  }
   renderDeckCard(data,index){
 
     const href = data.image_url? data.image_url :'https://xpgcards.blob.core.windows.net/image/null.jpg';
     const style = data.pre ? {opacity:.5} : {};
     return(
-      <div key={data.sort} style={{display:'inline-block'}}>
+      <div key={data.sort} style={{display:'inline-block'}} >
 
       <img
         style={style}
@@ -135,6 +143,7 @@ class DeckEditPage extends React.Component {
         onDragStart={this.onMoveStart}
         onDragEnter={this.onMoveEnter}
         onDragEnd={this.onMoveEnd}
+        onDoubleClick={this.trash}
         src={href}/>
       </div>
     );
@@ -182,7 +191,7 @@ class DeckEditPage extends React.Component {
 
     return (
       <div className="deck-detailedit" style={{paddingBottom:'200px'}}>
-        <input className="name" value={deck.deckform.name} onChange={this.changeName}/>
+        <input className="name" value={deck.deckform.name} onChange={this.changeName} placeholder="牌組名稱"/>
         <div className="deck">
           <div className="func-bar">
             <Button onClick={this.onClick} style={{float:'right',top:'5px'}} state={this.props.deck} rIcon="floppy-o" value={this.props.deck.mode} fail="fail" success="success"/>
@@ -246,7 +255,6 @@ class DeckEditPage extends React.Component {
         <div className="info green">
           <h2>玩家資訊</h2>
           <p>暱稱：<span>Ch Rick</span></p>
-          <p>牌組數：<span>20</span></p>
 
         </div>
       </div>
