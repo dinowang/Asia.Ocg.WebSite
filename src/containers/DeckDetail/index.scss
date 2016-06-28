@@ -46,7 +46,11 @@
       position: absolute;
       left:0;
       top:-34px;
-      background-color: #fff
+      background-color: #fff;
+      span{
+        font-size:1rem;
+        letter-spacing: 0;
+      }
     }
   }
   .blue{

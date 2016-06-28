@@ -100,7 +100,7 @@ class DeckDetail extends React.Component {
             {description}
           </div>
           <div className="main half right">
-            <div className="title green">玩家留言</div>
+            <div className="title green">玩家留言:<span>{this.props.deck.detail.comment.total_count}</span></div>
             <UserComment list={comment.items} loading={this.props.deck.detail.comment.loading} />
           </div>
 
