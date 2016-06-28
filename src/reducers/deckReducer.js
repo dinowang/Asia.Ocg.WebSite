@@ -45,7 +45,8 @@ const initialState ={
     preparation_list:[],
     last_editdate:'',
     views:0,
-    comment:{
+    comment:'',
+    comments:{
       loading:false,
       current_page:1,
       items:[]
@@ -295,15 +296,21 @@ export default handleActions({
     return Object.assign({},state)
   },'fetch deckComment' (state,action){
 
-    action.payload.items = state.detail.comment.items.concat(action.payload.items);
-    state.detail.comment = Object.assign({},state.detail.comment,action.payload);
+    action.payload.items = state.detail.comments.items.concat(action.payload.items);
+    state.detail.comments = Object.assign({},state.detail.comments,action.payload);
 
     return Object.assign({},state);
   },'set deckcommentpage'(state, action){
-    state.detail.comment.current_page = action.payload;
+    state.detail.comments.current_page = action.payload;
     return Object.assign({},state);
   },'set deckcommentloading'(state,action){
-    state.detail.comment.loading = action.payload;
+    state.detail.comments.loading = action.payload;
+    return Object.assign({},state);
+  },'set deckcomment' (state,action){
+    state.detail.comment = action.payload;
+    return Object.assign({},state);
+  },'init deckcomments' (state){
+    state.detail.comments = initialState.detail.comments;
     return Object.assign({},state);
   }
 

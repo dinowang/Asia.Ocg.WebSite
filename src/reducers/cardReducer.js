@@ -65,8 +65,6 @@ export default handleActions({
     state.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'init cardcomment' (state){
-    console.log('-----')
-
     state.comments = initialState.comments;
     return Object.assign({},state);
   }

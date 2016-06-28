@@ -41,6 +41,9 @@ export const changeKindName = createAction('change deckkindname');
 export const changeDescription = createAction('change deckdesc');
 export const setCollapse = createAction('set deckcollapse');
 export const setDeckPage = createAction('set deckcommentpage');
+export const setDeckComment = createAction('set deckcomment');
+export const initDeckComments = createAction('init deckcomments');
+
 export const requestDeckList = () => {
   return (dispatch) => {
     fetch(`${Host}/deck/list/`)
@@ -57,7 +60,7 @@ export const requestDeckList = () => {
 export const requestDeckComment = () => {
   return (dispatch,state) => {
     const {deck, user} = state();
-    fetch(`${Host}/deck/comment/${deck.detail.id}/${deck.detail.comment.current_page}`)
+    fetch(`${Host}/deck/comment/${deck.detail.id}/${deck.detail.comments.current_page}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -241,6 +244,45 @@ export const requestUpdateDeck= (nav) => {
         dispatch(changeBtnType(ButtonStateEnum.None));
       },2500);
     });
+
+  };
+};
+
+export const requestCreateDeckComment= () => {
+  return (dispatch, state) => {
+    const {deck, user} = state();
+    fetch(`${Host}/deck/comment`,{
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify({
+        deck_id: deck.detail.id,
+        content: deck.detail.comment
+      })
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(initDeckComments());
+        dispatch(requestDeckComment());
+        dispatch(setDeckComment(''));
+        dispatch(changeBtnType(ButtonStateEnum.Success));
+        return true;
+      }else if(json.status_code === StatusCode.DeckKindIsNull){
+        // dispatch(changeBanErrMsg("請選擇種類"));
+      }else if(json.status_code === StatusCode.DeckNameIsNull){
+        // dispatch(changeBanErrMsg("請填寫牌組名稱"));
+      }
+      dispatch(changeBtnType(ButtonStateEnum.Fail));
+      setTimeout(()=>{
+        dispatch(changeBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+
 
   };
 };

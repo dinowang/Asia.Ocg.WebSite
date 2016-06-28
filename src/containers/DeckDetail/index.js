@@ -1,22 +1,25 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
 import moment from 'moment';
+import {bindActionCreators} from 'redux';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import Button from '../../components/button';
 import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
 import CardHelper from '../../businessLogic/cardHelper';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Link} from 'react-router';
+import ButtonStateEnum from '../../enums/buttonStateEnum';
 import UserComment from '../../components/userComment';
 import * as deckActions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
-
 import './index.scss';
 
 class DeckDetail extends React.Component {
   constructor(){
     super();
     this.handleScroll = this.handleScroll.bind(this);
+    this.onChangeComment = this.onChangeComment.bind(this);
+    this.submitComment  = this.submitComment.bind(this);
   }
   componentWillMount(){
     const {id} = this.props.params;
@@ -52,15 +55,43 @@ class DeckDetail extends React.Component {
     const {scrollTop, scrollHeight, clientHeight} = e.target;
     const {loading, detail} = this.props.deck;
     if((scrollTop + clientHeight + marginBottom )>= scrollHeight && loading === false){
-      if(detail.comment.current_page < detail.comment.total_page){
-        this.props.deckActions.setDeckPage(detail.comment.current_page+1);
+      if(detail.comments.current_page < detail.comments.total_page){
+        this.props.deckActions.setDeckPage(detail.comments.current_page+1);
         this.props.deckActions.setDeckCommentLoading(true);
         this.props.deckActions.requestDeckComment();
       }
     }
   }
+  submitComment(){
+    const {deckActions} = this.props;
+
+    deckActions.changeBtnType(ButtonStateEnum.Loading);
+    deckActions.requestCreateDeckComment();
+  }
+  renderSubmitButton(){
+    if(this.props.user.account){
+      return(
+        <Button onClick={this.submitComment}
+          style={{float:'right',margin:'5px 0'}}
+          state={this.props.deck}
+          rIcon="floppy-o"
+          value="新增留言"
+          fail="fail"
+          success="success"/>
+      )
+    }else{
+      return(
+        <LinkButton style={{float:'right'}} value="新增留言" to='/login'/>
+      )
+    }
+  }
+  onChangeComment(e){
+    const {deckActions} = this.props;
+    deckActions.setDeckComment(e.target.value);
+    deckActions.changeBtnType(ButtonStateEnum.None);
+  }
   render(){
-    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate,description,comment} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate,description,comments} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
@@ -100,8 +131,11 @@ class DeckDetail extends React.Component {
             {description}
           </div>
           <div className="main half right">
-            <div className="title green">玩家留言:<span>{this.props.deck.detail.comment.total_count}</span></div>
-            <UserComment list={comment.items} loading={this.props.deck.detail.comment.loading} />
+            <div className="title green">玩家留言:<span>{this.props.deck.detail.comments.total_count}</span></div>
+            <textarea value={this.props.deck.comment} onChange={this.onChangeComment} placeholder="留言內容" />
+            {this.renderSubmitButton()}
+            <div className="clear"></div>
+            <UserComment list={comments.items} loading={this.props.deck.detail.comments.loading} />
           </div>
 
         </div>
