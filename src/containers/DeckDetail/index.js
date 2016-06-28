@@ -34,7 +34,9 @@ class DeckDetail extends React.Component {
     }
   }
   componentWillUnmount(){
-    this.props.deckActions.initDetail();
+    const {deckActions} = this.props;
+    deckActions.initDetail();
+    deckActions.changeBtnType(ButtonStateEnum.None);
   }
   renderDeckCard(data,index){
     const href = `/card/${data.serial_number}/${data.name}`
