@@ -51,7 +51,10 @@ class DeckDetail extends React.Component {
     const editHref = `/deckdetail/edit/${id}`
     const ownerStyle =  owner.current_user? {}:{display:'none'};
     const loadingStyle = this.props.deck.loading ? {}:{display:'none'};
-    const lastDate = moment(last_editdate).format("YYYY.MM.DD");
+    let lastDate = '';
+    if(last_editdate){
+      lastDate = moment(last_editdate).format("YYYY.MM.DD");
+    }
 
     return (
       <div className="deck-detail">

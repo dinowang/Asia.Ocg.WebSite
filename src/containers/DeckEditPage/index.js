@@ -2,6 +2,7 @@ import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Icon} from 'react-fa';
 import {Link} from 'react-router';
+import moment from 'moment';
 import DeckList from '../../components/deckList';
 import { browserHistory } from 'react-router';
 import Button from '../../components/button';
@@ -194,6 +195,11 @@ class DeckEditPage extends React.Component {
     const monster = CardHelper.Monster(this.props.deck.deckform.main_list);
     const magic = CardHelper.filter(this.props.deck.deckform.main_list,'魔');
     const trap = CardHelper.filter(this.props.deck.deckform.main_list,'罠');
+    let lastDate = '';
+    if(deck.deckform.last_editdate){
+      lastDate = moment(deck.deckform.last_editdate).format("YYYY.MM.DD HH:mm");
+    }
+
     let kind_default = -1;
     let ban_default = -1;
     let type_default = -1;
@@ -283,9 +289,7 @@ class DeckEditPage extends React.Component {
               <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
               <p>陷阱：<span>{trap.mCount} 枚 / {trap.tCount}種類</span></p>
 
-              <p>最後更新日：<span>2016.06.01</span></p>
-              <p>點閱率：<span>100</span></p>
-              <p>留言數：<span>10</span></p>
+              <p>最後更新日：<span>{lastDate}</span></p>
               </div>
           </div>
       </div>
