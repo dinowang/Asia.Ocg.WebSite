@@ -27,6 +27,7 @@ export const changeBanErrMsg = createAction('change deckerrmsg');
 export const setDeckFormId = createAction('set deckformid');
 export const fetchDeck = createAction('fetch deck');
 export const fetchDeckDetail = createAction('fetch deckdetail');
+export const fetchDeckComment = createAction('fetch deckComment');
 export const setDeckDetailId = createAction('set deckdetailid');
 export const fetchDeckList = createAction('fetch deckList');
 export const changeDeckTypePage = createAction('change decktypepage');
@@ -34,10 +35,12 @@ export const fetchDeckTypePage = createAction('fetch decktypepage');
 export const initDetail = createAction('init detail');
 export const initDeckForm = createAction('init deckform');
 export const setLoading = createAction('set deckdetailloading');
+export const setDeckCommentLoading = createAction('set deckcommentloading');
 export const changeKindMode = createAction('change deckkindmode');
 export const changeKindName = createAction('change deckkindname');
 export const changeDescription = createAction('change deckdesc');
 export const setCollapse = createAction('set deckcollapse');
+export const setDeckPage = createAction('set deckcommentpage');
 export const requestDeckList = () => {
   return (dispatch) => {
     fetch(`${Host}/deck/list/`)
@@ -46,6 +49,21 @@ export const requestDeckList = () => {
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeckList(json.data));
+      }
+    });
+  };
+};
+
+export const requestDeckComment = () => {
+  return (dispatch,state) => {
+    const {deck, user} = state();
+    fetch(`${Host}/deck/comment/${deck.detail.id}/${deck.detail.comment.current_page}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDeckComment(json.data));
+        dispatch(setDeckCommentLoading(false));
       }
     });
   };
@@ -69,6 +87,7 @@ export const requestDeckDetail = () => {
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeckDetail(json.data));
+        dispatch(requestDeckComment());
       }
       dispatch(setLoading(false));
     });

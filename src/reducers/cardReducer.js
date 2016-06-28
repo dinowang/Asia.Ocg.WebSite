@@ -41,13 +41,6 @@ export default handleActions({
     return Object.assign({},state,action.payload);
   },'fetch cardcomment' (state, action) {
     action.payload.items = state.comments.items.concat(action.payload.items);
-    // action.payload.items= state.comments.items.concat(action.payload.items.map((data)=>{
-    //   if(data.image_url){
-    //     return data;
-    //   }else{
-    //     data.image_url = "https://xpgcards.blob.core.windows.net/user-image/user.png";
-    //   }
-    // }));
     state.comments = Object.assign({},state.comments,action.payload);
     return Object.assign({},state);
   },'fetch carddeck' (state, action){

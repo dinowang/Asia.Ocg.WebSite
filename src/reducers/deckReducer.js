@@ -45,7 +45,11 @@ const initialState ={
     preparation_list:[],
     last_editdate:'',
     views:0,
-    comment:'',
+    comment:{
+      loading:false,
+      current_page:1,
+      items:[]
+    },
     owner:{
       name:'',
       current_user: false
@@ -229,7 +233,7 @@ export default handleActions({
     state.submitBtnText = action.payload;
     return Object.assign({},state);
   },'fetch deckdetail' (state, action) {
-    state.detail = action.payload;
+    state.detail = Object.assign({},state.detail,action.payload);
     return Object.assign({},state);
   },'fetch deckList' (state, action) {
     state.deck_type = action.payload;
@@ -289,6 +293,18 @@ export default handleActions({
   },'change deckdesc'(state,action){
     state.deckform.description = action.payload;
     return Object.assign({},state)
+  },'fetch deckComment' (state,action){
+
+    action.payload.items = state.detail.comment.items.concat(action.payload.items);
+    state.detail.comment = Object.assign({},state.detail.comment,action.payload);
+
+    return Object.assign({},state);
+  },'set deckcommentpage'(state, action){
+    state.detail.comment.current_page = action.payload;
+    return Object.assign({},state);
+  },'set deckcommentloading'(state,action){
+    state.detail.comment.loading = action.payload;
+    return Object.assign({},state);
   }
 
 }, initialState);

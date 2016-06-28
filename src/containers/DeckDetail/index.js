@@ -7,12 +7,17 @@ import CardHelper from '../../businessLogic/cardHelper';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
+import UserComment from '../../components/userComment';
 import * as deckActions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
 
 import './index.scss';
 
 class DeckDetail extends React.Component {
+  constructor(){
+    super();
+    this.handleScroll = this.handleScroll.bind(this);
+  }
   componentWillMount(){
     const {id} = this.props.params;
     const {deckActions, appActions, user} = this.props;
@@ -42,8 +47,20 @@ class DeckDetail extends React.Component {
       </div>
     );
   }
+  handleScroll(e){
+    const marginBottom = 100;
+    const {scrollTop, scrollHeight, clientHeight} = e.target;
+    const {loading, detail} = this.props.deck;
+    if((scrollTop + clientHeight + marginBottom )>= scrollHeight && loading === false){
+      if(detail.comment.current_page < detail.comment.total_page){
+        this.props.deckActions.setDeckPage(detail.comment.current_page+1);
+        this.props.deckActions.setDeckCommentLoading(true);
+        this.props.deckActions.requestDeckComment();
+      }
+    }
+  }
   render(){
-    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate,description} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate,description,comment} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
@@ -55,9 +72,8 @@ class DeckDetail extends React.Component {
     if(last_editdate){
       lastDate = moment(last_editdate).format("YYYY.MM.DD");
     }
-
     return (
-      <div className="deck-detail">
+      <div className="deck-detail" onScroll={this.handleScroll}>
         <h1>{name}</h1>
         <div className="deck">
           <div className="func-bar">
@@ -85,7 +101,7 @@ class DeckDetail extends React.Component {
           </div>
           <div className="main half right">
             <div className="title green">玩家留言</div>
-            {description}
+            <UserComment list={comment.items} loading={this.props.deck.detail.comment.loading} />
           </div>
 
         </div>
