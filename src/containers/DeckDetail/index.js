@@ -43,7 +43,7 @@ class DeckDetail extends React.Component {
     );
   }
   render(){
-    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate} = this.props.deck.detail;
+    const {id, name, kind, ban, main_list, extra_list, preparation_list, owner,views, last_editdate,description} = this.props.deck.detail;
 
     const monster = CardHelper.Monster(main_list);
     const magic = CardHelper.filter(main_list,'魔');
@@ -78,6 +78,10 @@ class DeckDetail extends React.Component {
             <div className="title red">備牌：{preparation_list.length}</div>
               <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {preparation_list.map(this.renderDeckCard)}
+          </div>
+          <div className="main description">
+            <div className="title green">描述：</div>
+            {description}
           </div>
         </div>
       <div className="deck-info">

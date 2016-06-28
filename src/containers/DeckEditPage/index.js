@@ -244,7 +244,7 @@ class DeckEditPage extends React.Component {
 
             </div>
           </div>
-          <div className="main description" onDragEnter={()=>this.onDragEnterArea(DeckDetailTypeEnum.Preparation)}>
+          <div className="main description">
             <div className="title green">描述：</div>
             <textarea onChange={this.changeDescription} value={deck.deckform.description? deck.deckform.description :''} placeholder="限制1000字以內(非必填)"/>
           </div>
