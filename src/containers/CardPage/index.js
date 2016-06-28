@@ -29,18 +29,22 @@ class CardPage extends React.Component {
   handleScroll(e){
     const marginBottom = 100;
     const {scrollTop, scrollHeight, clientHeight} = e.target;
-    const {loading, display_tab,deck} = this.props.card;
+    const {loading, display_tab,deck ,comments} = this.props.card;
     if((scrollTop + clientHeight + marginBottom )>= scrollHeight && loading === false){
 
       if(display_tab === 1 && deck.current_page < deck.total_page){
         this.props.cardActions.setDeckPage(deck.current_page+1);
         this.props.cardActions.setLoading(true);
         this.props.cardActions.requestCardDeck();
+      }else if(display_tab === 2 && comments.current_page < comments.total_page){
+        this.props.cardActions.setCommentPage(comments.current_page+1);
+        this.props.cardActions.setLoading(true);
+        this.props.cardActions.requestCardComment();
       }
     }
   }
   render(){
-    const { card, cardActions } = this.props;
+    const { card, cardActions, user } = this.props;
     return (
       <div className="card" onScroll={this.handleScroll}>
         <h1>{card.name}</h1>
@@ -81,7 +85,7 @@ class CardPage extends React.Component {
                 switch (card.display_tab) {
                   case 0:   return <CardInfo data={card}/>;
                   case 1:   return <CardDeck data={card} cardActions={cardActions}/>;
-                  case 2:   return <CardComment data={card} actions={cardActions}/>;
+                  case 2:   return <CardComment data={card} user={user} actions={cardActions}/>;
                 }
                   })()}
               </div>
@@ -107,7 +111,8 @@ CardPage.propTypes ={
 
 function mapStateToProps(state) {
   return {
-    card: state.card
+    card: state.card,
+    user: state.user
   };
 }
 
