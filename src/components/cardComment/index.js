@@ -4,6 +4,7 @@ import moment from 'moment';
 import Button from '../button';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
 import LinkButton from '../linkButton';
+import UserComment from '../userComment';
 import './index.scss';
 
 class CardComment extends React.Component {
@@ -71,19 +72,12 @@ class CardComment extends React.Component {
     }
   }
   render() {
-    const loadingStyle = this.props.data.loading  ? {}:{display:'none'};
-
     return (
       <div className="card-comment">
         <textarea value={this.props.data.comment} onChange={this.onChangeComment} placeholder="留言內容" />
         {this.renderSubmitButton()}
         <div className="clear"></div>
-        <ul>
-          {this.props.data.comments.items.map(this.renderComment)}
-        </ul>
-        <div style={{textAlign:'center'}}>
-          <Icon style={loadingStyle} style={loadingStyle} name="spinner" spin={true} size="2x"/>
-        </div>
+        <UserComment list={this.props.data.comments.items} loading={this.props.data.loading} />
       </div>
     );
   }

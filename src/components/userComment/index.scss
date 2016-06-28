@@ -1,0 +1,47 @@
+.user-comment{
+  ul{
+    li{
+      position: relative;
+      border:1px solid #ddd;
+      display: block;
+      padding: 10px 0 30px;
+      margin:5px 0;
+      .avtor{
+        float: left;
+        display: inline-block;
+        width:80px;
+        height:50px;
+
+        text-align: center;
+        img{
+          width:50px;
+          height:50px;
+          border-radius: 50%;
+        }
+      }
+      .message{
+        float: left;
+        display: inline-block;
+        min-height: 40px;
+
+      }
+      .fnc-bar{
+        position: absolute;
+        bottom:0;left:0;
+        width:100%;
+        height: 20px;
+        li{
+          border:none;
+          display: inline-block;
+          padding: 0 ;
+          margin: 0;
+        }
+        .date{
+          float: right;
+          right:10px;
+        }
+      }
+    }
+  }
+
+}

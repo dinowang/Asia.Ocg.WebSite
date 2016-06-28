@@ -79,10 +79,15 @@ class DeckDetail extends React.Component {
               <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {preparation_list.map(this.renderDeckCard)}
           </div>
-          <div className="main description">
-            <div className="title green">描述：</div>
+          <div className="main half left">
+            <div className="title green">描述</div>
             {description}
           </div>
+          <div className="main half right">
+            <div className="title green">玩家留言</div>
+            {description}
+          </div>
+
         </div>
       <div className="deck-info">
         <div className="info">
