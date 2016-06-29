@@ -10,6 +10,7 @@ import LinkButton from '../../components/linkButton';
 import CardHelper from '../../businessLogic/cardHelper';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
 import UserComment from '../../components/userComment';
+import BanTypeEnum from '../../enums/BanTypeEnum';
 import * as deckActions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
 import './index.scss';
@@ -40,13 +41,22 @@ class DeckDetail extends React.Component {
   }
   renderDeckCard(data,index){
     const href = `/card/${data.serial_number}/${data.name}`
+    let banStyle = '';
+    if(data.ban_type === BanTypeEnum.Ban){
+      banStyle = 'ban-type ban';
+    }else if(data.ban_type === BanTypeEnum.Limit){
+      banStyle = 'ban-type limit';
+    }else if(data.ban_type === BanTypeEnum.PreLimit){
+      banStyle = 'ban-type prelimit';
+    }
     return(
-      <div key={data.sort} style={{display:'inline-block'}}>
-        <Link to={href}>
+      <div className="card" key={data.sort}>
+        <Link  to={href}>
+          <div className={banStyle}></div>
           <img
           draggable={false}
           value={{data:data,index:index}}
-          src={data.image_url}/>
+          src={data.image_url}></img>
         </Link>
 
       </div>

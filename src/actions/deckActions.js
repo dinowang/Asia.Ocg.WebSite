@@ -272,10 +272,6 @@ export const requestCreateDeckComment= () => {
         dispatch(setDeckComment(''));
         dispatch(changeBtnType(ButtonStateEnum.Success));
         return true;
-      }else if(json.status_code === StatusCode.DeckKindIsNull){
-        // dispatch(changeBanErrMsg("請選擇種類"));
-      }else if(json.status_code === StatusCode.DeckNameIsNull){
-        // dispatch(changeBanErrMsg("請填寫牌組名稱"));
       }
       dispatch(changeBtnType(ButtonStateEnum.Fail));
       setTimeout(()=>{

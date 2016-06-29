@@ -1,4 +1,15 @@
 .deck-detail{
+  .tip{
+    position: absolute;
+    top:50px;
+    left:-10px;
+    width:100px;
+    display: block;
+    background-color: rgba(0,0,0,.8);
+    border-radius: 10px;
+    text-align: center;
+    padding: 2px;
+  }
   textarea{
     padding: 10px;
     width:100%;
@@ -14,11 +25,57 @@
   }
   .main{
     width:100%;
-    a{
-      img{
-        animation: main-an .8s;
+    .card{
+      display: inline-block;
+      position: relative;
+      a{
+        img{
+          animation: main-an .8s;
+        }
+      }
+      .ban-type{
+        z-index: 2;
+        top:-5px;
+        left:-5px;
+        position: absolute;
+        background-color: #000;
+        border-radius: 50%;
+        padding: 4px;
+
+        &.ban{
+          border: 2px solid #f00;
+          &:after{
+            content:'禁';
+          }
+          &:hover:before{
+            content: '不能使用';
+            @extend .tip;
+          }
+        }
+        &.limit{
+          border: 2px solid #f39c12;
+
+          &:after{
+            content:'限';
+          }
+          &:hover:before{
+            content: '限制放 1 張';
+            @extend .tip;
+          }
+        }
+        &.prelimit{
+          border: 2px solid #00c0ef;
+          &:after{
+            content:'準';
+          }
+          &:hover:before{
+            content: '限制放 2 張';
+            @extend .tip;
+          }
+        }
       }
     }
+
     &.half{
       width:48%;
       display: inline-block;

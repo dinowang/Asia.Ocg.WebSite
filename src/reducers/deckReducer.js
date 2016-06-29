@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
 import ButtonStateEnum from '../enums/buttonStateEnum';
-
+import BanTypeEnum from '../enums/banTypeEnum';
 const initialState ={
   collapse:{
     use:true,
