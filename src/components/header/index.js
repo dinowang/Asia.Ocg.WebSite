@@ -39,10 +39,6 @@ class Header extends React.Component {
         <span>{this.props.user.account}</span>
         <div className="user-menu noselect">
           <ul>
-            <li>
-              個人資料設定
-              <Icon name="cog"/>
-            </li>
             <li onClick={this.clickLogout}>
               登出
               <Icon name="sign-out"/>

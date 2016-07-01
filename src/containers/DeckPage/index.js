@@ -48,7 +48,7 @@ class DeckPage extends React.Component {
         </div>
         <div className="other">
           <p className="title">
-            我的牌組
+            
           </p>
 
         </div>

@@ -54,19 +54,10 @@ class CardPage extends React.Component {
               <ul>
                 <li>價格情報</li>
                 <li>
-                  卡司魔
+                  準備中
                   <Icon name="check-circle"/>
-                  <span className="price">$30</span>
+                  <span className="price">$--</span>
                 </li>
-                <li>
-                  卡司魔
-                  <span className="price">$30</span>
-                </li>
-                <li>
-                  露天
-
-                </li>
-
               </ul>
 
           </div>
@@ -93,7 +84,7 @@ class CardPage extends React.Component {
 
           </div>
           <div className="other">
-            test
+
           </div>
 
         </div>
