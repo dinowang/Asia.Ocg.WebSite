@@ -1,0 +1,30 @@
+.maincardlist-page{
+  .list{
+    background-color: #fff;
+    padding: 10px;
+    table{
+      border-collapse: collapse;
+      width:100%;
+    }
+    td,th{
+      padding: 10px;
+      border:1px solid #aaa;
+      &:first-child{
+        width:40%;
+      }
+      a{
+        text-decoration: none;
+        color:#3c8dbc;
+      }
+    }
+    .group{
+      .fa{
+        padding: 0 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .fun-bar{
+    height:35px;
+  }
+}

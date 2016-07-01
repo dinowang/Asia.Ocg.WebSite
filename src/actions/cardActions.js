@@ -12,6 +12,8 @@ export const setLoading = createAction('set loading');
 export const setComment = createAction('set comment');
 export const changeBtnType = createAction('change cardcommentbtnstyle');
 export const initComment = createAction('init cardcomment');
+export const setEditSerialNumber = createAction('set editserialnumber')
+export const fetchCardEdit = createAction('fetch cardedit');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -65,7 +67,6 @@ export const requestCardDeck = () => {
 };
 
 //Member
-
 export const requestCreateCardComment= () => {
   return (dispatch, state) => {
     const {card, user} = state();
@@ -98,5 +99,27 @@ export const requestCreateCardComment= () => {
     });
 
 
+  };
+};
+
+//Management
+export const requestCardEdit = () => {
+  return (dispatch, state) => {
+    const {card,user} = state();
+    fetch(`${Host}/card/edit/${card.edit.serial_number}`,{
+      method:'Get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchCardEdit(json.data));
+      }
+    });
   };
 };

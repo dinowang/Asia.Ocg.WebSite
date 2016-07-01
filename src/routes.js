@@ -15,6 +15,9 @@ import DeckEditPage from './containers/DeckEditPage';
 //
 import BanFormPage from './containers/Manage/Ban/BanFormPage';
 import ManBanListPage from './containers/Manage/Ban/ManBanListPage';
+import ManCardListPage from './containers/Manage/Card/ManCardListPage';
+import ManCardFormPage from './containers/Manage/Card/ManCardFormPage';
+
 
 
 import NotFoundPage from './components/NotFoundPage.js';
@@ -43,6 +46,9 @@ export default (
     <Route path="banManage/Form" component={BanFormPage}/>
     <Route path="banManage/Form/:id" component={BanFormPage}/>
     <Route path="banManage/List" component={ManBanListPage}/>
+
+    <Route path="cardManage/List" component={ManCardListPage}/>
+    <Route path="cardManage/Form/:serialNumber" component={ManCardFormPage}/>
 
 
 

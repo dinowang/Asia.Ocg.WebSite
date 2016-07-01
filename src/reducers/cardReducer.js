@@ -27,7 +27,34 @@ const initialState ={
     total_page:0,
     total_count:0,
     items:[]
+  },edit:{
+    serial_number:'',
+    kinds:[{
+      key:-1,
+      value:'請選擇'
+    }],
+    levels:[{
+      key:-1,
+      value:'請選擇'
+    }],
+    propertys:[{
+      key:-1,
+      value:'請選擇'
+    }],
+    races:[{
+      key:-1,
+      value:'請選擇'
+    }],
+    packs:[{
+      key:-1,
+      value:'請選擇'
+    }],
+    types:[{
+      key:-1,
+      value:'請選擇'
+    }]
   }
+
 };
 export default handleActions({
   'change tab' (state, action) {
@@ -66,6 +93,12 @@ export default handleActions({
     return Object.assign({},state);
   },'init cardcomment' (state){
     state.comments = initialState.comments;
+    return Object.assign({},state);
+  },'set editserialnumber'(state, action){
+    state.edit.serial_number = action.payload;
+    return Object.assign({},state);
+  },'fetch cardedit' (state,action){
+    state.edit = action.payload;
     return Object.assign({},state);
   }
 }, initialState);
