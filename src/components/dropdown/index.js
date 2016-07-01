@@ -8,6 +8,7 @@ class DropDown extends React.Component {
    this.show = this.show.bind(this);
    this.hide = this.hide.bind(this);
    this.select = this.select.bind(this);
+   this.setValue = this.setValue.bind(this);
    let defaultValue  = this.props.values.filter(data=>data.key === this.props.default);
    this.state = {
      isShow : '0',
@@ -27,17 +28,23 @@ class DropDown extends React.Component {
   }
   componentWillUpdate(nestProps,nextState){
     if(nestProps.default !== nextState.defaultValue.key){
-      let defaultValue  = this.props.values.filter(data=>data.key === nestProps.default);
+      let defaultValue  = nestProps.values.filter(data=>data.key === nestProps.default);
       if(defaultValue.length > 0){
         this.setState({isShow:'0',defaultValue:defaultValue[0]});
       }
-      // this.props.getValue(defaultValue[0]);
     }
   }
-  render(){
+  setValue(key){
+    let defaultValue  = this.props.values.filter(data=>data.key === key);
+    this.setState({isShow:'0',defaultValue:defaultValue[0]});
+    this.props.getValue(defaultValue[0]);
+  }
+    render(){
     const isShow = {opacity:this.state.isShow, zIndex:this.state.isShow === "0" ?'-2':'10'};
+    const style = Object.assign({},this.props.style,{top:'1px'});
+
     return (
-        <div className="dropdown" style={this.props.style} >
+        <div className="dropdown" style={style}>
         <Icon name="angle-down" size="2x" onClick={this.show}/>
           <div className="default" onClick={this.show}>{this.state.defaultValue.value}</div>
           <div className="all" style={isShow} onMouseLeave={this.hide}>
