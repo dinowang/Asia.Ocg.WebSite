@@ -104,5 +104,8 @@ export default handleActions({
   },'set cardProperty' (state, action){
     state.edit.property_id = action.payload;
     return Object.assign({},state);
+  },'set cardKind' (state, action){
+    state.edit.kind_id = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);

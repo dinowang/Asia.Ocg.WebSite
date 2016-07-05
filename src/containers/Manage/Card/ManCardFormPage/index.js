@@ -15,6 +15,7 @@ class ManCardFormPage extends React.Component {
   constructor(){
     super();
     this.changeProperty = this.changeProperty.bind(this);
+    this.changeKind = this.changeKind.bind(this);
   }
   componentWillMount(){
     let {serialNumber} = this.props.params;
@@ -27,8 +28,8 @@ class ManCardFormPage extends React.Component {
       this.props.appActions.requestGetInfo([cardActions.requestCardEdit]);
     }
   }
-  changeKind(){
-
+  changeKind(e){
+    this.props.cardActions.setKind(e.key);
   }
   changeProperty(e){
     this.props.cardActions.setProperty(e.key);
