@@ -179,7 +179,7 @@ export const requestUpdateCardDetail = () => {
 export const requestUpdateCards = () => {
   return (dispatch, state) => {
     let {card,user} = state();
-    fetch(`${Host}/card/editCards`,{
+    fetch(`${Host}/card/cards`,{
       method:'PUT',
       headers: {
         'Accept': 'application/json',
@@ -187,6 +187,34 @@ export const requestUpdateCards = () => {
         'Token': user.token
       },
       body: JSON.stringify(card.edit.card_form)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchCards(json.data));
+        dispatch(changeCardsBtnType(ButtonStateEnum.Success));
+      }else{
+        dispatch(changeCardsBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardsBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+  };
+};
+export const requestCreateCards= () => {
+  return (dispatch, state) => {
+    let {card,user} = state();
+    let postData = Object.assign({}, card.edit.card_form,{detail_id:card.edit.id});
+    fetch(`${Host}/card/cards`,{
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(postData)
     })
       .then((response)=> {
         return response.json();

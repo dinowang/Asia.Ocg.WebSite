@@ -79,7 +79,7 @@ class ManCardFormPage extends React.Component {
     if(this.props.card.edit.card_form.id){
       this.props.cardActions.requestUpdateCards();
     }else{
-      // this.props.actions.requestCreateBan(this.props.nav);
+      this.props.cardActions.requestCreateCards();
     }
   }
 
