@@ -19,6 +19,7 @@ class ManCardFormPage extends React.Component {
     this.changeLevel = this.changeLevel.bind(this);
     this.changeRace = this.changeRace.bind(this);
     this.changeAttack = this.changeAttack.bind(this);
+    this.changeDefence = this.changeDefence.bind(this);
   }
   componentWillMount(){
     let {serialNumber} = this.props.params;
@@ -45,6 +46,9 @@ class ManCardFormPage extends React.Component {
   }
   changeAttack(e){
     this.props.cardActions.setAttack(e.target.value);
+  }
+  changeDefence(e){
+    this.props.cardActions.setDefence(e.target.value);
   }
   saveCardDetail(){
 
@@ -94,7 +98,7 @@ class ManCardFormPage extends React.Component {
               values={edit.races}/>
           </div>
           <input onChange={this.changeAttack} className="name input" placeholder="攻擊力" value={edit.attack} />
-          <input className="name input" placeholder="守備力" value={edit.defence} />
+          <input onChange={this.changeDefence} className="name input" placeholder="守備力" value={edit.defence} />
           <Button
             onClick={this.saveCardDetail}
             style={{float:'right',top:'5px'}}

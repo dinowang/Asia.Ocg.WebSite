@@ -116,5 +116,8 @@ export default handleActions({
   },'set cardAttack' (state, action){
     state.edit.attack = action.payload;
     return Object.assign({},state);
+  },'set cardDefence' (state, action){
+    state.edit.defence = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);
