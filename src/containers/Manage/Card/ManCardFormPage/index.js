@@ -17,6 +17,7 @@ class ManCardFormPage extends React.Component {
     this.changeProperty = this.changeProperty.bind(this);
     this.changeKind = this.changeKind.bind(this);
     this.changeLevel = this.changeLevel.bind(this);
+    this.changeRace = this.changeRace.bind(this);
   }
   componentWillMount(){
     let {serialNumber} = this.props.params;
@@ -37,6 +38,9 @@ class ManCardFormPage extends React.Component {
   }
   changeLevel(e){
     this.props.cardActions.setLevel(e.key);
+  }
+  changeRace(e){
+    this.props.cardActions.setRace(e.key);
   }
   saveCardDetail(){
 
@@ -80,7 +84,7 @@ class ManCardFormPage extends React.Component {
           <div className="col">
             <span>種族</span>
             <DropDown
-              getValue={this.changeKind}
+              getValue={this.changeRace}
               style={{width:'65%'}}
               default={raceValue}
               values={edit.races}/>

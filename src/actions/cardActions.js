@@ -17,6 +17,7 @@ export const fetchCardEdit = createAction('fetch cardedit');
 export const setProperty = createAction('set cardProperty');
 export const setKind = createAction('set cardKind');
 export const setLevel = createAction('set cardLevel');
+export const setRace = createAction('set cardRace');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
