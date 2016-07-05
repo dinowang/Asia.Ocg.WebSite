@@ -107,5 +107,8 @@ export default handleActions({
   },'set cardKind' (state, action){
     state.edit.kind_id = action.payload;
     return Object.assign({},state);
+  },'set cardLevel' (state, action){
+    state.edit.level_id = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);
