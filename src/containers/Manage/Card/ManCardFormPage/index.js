@@ -77,6 +77,7 @@ class ManCardFormPage extends React.Component {
     let kindValue = edit.kind_id ? edit.kind_id : -1;
     let levelValue = edit.level_id ? edit.level_id : -1;
     let raceValue = edit.race_id ? edit.race_id : -1;
+    let isMonsterStyle = propValue >= 8 ? {display:'none'} :{};
     return (
       <div className="mancardform-page">
         <input onChange={this.changeName} className="name" placeholder="卡片名稱" value={edit.name} />
@@ -99,7 +100,7 @@ class ManCardFormPage extends React.Component {
               default={kindValue}
               values={edit.kinds}/>
           </div>
-          <div className="col">
+          <div className="col" style={isMonsterStyle}>
             <span>等級</span>
             <DropDown
               getValue={this.changeLevel}
@@ -107,7 +108,7 @@ class ManCardFormPage extends React.Component {
               default={levelValue}
               values={edit.levels}/>
           </div>
-          <div className="col">
+          <div className="col" style={isMonsterStyle}>
             <span>種族</span>
             <DropDown
               getValue={this.changeRace}
@@ -115,8 +116,8 @@ class ManCardFormPage extends React.Component {
               default={raceValue}
               values={edit.races}/>
           </div>
-          <input onChange={this.changeAttack} className="name input" placeholder="攻擊力" value={edit.attack} />
-          <input onChange={this.changeDefence} className="name input" placeholder="守備力" value={edit.defence} />
+          <input style={isMonsterStyle} onChange={this.changeAttack} className="name input" placeholder="攻擊力" value={edit.attack} />
+          <input style={isMonsterStyle} onChange={this.changeDefence} className="name input" placeholder="守備力" value={edit.defence} />
           <Button
             onClick={this.saveCardDetail}
             style={{float:'right',top:'5px'}}
