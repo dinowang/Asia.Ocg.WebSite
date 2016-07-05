@@ -21,11 +21,15 @@ class ManCardFormPage extends React.Component {
     this.changeRace = this.changeRace.bind(this);
     this.changeAttack = this.changeAttack.bind(this);
     this.changeDefence = this.changeDefence.bind(this);
+    this.changePack = this.changePack.bind(this);
+    this.changeType = this.changeType.bind(this);
     this.saveCardDetail = this.saveCardDetail.bind(this);
     this.changeName = this.changeName.bind(this);
     this.changeEffect = this.changeEffect.bind(this);
     this.changeSerialNumber = this.changeSerialNumber.bind(this);
     this.renderCards = this.renderCards.bind(this);
+    this.saveCards = this.saveCards.bind(this);
+    this.changeCardNumber = this.changeCardNumber.bind(this);
   }
   componentWillMount(){
     let {id} = this.props.params;
@@ -49,12 +53,19 @@ class ManCardFormPage extends React.Component {
   changeRace(e){
     this.props.cardActions.setRace(e.key);
   }
+  changePack(e){
+    this.props.cardActions.setPack(e.key);
+  }
+  changeType(e){
+    this.props.cardActions.setType(e.key);
+  }
   changeAttack(e){
     this.props.cardActions.setAttack(e.target.value);
   }
   changeDefence(e){
     this.props.cardActions.setDefence(e.target.value);
   }
+
   saveCardDetail(){
     this.props.cardActions.changeCardDetailBtnType(ButtonStateEnum.Loading);
     if(this.props.card.edit.serial_number){
@@ -63,8 +74,20 @@ class ManCardFormPage extends React.Component {
       // this.props.actions.requestCreateBan(this.props.nav);
     }
   }
+  saveCards(){
+    this.props.cardActions.changeCardsBtnType(ButtonStateEnum.Loading);
+    if(this.props.card.edit.card_form.id){
+      this.props.cardActions.requestUpdateCards();
+    }else{
+      // this.props.actions.requestCreateBan(this.props.nav);
+    }
+  }
+
   changeName(e){
     this.props.cardActions.setName(e.target.value);
+  }
+  changeCardNumber(e){
+    this.props.cardActions.setCardNumber(e.target.value);
   }
   changeEffect(e){
     this.props.cardActions.setEffect(e.target.value);
@@ -72,8 +95,7 @@ class ManCardFormPage extends React.Component {
   changeSerialNumber(e){
     this.props.cardActions.setSerialNumber(e.target.value);
   }
-  test(e){
-    console.log('test',e)
+  selectCards(e){
     this.props.cardActions.setCardForm(e);
   }
   renderCards(data){
@@ -82,7 +104,7 @@ class ManCardFormPage extends React.Component {
       typeName= typeName.value
     }
     return(
-      <li key={data.id} onClick={()=>this.test(data)}>
+      <li key={data.id} onClick={()=>this.selectCards(data)}>
           <img src={data.image_url}/>
           <span className="type">{typeName}</span>
           <p>{data.number}</p>
@@ -158,15 +180,15 @@ class ManCardFormPage extends React.Component {
           </ul>
         </div>
         <div className="edit-cards">
-          <input className="name input" placeholder="卡號" value={edit.card_form.number} />
+          <input onChange={this.changeCardNumber} className="name input" placeholder="卡號" value={edit.card_form.number} />
             <img src={edit.card_form.image_url}/>
           <DropDown
-            getValue={this.changeKind}
+            getValue={this.changePack}
             style={{width:'100%'}}
             default={packValue}
             values={edit.packs}/>
           <DropDown
-            getValue={this.changeKind}
+            getValue={this.changeType}
             style={{width:'50%'}}
             default={typeValue}
             values={edit.types}/>
@@ -180,9 +202,9 @@ class ManCardFormPage extends React.Component {
                 fail="fail"
                 success="success"/>
             <Button
-                onClick={this.saveCardDetail}
+                onClick={this.saveCards}
                 style={{float:'right'}}
-                state={this.props.card.edit}
+                state={this.props.card.edit.card_form}
                 rIcon="floppy-o"
                 value="存擋"
                 fail="fail"

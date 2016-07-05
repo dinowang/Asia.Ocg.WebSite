@@ -55,6 +55,7 @@ const initialState ={
     }]
     ,cards:[]
     ,card_form:{
+      sumbitBtn:  ButtonStateEnum.None
 
     }
 
@@ -116,6 +117,12 @@ export default handleActions({
   },'set cardRace' (state, action){
     state.edit.race_id = action.payload;
     return Object.assign({},state);
+  },'set cardPack' (state, action){
+    state.edit.card_form.pack_id = action.payload;
+    return Object.assign({},state);
+  },'set cardType' (state, action){
+    state.edit.card_form.type_id = action.payload;
+    return Object.assign({},state);
   },'set cardAttack' (state, action){
     state.edit.attack = action.payload;
     return Object.assign({},state);
@@ -138,7 +145,16 @@ export default handleActions({
     state.edit.id = action.payload;
     return Object.assign({},state);
   },'set cardForm'(state, action){
-    state.edit.card_form = action.payload;
+    state.edit.card_form = Object.assign({},state.edit.card_form,action.payload)
+    return Object.assign({},state);
+  },'change cardsBtnType'(state, action){
+    state.edit.card_form.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'fetch editResultCards'(state, action){
+    state.edit.cards = action.payload;
+    return Object.assign({},state);
+  },'set editCardNumber'(state,action){
+    state.edit.card_form.number = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

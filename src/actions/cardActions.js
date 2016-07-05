@@ -10,7 +10,6 @@ export const setDeckPage = createAction('set deckpage');
 export const setCommentPage = createAction('set cardcommentpage');
 export const setLoading = createAction('set loading');
 export const setComment = createAction('set comment');
-export const changeBtnType = createAction('change cardcommentbtnstyle');
 export const initComment = createAction('init cardcomment');
 export const fetchCardEdit = createAction('fetch cardedit');
 export const setProperty = createAction('set cardProperty');
@@ -24,7 +23,13 @@ export const setEffect = createAction('set cardEffect');
 export const setSerialNumber = createAction('set cardSerialNumber');
 export const setCardDetailId = createAction('set cardDetailId')
 export const changeCardDetailBtnType = createAction('change carddetailbtntype');
+export const changeBtnType = createAction('change cardcommentbtnstyle');
+export const changeCardsBtnType = createAction('change cardsBtnType');
 export const setCardForm = createAction('set cardForm')
+export const setPack = createAction('set cardPack');
+export const setType = createAction('set cardType');
+export const setCardNumber = createAction('set editCardNumber');
+export const fetchCards = createAction('fetch editResultCards');
 
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
@@ -167,6 +172,33 @@ export const requestUpdateCardDetail = () => {
       }
       setTimeout(()=>{
         dispatch(changeCardDetailBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+  };
+};
+export const requestUpdateCards = () => {
+  return (dispatch, state) => {
+    let {card,user} = state();
+    fetch(`${Host}/card/editCards`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(card.edit.card_form)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchCards(json.data));
+        dispatch(changeCardsBtnType(ButtonStateEnum.Success));
+      }else{
+        dispatch(changeCardsBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardsBtnType(ButtonStateEnum.None));
       },2500);
     });
   };
