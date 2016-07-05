@@ -25,6 +25,7 @@ class ManCardFormPage extends React.Component {
     this.changeName = this.changeName.bind(this);
     this.changeEffect = this.changeEffect.bind(this);
     this.changeSerialNumber = this.changeSerialNumber.bind(this);
+    this.renderCards = this.renderCards.bind(this);
   }
   componentWillMount(){
     let {id} = this.props.params;
@@ -71,12 +72,34 @@ class ManCardFormPage extends React.Component {
   changeSerialNumber(e){
     this.props.cardActions.setSerialNumber(e.target.value);
   }
+  test(e){
+    console.log('test',e)
+    this.props.cardActions.setCardForm(e);
+  }
+  renderCards(data){
+    let typeName = this.props.card.edit.types.filter(type => type.key === data.type_id)[0];
+    if(typeName){
+      typeName= typeName.value
+    }
+    return(
+      <li key={data.id} onClick={()=>this.test(data)}>
+          <img src={data.image_url}/>
+          <span className="type">{typeName}</span>
+          <p>{data.number}</p>
+          <p><Icon name='cloud-upload' size='2x'/></p>
+      </li>
+    )
+  }
   render(){
     const {edit} = this.props.card;
-    let propValue = edit.property_id ? edit.property_id : -1;
-    let kindValue = edit.kind_id ? edit.kind_id : -1;
-    let levelValue = edit.level_id ? edit.level_id : -1;
-    let raceValue = edit.race_id ? edit.race_id : -1;
+    const propValue = edit.property_id ? edit.property_id : -1;
+    const kindValue = edit.kind_id ? edit.kind_id : -1;
+    const levelValue = edit.level_id ? edit.level_id : -1;
+    const raceValue = edit.race_id ? edit.race_id : -1;
+    const typeValue = edit.card_form.type_id ? edit.card_form.type_id  : -1;
+    const packValue = edit.card_form.pack_id ? edit.card_form.pack_id  : -1;
+
+
     let isMonsterStyle = propValue >= 8 ? {display:'none'} :{};
     return (
       <div className="mancardform-page">
@@ -131,27 +154,41 @@ class ManCardFormPage extends React.Component {
         </div>
         <div className="card-image">
           <ul>
-            <li>
-              <img src=""/>
-              <p><Icon name='cloud-upload' size='2x'/></p>
-            </li>
-            <li>
-              <img src=""/>
-              <p><Icon name='cloud-upload' size='2x'/></p>
-            </li>
+            {edit.cards.map(this.renderCards)}
           </ul>
         </div>
         <div className="edit-cards">
+          <input className="name input" placeholder="卡號" value={edit.card_form.number} />
+            <img src={edit.card_form.image_url}/>
           <DropDown
             getValue={this.changeKind}
             style={{width:'100%'}}
-            default={-1}
+            default={packValue}
             values={edit.packs}/>
-            <DropDown
-              getValue={this.changeKind}
-              style={{width:'100%'}}
-              default={-1}
-              values={edit.types}/>
+          <DropDown
+            getValue={this.changeKind}
+            style={{width:'50%'}}
+            default={typeValue}
+            values={edit.types}/>
+          <div>
+            <Button
+                onClick={this.saveCardDetail}
+                style={{float:'left'}}
+                state={this.props.card.edit}
+                lIcon="bug"
+                value="搜索"
+                fail="fail"
+                success="success"/>
+            <Button
+                onClick={this.saveCardDetail}
+                style={{float:'right'}}
+                state={this.props.card.edit}
+                rIcon="floppy-o"
+                value="存擋"
+                fail="fail"
+                success="success"/>
+          </div>
+
         </div>
       </div>
     );

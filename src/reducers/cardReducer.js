@@ -53,8 +53,12 @@ const initialState ={
       key:-1,
       value:'請選擇'
     }]
-  }
+    ,cards:[]
+    ,card_form:{
 
+    }
+
+  }
 };
 export default handleActions({
   'change tab' (state, action) {
@@ -132,6 +136,9 @@ export default handleActions({
     return Object.assign({},state);
   },'set cardDetailId'(state, action){
     state.edit.id = action.payload;
+    return Object.assign({},state);
+  },'set cardForm'(state, action){
+    state.edit.card_form = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

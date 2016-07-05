@@ -20,27 +20,48 @@
     margin: 20px 0;
     float: left;
     background-color: #fff;
-    width:37.5%;
+    width:39%;
+
     ul{
       li{
         margin:5px;
         display: inline-block;
+        position: relative;
+
         p{
           text-align: center;
+        }
+        .fa{
           color: #3c8dbc;
+        }
+        .type{
+          position: absolute;
+          background-color:rgba(255,255,255,0.8);
+          border-radius: 5px;
+          padding: 2px;
+          top:0;
+          right:0;
         }
       }
     }
     img{
       width:100px;
     }
+
   }
   .edit-cards{
     margin: 20px 20px;
+    padding: 10px;
     float: left;
     background-color: #fff;
     width:35%;
-    height: 50%;
+    text-align: center;
+    .dropdown{
+      margin: 10px 0;
+    }
+    img{
+      width:200px;
+    }
   }
   .drop-info{
     margin: 20px 0;

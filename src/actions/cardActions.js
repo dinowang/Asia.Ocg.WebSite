@@ -24,6 +24,8 @@ export const setEffect = createAction('set cardEffect');
 export const setSerialNumber = createAction('set cardSerialNumber');
 export const setCardDetailId = createAction('set cardDetailId')
 export const changeCardDetailBtnType = createAction('change carddetailbtntype');
+export const setCardForm = createAction('set cardForm')
+
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -135,7 +137,17 @@ export const requestCardEdit = () => {
 };
 export const requestUpdateCardDetail = () => {
   return (dispatch, state) => {
-    const {card,user} = state();
+    let {card,user} = state();
+    let postData = Object.assign({},card.edit);
+    postData.packs = [];
+    postData.propertys = [];
+    postData.levels = [];
+    postData.races = [];
+    postData.kinds = [];
+    postData.types = [];
+    postData.types = [];
+    postData.cards = [];
+    postData.card_form = {};
     fetch(`${Host}/card/edit`,{
       method:'PUT',
       headers: {
@@ -143,7 +155,7 @@ export const requestUpdateCardDetail = () => {
         'Content-Type': 'application/json',
         'Token': user.token
       },
-      body: JSON.stringify(card.edit)
+      body: JSON.stringify(postData)
     })
       .then((response)=> {
         return response.json();
