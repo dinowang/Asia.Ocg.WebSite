@@ -18,6 +18,7 @@ export const setProperty = createAction('set cardProperty');
 export const setKind = createAction('set cardKind');
 export const setLevel = createAction('set cardLevel');
 export const setRace = createAction('set cardRace');
+export const setAttack = createAction('set cardAttack');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();

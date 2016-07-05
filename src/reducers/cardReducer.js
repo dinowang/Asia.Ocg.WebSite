@@ -113,5 +113,8 @@ export default handleActions({
   },'set cardRace' (state, action){
     state.edit.race_id = action.payload;
     return Object.assign({},state);
+  },'set cardAttack' (state, action){
+    state.edit.attack = action.payload;
+    return Object.assign({},state);
   }
 }, initialState);
