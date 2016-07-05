@@ -48,7 +48,7 @@ export default (
     <Route path="banManage/List" component={ManBanListPage}/>
 
     <Route path="cardManage/List" component={ManCardListPage}/>
-    <Route path="cardManage/Form/:serialNumber" component={ManCardFormPage}/>
+    <Route path="cardManage/Form/:id" component={ManCardFormPage}/>
 
 
 

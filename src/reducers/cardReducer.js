@@ -28,7 +28,6 @@ const initialState ={
     total_count:0,
     items:[]
   },edit:{
-    serial_number:'',
     sumbitBtn:  ButtonStateEnum.None,
     kinds:[{
       key:-1,
@@ -118,6 +117,21 @@ export default handleActions({
     return Object.assign({},state);
   },'set cardDefence' (state, action){
     state.edit.defence = action.payload;
+    return Object.assign({},state);
+  },'change carddetailbtntype'(state, action){
+    state.edit.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'set cardName'(state, action){
+    state.edit.name = action.payload;
+    return Object.assign({},state);
+  },'set cardEffect'(state, action){
+    state.edit.effect = action.payload;
+    return Object.assign({},state);
+  },'set cardSerialNumber'(state, action){
+    state.edit.serial_number = action.payload;
+    return Object.assign({},state);
+  },'set cardDetailId'(state, action){
+    state.edit.id = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

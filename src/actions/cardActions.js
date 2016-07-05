@@ -12,7 +12,6 @@ export const setLoading = createAction('set loading');
 export const setComment = createAction('set comment');
 export const changeBtnType = createAction('change cardcommentbtnstyle');
 export const initComment = createAction('init cardcomment');
-export const setEditSerialNumber = createAction('set editserialnumber')
 export const fetchCardEdit = createAction('fetch cardedit');
 export const setProperty = createAction('set cardProperty');
 export const setKind = createAction('set cardKind');
@@ -20,6 +19,11 @@ export const setLevel = createAction('set cardLevel');
 export const setRace = createAction('set cardRace');
 export const setAttack = createAction('set cardAttack');
 export const setDefence = createAction('set cardDefence');
+export const setName = createAction('set cardName');
+export const setEffect = createAction('set cardEffect');
+export const setSerialNumber = createAction('set cardSerialNumber');
+export const setCardDetailId = createAction('set cardDetailId')
+export const changeCardDetailBtnType = createAction('change carddetailbtntype');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -112,7 +116,7 @@ export const requestCreateCardComment= () => {
 export const requestCardEdit = () => {
   return (dispatch, state) => {
     const {card,user} = state();
-    fetch(`${Host}/card/edit/${card.edit.serial_number}`,{
+    fetch(`${Host}/card/edit/${card.edit.id}`,{
       method:'Get',
       headers: {
         'Accept': 'application/json',
@@ -126,6 +130,32 @@ export const requestCardEdit = () => {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchCardEdit(json.data));
       }
+    });
+  };
+};
+export const requestUpdateCardDetail = () => {
+  return (dispatch, state) => {
+    const {card,user} = state();
+    fetch(`${Host}/card/edit`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(card.edit)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.Success));
+      }else{
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.None));
+      },2500);
     });
   };
 };

@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
+import {Link} from 'react-router';
+import moment from 'moment';
 import Button from '../../../../components/button';
 import * as appActions from '../../../../actions/appActions';
 import * as cardActions from '../../../../actions/cardActions';
 import DropDown from '../../../../components/dropdown';
-import {Link} from 'react-router';
-import moment from 'moment';
+import ButtonStateEnum from '../../../../enums/buttonStateEnum';
 import './index.scss';
 
 class ManCardFormPage extends React.Component {
@@ -20,12 +21,15 @@ class ManCardFormPage extends React.Component {
     this.changeRace = this.changeRace.bind(this);
     this.changeAttack = this.changeAttack.bind(this);
     this.changeDefence = this.changeDefence.bind(this);
+    this.saveCardDetail = this.saveCardDetail.bind(this);
+    this.changeName = this.changeName.bind(this);
+    this.changeEffect = this.changeEffect.bind(this);
+    this.changeSerialNumber = this.changeSerialNumber.bind(this);
   }
   componentWillMount(){
-    let {serialNumber} = this.props.params;
+    let {id} = this.props.params;
     let {cardActions} = this.props;
-    cardActions.setEditSerialNumber(serialNumber);
-    // cardActions.requestCardEdit(serialNumber);
+    cardActions.setCardDetailId(id);
     if(this.props.user.token){
       cardActions.requestCardEdit();
     }else{
@@ -51,7 +55,21 @@ class ManCardFormPage extends React.Component {
     this.props.cardActions.setDefence(e.target.value);
   }
   saveCardDetail(){
-
+    this.props.cardActions.changeCardDetailBtnType(ButtonStateEnum.Loading);
+    if(this.props.card.edit.serial_number){
+      this.props.cardActions.requestUpdateCardDetail();
+    }else{
+      // this.props.actions.requestCreateBan(this.props.nav);
+    }
+  }
+  changeName(e){
+    this.props.cardActions.setName(e.target.value);
+  }
+  changeEffect(e){
+    this.props.cardActions.setEffect(e.target.value);
+  }
+  changeSerialNumber(e){
+    this.props.cardActions.setSerialNumber(e.target.value);
   }
   render(){
     const {edit} = this.props.card;
@@ -61,10 +79,10 @@ class ManCardFormPage extends React.Component {
     let raceValue = edit.race_id ? edit.race_id : -1;
     return (
       <div className="mancardform-page">
-        <input className="name" placeholder="卡片名稱" value={edit.name} />
-        <textarea className="effect" placeholder="卡片效果" value={edit.effect} />
+        <input onChange={this.changeName} className="name" placeholder="卡片名稱" value={edit.name} />
+        <textarea  onChange={this.changeEffect} className="effect" placeholder="卡片效果" value={edit.effect} />
         <div className="drop-info">
-          <input className="name input" placeholder="卡片名稱" value={edit.serial_number} />
+          <input onChange={this.changeSerialNumber} className="name input" placeholder="卡片名稱" value={edit.serial_number} />
           <div className="col">
             <span>屬性</span>
             <DropDown
