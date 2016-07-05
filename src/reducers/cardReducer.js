@@ -56,7 +56,10 @@ const initialState ={
     ,cards:[]
     ,card_form:{
       sumbitBtn:  ButtonStateEnum.None
-
+    },cardsDelete:{
+      sumbitBtn:  ButtonStateEnum.None
+    },parseImage:{
+      sumbitBtn:  ButtonStateEnum.None
     }
 
   }
@@ -155,6 +158,12 @@ export default handleActions({
     return Object.assign({},state);
   },'set editCardNumber'(state,action){
     state.edit.card_form.number = action.payload;
+    return Object.assign({},state);
+  },'change deleteCardsBtnType'(state, action){
+    state.edit.cardsDelete.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'change parseCardsBtnType'(state, action){
+    state.edit.parseImage.sumbitBtn = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

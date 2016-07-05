@@ -30,6 +30,8 @@ class ManCardFormPage extends React.Component {
     this.renderCards = this.renderCards.bind(this);
     this.saveCards = this.saveCards.bind(this);
     this.changeCardNumber = this.changeCardNumber.bind(this);
+    this.deleteCards = this.deleteCards.bind(this);
+    this.getImage = this.getImage.bind(this);
   }
   componentWillMount(){
     let {id} = this.props.params;
@@ -112,6 +114,14 @@ class ManCardFormPage extends React.Component {
       </li>
     )
   }
+  deleteCards(){
+    this.props.cardActions.changeCardsDeleteBtnType(ButtonStateEnum.Loading);
+    this.props.cardActions.requestDeleteCards();
+  }
+  getImage(){
+    this.props.cardActions.changeCardsParseBtnType(ButtonStateEnum.Loading);
+    this.props.cardActions.requestGetImage();
+  }
   render(){
     const {edit} = this.props.card;
     const propValue = edit.property_id ? edit.property_id : -1;
@@ -120,7 +130,7 @@ class ManCardFormPage extends React.Component {
     const raceValue = edit.race_id ? edit.race_id : -1;
     const typeValue = edit.card_form.type_id ? edit.card_form.type_id  : -1;
     const packValue = edit.card_form.pack_id ? edit.card_form.pack_id  : -1;
-
+    const showDeleteSty = edit.card_form.id ? {}:{display:'none'};
 
     let isMonsterStyle = propValue >= 8 ? {display:'none'} :{};
     return (
@@ -194,11 +204,20 @@ class ManCardFormPage extends React.Component {
             values={edit.types}/>
           <div>
             <Button
-                onClick={this.saveCardDetail}
+                onClick={this.getImage}
                 style={{float:'left'}}
-                state={this.props.card.edit}
+                state={this.props.card.edit.parseImage}
                 lIcon="bug"
                 value="搜索"
+                fail="fail"
+                success="success"/>
+            <Button
+                onClick={this.deleteCards}
+                style={{textAlign:'center'},showDeleteSty}
+                state={this.props.card.edit.cardsDelete}
+                rIcon="trash"
+                value="刪除"
+                normalSty={{backgroundColor:'red'}}
                 fail="fail"
                 success="success"/>
             <Button

@@ -10,6 +10,7 @@ class Button extends React.Component {
    this.loading = this.loading.bind(this);
    this.fail = this.fail.bind(this);
    this.success = this.success.bind(this);
+   this.normal = this.normal.bind(this);
 
 
   }
@@ -19,8 +20,9 @@ class Button extends React.Component {
   normal(){
     const lIcon = this.props.lIcon? <Icon name={this.props.lIcon}/> :'';
     const rIcon = this.props.rIcon? <Icon name={this.props.rIcon}/> :'';
+
     return(
-      <div className="button" onClick={this.onClick}>
+      <div className="button" onClick={this.onClick} style={this.props.normalSty}>
         {lIcon}
         {this.props.value}
         {rIcon}

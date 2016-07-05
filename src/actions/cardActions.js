@@ -30,6 +30,9 @@ export const setPack = createAction('set cardPack');
 export const setType = createAction('set cardType');
 export const setCardNumber = createAction('set editCardNumber');
 export const fetchCards = createAction('fetch editResultCards');
+export const changeCardsDeleteBtnType = createAction('change deleteCardsBtnType');
+export const changeCardsParseBtnType = createAction('change parseCardsBtnType');
+
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -227,6 +230,55 @@ export const requestCreateCards= () => {
       }
       setTimeout(()=>{
         dispatch(changeCardsBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+  };
+};
+export const requestDeleteCards= () => {
+  return (dispatch, state) => {
+    let {card,user} = state();
+    fetch(`${Host}/card/cards/${card.edit.card_form.id}`,{
+      method:'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchCards(json.data));
+        dispatch(setCardForm({image_url:'',number:''}));
+        dispatch(changeCardsDeleteBtnType(ButtonStateEnum.Success));
+      }else{
+        dispatch(changeCardsDeleteBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardsDeleteBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+  };
+};
+
+export const requestGetImage = () => {
+  return (dispatch, state) => {
+    let {card,user} = state();
+    fetch(`${Host}/card/getimage/${card.edit.card_form.id}`
+      ,{headers: {'Token':user.token}})
+    .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchCards(json.data.cards));
+        dispatch(setCardForm(json.data.card_form));
+        dispatch(changeCardsParseBtnType(ButtonStateEnum.Success));
+      }else{
+        dispatch(changeCardsParseBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardsParseBtnType(ButtonStateEnum.None));
       },2500);
     });
   };
