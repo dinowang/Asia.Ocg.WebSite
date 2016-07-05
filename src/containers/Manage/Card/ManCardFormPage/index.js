@@ -3,10 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
-import LinkButton from '../../../../components/linkButton';
+import Button from '../../../../components/button';
 import * as appActions from '../../../../actions/appActions';
 import * as cardActions from '../../../../actions/cardActions';
-
 import DropDown from '../../../../components/dropdown';
 import {Link} from 'react-router';
 import moment from 'moment';
@@ -15,6 +14,7 @@ import './index.scss';
 class ManCardFormPage extends React.Component {
   constructor(){
     super();
+    this.changeProperty = this.changeProperty.bind(this);
   }
   componentWillMount(){
     let {serialNumber} = this.props.params;
@@ -28,6 +28,12 @@ class ManCardFormPage extends React.Component {
     }
   }
   changeKind(){
+
+  }
+  changeProperty(e){
+    this.props.cardActions.setProperty(e.key);
+  }
+  saveCardDetail(){
 
   }
   render(){
@@ -45,7 +51,7 @@ class ManCardFormPage extends React.Component {
           <div className="col">
             <span>屬性</span>
             <DropDown
-              getValue={this.changeKind}
+              getValue={this.changeProperty}
               style={{width:'65%'}}
               default={propValue}
               values={edit.propertys}/>
@@ -76,11 +82,15 @@ class ManCardFormPage extends React.Component {
           </div>
           <input className="name input" placeholder="攻擊力" value={edit.attack} />
           <input className="name input" placeholder="守備力" value={edit.defence} />
-          <hr/>
-          <div>
-            <img src=""/>
+          <Button
+            onClick={this.saveCardDetail}
+            style={{float:'right',top:'5px'}}
+            state={this.props.card.edit}
+            rIcon="floppy-o"
+            value="存擋"
+            fail="fail"
+            success="success"/>
 
-          </div>
 
         </div>
         <div className="card-image">

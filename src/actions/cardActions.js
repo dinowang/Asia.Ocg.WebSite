@@ -14,6 +14,7 @@ export const changeBtnType = createAction('change cardcommentbtnstyle');
 export const initComment = createAction('init cardcomment');
 export const setEditSerialNumber = createAction('set editserialnumber')
 export const fetchCardEdit = createAction('fetch cardedit');
+export const setProperty = createAction('set cardProperty');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();

@@ -29,6 +29,7 @@ const initialState ={
     items:[]
   },edit:{
     serial_number:'',
+    sumbitBtn:  ButtonStateEnum.None,
     kinds:[{
       key:-1,
       value:'請選擇'
@@ -98,7 +99,10 @@ export default handleActions({
     state.edit.serial_number = action.payload;
     return Object.assign({},state);
   },'fetch cardedit' (state,action){
-    state.edit = action.payload;
+    state.edit = Object.assign({},state.edit,action.payload);
+    return Object.assign({},state);
+  },'set cardProperty' (state, action){
+    state.edit.property_id = action.payload;
     return Object.assign({},state);
   }
 }, initialState);
