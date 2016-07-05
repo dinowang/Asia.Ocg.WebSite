@@ -30,7 +30,6 @@ export const setPack = createAction('set cardPack');
 export const setType = createAction('set cardType');
 export const setCardNumber = createAction('set editCardNumber');
 export const fetchCards = createAction('fetch editResultCards');
-
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -220,7 +219,8 @@ export const requestCreateCards= () => {
         return response.json();
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
-        dispatch(fetchCards(json.data));
+        dispatch(fetchCards(json.data.cards));
+        dispatch(setCardForm(json.data.card_form));
         dispatch(changeCardsBtnType(ButtonStateEnum.Success));
       }else{
         dispatch(changeCardsBtnType(ButtonStateEnum.Fail));
