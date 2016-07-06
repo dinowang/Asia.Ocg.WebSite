@@ -109,7 +109,7 @@ class DeckDetail extends React.Component {
     const magic = CardHelper.filter(main_list,'魔');
     const trap = CardHelper.filter(main_list,'罠');
     const editHref = `/deckdetail/edit/${id}`
-    const ownerStyle =  owner.current_user? {}:{display:'none'};
+    const ownerStyle =  this.props.user.alldeck.indexOf(parseInt(id)) === -1 ? {display:'none'}: {};
     const loadingStyle = this.props.deck.loading ? {}:{display:'none'};
     let lastDate = '';
     if(last_editdate){

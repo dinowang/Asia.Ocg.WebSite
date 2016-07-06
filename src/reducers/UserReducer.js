@@ -3,12 +3,13 @@ import CookieHelper from '../businessLogic/cookieHelper';
 import PermissionEnum from '../enums/PermissionEnum';
 
 const initialState ={
-  "token": null,
-  "account":null,
-  "score": 0,
-  "nickname": null,
-  "image_url": null,
-  "privilege": PermissionEnum.User,
+  token: null,
+  account:null,
+  score: 0,
+  nickname: null,
+  image_url: null,
+  privilege: PermissionEnum.User,
+  alldeck:[],
 };
 export default handleActions({
   'set userdata' (state, action){
