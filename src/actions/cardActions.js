@@ -186,6 +186,7 @@ export const requestCreateCardDetail = (nav) => {
     }).then((json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(changeCardDetailBtnType(ButtonStateEnum.Success));
+        dispatch(fetchCardEdit(json.data));
         nav.push(`/cardManage/Form/${json.data.id}`);
       }else{
         dispatch(changeCardDetailBtnType(ButtonStateEnum.Fail));
