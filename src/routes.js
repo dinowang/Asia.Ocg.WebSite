@@ -49,6 +49,8 @@ export default (
 
     <Route path="cardManage/List" component={ManCardListPage}/>
     <Route path="cardManage/Form/:id" component={ManCardFormPage}/>
+    <Route path="cardManage/Form/" component={ManCardFormPage}/>
+
 
 
 

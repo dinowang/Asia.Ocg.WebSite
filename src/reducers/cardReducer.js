@@ -28,32 +28,37 @@ const initialState ={
     total_count:0,
     items:[]
   },edit:{
-    sumbitBtn:  ButtonStateEnum.None,
-    kinds:[{
-      key:-1,
-      value:'請選擇'
-    }],
-    levels:[{
-      key:-1,
-      value:'請選擇'
-    }],
-    propertys:[{
-      key:-1,
-      value:'請選擇'
-    }],
-    races:[{
-      key:-1,
-      value:'請選擇'
-    }],
-    packs:[{
-      key:-1,
-      value:'請選擇'
-    }],
-    types:[{
-      key:-1,
-      value:'請選擇'
-    }]
-    ,cards:[]
+    detail_form:{
+      sumbitBtn:  ButtonStateEnum.None,
+      cards:[]
+
+    },
+    dropdown:{
+      kinds:[{
+        key:-1,
+        value:'請選擇'
+      }],
+      levels:[{
+        key:-1,
+        value:'請選擇'
+      }],
+      propertys:[{
+        key:-1,
+        value:'請選擇'
+      }],
+      races:[{
+        key:-1,
+        value:'請選擇'
+      }],
+      packs:[{
+        key:-1,
+        value:'請選擇'
+      }],
+      types:[{
+        key:-1,
+        value:'請選擇'
+      }]
+    }
     ,card_form:{
       sumbitBtn:  ButtonStateEnum.None
     },cardsDelete:{
@@ -106,19 +111,19 @@ export default handleActions({
     state.edit.serial_number = action.payload;
     return Object.assign({},state);
   },'fetch cardedit' (state,action){
-    state.edit = Object.assign({},state.edit,action.payload);
+    state.edit.detail_form = Object.assign({},state.edit.detail_form,action.payload);
     return Object.assign({},state);
   },'set cardProperty' (state, action){
-    state.edit.property_id = action.payload;
+    state.edit.detail_form.property_id = action.payload;
     return Object.assign({},state);
   },'set cardKind' (state, action){
-    state.edit.kind_id = action.payload;
+    state.edit.detail_form.kind_id = action.payload;
     return Object.assign({},state);
   },'set cardLevel' (state, action){
-    state.edit.level_id = action.payload;
+    state.edit.detail_form.level_id = action.payload;
     return Object.assign({},state);
   },'set cardRace' (state, action){
-    state.edit.race_id = action.payload;
+    state.edit.detail_form.race_id = action.payload;
     return Object.assign({},state);
   },'set cardPack' (state, action){
     state.edit.card_form.pack_id = action.payload;
@@ -127,25 +132,25 @@ export default handleActions({
     state.edit.card_form.type_id = action.payload;
     return Object.assign({},state);
   },'set cardAttack' (state, action){
-    state.edit.attack = action.payload;
+    state.edit.detail_form.attack = action.payload;
     return Object.assign({},state);
   },'set cardDefence' (state, action){
-    state.edit.defence = action.payload;
+    state.edit.detail_form.defence = action.payload;
     return Object.assign({},state);
   },'change carddetailbtntype'(state, action){
-    state.edit.sumbitBtn = action.payload;
+    state.edit.detail_form.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'set cardName'(state, action){
-    state.edit.name = action.payload;
+    state.edit.detail_form.name = action.payload;
     return Object.assign({},state);
   },'set cardEffect'(state, action){
-    state.edit.effect = action.payload;
+    state.edit.detail_form.effect = action.payload;
     return Object.assign({},state);
   },'set cardSerialNumber'(state, action){
-    state.edit.serial_number = action.payload;
+    state.edit.detail_form.serial_number = action.payload;
     return Object.assign({},state);
   },'set cardDetailId'(state, action){
-    state.edit.id = action.payload;
+    state.edit.detail_form.id = action.payload;
     return Object.assign({},state);
   },'set cardForm'(state, action){
     state.edit.card_form = Object.assign({},state.edit.card_form,action.payload)
@@ -154,7 +159,7 @@ export default handleActions({
     state.edit.card_form.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'fetch editResultCards'(state, action){
-    state.edit.cards = action.payload;
+    state.edit.detail_form.cards = action.payload;
     return Object.assign({},state);
   },'set editCardNumber'(state,action){
     state.edit.card_form.number = action.payload;
@@ -164,6 +169,9 @@ export default handleActions({
     return Object.assign({},state);
   },'change parseCardsBtnType'(state, action){
     state.edit.parseImage.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'fetch cardDropdwon' (state,action){
+    state.edit.dropdown = action.payload;
     return Object.assign({},state);
   }
 }, initialState);

@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
 import {Link} from 'react-router';
 import moment from 'moment';
+import { browserHistory } from 'react-router';
 import Button from '../../../../components/button';
 import * as appActions from '../../../../actions/appActions';
 import * as cardActions from '../../../../actions/cardActions';
@@ -40,7 +41,7 @@ class ManCardFormPage extends React.Component {
     if(this.props.user.token){
       cardActions.requestCardEdit();
     }else{
-      this.props.appActions.requestGetInfo([cardActions.requestCardEdit]);
+      this.props.appActions.requestGetInfo([cardActions.requestCardDropDown]);
     }
   }
   changeKind(e){
@@ -70,10 +71,10 @@ class ManCardFormPage extends React.Component {
 
   saveCardDetail(){
     this.props.cardActions.changeCardDetailBtnType(ButtonStateEnum.Loading);
-    if(this.props.card.edit.serial_number){
+    if(this.props.card.edit.detail_form.id){
       this.props.cardActions.requestUpdateCardDetail();
     }else{
-      // this.props.actions.requestCreateBan(this.props.nav);
+      this.props.cardActions.requestCreateCardDetail(this.props.nav);
     }
   }
   saveCards(){
@@ -101,7 +102,7 @@ class ManCardFormPage extends React.Component {
     this.props.cardActions.setCardForm(e);
   }
   renderCards(data){
-    let typeName = this.props.card.edit.types.filter(type => type.key === data.type_id)[0];
+    let typeName = this.props.card.edit.dropdown.types.filter(type => type.key === data.type_id)[0];
     if(typeName){
       typeName= typeName.value
     }
@@ -124,10 +125,10 @@ class ManCardFormPage extends React.Component {
   }
   render(){
     const {edit} = this.props.card;
-    const propValue = edit.property_id ? edit.property_id : -1;
-    const kindValue = edit.kind_id ? edit.kind_id : -1;
-    const levelValue = edit.level_id ? edit.level_id : -1;
-    const raceValue = edit.race_id ? edit.race_id : -1;
+    const propValue = edit.detail_form.property_id ? edit.detail_form.property_id : -1;
+    const kindValue = edit.detail_form.kind_id ? edit.detail_form.kind_id : -1;
+    const levelValue = edit.detail_form.level_id ? edit.detail_form.level_id : -1;
+    const raceValue = edit.detail_form.race_id ? edit.detail_form.race_id : -1;
     const typeValue = edit.card_form.type_id ? edit.card_form.type_id  : -1;
     const packValue = edit.card_form.pack_id ? edit.card_form.pack_id  : -1;
     const showDeleteSty = edit.card_form.id ? {}:{display:'none'};
@@ -135,17 +136,17 @@ class ManCardFormPage extends React.Component {
     let isMonsterStyle = propValue >= 8 ? {display:'none'} :{};
     return (
       <div className="mancardform-page">
-        <input onChange={this.changeName} className="name" placeholder="卡片名稱" value={edit.name} />
-        <textarea  onChange={this.changeEffect} className="effect" placeholder="卡片效果" value={edit.effect} />
+        <input onChange={this.changeName} className="name" placeholder="卡片名稱" value={edit.detail_form.name} />
+        <textarea  onChange={this.changeEffect} className="effect" placeholder="卡片效果" value={edit.detail_form.effect} />
         <div className="drop-info">
-          <input onChange={this.changeSerialNumber} className="name input" placeholder="卡片名稱" value={edit.serial_number} />
+          <input onChange={this.changeSerialNumber} className="name input" placeholder="卡片密碼" value={edit.detail_form.serial_number} />
           <div className="col">
             <span>屬性</span>
             <DropDown
               getValue={this.changeProperty}
               style={{width:'65%'}}
               default={propValue}
-              values={edit.propertys}/>
+              values={edit.dropdown.propertys}/>
           </div>
           <div className="col">
             <span>種類</span>
@@ -153,7 +154,7 @@ class ManCardFormPage extends React.Component {
               getValue={this.changeKind}
               style={{width:'65%'}}
               default={kindValue}
-              values={edit.kinds}/>
+              values={edit.dropdown.kinds}/>
           </div>
           <div className="col" style={isMonsterStyle}>
             <span>等級</span>
@@ -161,7 +162,7 @@ class ManCardFormPage extends React.Component {
               getValue={this.changeLevel}
               style={{width:'65%'}}
               default={levelValue}
-              values={edit.levels}/>
+              values={edit.dropdown.levels}/>
           </div>
           <div className="col" style={isMonsterStyle}>
             <span>種族</span>
@@ -169,14 +170,14 @@ class ManCardFormPage extends React.Component {
               getValue={this.changeRace}
               style={{width:'65%'}}
               default={raceValue}
-              values={edit.races}/>
+              values={edit.dropdown.races}/>
           </div>
-          <input style={isMonsterStyle} onChange={this.changeAttack} className="name input" placeholder="攻擊力" value={edit.attack} />
-          <input style={isMonsterStyle} onChange={this.changeDefence} className="name input" placeholder="守備力" value={edit.defence} />
+          <input style={isMonsterStyle} onChange={this.changeAttack} className="name input" placeholder="攻擊力" value={edit.detail_form.attack} />
+          <input style={isMonsterStyle} onChange={this.changeDefence} className="name input" placeholder="守備力" value={edit.detail_form.defence} />
           <Button
             onClick={this.saveCardDetail}
             style={{float:'right',top:'5px'}}
-            state={this.props.card.edit}
+            state={this.props.card.edit.detail_form}
             rIcon="floppy-o"
             value="存擋"
             fail="fail"
@@ -186,7 +187,7 @@ class ManCardFormPage extends React.Component {
         </div>
         <div className="card-image">
           <ul>
-            {edit.cards.map(this.renderCards)}
+            {edit.detail_form.cards.map(this.renderCards)}
           </ul>
         </div>
         <div className="edit-cards">
@@ -196,12 +197,12 @@ class ManCardFormPage extends React.Component {
             getValue={this.changePack}
             style={{width:'100%'}}
             default={packValue}
-            values={edit.packs}/>
+            values={edit.dropdown.packs}/>
           <DropDown
             getValue={this.changeType}
             style={{width:'50%'}}
             default={typeValue}
-            values={edit.types}/>
+            values={edit.dropdown.types}/>
           <div>
             <Button
                 onClick={this.getImage}
@@ -244,7 +245,8 @@ function mapStateToProps(state) {
   return {
     search: state.search,
     card: state.card,
-    user: state.user
+    user: state.user,
+    nav: browserHistory
   };
 }
 

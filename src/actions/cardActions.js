@@ -32,7 +32,7 @@ export const setCardNumber = createAction('set editCardNumber');
 export const fetchCards = createAction('fetch editResultCards');
 export const changeCardsDeleteBtnType = createAction('change deleteCardsBtnType');
 export const changeCardsParseBtnType = createAction('change parseCardsBtnType');
-
+export const fetchDropDwon = createAction('fetch cardDropdwon');
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();
@@ -122,11 +122,35 @@ export const requestCreateCardComment= () => {
 };
 
 //Management
+export const requestCardDropDown = () => {
+  return (dispatch, state) => {
+    const {card,user} = state();
+    fetch(`${Host}/card/dropdown`,{
+      method:'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      }
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(fetchDropDwon(json.data));
+        if(card.edit.detail_form.id){
+          dispatch(requestCardEdit());
+        }
+      }
+    });
+  };
+};
+
 export const requestCardEdit = () => {
   return (dispatch, state) => {
     const {card,user} = state();
-    fetch(`${Host}/card/edit/${card.edit.id}`,{
-      method:'Get',
+    fetch(`${Host}/card/edit/${card.edit.detail_form.id}`,{
+      method:'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -142,19 +166,37 @@ export const requestCardEdit = () => {
     });
   };
 };
+
+export const requestCreateCardDetail = (nav) => {
+  return (dispatch, state) => {
+    let {card,user} = state();
+    fetch(`${Host}/card/edit`,{
+      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(card.edit.detail_form)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.Success){
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.Success));
+        nav.push(`/cardManage/Form/${json.data.id}`);
+      }else{
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.Fail));
+      }
+      setTimeout(()=>{
+        dispatch(changeCardDetailBtnType(ButtonStateEnum.None));
+      },2500);
+    });
+  };
+};
 export const requestUpdateCardDetail = () => {
   return (dispatch, state) => {
     let {card,user} = state();
-    let postData = Object.assign({},card.edit);
-    postData.packs = [];
-    postData.propertys = [];
-    postData.levels = [];
-    postData.races = [];
-    postData.kinds = [];
-    postData.types = [];
-    postData.types = [];
-    postData.cards = [];
-    postData.card_form = {};
     fetch(`${Host}/card/edit`,{
       method:'PUT',
       headers: {
@@ -162,7 +204,7 @@ export const requestUpdateCardDetail = () => {
         'Content-Type': 'application/json',
         'Token': user.token
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(card.edit.detail_form)
     })
       .then((response)=> {
         return response.json();
@@ -208,7 +250,7 @@ export const requestUpdateCards = () => {
 export const requestCreateCards= () => {
   return (dispatch, state) => {
     let {card,user} = state();
-    let postData = Object.assign({}, card.edit.card_form,{detail_id:card.edit.id});
+    let postData = Object.assign({}, card.edit.card_form,{detail_id:card.edit.detail_form.id});
     fetch(`${Host}/card/cards`,{
       method:'POST',
       headers: {
