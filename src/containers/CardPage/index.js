@@ -1,11 +1,13 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import LinkButton from '../../components/linkButton';
 import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
 import CardInfo from '../../components/cardInfo';
 import CardDeck from '../../components/cardDeck';
 import CardComment from '../../components/cardComment';
+import PermissionEnum from '../../enums/PermissionEnum';
 import {Icon} from 'react-fa';
 import './index.scss';
 
@@ -45,6 +47,9 @@ class CardPage extends React.Component {
   }
   render(){
     const { card, cardActions, user } = this.props;
+    const editCardHref = `/cardManage/Form/${card.id}`;
+    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
+
     return (
       <div className="card" onScroll={this.handleScroll}>
         <h1>{card.name}</h1>
@@ -59,6 +64,8 @@ class CardPage extends React.Component {
                   <span className="price">$--</span>
                 </li>
               </ul>
+              <LinkButton style={adminStyle} value="修改卡片" to={editCardHref} lIcon="pencil-square"/>
+
 
           </div>
 

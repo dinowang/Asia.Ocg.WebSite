@@ -35,14 +35,18 @@ class ManCardFormPage extends React.Component {
     this.getImage = this.getImage.bind(this);
   }
   componentWillMount(){
+
     let {id} = this.props.params;
     let {cardActions} = this.props;
     cardActions.setCardDetailId(id);
     if(this.props.user.token){
-      cardActions.requestCardEdit();
+      cardActions.requestCardDropDown();
     }else{
       this.props.appActions.requestGetInfo([cardActions.requestCardDropDown]);
     }
+  }
+  componentWillUnmount(){
+    this.props.cardActions.initCardEdit();
   }
   changeKind(e){
     this.props.cardActions.setKind(e.key);
@@ -131,6 +135,10 @@ class ManCardFormPage extends React.Component {
     const raceValue = edit.detail_form.race_id ? edit.detail_form.race_id : -1;
     const typeValue = edit.card_form.type_id ? edit.card_form.type_id  : -1;
     const packValue = edit.card_form.pack_id ? edit.card_form.pack_id  : -1;
+
+
+
+
     const showDeleteSty = edit.card_form.id ? {}:{display:'none'};
 
     let isMonsterStyle = propValue >= 8 ? {display:'none'} :{};

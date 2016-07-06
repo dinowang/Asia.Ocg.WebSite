@@ -33,6 +33,8 @@ export const fetchCards = createAction('fetch editResultCards');
 export const changeCardsDeleteBtnType = createAction('change deleteCardsBtnType');
 export const changeCardsParseBtnType = createAction('change parseCardsBtnType');
 export const fetchDropDwon = createAction('fetch cardDropdwon');
+export const initCardEdit = createAction('init cardEdit');
+
 export const checkinList = (serialNumber)=>{
   return (dispatch, state) => {
     const {card} = state();

@@ -27,7 +27,8 @@ const initialState ={
     total_page:0,
     total_count:0,
     items:[]
-  },edit:{
+  },
+  edit:{
     detail_form:{
       sumbitBtn:  ButtonStateEnum.None,
       cards:[]
@@ -111,7 +112,7 @@ export default handleActions({
     state.edit.serial_number = action.payload;
     return Object.assign({},state);
   },'fetch cardedit' (state,action){
-    state.edit.detail_form = Object.assign({},state.edit.detail_form,action.payload);
+    state.edit.detail_form =  Object.assign({},initialState.edit.detail_form,action.payload);
     return Object.assign({},state);
   },'set cardProperty' (state, action){
     state.edit.detail_form.property_id = action.payload;
@@ -171,7 +172,17 @@ export default handleActions({
     state.edit.parseImage.sumbitBtn = action.payload;
     return Object.assign({},state);
   },'fetch cardDropdwon' (state,action){
-    state.edit.dropdown = action.payload;
+    const init = initialState.edit.dropdown;
+    state.edit.dropdown.kinds =  init.kinds.concat(action.payload.kinds);
+    state.edit.dropdown.types =  init.types.concat(action.payload.types);
+    state.edit.dropdown.propertys =  init.propertys.concat(action.payload.propertys);
+    state.edit.dropdown.races =  init.races.concat(action.payload.races);
+    state.edit.dropdown.levels =  init.levels.concat(action.payload.levels);
+    state.edit.dropdown.packs =  init.packs.concat(action.payload.packs);
+    return Object.assign({},state);
+  },'init cardEdit'(state){
+    state.edit.detail_form = {cards:[],sumbitBtn:  ButtonStateEnum.None};
+    state.edit.card_form = {sumbitBtn:  ButtonStateEnum.None};
     return Object.assign({},state);
   }
 }, initialState);

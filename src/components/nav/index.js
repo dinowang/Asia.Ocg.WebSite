@@ -51,8 +51,8 @@ class Nav extends React.Component {
         title:'會員管理',
         href:'/banManage/List'
     },{
-        title:'卡片管理',
-        href:'/cardManage/Form'
+        title:'新增卡片',
+        href:'/cardManage/Form/'
     }];
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
     return (
