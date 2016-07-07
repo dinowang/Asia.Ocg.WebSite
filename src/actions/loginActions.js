@@ -162,7 +162,7 @@ export const requestLogout = () => {
     fetch(`${Host}/account/logout`,{headers: {'Token':user.token}})
     .then((response)=> {
         return response.json();
-    }).then((json)=> {
+    }).then(()=> {
       dispatch(initUserData());
     });
   };

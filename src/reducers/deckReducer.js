@@ -1,7 +1,6 @@
 import { handleActions } from 'redux-actions';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../enums/DeckEnum';
 import ButtonStateEnum from '../enums/buttonStateEnum';
-import BanTypeEnum from '../enums/banTypeEnum';
 const initialState ={
   collapse:{
     use:true,
@@ -130,7 +129,7 @@ export default handleActions({
       }
     }
     return Object.assign({},state);
-  },'remove deckitem' (state,action) {
+  },'remove deckitem' (state) {
     switch (state.on_drag_item.type) {
       case DeckDetailTypeEnum.Main:
         state.deckform.main_list = state.deckform.main_list.filter(data=>
@@ -149,13 +148,13 @@ export default handleActions({
         break;
     }
     return Object.assign({},state);
-  },'clear ondrawitem'(state,action){
+  },'clear ondrawitem'(state){
     state.on_drag_item = {};
     return Object.assign({},state);
   },'set dragmode'(state,action){
     state.add_mode = action.payload;
     return Object.assign({},state);
-  },'remove allpreitem'(state,action){
+  },'remove allpreitem'(state){
     state.deckform.main_list = state.deckform.main_list.filter(data=>
       data.pre === false
     )
@@ -182,7 +181,7 @@ export default handleActions({
   },'set onmovearray'(state,action){
     state.on_move_array = action.payload;
     return Object.assign({},state);
-  },'move'(state,action){
+  },'move'(state){
     switch (state.on_move_array.data.type) {
       case DeckDetailTypeEnum.Main:
         state.deckform.main_list.splice(state.on_move_array.index+1,0,Object.assign({},state.on_drag_item,{sort:Math.random(),pre:false,type:1}));
@@ -287,7 +286,7 @@ export default handleActions({
 
     }
     return Object.assign({},state);
-  },'change deckkindmode' (state,action){
+  },'change deckkindmode' (state){
     state.kindMode = !state.kindMode;
     return Object.assign({},state);
   },'change deckkindname' (state,action){

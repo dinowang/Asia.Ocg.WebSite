@@ -1,5 +1,4 @@
 import React from 'react';
-import {Icon} from 'react-fa';
 import moment from 'moment';
 import Button from '../button';
 import ButtonStateEnum from '../../enums/buttonStateEnum';

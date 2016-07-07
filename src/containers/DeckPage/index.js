@@ -16,7 +16,7 @@ class DeckPage extends React.Component {
 
   changeType(e){
     this.props.actions.changeType(e.target.value);
-  };
+  }
   componentWillMount(){
     this.props.actions.requestDeckList();
     let {deck_type, page} = this.props.params;
@@ -31,7 +31,7 @@ class DeckPage extends React.Component {
     return(
       <Link className={style} onClick={this.changeType} key={data.id} to={href} value={data.name}>{data.name}</Link>
     );
-  };
+  }
   render(){
     const listData =  this.props.deck.deck_type.filter(data=>data.name === this.props.deck.current_type)[0];
     const createDeckHref = this.props.user.account ? '/deckdetail/edit/' :'/login';
@@ -48,14 +48,12 @@ class DeckPage extends React.Component {
         </div>
         <div className="other">
           <p className="title">
-            
           </p>
-
         </div>
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {

@@ -1,8 +1,7 @@
-import React,{PropTypes} from 'react';
+import React from 'react';
 import {Icon} from 'react-fa';
 import { Link } from 'react-router';
 import {bindActionCreators} from 'redux';
-import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as loginActions from '../../actions/loginActions';

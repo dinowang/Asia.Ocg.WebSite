@@ -59,7 +59,7 @@ export const requestDeckList = () => {
 
 export const requestDeckComment = () => {
   return (dispatch,state) => {
-    const {deck, user} = state();
+    const {deck} = state();
     fetch(`${Host}/deck/comment/${deck.detail.id}/${deck.detail.comments.current_page}`)
       .then((response)=> {
         return response.json();
@@ -116,7 +116,7 @@ export const requestDeckTypePage = (page) => {
 //Member
 export const requestDeckInfo = () => {
   return (dispatch, state) => {
-    const {deck, user} = state();
+    const {user} = state();
     fetch(`${Host}/deck/editinfo`,{
       method:'GET',
       headers: {

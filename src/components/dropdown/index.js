@@ -55,13 +55,13 @@ class DropDown extends React.Component {
         </div>
     );
   }
-};
+}
 
 DropDown.propTypes ={
   style: PropTypes.object,
   default: PropTypes.number.isRequired,
   getValue: PropTypes.func,
-  values:PropTypes.array.isRequired,
+  values:PropTypes.array.isRequired
 }
 
 export default DropDown;

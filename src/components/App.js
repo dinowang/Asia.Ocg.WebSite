@@ -5,7 +5,6 @@ import Helmet from "react-helmet";
 import Header from './header';
 import Nav from './nav';
 import * as actions from '../actions/appActions';
-import CookieHelper from '../businessLogic/cookieHelper';
 
 class App extends React.Component{
   componentWillMount(){

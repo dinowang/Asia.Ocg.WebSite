@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
 import LinkButton from '../../../../components/linkButton';
 import * as banActions from '../../../../actions/banActions';
@@ -48,7 +47,7 @@ class ManBanListPage extends React.Component {
 
       </tr>
     )
-  };
+  }
   render(){
     return (
       <div className="manbanlist-page">
@@ -74,7 +73,7 @@ class ManBanListPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 ManBanListPage.propTypes = {
   banActions: PropTypes.object.isRequired,

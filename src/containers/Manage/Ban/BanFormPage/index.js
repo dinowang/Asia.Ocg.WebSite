@@ -10,7 +10,7 @@ import DropDown from '../../../../components/dropdown';
 import Button from '../../../../components/button';
 import ButtonStateEnum from '../../../../enums/buttonStateEnum';
 import SearchListPanel from '../../../../components/searchListPanel';
-import BanListText from '../../../../components/banlistText';
+import BanListText from '../../../../components/banListText';
 import BanTypeEnum from '../../../../enums/banTypeEnum';
 
 import './index.scss';

@@ -1,5 +1,4 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
@@ -25,14 +24,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    searchActions: bindActionCreators(searchActions, dispatch),
-    cardActions: bindActionCreators(cardActions, dispatch)
+    searchActions: bindActionCreators(searchActions, dispatch)
   };
 }
 
 ProfileEditPage.propTypes = {
-  params: PropTypes.object.isRequired,
-};
+  params: PropTypes.object.isRequired
+}
 
 export default connect(
   mapStateToProps,

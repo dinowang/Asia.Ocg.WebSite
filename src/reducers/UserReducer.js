@@ -9,7 +9,7 @@ const initialState ={
   nickname: null,
   image_url: null,
   privilege: PermissionEnum.User,
-  alldeck:[],
+  alldeck:[]
 };
 export default handleActions({
   'set userdata' (state, action){
@@ -18,8 +18,7 @@ export default handleActions({
       action.payload.image_url = 'https://xpgcards.blob.core.windows.net/user-image/user.png';
     }
     return Object.assign({},state,action.payload);
-  },
-  'init userdata' (state, action){
+  },'init userdata' (){
     CookieHelper.Set('token',null);
     return Object.assign({},initialState);
   }

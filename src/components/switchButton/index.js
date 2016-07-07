@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import './index.scss';
 
 class SwitchButton extends React.Component {
@@ -19,7 +19,7 @@ class SwitchButton extends React.Component {
         </label>
     );
   }
-};
+}
 
 SwitchButton.propTypes ={
 };

@@ -91,8 +91,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     banActions: bindActionCreators(banActions, dispatch),
-    appActions: bindActionCreators(appActions, dispatch),
-
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 

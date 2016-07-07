@@ -1,9 +1,7 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Icon} from 'react-fa';
-import {Link} from 'react-router';
 import moment from 'moment';
-import DeckList from '../../components/deckList';
 import { browserHistory } from 'react-router';
 import Button from '../../components/button';
 import DropDown from '../../components/dropdown';
@@ -122,7 +120,7 @@ class DeckEditPage extends React.Component {
       this.props.actions.preMove(e.target.value);
     }
   }
-  onMoveEnd(e){
+  onMoveEnd(){
     if(this.props.deck.on_move_array){
       this.props.actions.move();
       this.props.actions.removeAllPreItem();
@@ -300,7 +298,7 @@ class DeckEditPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -327,5 +325,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DeckEditPage);
-
-// <LinkButton value={this.props.deck.mode} to="/deckdetail/1/test"/>

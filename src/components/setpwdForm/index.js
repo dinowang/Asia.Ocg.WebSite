@@ -1,6 +1,5 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
-import LoginState from '../../enums/loginState';
 import {LoginProcessEnum} from '../../enums/loginState'
 import './index.scss';
 
@@ -16,7 +15,7 @@ class SetPwdForm extends React.Component {
       title: '驗證中...',
       color: 'header orange',
       icon: 'spinner',
-      spin: true,
+      spin: true
     }});
     actions.requestCheckCode(code);
   }

@@ -85,7 +85,7 @@ export default handleActions({
     return Object.assign({},state);
   },
   // 變更啟用狀態
-  'change banenable' (state, action) {
+  'change banenable' (state) {
     state.banform.enable = !state.banform.enable;
     return Object.assign({},state);
   },

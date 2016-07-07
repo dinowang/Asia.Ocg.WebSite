@@ -1,6 +1,6 @@
 import React,{PropTypes} from 'react';
 import {Icon} from 'react-fa';
-import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
+import {LoginStateEnum} from '../../enums/loginState';
 import EmailInput from '../emailInput';
 import './index.scss';
 

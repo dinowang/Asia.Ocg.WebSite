@@ -1,5 +1,4 @@
-import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import React from 'react';
 import './index.scss';
 
 class SearchListPanel extends React.Component {
@@ -32,7 +31,7 @@ class SearchListPanel extends React.Component {
         </div>
     );
   }
-};
+}
 
 SearchListPanel.propTypes ={
 };

@@ -1,16 +1,14 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
 import moment from 'moment';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import Button from '../../components/button';
-import DeckList from '../../components/deckList';
 import LinkButton from '../../components/linkButton';
 import CardHelper from '../../businessLogic/cardHelper';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
 import UserComment from '../../components/userComment';
-import BanTypeEnum from '../../enums/BanTypeEnum';
+import BanTypeEnum from '../../enums/banTypeEnum';
 import * as deckActions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
 import './index.scss';
@@ -43,7 +41,7 @@ class DeckDetail extends React.Component {
   mouseOverPreView(e){
     this.props.deckActions.setPreview(e);
   }
-  renderDeckCard(data,index){
+  renderDeckCard(data){
     const href = `/card/${data.serial_number}/${data.name}`
     let banStyle = '';
     if(data.ban_type === BanTypeEnum.Ban){
@@ -144,7 +142,7 @@ class DeckDetail extends React.Component {
           <div className="main half left">
             <div className="title green">描述</div>
             <div dangerouslySetInnerHTML={{__html: description}}></div>
-            
+
           </div>
           <div className="main half right">
             <div className="title green">玩家留言:<span>{this.props.deck.detail.comments.total_count}</span></div>
@@ -181,7 +179,7 @@ class DeckDetail extends React.Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {

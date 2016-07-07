@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from 'react-fa';
 import * as indexActions from '../../actions/indexActions';
 import * as cardActions from '../../actions/cardActions';
 import moment from 'moment';

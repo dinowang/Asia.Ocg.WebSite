@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
         title: '登入中...',
         color: 'header orange',
         icon: 'spinner',
-        spin: true,
+        spin: true
       }});
       actions.changeProcess({process:LoginProcessEnum.Processing});
       actions.requestLogin(account,password)

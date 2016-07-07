@@ -1,10 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import DatePicker from 'react-datepicker';
 import {Icon} from "react-fa";
-import {Link} from 'react-router';
-import moment from 'moment';
 import { browserHistory } from 'react-router';
 import Button from '../../../../components/button';
 import * as appActions from '../../../../actions/appActions';
@@ -243,7 +240,7 @@ class ManCardFormPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 ManCardFormPage.propTypes = {
   search: PropTypes.object.isRequired
