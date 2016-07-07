@@ -40,8 +40,7 @@ class DeckDetail extends React.Component {
     deckActions.initDetail();
     deckActions.changeBtnType(ButtonStateEnum.None);
   }
-  test(e){
-    // console.log('over',e)
+  mouseOverPreView(e){
     this.props.deckActions.setPreview(e);
   }
   renderDeckCard(data,index){
@@ -55,7 +54,7 @@ class DeckDetail extends React.Component {
       banStyle = 'ban-type prelimit';
     }
     return(
-      <div className="card" key={data.sort} onMouseOver={()=>this.test(data)}>
+      <div className="card" key={data.sort} onMouseOver={()=>this.mouseOverPreView(data)}>
         <Link  to={href}>
           <div className={banStyle}></div>
           <img
@@ -144,7 +143,8 @@ class DeckDetail extends React.Component {
           </div>
           <div className="main half left">
             <div className="title green">描述</div>
-            {description}
+            <div dangerouslySetInnerHTML={{__html: description}}></div>
+            
           </div>
           <div className="main half right">
             <div className="title green">玩家留言:<span>{this.props.deck.detail.comments.total_count}</span></div>
