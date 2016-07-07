@@ -43,7 +43,7 @@ export const setCollapse = createAction('set deckcollapse');
 export const setDeckPage = createAction('set deckcommentpage');
 export const setDeckComment = createAction('set deckcomment');
 export const initDeckComments = createAction('init deckcomments');
-
+export const setPreview = createAction('set deckItemPreview');
 export const requestDeckList = () => {
   return (dispatch) => {
     fetch(`${Host}/deck/list/`)

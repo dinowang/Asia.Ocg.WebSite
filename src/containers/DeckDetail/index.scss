@@ -144,6 +144,19 @@
       }
     }
   }
+  .preview{
+    h2{
+      text-align:left;
+    }
+    strong{
+      line-height: 30px;
+      font-size: 1rem;
+    }
+    text-align: center;
+    img{
+      width:100%;
+    }
+  }
   .fa-spinner{
     display: block;
     text-align: center;

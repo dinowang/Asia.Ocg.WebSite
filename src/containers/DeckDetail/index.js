@@ -21,6 +21,7 @@ class DeckDetail extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
     this.onChangeComment = this.onChangeComment.bind(this);
     this.submitComment  = this.submitComment.bind(this);
+    this.renderDeckCard = this.renderDeckCard.bind(this);
   }
   componentWillMount(){
     const {id} = this.props.params;
@@ -39,6 +40,10 @@ class DeckDetail extends React.Component {
     deckActions.initDetail();
     deckActions.changeBtnType(ButtonStateEnum.None);
   }
+  test(e){
+    // console.log('over',e)
+    this.props.deckActions.setPreview(e);
+  }
   renderDeckCard(data,index){
     const href = `/card/${data.serial_number}/${data.name}`
     let banStyle = '';
@@ -50,13 +55,12 @@ class DeckDetail extends React.Component {
       banStyle = 'ban-type prelimit';
     }
     return(
-      <div className="card" key={data.sort}>
+      <div className="card" key={data.sort} onMouseOver={()=>this.test(data)}>
         <Link  to={href}>
           <div className={banStyle}></div>
           <img
           draggable={false}
-          value={{data:data,index:index}}
-          src={data.image_url}></img>
+          src={data.image_url}/>
         </Link>
 
       </div>
@@ -167,6 +171,11 @@ class DeckDetail extends React.Component {
         <div className="info green">
           <h2>玩家資訊</h2>
           <p>暱稱：<span>{owner.name}</span></p>
+        </div>
+        <div className="info orange preview">
+          <h2>預覽</h2>
+          <strong>{this.props.deck.preview.name}</strong>
+          <img src={this.props.deck.preview.image_url}/>
         </div>
       </div>
       </div>

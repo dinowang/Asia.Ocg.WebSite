@@ -8,6 +8,8 @@ const initialState ={
     info:false,
     kind:true
   },
+  preview:{
+  },
   kindMode: true,
   loading:false,
   edit_mode: false,
@@ -311,6 +313,9 @@ export default handleActions({
     return Object.assign({},state);
   },'init deckcomments' (state){
     state.detail.comments = initialState.detail.comments;
+    return Object.assign({},state);
+  },'set deckItemPreview'(state,action){
+    state.preview = action.payload;
     return Object.assign({},state);
   }
 
