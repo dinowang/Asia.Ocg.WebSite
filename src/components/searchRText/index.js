@@ -4,12 +4,15 @@ import {Link} from 'react-router';
 import './index.scss';
 
 const SearchRText = (props) => {
+  const preFetch = (e) =>{
+    props.actions.checkinList(e);
+  }
   let renderLi = (item, index)=>{
     const {name, kind, level, property, race, attack, defence, serial_number} = item;
     const href = `/card/${serial_number}/${name}`;
 
     return(
-      <tr key={index}>
+      <tr key={index} onMouseOver={()=>{preFetch(serial_number)}}>
         <td><Link to={href}>{name}</Link></td>
         <td>{kind}</td>
         <td>{level}</td>

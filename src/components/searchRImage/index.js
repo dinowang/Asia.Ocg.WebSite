@@ -11,7 +11,7 @@ const SearchRImage = (props) => {
     const href = `/card/${serial_number}/${name}`;
     return (
       <div className="card-list" key={index}>
-        <Link to={href}><img src={image_url}></img></Link>
+        <Link to={href} onMouseOver={()=>{preFetch(serial_number)}}><img src={image_url}></img></Link>
         <div className="card-info" >
         <Link onMouseOver={()=>{preFetch(serial_number)}} to={href}>{name}</Link>
           <ul>

@@ -71,7 +71,7 @@ class SearchPage extends React.Component {
                 {(() => {
               switch (search.display_mode) {
                 case 0:   return <SearchRImage data={search.items} actions={cardActions}/>;
-                case 1:   return <SearchRText data={search.items}/>;
+                case 1:   return <SearchRText data={search.items} actions={cardActions}/>;
               }
                 })()}
                 <PageList
