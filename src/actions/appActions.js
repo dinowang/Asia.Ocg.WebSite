@@ -2,11 +2,15 @@ import { createAction } from 'redux-actions';
 import {Host} from './url';
 import { setUserData } from './userActions';
 import CookieHelper from '../businessLogic/cookieHelper';
+import fetch from 'isomorphic-fetch';
 export const setTitle = createAction('set title');
+export const setUrl = createAction('set webUrl');
+export const setDescription = createAction('set webDescription');
+export const setImage = createAction('set webImage');
 export const requestGetInfo = (funcs = [],errFuncs = []) => {
   const token = CookieHelper.Get('token');
-  return (dispatch) => {
-    fetch(`${Host}/account/getinfo`,{
+  return async (dispatch) => {
+    await fetch(`${Host}/account/getinfo`,{
       method:'POST',
       headers: {
         'Accept': 'application/json',

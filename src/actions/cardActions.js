@@ -36,7 +36,7 @@ export const fetchDropDwon = createAction('fetch cardDropdwon');
 export const initCardEdit = createAction('init cardEdit');
 
 export const checkinList = (serialNumber)=>{
-  return (dispatch, state) => {
+  return async (dispatch, state) => {
     const {card} = state();
     let value ;
     card.list.map((data)=>{
@@ -48,13 +48,13 @@ export const checkinList = (serialNumber)=>{
       dispatch(fetchCardInfo(value));
 
     }else{
-      dispatch(requestCardInfo(serialNumber));
+      await dispatch(requestCardInfo(serialNumber));
     }
   };
 };
 export const requestCardInfo = (serialNumber) => {
-  return (dispatch) => {
-    fetch(`${Host}/card/${serialNumber}`)
+  return async (dispatch) => {
+    await fetch(`${Host}/card/${serialNumber}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {

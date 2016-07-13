@@ -1,26 +1,39 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
-import PageList from '../../components/pageList';
+import { asyncConnect } from 'redux-async-connect';
+import {
+        Icon,
+        PageList,
+        SearchRText,
+        SearchRImage
+      } from '../../components';
 import * as searchActions from '../../actions/searchActions';
 import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
 
-import SearchRText from '../../components/searchRText';
-import SearchRImage from '../../components/searchRImage';
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
-class SearchPage extends React.Component {
+@asyncConnect([{
+  promise: async ({params, store: {dispatch}}) => {
+    let {query, page} = params;
+    await dispatch(searchActions.inputSearch({query:query.toUpperCase()}));
 
+    page = page ? page : 1;
+    await dispatch(searchActions.changePage(parseInt(page)));
+    await dispatch(searchActions.requestSearch());
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class SearchPage extends React.Component {
   componentWillMount(){
     let {query, page} = this.props.params;
     this.props.searchActions.inputSearch({query:query.toUpperCase()});
     page = page ? page : 1;
     this.handlePageList(parseInt(page));
-
-
   }
   componentWillUpdate(nextState){
     // Set Titele
@@ -115,8 +128,3 @@ SearchPage.propTypes = {
   cardActions: PropTypes.object.isRequired,
   search: PropTypes.object.isRequired
 };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchPage);

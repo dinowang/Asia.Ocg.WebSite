@@ -3,6 +3,7 @@ import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('development'),
+  'process.env.BROWSER': true,
   __DEV__: true
 };
 
@@ -11,6 +12,7 @@ export default {
   // devtool: 'cheap-module-eval-source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
   entry: [
+    'babel-polyfill',
     'whatwg-fetch',
     'webpack-hot-middleware/client?reload=true',
     './src/index'

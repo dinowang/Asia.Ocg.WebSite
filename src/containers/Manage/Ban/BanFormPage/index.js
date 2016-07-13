@@ -3,17 +3,23 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import * as actions from '../../../../actions/banActions';
-import SwitchButton from '../../../../components/switchButton';
-import DropDown from '../../../../components/dropdown';
-import Button from '../../../../components/button';
 import ButtonStateEnum from '../../../../enums/buttonStateEnum';
-import SearchListPanel from '../../../../components/searchListPanel';
-import BanListText from '../../../../components/banListText';
 import BanTypeEnum from '../../../../enums/banTypeEnum';
+import {
+  SwitchButton,
+  DropDown,
+  Button,
+  SearchListPanel,
+  BanListText
+} from '../../../../components';
 
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+  require('react-datepicker/dist/react-datepicker.css');
+
+}
 
 class BanFormPage extends React.Component {
   constructor() {

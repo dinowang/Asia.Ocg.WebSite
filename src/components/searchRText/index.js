@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 const SearchRText = (props) => {
   const preFetch = (e) =>{

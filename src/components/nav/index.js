@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../icon';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
 import * as actions from '../../actions/searchActions';
 import PermissionEnum from '../../enums/PermissionEnum';
-
 import SearchInput from '../searchInput';
 import Single from './single';
 import Multi from './multi';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
-class Nav extends React.Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Nav extends React.Component {
 
   searchOnChange(value){
     value = value.toUpperCase();
@@ -67,10 +69,10 @@ class Nav extends React.Component {
           </div>
         </div>
         <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
-        <Single title="首頁" icon="home" href="/"/>
-        <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
-        <Single title="禁卡表" icon="ban" href="/ban"/>
-        <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
+       <Single title="首頁" icon="home" href="/"/>
+       <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
+       <Single title="禁卡表" icon="ban" href="/ban"/>
+       <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
 
 
 
@@ -102,8 +104,3 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   };
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav);

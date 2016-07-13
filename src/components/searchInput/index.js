@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 const SearchInput = (props) => {
   const handleChange = (e) => {

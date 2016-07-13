@@ -1,8 +1,10 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../';
 import {LoginProcessEnum} from '../../enums/loginState'
-import './index.scss';
 
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 class SetPwdForm extends React.Component {
   constructor(){
     super();

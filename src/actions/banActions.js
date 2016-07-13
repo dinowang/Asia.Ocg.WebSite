@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import fetch from 'isomorphic-fetch';
 import {Host} from './url';
 import ButtonStateEnum from '../enums/buttonStateEnum';
 import StatusCode from '../enums/statusCode';
@@ -28,8 +29,8 @@ export const requestSearch = (value) => {
   };
 };
 export const requestBan = (id) => {
-  return (dispatch) => {
-    fetch(`${Host}/ban/${id}`)
+  return async (dispatch) => {
+    await fetch(`${Host}/ban/${id}`)
     .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -41,20 +42,19 @@ export const requestBan = (id) => {
 };
 
 export const requestBanList = (id, nav) => {
-  return (dispatch) => {
-    fetch(`${Host}/ban/list`)
+  return async (dispatch) => {
+    await fetch(`${Host}/ban/list`)
     .then((response)=> {
         return response.json();
-    }).then((json)=> {
+    }).then( async (json)=> {
       if(json.data){
-        dispatch(fetchUserBanList(json.data));
+        await dispatch(fetchUserBanList(json.data));
         if(id){
-          dispatch(requestBan(id));
+          await dispatch(requestBan(id));
         }else{
-          dispatch(requestBan(json.data[0].id));
+          await dispatch(requestBan(json.data[0].id));
           nav.push(`/ban/${json.data[0].id}`);
         }
-
       }
     });
   };
@@ -98,7 +98,6 @@ export const requestCreateBan = (nav) => {
 export const requestManageBanList = () => {
   return (dispatch, state) => {
     const {user} = state();
-    console.log('user',user);
     fetch(`${Host}/manage/ban`,{headers: {'Token':user.token}})
     .then((response)=> {
         return response.json();

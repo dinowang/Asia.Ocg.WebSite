@@ -1,14 +1,20 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from "react-fa";
+import {
+  Icon,
+  Button,
+  DropDown
+} from "../../../../components";
 import { browserHistory } from 'react-router';
-import Button from '../../../../components/button';
 import * as appActions from '../../../../actions/appActions';
 import * as cardActions from '../../../../actions/cardActions';
-import DropDown from '../../../../components/dropdown';
 import ButtonStateEnum from '../../../../enums/buttonStateEnum';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
 
 class ManCardFormPage extends React.Component {
   constructor(){

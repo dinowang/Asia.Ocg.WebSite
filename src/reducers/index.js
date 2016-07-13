@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers,createStore, applyMiddleware  } from 'redux';
 import search from './searchReducer';
 import card from './cardReducer';
 import user from './userReducer';
@@ -7,8 +7,14 @@ import deck from './deckReducer';
 import ban from './banReducer';
 import app from './appReducer';
 import index from './indexReducer'
+import { routerReducer } from 'react-router-redux';
+import {reducer as reduxAsyncConnect} from 'redux-async-connect';
+import thunk from 'redux-thunk';
+// import { createStore, applyMiddleware } from 'redux';
 
-const rootReducer = combineReducers({
+export default combineReducers({
+  routing:routerReducer,
+  reduxAsyncConnect,
   search,
   card,
   user,
@@ -19,4 +25,4 @@ const rootReducer = combineReducers({
   index
 });
 
-export default rootReducer;
+// export default rootReducer;

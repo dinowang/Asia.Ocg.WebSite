@@ -1,17 +1,35 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import LinkButton from '../../components/linkButton';
+import { asyncConnect } from 'redux-async-connect';
 import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
-import CardInfo from '../../components/cardInfo';
-import CardDeck from '../../components/cardDeck';
-import CardComment from '../../components/cardComment';
 import PermissionEnum from '../../enums/PermissionEnum';
-import {Icon} from 'react-fa';
-import './index.scss';
 
-class CardPage extends React.Component {
+import {
+  Icon,
+  LinkButton,
+  CardInfo,
+  CardDeck,
+  CardComment
+} from '../../components';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+@asyncConnect([{
+  promise: async ({params, store: {dispatch,getState},location}) => {
+    let {serialNumber} = params;
+    await dispatch(cardActions.checkinList(serialNumber));
+    const {name,effect,image_url} = getState().card;
+    dispatch(appActions.setTitle(name));
+    dispatch(appActions.setDescription(effect));
+    dispatch(appActions.setImage(image_url));
+    dispatch(appActions.setUrl(location.pathname));
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class CardPage extends React.Component {
   constructor(){
     super();
     this.handleScroll = this.handleScroll.bind(this);
@@ -121,8 +139,3 @@ function mapDispatchToProps(dispatch) {
 
   };
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardPage);

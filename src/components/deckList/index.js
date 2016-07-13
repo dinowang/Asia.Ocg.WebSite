@@ -1,9 +1,12 @@
 import React,{PropTypes} from 'react';
 import {Link} from 'react-router';
-import PageList from '../pageList';
 import moment from 'moment';
+import {PageList} from '../';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
 class DeckList extends React.Component{
   renderData(data){
     const {id, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;

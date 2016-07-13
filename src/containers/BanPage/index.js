@@ -3,13 +3,30 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { browserHistory } from 'react-router';
 import {Link} from 'react-router';
-import {Icon} from 'react-fa';
+import { asyncConnect } from 'redux-async-connect';
+import {Icon} from '../../components';
 import * as banActions from '../../actions/banActions';
 import * as appActions from '../../actions/appActions';
 import BanTypeEnum from '../../enums/banTypeEnum';
-import './index.scss';
 
-class BanPage extends React.Component {
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
+@asyncConnect([{
+  promise: async ({params,store: {dispatch,getState},location}) => {
+    const {id} = params;
+    await dispatch(banActions.requestBanList(id,browserHistory));
+    const {banform} = getState().ban;
+    const title = `${banform.name}-禁卡表`;
+    dispatch(appActions.setTitle(title));
+    dispatch(appActions.setDescription(`禁止・限制卡表適用於所有公認比賽`));
+    dispatch(appActions.setImage(''));
+    dispatch(appActions.setUrl(location.pathname));
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class BanPage extends React.Component {
   constructor(){
     super();
     this.renderBanList = this.renderBanList.bind(this);
@@ -94,8 +111,3 @@ function mapDispatchToProps(dispatch) {
     appActions: bindActionCreators(appActions, dispatch)
   };
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BanPage);

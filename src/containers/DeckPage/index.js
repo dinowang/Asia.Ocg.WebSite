@@ -1,12 +1,32 @@
 import React,{PropTypes} from 'react';
-import DeckList from '../../components/deckList';
-import LinkButton from '../../components/linkButton';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
+import {DeckList, LinkButton} from '../../components';
+import { asyncConnect } from 'redux-async-connect';
 import * as actions from '../../actions/deckActions';
-import './index.scss';
+import * as appActions from '../../actions/appActions';
 
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
+@asyncConnect([{
+  promise: async ({params,store: {dispatch},location}) => {
+    await dispatch(actions.requestDeckList());
+
+    const {deck_type, page} = params;
+    if(deck_type){
+      await dispatch(actions.changeType(deck_type));
+      await dispatch(actions.requestDeckTypePage(parseInt(page)));
+      dispatch(appActions.setTitle(`${deck_type}-牌組區`));
+    }
+    dispatch(appActions.setDescription(`牌組分享區`));
+    dispatch(appActions.setImage(''));
+    dispatch(appActions.setUrl(location.pathname));
+  }
+}])
 class DeckPage extends React.Component {
   constructor(){
     super();
@@ -23,6 +43,8 @@ class DeckPage extends React.Component {
     if(deck_type){
       this.props.actions.changeType(deck_type);
       this.props.actions.requestDeckTypePage(parseInt(page));
+      this.props.appActions.setTitle(`${deck_type}-牌組區`);
+
     }
   }
   renderNav(data){
@@ -64,7 +86,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    appActions :bindActionCreators(appActions, dispatch)
   };
 }
 

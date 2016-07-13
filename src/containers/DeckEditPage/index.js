@@ -1,10 +1,12 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Icon} from 'react-fa';
 import moment from 'moment';
 import { browserHistory } from 'react-router';
-import Button from '../../components/button';
-import DropDown from '../../components/dropdown';
+import {
+  Icon,
+  Button,
+  DropDown
+} from '../../components';
 import CardHelper from '../../businessLogic/cardHelper';
 import {bindActionCreators} from 'redux';
 import {DeckDetailTypeEnum,DeckModeEnum} from '../../enums/DeckEnum';
@@ -13,7 +15,9 @@ import ButtonStateEnum from '../../enums/buttonStateEnum'
 import * as actions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class DeckEditPage extends React.Component {
   constructor(){

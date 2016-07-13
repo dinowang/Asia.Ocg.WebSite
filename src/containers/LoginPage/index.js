@@ -1,19 +1,33 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from 'react-fa';
+import { asyncConnect } from 'redux-async-connect';
 import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
-import LoginForm from '../../components/loginForm';
-import ForgetForm from '../../components/forgetForm';
-import RegisterFomr from '../../components/registerForm';
-import SetPwdForm from '../../components/setpwdForm';
-import ReSendEmailForm from '../../components/resendEmailForm';
-
-
 import * as actions from '../../actions/loginActions';
-import './index.scss';
+import {
+  Icon,
+  LoginForm,
+  ForgetForm,
+  RegisterForm,
+  SetPwdForm,
+  ReSendEmailForm
+} from '../../components';
 
-class LoginPage extends React.Component {
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+@asyncConnect([{
+  promise: async ({params,store: {dispatch}}) => {
+    let {code} = params;
+    if(code){
+      dispatch(actions.changeMode({mode:LoginStateEnum.RegisterSetPassword}));
+    }else{
+      dispatch(actions.changeMode({mode:LoginStateEnum.Loging}));
+    }
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class LoginPage extends React.Component {
   componentWillMount(){
     let {code} = this.props.params;
     const {actions} = this.props;
@@ -34,7 +48,7 @@ class LoginPage extends React.Component {
           switch (login.mode) {
             case LoginStateEnum.Loging:   return <LoginForm actions={actions} data={login}/>;
             case LoginStateEnum.Forget:   return <ForgetForm actions={actions}/>;
-            case LoginStateEnum.Register:   return <RegisterFomr actions={actions} data={login}/>;
+            case LoginStateEnum.Register:   return <RegisterForm actions={actions} data={login}/>;
             case LoginStateEnum.RegisterSetPassword: return <SetPwdForm actions={actions} data={login} code={this.props.params.code}/>;
             case LoginStateEnum.ReSendEmail: return <ReSendEmailForm actions={actions} data={login}/>;
           }
@@ -72,8 +86,3 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   };
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginPage);

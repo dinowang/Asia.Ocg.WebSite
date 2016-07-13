@@ -1,8 +1,10 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
-import EmailInput from '../emailInput';
+import {Icon,EmailInput} from '../';
 import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class LoginForm extends React.Component {
   constructor(){

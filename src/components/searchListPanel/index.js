@@ -1,6 +1,8 @@
 import React from 'react';
-import './index.scss';
 
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 class SearchListPanel extends React.Component {
   constructor(props) {
    super(props);

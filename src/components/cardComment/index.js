@@ -1,10 +1,15 @@
 import React from 'react';
 import moment from 'moment';
-import Button from '../button';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
-import LinkButton from '../linkButton';
-import UserComment from '../userComment';
-import './index.scss';
+import {
+  Button,
+  LinkButton,
+  UserComment
+} from '../';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class CardComment extends React.Component {
   constructor(props){

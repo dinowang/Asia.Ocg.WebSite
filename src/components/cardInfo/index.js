@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
-import CardPack from '../cardPack';
-import './index.scss';
+import {CardPack} from '../';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class CardInfo extends React.Component {
   render() {

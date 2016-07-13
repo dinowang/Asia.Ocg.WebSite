@@ -1,7 +1,10 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class Button extends React.Component {
   constructor(props) {

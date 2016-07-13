@@ -1,5 +1,8 @@
 import React, {PropTypes} from 'react';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class CardPack extends React.Component {
   renderTable(data, index){

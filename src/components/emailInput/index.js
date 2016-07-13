@@ -1,8 +1,11 @@
 import React from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../';
 
 import EmailHelper from '../../businessLogic/emailHelper';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class EmailInput extends React.Component {
   constructor(props, refs){

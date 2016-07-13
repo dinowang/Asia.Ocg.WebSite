@@ -5,31 +5,38 @@ import Helmet from "react-helmet";
 import Header from './header';
 import Nav from './nav';
 import * as actions from '../actions/appActions';
+import { asyncConnect } from 'redux-async-connect';
 
-class App extends React.Component{
+
+@asyncConnect([{
+  promise: async ({store: {dispatch}}) => {
+    await dispatch(actions.requestGetInfo());
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class App extends React.Component {
   componentWillMount(){
-      this.props.actions.requestGetInfo();
+    this.props.actions.requestGetInfo();
   }
   render(){
     const {app} = this.props;
     return(
       <div>
-        <Helmet title={app.title}/>
+        <Helmet
+          title={app.title}
+          titleTemplate="%s - AsiaCards(亞洲卡片王)"
+          defaultTitle="AsiaCards(亞洲卡片王)"
+          meta={app.meta}
+          />
         <Header/>
         <Nav/>
         <div className="container">
           {this.props.children}
         </div>
       </div>
-    );
+    )
   }
 }
-
-App.propTypes = {
-  children: PropTypes.element,
-  actions: PropTypes.object.isRequired,
-  props: PropTypes.object
-};
 function mapStateToProps(state) {
   return {
     login: state.login,
@@ -37,14 +44,8 @@ function mapStateToProps(state) {
     actions:PropTypes.object.isRequired
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch)
   };
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);

@@ -1,63 +1,66 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App';
-import IndexPage from './containers/IndexPage';
-import DeckPage from './containers/DeckPage';
-import SearchPage from './containers/SearchPage';
-import CardPage from './containers/CardPage';
-import LoginPage from './containers/LoginPage';
-import BanPage from './containers/BanPage';
-import DeckDetail from './containers/DeckDetail';
-import DeckEditPage from './containers/DeckEditPage';
+import {
+  App,
+  NotFoundPage
+} from './components';
+import {
+  IndexPage,
+  LoginPage,
+  DeckPage,
+  BanPage,
+  SearchPage,
+  DeckDetail,
+  DeckEditPage,
+  BanFormPage,
+  ManBanListPage,
+  ManCardListPage,
+  ManCardFormPage,
+  CardPage
+} from './containers';
+
+export default (store) => {
 
 
-//
-import BanFormPage from './containers/Manage/Ban/BanFormPage';
-import ManBanListPage from './containers/Manage/Ban/ManBanListPage';
-import ManCardListPage from './containers/Manage/Card/ManCardListPage';
-import ManCardFormPage from './containers/Manage/Card/ManCardFormPage';
+  return (
+    <Route path="/" component={App}>
+      <IndexRoute component={IndexPage}/>
+      <Route path="login" component={LoginPage}/>
+
+      // 卡片
+      <Route path="card/:serialNumber" component={CardPage}/>
+      <Route path="card/:serialNumber/:name" component={CardPage}/>
+
+      // 牌組
+      <Route path="deck/:deck_type" component={DeckPage}/>
+      <Route path="deck/:deck_type/:page" component={DeckPage}/>
+      // 禁卡表
+      <Route path="ban/:id" component={BanPage}/>
+      <Route path="ban" component={BanPage}/>
+      // 搜尋
+      <Route path="search/:query" component={SearchPage}/>
+      <Route path="search/:query/:page" component={SearchPage}/>
+      // 註冊設定密碼
+      <Route path="register/setpassword/:code" component={LoginPage}/>
 
 
+      //------ 會員功能
+      // 牌組
+      <Route path="deckdetail/edit/:id" component={DeckEditPage}/>
+      <Route path="deckdetail/edit/" component={DeckEditPage}/>
+      <Route path="deckdetail/:id/:name" component={DeckDetail}/>
+      // 管理功能
+      <Route path="banManage/Form" component={BanFormPage}/>
+      <Route path="banManage/Form/:id" component={BanFormPage}/>
+      <Route path="banManage/List" component={ManBanListPage}/>
 
-import NotFoundPage from './components/NotFoundPage.js';
+      <Route path="cardManage/List" component={ManCardListPage}/>
+      <Route path="cardManage/Form/:id" component={ManCardFormPage}/>
+      <Route path="cardManage/Form/" component={ManCardFormPage}/>
 
-export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={IndexPage}/>
-    <Route path="deck/:deck_type" component={DeckPage}/>
-    <Route path="deck/:deck_type/:page" component={DeckPage}/>
+      <Route path="*" component={NotFoundPage}/>
 
-    <Route path="ban/:id" component={BanPage}/>
-    <Route path="ban" component={BanPage}/>
-    <Route path="login" component={LoginPage}/>
-    <Route path="search/:query" component={SearchPage}/>
-    <Route path="search/:query/:page" component={SearchPage}/>
-    <Route path="card/:serialNumber" component={CardPage}/>
-    <Route path="card/:serialNumber/:name" component={CardPage}/>
-    <Route path="register/setpassword/:code" component={LoginPage}/>
-
-    // Member
-    <Route path="deckdetail/edit/:id" component={DeckEditPage}/>
-    <Route path="deckdetail/edit/" component={DeckEditPage}/>
-    <Route path="deckdetail/:id/:name" component={DeckDetail}/>
-
-    // ManageMent
-    <Route path="banManage/Form" component={BanFormPage}/>
-    <Route path="banManage/Form/:id" component={BanFormPage}/>
-    <Route path="banManage/List" component={ManBanListPage}/>
-
-    <Route path="cardManage/List" component={ManCardListPage}/>
-    <Route path="cardManage/Form/:id" component={ManCardFormPage}/>
-    <Route path="cardManage/Form/" component={ManCardFormPage}/>
-
-
-
-
-
-
-
-
-    <Route path="*" component={NotFoundPage}/>
-  </Route>
-);
+    </Route>
+  );
+};

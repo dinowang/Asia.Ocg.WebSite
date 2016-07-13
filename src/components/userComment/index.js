@@ -1,16 +1,16 @@
 import React from 'react';
 import moment from 'moment';
-import {Icon} from 'react-fa';
-import './index.scss';
+import {Icon} from '../';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class UserComment extends React.Component {
   constructor(props){
     super(props)
-
   }
-
   renderComment(data, index){
-
     const date = moment(data.time).lang('zh-tw').fromNow();
     return(
       <li key={index}>

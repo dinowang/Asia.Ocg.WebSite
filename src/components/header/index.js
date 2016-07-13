@@ -1,11 +1,14 @@
 import React from 'react';
-import {Icon} from 'react-fa';
+import Icon from '../icon';
 import { Link } from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as loginActions from '../../actions/loginActions';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class Header extends React.Component {
   constructor(){

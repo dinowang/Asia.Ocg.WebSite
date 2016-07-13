@@ -1,15 +1,19 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from "react-fa";
-import LinkButton from '../../../../components/linkButton';
-import * as banActions from '../../../../actions/banActions';
-import * as appActions from '../../../../actions/appActions';
 import {Link} from 'react-router';
 import moment from 'moment';
+import {
+  Icon,
+  LinkButton
+} from "../../../../components";
+import * as banActions from '../../../../actions/banActions';
+import * as appActions from '../../../../actions/appActions';
 
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class ManBanListPage extends React.Component {
   constructor(){

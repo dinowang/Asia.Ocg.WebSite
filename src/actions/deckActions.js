@@ -45,8 +45,8 @@ export const setDeckComment = createAction('set deckcomment');
 export const initDeckComments = createAction('init deckcomments');
 export const setPreview = createAction('set deckItemPreview');
 export const requestDeckList = () => {
-  return (dispatch) => {
-    fetch(`${Host}/deck/list/`)
+  return async (dispatch) => {
+    await fetch(`${Host}/deck/list/`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -73,11 +73,10 @@ export const requestDeckComment = () => {
 };
 
 export const requestDeckDetail = () => {
-  return (dispatch,state) => {
+  return async (dispatch,state) => {
     const {deck, user} = state();
     dispatch(setLoading(true));
-
-    fetch(`${Host}/deck/detail/${deck.detail.id}`,{
+    await fetch(`${Host}/deck/detail/${deck.detail.id}`,{
       method:'GET',
       headers: {
         'Accept': 'application/json',
@@ -87,10 +86,10 @@ export const requestDeckDetail = () => {
     })
       .then((response)=> {
         return response.json();
-    }).then((json)=> {
+    }).then(async (json)=> {
       if(json.status_code === StatusCode.Success){
         dispatch(fetchDeckDetail(json.data));
-        dispatch(requestDeckComment());
+        await dispatch(requestDeckComment());
       }
       dispatch(setLoading(false));
     });
@@ -117,6 +116,7 @@ export const requestDeckTypePage = (page) => {
 export const requestDeckInfo = () => {
   return (dispatch, state) => {
     const {user} = state();
+    console.log(user.token)
     fetch(`${Host}/deck/editinfo`,{
       method:'GET',
       headers: {

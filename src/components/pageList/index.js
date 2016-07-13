@@ -1,8 +1,11 @@
 import React, {PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../';
 import {Link} from 'react-router';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
 class PageList extends React.Component {
   click(page){
     this.props.onClick(page);

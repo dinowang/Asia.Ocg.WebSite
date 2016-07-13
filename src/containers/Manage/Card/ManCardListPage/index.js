@@ -1,17 +1,20 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Icon} from "react-fa";
-import LinkButton from '../../../../components/linkButton';
-import * as appActions from '../../../../actions/appActions';
 import {Link} from 'react-router';
-import './index.scss';
+import {
+  Icon,
+  LinkButton
+} from "../../../../components";
+import * as appActions from '../../../../actions/appActions';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class ManCardListPage extends React.Component {
   constructor(){
     super();
-  }
-  componentWillMount(){
   }
   renderData(data, index){
     const href = `/banManage/form/${data.id}`

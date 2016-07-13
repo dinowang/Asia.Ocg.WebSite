@@ -1,7 +1,10 @@
 import React,{PropTypes} from 'react';
-import {Icon} from 'react-fa';
+import {Icon} from '../';
 import {LoginStateEnum} from '../../enums/loginState';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class ForgetForm extends React.Component {
   changeMode(mode){

@@ -1,8 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Icon} from 'react-fa';
-import './index.scss';
+import {Icon} from '../';
 
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 export const LinkButton = (props) => {
   return (

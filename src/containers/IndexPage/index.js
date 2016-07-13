@@ -4,10 +4,24 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as indexActions from '../../actions/indexActions';
 import * as cardActions from '../../actions/cardActions';
+import * as appActions from '../../actions/appActions';
+
 import moment from 'moment';
+import { asyncConnect } from 'redux-async-connect';
 
-import './index.scss';
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
+@asyncConnect([{
+  promise: async ({store: {dispatch}}) => {
+    await dispatch(indexActions.requestInfo());
+    dispatch(appActions.setTitle(''));
+    dispatch(appActions.setUrl(''));
+    dispatch(appActions.setImage(''));
+    dispatch(appActions.setDescription('最完整的遊戲王卡牌查詢網站（組牌、禁卡表、最新消息'));
+  }
+}])
 class IndexPage extends React.Component {
   constructor(){
     super();
@@ -15,7 +29,8 @@ class IndexPage extends React.Component {
     this.preAddCardData - this.preAddCardData.bind(this);
   }
   componentWillMount(){
-    this.props.indexActions.requestInfo();
+    this.props.indexActions.requestInfo()
+    this.props.appActions.setTitle('');
   }
   preAddCardData(e){
     this.props.cardActions.checkinList(e)
@@ -63,7 +78,7 @@ class IndexPage extends React.Component {
   }
   render(){
     return (
-      <div className="index-page">
+      <div className="index-page" >
         <div className="pop-card">
           <p className="title">熱門卡片<span>(近三天)</span></p>
           <ul>
@@ -107,8 +122,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     indexActions: bindActionCreators(indexActions, dispatch),
-    cardActions: bindActionCreators(cardActions, dispatch)
-
+    cardActions: bindActionCreators(cardActions, dispatch),
+    appActions: bindActionCreators(appActions, dispatch)
   };
 }
 
@@ -116,10 +131,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(IndexPage);
-
-
-
-// <div className="pop">
-//   <p className="title">本日人氣</p>
-//   <img src="https://xpgcards.blob.core.windows.net/card-image/15AX/JPM07/aeb575ba-d5af-45a8-a7ac-54f7af1eafdd200X282.jpg"/>
-// </div>

@@ -3,17 +3,38 @@ import moment from 'moment';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import Button from '../../components/button';
-import LinkButton from '../../components/linkButton';
+import { asyncConnect } from 'redux-async-connect';
+import {
+  Button,
+  LinkButton,
+  UserComment
+} from '../../components';
 import CardHelper from '../../businessLogic/cardHelper';
-import ButtonStateEnum from '../../enums/buttonStateEnum';
-import UserComment from '../../components/userComment';
 import BanTypeEnum from '../../enums/banTypeEnum';
+import ButtonStateEnum from '../../enums/buttonStateEnum';
 import * as deckActions from '../../actions/deckActions';
 import * as appActions from '../../actions/appActions';
-import './index.scss';
 
-class DeckDetail extends React.Component {
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
+@asyncConnect([{
+  promise: async ({params,store: {dispatch,getState},location}) => {
+    const {id} = params;
+    if(id){
+      dispatch(deckActions.setDeckDetailId(id));
+      await dispatch(deckActions.requestDeckDetail());
+      const {name,description} = getState().deck.detail;
+      dispatch(appActions.setTitle(name));
+      dispatch(appActions.setDescription(description));
+      dispatch(appActions.setImage(''));
+      dispatch(appActions.setUrl(location.pathname));
+    }
+  }
+}])
+@connect(mapStateToProps, mapDispatchToProps)
+export default class DeckDetail extends React.Component {
   constructor(){
     super();
     this.handleScroll = this.handleScroll.bind(this);
@@ -26,12 +47,11 @@ class DeckDetail extends React.Component {
     const {deckActions, appActions, user} = this.props;
     if(id){
       deckActions.setDeckDetailId(id)
-      if(user.account){
-        deckActions.requestDeckDetail();
-      }else{
-        appActions.requestGetInfo([],[deckActions.requestDeckDetail]);
-      }
+      deckActions.requestDeckDetail();
     }
+  }
+  componentWillUpdate(nextProps){
+    this.props.appActions.setTitle(`${nextProps.deck.detail.name}`);
   }
   componentWillUnmount(){
     const {deckActions} = this.props;
@@ -199,8 +219,3 @@ DeckDetail.propTypes ={
   deckActions:PropTypes.object.isRequired,
   deck:PropTypes.object.isRequired
 };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeckDetail);

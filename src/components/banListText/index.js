@@ -1,7 +1,11 @@
 import React from 'react';
 import BanTypeEnum from '../../enums/banTypeEnum';
-import {Icon} from 'react-fa';
-import './index.scss';
+import {Icon} from '../';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
+
 class BanListText extends React.Component {
   constructor(props){
     super(props)

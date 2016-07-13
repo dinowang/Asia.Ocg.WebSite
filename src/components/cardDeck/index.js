@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
 import moment from 'moment';
-import './index.scss';
+
+if (process.env.BROWSER) {
+  require('./index.scss');
+}
 
 class CardDeck extends React.Component {
   componentWillMount(){
