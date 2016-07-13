@@ -2,7 +2,7 @@ import App from './App';
 import {Icon} from './icon';
 import NotFoundPage from './NotFoundPage';
 import EmailInput from './emailInput';
-import DeckList from './decklist';
+import DeckList from './deckList';
 import PageList from './pageList';
 import LinkButton from './linkButton';
 import SearchRText from './searchRText';
