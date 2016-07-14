@@ -23,7 +23,7 @@ render(
   <Provider store={store} key="provider">
       <Router
         routes={routes()}
-        render={(props) => <ReduxAsyncConnect {...props}/>}
+        
         history={browserHistory}
         onUpdate={gaPageView}
         >

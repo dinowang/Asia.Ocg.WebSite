@@ -68,7 +68,8 @@ export default class Nav extends React.Component {
             </p>
           </div>
         </div>
-        <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
+
+       <SearchInput value={this.props.search.query} onFocus={()=>this.handleInputFoucs()} onChange={(value)=>this.searchOnChange(value)} placeholder="卡號、卡片名稱"  />
        <Single title="首頁" icon="home" href="/"/>
        <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
        <Single title="禁卡表" icon="ban" href="/ban"/>
