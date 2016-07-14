@@ -46,7 +46,6 @@ export const checkinList = (serialNumber)=>{
     });
     if(value){
       dispatch(fetchCardInfo(value));
-
     }else{
       await dispatch(requestCardInfo(serialNumber));
     }

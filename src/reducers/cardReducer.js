@@ -78,6 +78,11 @@ export default handleActions({
     let IsExist = state.list.filter(data=>data.serial_number === action.payload.serial_number);
     if(IsExist.length === 0){
       state.list = state.list.concat(action.payload);
+
+      // 本地暫存上限五筆 
+      if(state.list.length > 5){
+        state.list.splice(0,1);
+      }
     }
     return Object.assign({},state,action.payload);
   },'fetch cardcomment' (state, action) {
