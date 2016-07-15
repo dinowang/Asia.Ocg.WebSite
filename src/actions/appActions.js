@@ -10,23 +10,27 @@ export const setImage = createAction('set webImage');
 export const requestGetInfo = (funcs = [],errFuncs = []) => {
   const token = CookieHelper.Get('token');
   return async (dispatch) => {
-    await fetch(`${Host}/account/getinfo`,{
-      method:'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-      Token: token})
-    })
-      .then((response)=> {
-        return response.json();
-    }).then((json)=> {
-      if(json.data !== null) {
-        dispatch(setUserData(json.data));
-        funcs.map(func=>func());
-      }
-      errFuncs.map(func=>func());
-    });
+    if(token){
+      await fetch(`${Host}/account/getinfo`,{
+        method:'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          Token: token})
+        })
+        .then((response)=> {
+          return response.json();
+        }).then((json)=> {
+          if(json.data !== null) {
+            dispatch(setUserData(json.data));
+            funcs.map(func=>func());
+          }else{
+             CookieHelper.Set('token',';expires=Thu, 01 Jan 1970 00:00:00 GMT');
+          }
+          errFuncs.map(func=>func());
+        });
+    }
   };
 };
