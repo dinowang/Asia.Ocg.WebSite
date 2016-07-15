@@ -13,7 +13,6 @@ const initialState ={
 };
 export default handleActions({
   'set userdata' (state, action){
-    console.log('set UserData')
     CookieHelper.Set('token',action.payload.token);
     if(!action.payload.image_url){
       action.payload.image_url = 'https://xpgcards.blob.core.windows.net/user-image/user.png';
