@@ -159,7 +159,7 @@ export default class DeckDetail extends React.Component {
               <div style={loadingStyle} className="spinner" ><img src="https://xpgcards.blob.core.windows.net/image/null.jpg"/></div>
               {preparation_list.map(this.renderDeckCard)}
           </div>
-          <div className="main half left">
+          <div className="main half left description">
             <div className="title green">描述</div>
             <div dangerouslySetInnerHTML={{__html: description}}></div>
 

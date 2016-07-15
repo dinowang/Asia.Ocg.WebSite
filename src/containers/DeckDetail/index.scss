@@ -25,9 +25,6 @@
   }
   .main{
     width:100%;
-    a{
-      color:#3c8dbc;
-    }
     .card{
       display: inline-block;
       position: relative;
@@ -35,8 +32,6 @@
         img{
           animation: main-an .8s;
         }
-        color:#fff;
-
       }
       .ban-type{
         z-index: 2;
@@ -170,6 +165,11 @@
     text-align: center;
     display: block;
     animation: spinner-an 2s linear infinite;
+  }
+  .description{
+    a{
+      color:#3c8dbc;
+    }
   }
   @keyframes main-an {
     0%{
