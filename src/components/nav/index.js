@@ -18,10 +18,8 @@ export default class Nav extends React.Component {
 
   searchOnChange(value){
     value = value.toUpperCase();
-    this.props.actions.inputSearch({
-      query: value,
-      current_page:
-    1});
+    this.props.actions.inputSearch(value);
+    this.props.actions.changePage(1);
 
     clearTimeout(this.onChangeEvent);
     this.onChangeEvent = setTimeout(()=>{

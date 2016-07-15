@@ -20,7 +20,7 @@ if (process.env.BROWSER) {
 @asyncConnect([{
   promise: async ({params, store: {dispatch}}) => {
     let {query, page} = params;
-    await dispatch(searchActions.inputSearch({query:query.toUpperCase()}));
+    await dispatch(searchActions.inputSearch(query));
 
     page = page ? page : 1;
     await dispatch(searchActions.changePage(parseInt(page)));
@@ -31,7 +31,7 @@ if (process.env.BROWSER) {
 export default class SearchPage extends React.Component {
   componentWillMount(){
     let {query, page} = this.props.params;
-    this.props.searchActions.inputSearch({query:query.toUpperCase()});
+    this.props.searchActions.inputSearch(query);
     page = page ? page : 1;
     this.handlePageList(parseInt(page));
   }

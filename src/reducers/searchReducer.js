@@ -14,7 +14,8 @@ export default handleActions({
   return Object.assign({},state,action.payload);
   },
   'input search' (state, action){
-    return Object.assign({},state,action.payload);
+    state.query = action.payload.toUpperCase().trim();
+    return Object.assign({},state);
   },
   'change page' (state, action){
     state.current_page = action.payload;
