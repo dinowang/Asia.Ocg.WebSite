@@ -34,6 +34,7 @@ const initialState ={
       cards:[]
 
     },
+    packMode: true,
     dropdown:{
       kinds:[{
         key:-1,
@@ -79,7 +80,7 @@ export default handleActions({
     if(IsExist.length === 0){
       state.list = state.list.concat(action.payload);
 
-      // 本地暫存上限五筆 
+      // 本地暫存上限五筆
       if(state.list.length > 5){
         state.list.splice(0,1);
       }
@@ -133,6 +134,12 @@ export default handleActions({
     return Object.assign({},state);
   },'set cardPack' (state, action){
     state.edit.card_form.pack_id = action.payload;
+    return Object.assign({},state);
+  },'set cardPackName' (state, action){
+    state.edit.card_form.pack_name = action.payload;
+    return Object.assign({},state);
+  },'set cardPackMode' (state){
+    state.edit.packMode = !state.edit.packMode
     return Object.assign({},state);
   },'set cardType' (state, action){
     state.edit.card_form.type_id = action.payload;

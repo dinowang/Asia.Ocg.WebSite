@@ -36,6 +36,8 @@ class ManCardFormPage extends React.Component {
     this.changeCardNumber = this.changeCardNumber.bind(this);
     this.deleteCards = this.deleteCards.bind(this);
     this.getImage = this.getImage.bind(this);
+    this.changePackMode = this.changePackMode.bind(this);
+    this.changePackName = this.changePackName.bind(this);
   }
   componentWillMount(){
 
@@ -50,6 +52,13 @@ class ManCardFormPage extends React.Component {
   }
   componentWillUnmount(){
     this.props.cardActions.initCardEdit();
+  }
+  changePackMode(){
+    this.props.cardActions.setPackMode();
+    this.props.cardActions.setPackName('');
+  }
+  changePackName(e){
+    this.props.cardActions.setPackName(e.target.value);
   }
   changeKind(e){
     this.props.cardActions.setKind(e.key);
@@ -91,6 +100,10 @@ class ManCardFormPage extends React.Component {
     }else{
       this.props.cardActions.requestCreateCards();
     }
+    if(this.props.card.edit.packMode === false){
+      this.props.cardActions.setPackMode();
+    }
+
   }
 
   changeName(e){
@@ -204,9 +217,11 @@ class ManCardFormPage extends React.Component {
         <div className="edit-cards">
           <input onChange={this.changeCardNumber} className="name input" placeholder="卡號" value={edit.card_form.number} />
             <img src={edit.card_form.image_url}/>
+          <span className="other" onClick={this.changePackMode}>新增卡包</span>
+          <input onChange={this.changePackName} style={edit.packMode ? {display:'none'}: {}} className="name input" value={edit.card_form.pack_name} placeholder="【補充包】(BE01) 復刻新手包系列"/>
           <DropDown
             getValue={this.changePack}
-            style={{width:'100%'}}
+            style={edit.packMode ? {width:'100%'} :{display:'none'}}
             default={packValue}
             values={edit.dropdown.packs}/>
           <DropDown
