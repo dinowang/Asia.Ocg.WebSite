@@ -19,7 +19,7 @@ export default handleActions({
     }
     return Object.assign({},state,action.payload);
   },'init userdata' (){
-    CookieHelper.Set('token',null);
+    CookieHelper.Set('token',';expires=Thu, 01 Jan 1970 00:00:00 GMT');
     return Object.assign({},initialState);
   }
 }, initialState);
