@@ -26,7 +26,7 @@ if (process.env.BROWSER) {
       dispatch(deckActions.setDeckDetailId(id));
       await dispatch(deckActions.requestDeckDetail());
       const {name,description} = getState().deck.detail;
-      dispatch(appActions.setTitle(name));
+      dispatch(appActions.setTitle(`${name}(遊戲王牌組)`));
       dispatch(appActions.setDescription(description));
       dispatch(appActions.setImage(''));
       dispatch(appActions.setUrl(location.pathname));
@@ -51,7 +51,7 @@ export default class DeckDetail extends React.Component {
     }
   }
   componentWillUpdate(nextProps){
-    this.props.appActions.setTitle(`${nextProps.deck.detail.name}`);
+    this.props.appActions.setTitle(`${nextProps.deck.detail.name}(遊戲王牌組)`);
   }
   componentWillUnmount(){
     const {deckActions} = this.props;
