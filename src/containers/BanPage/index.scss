@@ -4,7 +4,7 @@
   }
   .data{
     display: inline-block;
-    width:80%;
+    width:85%;
     .title{
       background-color: #fff;
       padding: 5px;
@@ -12,11 +12,20 @@
       border-radius: 5px 5px 0 0 ;
     }
     .list{
-      padding:20px;
+      padding:10px;
       background-color: #fff;
       img{
         width:100px;
         margin:0 2px;
+      }
+      a{
+        margin: 0 2px;
+        color:#3c8dbc;
+        display: inline-block;
+        font-size: 14px;
+        width:100px;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
     .red{
@@ -30,17 +39,17 @@
     }
   }
   .ban-list{
+    display: inline-block;
+    float: right;
+    background-color: #fff;
+    width:14%;
+    border-top:2px solid #00a65a;
     a{
       padding: 10px;
       cursor: pointer;
       color:#444;
       display: block;
     }
-    display: inline-block;
-    float: right;
-    background-color: #fff;
-    width:18%;
-    border-top:2px solid #00a65a;
     h3{
       margin:10px;
     }

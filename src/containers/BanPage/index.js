@@ -43,6 +43,7 @@ export default class BanPage extends React.Component {
     return(
       <Link key={data.serial_number} to={href}>
         <img src={data.image_url}></img>
+        <p>{data.name.length < 6? data.name: data.name.substring(0,6)+'...'}</p>
       </Link>
     );
   }
