@@ -36,6 +36,7 @@ export const changeCardsDeleteBtnType = createAction('change deleteCardsBtnType'
 export const changeCardsParseBtnType = createAction('change parseCardsBtnType');
 export const fetchDropDwon = createAction('fetch cardDropdwon');
 export const initCardEdit = createAction('init cardEdit');
+import { browserHistory } from 'react-router';
 
 export const checkinList = (serialNumber)=>{
   return async (dispatch, state) => {
@@ -59,7 +60,11 @@ export const requestCardInfo = (serialNumber) => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      dispatch(fetchCardInfo(json.data));
+      if(json.data){
+        dispatch(fetchCardInfo(json.data));
+      }else{
+        browserHistory.push('/');
+      }
     });
   };
 };
