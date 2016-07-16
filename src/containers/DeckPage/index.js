@@ -34,8 +34,10 @@ class DeckPage extends React.Component {
     this.renderNav = this.renderNav.bind(this);
   }
 
-  changeType(e){
-    this.props.actions.changeType(e.target.value);
+  changeType(value){
+    this.props.actions.changeType(value);
+    this.props.actions.requestDeckTypePage(parseInt(1));
+    this.props.appActions.setTitle(`${value}-牌組區`);
   }
   componentWillMount(){
     this.props.actions.requestDeckList();
@@ -51,7 +53,7 @@ class DeckPage extends React.Component {
     const href = `/deck/${data.name}/${data.current_page}`;
     const style = this.props.deck.current_type === data.name ? 'active' :'';
     return(
-      <Link className={style} onClick={this.changeType} key={data.id} to={href} value={data.name}>{data.name}</Link>
+      <Link className={style} onClick={()=>this.changeType(data.name)} key={data.id} to={href}>{data.name}</Link>
     );
   }
   render(){
