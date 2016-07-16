@@ -13,7 +13,9 @@ export const requestSearch = () => {
       .then((response)=> {
         return response.json();
     }).then((json)=> {
-      dispatch(fetchBasic(json.data));
+      if(json.data){
+        dispatch(fetchBasic(json.data));
+      }
       dispatch(setLoading(false));
     });
   };
