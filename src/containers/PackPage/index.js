@@ -38,6 +38,11 @@ export default class PackPage extends React.Component {
     this.renderPackItem = this.renderPackItem.bind(this);
     this.renderClass = this.renderClass.bind(this);
     this.renderGroupList = this.renderGroupList.bind(this);
+    this.changePackGroupName = this.changePackGroupName.bind(this);
+    this.submitPackGroup = this.submitPackGroup.bind(this);
+    this.renderListEdit = this.renderListEdit.bind(this);
+    this.clickGroupForm = this.clickGroupForm.bind(this);
+    this.deletePackGroup = this.deletePackGroup.bind(this);
   }
   componentWillMount(){
 
@@ -64,10 +69,17 @@ export default class PackPage extends React.Component {
       </li>
     )
   }
+  clickGroupForm(data){
+    const packGroup = {
+      id: data.key,
+      name:data.value
+    }
+    this.props.packActions.setPackGroup(packGroup);
+  }
   renderListEdit(data){
     const key = `${data.value}-list`
     return(
-      <li key={key}>
+      <li key={key} onClick={()=>this.clickGroupForm(data)}>
           {data.value}
       </li>
     )
@@ -82,7 +94,6 @@ export default class PackPage extends React.Component {
     }
   }
   renderData(data){
-    let g = '<th>發售日</th>';
     return(
       <div key={data.value}>
         <h1>{data.value}</h1>
@@ -138,17 +149,35 @@ export default class PackPage extends React.Component {
   changeMode(){
     this.props.packActions.setEditMode();
   }
+  changePackGroupName(e){
+    this.props.packActions.setPackGroupName(e.target.value);
+  }
+  submitPackGroup(){
+    this.props.packActions.changeBtnType(ButtonStateEnum.Loading);
+    this.props.packActions.requestCreatePackGroup();
+  }
+  deletePackGroup(){
+    this.props.packActions.requestDeletePackGroup();
+  }
   renderGroupList(){
     const {isEdit, groupForm, group} = this.props.pack;
+    const buttonValue = groupForm.id === 0 ? '新增' : '更新';
     if(isEdit === true){
       return(
         <ul className="edit">
-          <input placeholder="分類名稱" style={{width:'90%',textAlign:'center'}}/>
-            <Button onClick={this.changeMode}
-              style={{margin:'10px'}}
-              state={groupForm}
-              lIcon="pencil"
-              value="新增"
+          <input value={groupForm.name} onChange={this.changePackGroupName} placeholder="分類名稱" style={{width:'90%',textAlign:'center'}}/>
+          <Button onClick={this.submitPackGroup}
+            style={{display:'inline-block',margin:'10px 2px'}}
+            state={this.props.pack}
+            lIcon="pencil"
+            value={buttonValue}
+            fail="fail"
+            success="success"/>
+          <Button onClick={this.deletePackGroup}
+              style={{display:'inline-block',margin:'10px 2px'}}
+              state={this.props.pack}
+              lIcon="trash"
+              value="刪除"
               fail="fail"
               success="success"/>
           {group.map(this.renderListEdit)}

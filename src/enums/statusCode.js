@@ -1,6 +1,7 @@
 const StatusCode ={
   Success: 0,
   NoData: 1,
+  IsExist: 3,
 
   // Register
   registerExist: 202,
@@ -14,7 +15,7 @@ const StatusCode ={
   loginFail: 223,
   unCheckEMail: 224,
 
-  // DeckE
+  // Deck
   DeckKindIsNull : 261,
   DeckNameIsNull : 262,
   DeckBanIsNull : 263,
@@ -25,6 +26,8 @@ const StatusCode ={
 
 
   BanDateExist: 241
+
+  // Pack
 };
 
 export default StatusCode;

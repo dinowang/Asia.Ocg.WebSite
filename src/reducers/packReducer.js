@@ -7,8 +7,10 @@ const initialState ={
   isEdit: false,
   group:[],
   groupForm:{
-    sumbitBtn:ButtonStateEnum.None
-  }
+    id:0,
+    name:''
+  },
+  sumbitBtn:ButtonStateEnum.None
 };
 export default handleActions({
   'set pack' (state, action){
@@ -20,5 +22,24 @@ export default handleActions({
   },'fetch packList' (state,action){
     state.group = action.payload;
     return Object.assign({},state);
+  },'set packGroupName'(state,action){
+    const g ={
+      groupForm:{
+        id: state.groupForm.id,
+        sumbitBtn:ButtonStateEnum.None,
+        name:action.payload
+    }}
+    return Object.assign({},state,g);
+  },'set packGroupBtnType'(state,action){
+    state.sumbitBtn = action.payload;
+    return Object.assign({},state);
+  },'init packGroupForm'(state,action){
+    state.groupForm = initialState.groupForm;
+
+    return Object.assign({},state);
+  },'set packGroup'(state,action){
+    state.groupForm = action.payload;
+    return Object.assign({},state);
   }
+
 }, initialState);
