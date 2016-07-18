@@ -89,10 +89,23 @@ export default class PackPage extends React.Component {
   renderClass(){
     if(this.props.pack.isEdit === true){
       return (
-        <th>分類</th>
+        <tr>
+          <th>卡包名稱</th>
+          <th style={{width:'15%'}}>卡號</th>
+          <th style={{width:'20%'}}>發售日</th>
+          <th>分類</th>
+          <th style={{width:'10%'}}>別名</th>
+        </tr>
       )
     }else{
-
+      return(
+        <tr>
+          <th>別名</th>
+          <th>卡包名稱</th>
+          <th>卡號</th>
+          <th>發售日</th>
+        </tr>
+      )
     }
   }
   renderData(data){
@@ -101,12 +114,7 @@ export default class PackPage extends React.Component {
         <h1>{data.value}</h1>
           <table>
             <tbody>
-              <tr>
-                <th>卡包名稱</th>
-                <th>卡號</th>
-                <th>發售日</th>
-                {this.renderClass()}
-              </tr>
+              {this.renderClass()}
               {data.items.map((item)=>this.renderPackItem(item,data.key))}
             </tbody>
           </table>
@@ -147,6 +155,15 @@ export default class PackPage extends React.Component {
     }
     this.props.packActions.requestUpdatePack(updateData);
   }
+  onChangeNickName(groupId,data,e){
+    data.nick_name = e.target.value;
+    this.props.packActions.editPack({groupId:groupId,data:data});
+    const updateData = {
+      id:data.id,
+      nick_name:data.nick_name
+    }
+    this.props.packActions.requestUpdatePack(updateData);
+  }
   renderPackItem(data,groupId){
     const showDate = data.date? moment(data.date) :moment();
     if(this.props.pack.isEdit === true){
@@ -166,11 +183,13 @@ export default class PackPage extends React.Component {
               default={groupId}
               values={this.props.pack.group}/>
           </td>
+          <td><input onChange={(e)=>this.onChangeNickName(groupId,data,e)} value={data.nick_name}/></td>
         </tr>
       )
     }else{
       return(
         <tr key={data.pack_name} className="item">
+          <td>{data.nick_name}</td>
           <td>{data.pack_name}</td>
           <td>{data.number}</td>
           <td>{showDate.format('YYYY.MM.DD')}</td>
