@@ -154,7 +154,11 @@ export default class PackPage extends React.Component {
   }
   submitPackGroup(){
     this.props.packActions.changeBtnType(ButtonStateEnum.Loading);
-    this.props.packActions.requestCreatePackGroup();
+    if(this.props.pack.groupForm.id === 0){
+      this.props.packActions.requestCreatePackGroup();
+    }else{
+      this.props.packActions.requestUpdatePackGroup();
+    }
   }
   deletePackGroup(){
     this.props.packActions.requestDeletePackGroup();

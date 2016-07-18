@@ -51,6 +51,35 @@ export const requestCreatePackGroup = () => {
 
   };
 };
+export const requestUpdatePackGroup = () => {
+  return (dispatch, state) => {
+    const {pack, user} = state();
+    fetch(`${Host}/pack/group`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(pack.groupForm)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.NoData){
+        dispatch(changeBtnType(ButtonStateEnum.Fail))
+      }else if(json.data){
+        dispatch(fetchPackList(json.data));
+        dispatch(initPackGroupFrom());
+        dispatch(changeBtnType(ButtonStateEnum.Success))
+      }
+      setTimeout(()=>{
+        dispatch(changeBtnType(ButtonStateEnum.None));
+      },1500);
+    });
+
+  };
+};
 export const requestDeletePackGroup = () => {
   return (dispatch, state) => {
     const  {pack, user} = state();
