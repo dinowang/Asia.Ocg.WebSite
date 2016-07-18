@@ -17,7 +17,8 @@ import {
   ManBanListPage,
   ManCardListPage,
   ManCardFormPage,
-  CardPage
+  CardPage,
+  PackPage
 } from './containers';
 
 export default (store) => {
@@ -43,7 +44,8 @@ export default (store) => {
       <Route path="search/:query/:page" component={SearchPage}/>
       // 註冊設定密碼
       <Route path="register/setpassword/:code" component={LoginPage}/>
-
+      // 卡表
+      <Route path="pack/:group" component={PackPage}/>
 
       //------ 會員功能
       // 牌組

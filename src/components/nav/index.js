@@ -53,6 +53,9 @@ export default class Nav extends React.Component {
     },{
         title:'新增卡片',
         href:'/cardManage/Form/'
+    },{
+        title:'卡包',
+        href:'/cardManage/Form/'
     }];
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
     return (
@@ -71,6 +74,8 @@ export default class Nav extends React.Component {
        <Single title="首頁" icon="home" href="/"/>
        <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
        <Single title="禁卡表" icon="ban" href="/ban"/>
+       <Single title="卡表區" icon="building-o" href="/pack/all"/>
+
        <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
 
 

@@ -10,6 +10,8 @@ import deck from './deckReducer';
 import ban from './banReducer';
 import app from './appReducer';
 import index from './indexReducer'
+import pack from './packReducer'
+
 export default combineReducers({
   routing:routerReducer,
   reduxAsyncConnect,
@@ -20,7 +22,8 @@ export default combineReducers({
   deck,
   ban,
   app,
-  index
+  index,
+  pack
 });
 
 // export default rootReducer;

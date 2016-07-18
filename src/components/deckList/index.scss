@@ -1,28 +1,6 @@
 .deck-list{
   padding: 10px;
-  table{
-    text-align: center;
-    border-collapse: collapse;
-    width:100%;
-  }
-  th{
-    border:1px solid #444;
-    padding: 10px;
-  }
-  td{
-    color: #444;
-    // padding: 10px;
-    border:1px solid #444;
-    a{
-      padding:10px;
-      color:#3c8dbc;
-      display: block;
-      &:hover{
-        transition: all .1s;
-        background-color: #f7f7f7;
-      }
-    }
-  }
+  
   tr{
     th{
       &:first-child{
