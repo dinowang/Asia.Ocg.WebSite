@@ -43,6 +43,8 @@ export default class PackPage extends React.Component {
     this.renderListEdit = this.renderListEdit.bind(this);
     this.clickGroupForm = this.clickGroupForm.bind(this);
     this.deletePackGroup = this.deletePackGroup.bind(this);
+    this.onChangeNumber = this.onChangeNumber.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
   }
   componentWillMount(){
 
@@ -111,25 +113,55 @@ export default class PackPage extends React.Component {
       </div>
     )
   }
-  onDateChange(data,date){
-    console.log(data,date,'----')
+  onDateChange(groupId,data,date){
+    data.date =  moment(date).format('YYYY.MM.DD');
+    this.props.packActions.editPack({groupId:groupId,data:data});
+    const updateData = {
+      id:data.id,
+      date:data.date
+    }
+    this.props.packActions.requestUpdatePack(updateData);
+  }
+  onChangeNumber(groupId,data,e){
+    data.number = e.target.value;
+    this.props.packActions.editPack({groupId:groupId,data:data});
+    const updateData = {
+      id:data.id,
+      number:data.number
+    }
+    this.props.packActions.requestUpdatePack(updateData);
+  }
+  onChangeName(groupId,data,e){
+    data.pack_name = e.target.value;
+    this.props.packActions.editPack({groupId:groupId,data:data});
+    const updateData = {
+      id:data.id,
+      name:data.pack_name
+    }
+    this.props.packActions.requestUpdatePack(updateData);
+  }
+  onDropDwonDate(e,data){
+    const updateData = {
+      id:data.id,
+      pack_group_id:e.key
+    }
+    this.props.packActions.requestUpdatePack(updateData);
   }
   renderPackItem(data,groupId){
-    const date = moment(data.date);
-
+    const showDate = data.date? moment(data.date) :moment();
     if(this.props.pack.isEdit === true){
       return(
-        <tr key={data.pack_name} className="item">
-          <td><input value={data.pack_name}/></td>
-          <td><input value={data.number}/></td>
-          <td>  <DatePicker
+        <tr key={data.id} className="item">
+          <td><input onChange={(e)=>this.onChangeName(groupId,data,e)} value={data.pack_name}/></td>
+          <td><input onChange={(e)=>this.onChangeNumber(groupId,data,e)} value={data.number}/></td>
+          <td><DatePicker
               dateFormat="YYYY/MM/DD"
-              selected={date}
-              onChange={(date)=>this.onDateChange(data,date)} />
+              selected={showDate}
+              onChange={(date)=>this.onDateChange(groupId,data,date)} />
           </td>
           <td>
             <DropDown
-              getValue={this.changeBan}
+              getValue={(e)=>this.onDropDwonDate(e,data)}
               style={{top:'1px',width:"20%"}}
               default={groupId}
               values={this.props.pack.group}/>
@@ -141,7 +173,7 @@ export default class PackPage extends React.Component {
         <tr key={data.pack_name} className="item">
           <td>{data.pack_name}</td>
           <td>{data.number}</td>
-          <td>{data.date}</td>
+          <td>{showDate.format('YYYY.MM.DD')}</td>
         </tr>
       )
     }

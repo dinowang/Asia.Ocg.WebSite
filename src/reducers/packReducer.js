@@ -35,10 +35,24 @@ export default handleActions({
     return Object.assign({},state);
   },'init packGroupForm'(state,action){
     state.groupForm = initialState.groupForm;
-
     return Object.assign({},state);
   },'set packGroup'(state,action){
     state.groupForm = action.payload;
+    return Object.assign({},state);
+  },'edit pack'(state,action){
+    state.group = state.group.map((data)=>{
+      if(data.key === action.payload.groupId){
+        data.items = data.items.map((item)=>{
+          return item.id === action.payload.data
+          ? action.payload.data
+          : item;
+        })
+        return data;
+      }else{
+        return data;
+      }
+
+    })
     return Object.assign({},state);
   }
 

@@ -9,7 +9,9 @@ export const fetchPackList = createAction('fetch packList');
 export const setPackGroupName = createAction('set packGroupName');
 export const setPackGroup  = createAction('set packGroup');
 export const changeBtnType = createAction('set packGroupBtnType');
+export const editPack = createAction('edit pack');
 export const initPackGroupFrom = createAction('init packGroupForm');
+
 export const requestPackList = (value) => {
   return (dispatch) => {
     fetch(`${Host}/pack/list`)
@@ -99,6 +101,35 @@ export const requestDeletePackGroup = () => {
       }else if(json.data){
         dispatch(fetchPackList(json.data));
         dispatch(initPackGroupFrom());
+        dispatch(changeBtnType(ButtonStateEnum.Success))
+      }
+      setTimeout(()=>{
+        dispatch(changeBtnType(ButtonStateEnum.None));
+      },1500);
+    });
+
+  };
+};
+
+export const requestUpdatePack = (body) => {
+  return (dispatch, state) => {
+    const  {user} = state();
+    fetch(`${Host}/pack/pack`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(body)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.NoData){
+        dispatch(changeBtnType(ButtonStateEnum.Fail))
+      }else if(json.data){
+        dispatch(fetchPackList(json.data));
         dispatch(changeBtnType(ButtonStateEnum.Success))
       }
       setTimeout(()=>{
