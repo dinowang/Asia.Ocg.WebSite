@@ -14,9 +14,11 @@ export const editPack = createAction('edit pack');
 export const setPackUp = createAction('set packUp');
 export const setPackDown = createAction('set packDown');
 export const initPackGroupFrom = createAction('init packGroupForm');
+export const initPack = createAction('init pack');
+
 export const requestPackList = () => {
-  return (dispatch) => {
-    fetch(`${Host}/pack/list`)
+  return async (dispatch) => {
+    await fetch(`${Host}/pack/list`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {
@@ -27,8 +29,8 @@ export const requestPackList = () => {
   };
 };
 export const requestPack= (id) => {
-  return (dispatch) => {
-    fetch(`${Host}/pack/${id}`)
+  return async (dispatch) => {
+    await fetch(`${Host}/pack/${id}`)
       .then((response)=> {
         return response.json();
     }).then((json)=> {

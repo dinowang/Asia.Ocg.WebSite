@@ -24,7 +24,14 @@ if (process.env.BROWSER) {
 
 @asyncConnect([{
   promise: async ({params,store: {dispatch,getState},location}) => {
+    let {group} = params;
+    await dispatch(packActions.requestPackList());
+    await dispatch(packActions.setPack(group));
 
+    dispatch(appActions.setTitle('卡表區'));
+    dispatch(appActions.setDescription('最完整的遊戲王卡表'));
+    dispatch(appActions.setImage(''));
+    dispatch(appActions.setUrl(location.pathname));
   }
 }])
 @connect(mapStateToProps, mapDispatchToProps)
@@ -55,6 +62,8 @@ export default class PackListPage extends React.Component {
     const {group} = this.props.params;
 
     this.props.packActions.setPack(group);
+    this.props.appActions.setTitle('卡表區');
+
   }
   componentWillUpdate(nextProps){
 

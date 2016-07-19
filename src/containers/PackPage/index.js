@@ -17,7 +17,15 @@ if (process.env.BROWSER) {
 
 @asyncConnect([{
   promise: async ({params,store: {dispatch,getState},location}) => {
-
+    let {id} = params;
+    await dispatch(packActions.requestPack(id));
+    const {pack_name , pack_number, pack_nickname} = getState().pack.pack;
+    const nickName = pack_nickname ? `-${pack_nickname}`:'';
+    const h1 = `${pack_number? pack_number :''}${nickName}-${pack_name}`
+    dispatch(appActions.setTitle(`${h1}-遊戲王全卡表`));
+    dispatch(appActions.setDescription(`${h1}-最完整的遊戲王卡表`));
+    dispatch(appActions.setImage(''));
+    dispatch(appActions.setUrl(location.pathname));
   }
 }])
 @connect(mapStateToProps, mapDispatchToProps)
@@ -31,7 +39,15 @@ export default class PackPage extends React.Component {
     if(id){
       this.props.packActions.requestPack(id)
     }
-
+  }
+  componentWillUpdate(nextState){
+    const h1 = this.getTitle(nextState.pack.pack);
+    this.props.appActions.setTitle(`${h1}-遊戲王全卡表`);
+  }
+  getTitle(pack){
+    const nickName = pack.pack_nickname ? `-${pack.pack_nickname}`:'';
+    const h1 = `${pack.pack_number? pack.pack_number :''}${nickName}-${pack.pack_name}`
+    return h1;
   }
   renderCards(data){
     const toHref = `/card/${data.serial_number}/${data.card_name}`
@@ -42,11 +58,10 @@ export default class PackPage extends React.Component {
       </Link>
     )
   }
-
   render(){
     const {pack} = this.props.pack;
     const nickName = pack.pack_nickname ? `-${pack.pack_nickname}`:'';
-    const h1 = `${pack.pack_number? pack.pack_number :''}${nickName}-${pack.pack_name}`
+    const h1 = this.getTitle(pack);
     return (
       <div className="pack-page">
         <h1>{h1}</h1>

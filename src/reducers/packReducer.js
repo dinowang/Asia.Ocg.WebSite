@@ -20,6 +20,12 @@ export default handleActions({
   'set pack' (state, action){
     state.current_pack = action.payload;
     return Object.assign({},state);
+  },'init pack' (state, action){
+    state.pack = {
+      pack_name:'',
+      cards:[]
+    }
+    return Object.assign({},state);
   },'set editMode' (state){
     state.isEdit = !state.isEdit;
     return Object.assign({},state);
