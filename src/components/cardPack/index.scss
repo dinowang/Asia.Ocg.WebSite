@@ -2,12 +2,14 @@
   padding-bottom: 100px;
   table{
     background-color: #fff;
-
     border-collapse: collapse;
     width:100%;
   }
   td{
     padding: 10px;
+    border:none;
+    text-align: left;
+    text-indent: 10px;
     &:last-child{
       text-align: right;
     }

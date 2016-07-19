@@ -9,8 +9,8 @@ class CardPack extends React.Component {
     let tr = data.items.map((items,index)=>{
       return (
         <tr key={index}>
-          <td>{items.name}</td>
           <td>{items.card_number}</td>
+          <td>{items.name}</td>
         </tr>
       );
     });

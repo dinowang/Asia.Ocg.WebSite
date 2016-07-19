@@ -1,8 +1,4 @@
 .pack-page{
-  text-align: center;
-  h1{
-    text-align: left;
-  }
   .list{
     margin-top:10px;
     background-color: #fff;
@@ -10,10 +6,15 @@
     width:100%;
     a{
       display: inline-block;
+      position: relative;
       color: #3c8dbc;
       margin:10px 5px;
       img{
         width:100px;
+      }
+      p{
+        position: relative;
+        bottom: -6px;
       }
     }
   }

@@ -45,9 +45,11 @@ export default class PackPage extends React.Component {
 
   render(){
     const {pack} = this.props.pack;
+    const nickName = pack.pack_nickname ? `-${pack.pack_nickname}`:'';
+    const h1 = `${pack.pack_number? pack.pack_number :''}${nickName}-${pack.pack_name}`
     return (
       <div className="pack-page">
-        <h1>{pack.pack_name}</h1>
+        <h1>{h1}</h1>
         <div className="list">
           {pack.cards.map(this.renderCards)}
         </div>
