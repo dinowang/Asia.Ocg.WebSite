@@ -272,12 +272,12 @@ class DeckEditPage extends React.Component {
                 default={ban_default}
                 values={deck.ban}/></p>
 
-              <p style={adminStyle}>分類<DropDown
+              <p style={adminStyle}>分類：<DropDown
                 getValue={this.changeType}
                 style={{top:'1px',width:"70%"}}
                 default={type_default}
                 values={deck.type}/></p>
-              <p className="kind-p">種類
+              <p className="kind-p">種類：
                   <DropDown
                     getValue={this.changeKind}
                     style={deck.kindMode?{top:'1px',width:"73%"} :{display:'none'}}
