@@ -63,7 +63,7 @@ export default class PackListPage extends React.Component {
     this.props.packActions.setPack(name);
   }
   renderList(data){
-    const href = `/pack/${data.value}`
+    const href = `/packlist/${data.value}`
     const key = `${data.value}-list`
     return(
       <li key={key}>
