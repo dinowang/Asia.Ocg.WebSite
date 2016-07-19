@@ -15,7 +15,7 @@ import {
 import * as packActions from '../../actions/packActions';
 import * as appActions from '../../actions/appActions';
 import ButtonStateEnum from '../../enums/buttonStateEnum';
-
+import PermissionEnum from '../../enums/PermissionEnum';
 
 if (process.env.BROWSER) {
   require('./index.scss');
@@ -83,7 +83,7 @@ export default class PackPage extends React.Component {
   moveUp(key){
     this.props.packActions.setPackUp(key);
     this.props.packActions.requestUpdatePackGroupSort();
-    
+
   }
   moveDown(key){
     this.props.packActions.setPackDown(key);
@@ -268,11 +268,13 @@ export default class PackPage extends React.Component {
   render(){
     const current_pack = this.props.pack.current_pack;
     const packList = current_pack === 'all'? this.props.pack.group : this.props.pack.group.filter((data)=>data.value===current_pack);
+    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block',float:'right',margin:'5px'}:{display:'none'};
+
     return (
       <div className="pack-page">
           <div className="data">
             <Button onClick={this.changeMode}
-              style={{float:'right',margin:'5px'}}
+              style={adminStyle}
               state={{sumbitBtn:ButtonStateEnum.None}}
               lIcon="pencil"
               value="修改"
@@ -298,6 +300,7 @@ PackPage.propTypes ={
 function mapStateToProps(state) {
   return {
     pack: state.pack,
+    user: state.user,
     nav: browserHistory
   };
 }
