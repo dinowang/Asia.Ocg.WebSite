@@ -117,8 +117,8 @@ export default class PackListPage extends React.Component {
       return(
         <tr>
           <th>別名</th>
-          <th>卡包名稱</th>
           <th>卡號</th>
+          <th>卡包名稱</th>
           <th>發售日</th>
         </tr>
       )
@@ -210,10 +210,10 @@ export default class PackListPage extends React.Component {
         <tr key={data.pack_name} className="item" onClick={()=>this.go(data.id)}>
 
           <td>{data.nick_name}</td>
+          <td>{data.number}</td>
           <td className="name">
             {data.pack_name}
           </td>
-          <td>{data.number}</td>
           <td>{showDate.format('YYYY.MM.DD')}</td>
         </tr>
       )
