@@ -54,6 +54,26 @@ export default handleActions({
 
     })
     return Object.assign({},state);
+  },'set packUp'(state,action){
+    let item;
+    state.group.map((data,index)=>{
+      if(data.key === action.payload){
+        item = {index,data};
+      }
+    })
+    state.group = state.group.filter((item)=>item.key !== action.payload);
+    state.group.splice(item.index-1,0,item.data)
+    return Object.assign({},state);
+  },'set packDown'(state,action){
+    let item;
+    state.group.map((data,index)=>{
+      if(data.key === action.payload){
+        item = {index,data};
+      }
+    })
+    state.group = state.group.filter((item)=>item.key !== action.payload);
+    state.group.splice(item.index+1,0,item.data)
+    return Object.assign({},state);
   }
 
 }, initialState);

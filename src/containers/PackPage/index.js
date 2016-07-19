@@ -45,6 +45,8 @@ export default class PackPage extends React.Component {
     this.deletePackGroup = this.deletePackGroup.bind(this);
     this.onChangeNumber = this.onChangeNumber.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
+    this.moveUp = this.moveUp.bind(this);
+    this.moveDown = this.moveDown.bind(this);
   }
   componentWillMount(){
 
@@ -78,12 +80,25 @@ export default class PackPage extends React.Component {
     }
     this.props.packActions.setPackGroup(packGroup);
   }
+  moveUp(key){
+    this.props.packActions.setPackUp(key);
+    this.props.packActions.requestUpdatePackGroupSort();
+    
+  }
+  moveDown(key){
+    this.props.packActions.setPackDown(key);
+    this.props.packActions.requestUpdatePackGroupSort();
+  }
   renderListEdit(data){
     const key = `${data.value}-list`
     return(
-      <li key={key} onClick={()=>this.clickGroupForm(data)}>
-          {data.value}
-      </li>
+      <div className="packgroup-edit">
+        <Icon name="arrow-up" onClick={()=>this.moveUp(data.key)} />
+        <li draggable={true} value={data.key} key={key} onClick={()=>this.clickGroupForm(data)}>
+            {data.value}
+        </li>
+        <Icon name="arrow-down" onClick={()=>this.moveDown(data.key)} />
+      </div>
     )
   }
   renderClass(){

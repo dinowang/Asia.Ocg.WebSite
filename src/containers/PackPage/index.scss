@@ -53,8 +53,24 @@
   ul.edit{
     text-align: center;
     li{
+
        padding: 10px;
-       cursor:move;
+    }
+  }
+  .packgroup-edit{
+    position: relative;
+    cursor: pointer;
+    .fa-arrow-up{
+      position: absolute;
+      left:5px;
+      top:10px;
+      color:#3c8dbc;
+    }
+    .fa-arrow-down{
+      position: absolute;
+      right:5px;
+      top:10px;
+      color:red;
     }
   }
 }

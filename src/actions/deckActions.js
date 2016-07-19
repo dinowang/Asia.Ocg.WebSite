@@ -116,7 +116,6 @@ export const requestDeckTypePage = (page) => {
 export const requestDeckInfo = () => {
   return (dispatch, state) => {
     const {user} = state();
-    console.log(user.token)
     fetch(`${Host}/deck/editinfo`,{
       method:'GET',
       headers: {

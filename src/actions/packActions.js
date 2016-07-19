@@ -10,8 +10,9 @@ export const setPackGroupName = createAction('set packGroupName');
 export const setPackGroup  = createAction('set packGroup');
 export const changeBtnType = createAction('set packGroupBtnType');
 export const editPack = createAction('edit pack');
+export const setPackUp = createAction('set packUp');
+export const setPackDown = createAction('set packDown');
 export const initPackGroupFrom = createAction('init packGroupForm');
-
 export const requestPackList = (value) => {
   return (dispatch) => {
     fetch(`${Host}/pack/list`)
@@ -122,6 +123,37 @@ export const requestUpdatePack = (body) => {
         'Token': user.token
       },
       body: JSON.stringify(body)
+    })
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.status_code === StatusCode.NoData){
+        dispatch(changeBtnType(ButtonStateEnum.Fail))
+      }else if(json.data){
+        dispatch(fetchPackList(json.data));
+        dispatch(changeBtnType(ButtonStateEnum.Success))
+      }
+      setTimeout(()=>{
+        dispatch(changeBtnType(ButtonStateEnum.None));
+      },1500);
+    });
+
+  };
+};
+export const requestUpdatePackGroupSort = () => {
+  return (dispatch, state) => {
+    const  {pack,user} = state();
+    const postData = pack.group.map((data)=>{
+      return data.key
+    })
+    fetch(`${Host}/pack/group/sort`,{
+      method:'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Token': user.token
+      },
+      body: JSON.stringify(postData)
     })
       .then((response)=> {
         return response.json();
