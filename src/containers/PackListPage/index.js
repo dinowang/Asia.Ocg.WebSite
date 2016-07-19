@@ -263,7 +263,7 @@ export default class PackListPage extends React.Component {
     }else{
       return (
         <ul>
-          <Link onClick={()=>this.changePack('all')} to='/pack/all'>
+          <Link onClick={()=>this.changePack('all')} to='/packlist/all'>
             <Icon name="tasks"/>
             全部
           </Link>
