@@ -10,7 +10,11 @@ const initialState ={
     id:0,
     name:''
   },
-  sumbitBtn:ButtonStateEnum.None
+  sumbitBtn:ButtonStateEnum.None,
+  pack:{
+    pack_name:'',
+    cards:[]
+  }
 };
 export default handleActions({
   'set pack' (state, action){
@@ -21,6 +25,9 @@ export default handleActions({
     return Object.assign({},state);
   },'fetch packList' (state,action){
     state.group = action.payload;
+    return Object.assign({},state);
+  },'fetch pack' (state,action){
+    state.pack = action.payload;
     return Object.assign({},state);
   },'set packGroupName'(state,action){
     const g ={

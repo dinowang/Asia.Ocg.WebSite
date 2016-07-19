@@ -1,0 +1,82 @@
+.packlist-page{
+  a{
+    color:#3c8dbc;
+    display: block;
+    padding: 10px;
+    .fa{
+      padding-right:5px;
+    }
+  }
+  .data{
+    padding: 10px;
+    background-color: #fff;
+    width: 80%;
+    float: left;
+    table{
+      margin: 20px 0;
+    }
+    td{
+      padding: 10px;
+
+    }
+    .item:hover{
+      cursor: pointer;
+      background-color: #f7f7f7;
+      td{
+          color:#3c8dbc;
+
+      }
+
+    }
+  }
+  .list{
+    margin-left:5%;
+    width: 15%;
+    float: left;
+    background-color: #fff;
+    border-top:2px solid #00a65a;
+    h3{
+      padding: 10px;
+
+    }
+    li{
+      border-top: 1px solid #f4f4f4;
+      cursor: pointer;
+      &:hover{
+        background-color: #f4f4f4;
+      }
+
+    }
+  }
+  input{
+    text-align: center;
+    width:100%;
+    height: 40px;
+    font-size: 1.5rem;
+
+  }
+  ul.edit{
+    text-align: center;
+    li{
+
+       padding: 10px;
+    }
+  }
+  .packgroup-edit{
+    position: relative;
+    cursor: pointer;
+    .fa-arrow-up{
+      position: absolute;
+      left:5px;
+      top:10px;
+      color:#3c8dbc;
+    }
+    .fa-arrow-down{
+      position: absolute;
+      right:5px;
+      top:10px;
+      color:red;
+    }
+  }
+
+}

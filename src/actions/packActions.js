@@ -6,6 +6,7 @@ import StatusCode from '../enums/statusCode';
 export const setPack = createAction('set pack');
 export const setEditMode = createAction('set editMode');
 export const fetchPackList = createAction('fetch packList');
+export const fetchPack= createAction('fetch pack');
 export const setPackGroupName = createAction('set packGroupName');
 export const setPackGroup  = createAction('set packGroup');
 export const changeBtnType = createAction('set packGroupBtnType');
@@ -13,7 +14,7 @@ export const editPack = createAction('edit pack');
 export const setPackUp = createAction('set packUp');
 export const setPackDown = createAction('set packDown');
 export const initPackGroupFrom = createAction('init packGroupForm');
-export const requestPackList = (value) => {
+export const requestPackList = () => {
   return (dispatch) => {
     fetch(`${Host}/pack/list`)
       .then((response)=> {
@@ -21,6 +22,18 @@ export const requestPackList = (value) => {
     }).then((json)=> {
       if(json.data){
         dispatch(fetchPackList(json.data));
+      }
+    });
+  };
+};
+export const requestPack= (id) => {
+  return (dispatch) => {
+    fetch(`${Host}/pack/${id}`)
+      .then((response)=> {
+        return response.json();
+    }).then((json)=> {
+      if(json.data){
+        dispatch(fetchPack(json.data));
       }
     });
   };

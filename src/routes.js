@@ -18,6 +18,7 @@ import {
   ManCardListPage,
   ManCardFormPage,
   CardPage,
+  PackListPage,
   PackPage
 } from './containers';
 
@@ -45,7 +46,9 @@ export default (store) => {
       // 註冊設定密碼
       <Route path="register/setpassword/:code" component={LoginPage}/>
       // 卡表
-      <Route path="pack/:group" component={PackPage}/>
+      <Route path="packlist/:group" component={PackListPage}/>
+      <Route path="pack/:id" component={PackPage}/>
+
 
       //------ 會員功能
       // 牌組

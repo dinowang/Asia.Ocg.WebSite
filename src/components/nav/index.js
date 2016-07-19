@@ -74,7 +74,7 @@ export default class Nav extends React.Component {
        <Single title="首頁" icon="home" href="/"/>
        <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
        <Single title="禁卡表" icon="ban" href="/ban"/>
-       <Single title="卡表區" icon="building-o" href="/pack/all"/>
+       <Single title="卡表區" icon="building-o" href="/packlist/all"/>
 
        <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
 
