@@ -18,6 +18,9 @@ import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
+import * as packActions from './actions/packActions';
+import * as searchActions from './actions/searchActions';
+
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -53,6 +56,11 @@ app.use((req, res) => {
         res.send('<!doctype html>\n' +
           ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
       });
+
+      // reset
+      store.dispatch(packActions.initPack());
+      store.dispatch(searchActions.inputSearch(''));
+      
 
 
     } else {
