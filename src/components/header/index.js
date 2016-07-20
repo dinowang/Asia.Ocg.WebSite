@@ -2,10 +2,10 @@ import React from 'react';
 import Icon from '../icon';
 import { Link } from 'react-router';
 import {bindActionCreators} from 'redux';
+import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as loginActions from '../../actions/loginActions';
-import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
 
 if (process.env.BROWSER) {
   require('./index.scss');
@@ -14,8 +14,13 @@ if (process.env.BROWSER) {
 class Header extends React.Component {
   constructor(){
     super();
+    this.changeMode = this.changeMode.bind(this);
     this.clickLogout = this.clickLogout.bind(this);
 
+  }
+  async changeMode(){
+    await this.props.nav.push('/login')
+    this.props.loginActions.changeMode({mode:0});
   }
   clickLogout(){
     this.props.loginActions.requestLogout();
@@ -23,10 +28,10 @@ class Header extends React.Component {
   renderLogin(){
     return(
       <div className="login">
-        <Link to="/login">
+        <a onClick={this.changeMode}>
           <Icon name="sign-in"/>
           登入
-        </Link>
+        </a>
       </div>
     )
   }
@@ -65,7 +70,8 @@ class Header extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    nav:browserHistory
   };
 }
 
