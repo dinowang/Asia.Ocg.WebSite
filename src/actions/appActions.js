@@ -7,6 +7,7 @@ export const setTitle = createAction('set title');
 export const setUrl = createAction('set webUrl');
 export const setDescription = createAction('set webDescription');
 export const setImage = createAction('set webImage');
+export const setBreadcrumbsMode = createAction('set breadcrumbsMode');
 export const requestGetInfo = (funcs = [],errFuncs = []) => {
   const token = CookieHelper.Get('token');
   return async (dispatch) => {

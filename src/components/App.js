@@ -16,11 +16,31 @@ import Breadcrumbs from 'react-breadcrumbs';
 }])
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends React.Component {
-  componentWillMount(){
-    this.props.actions.requestGetInfo();
+  constructor(){
+    super();
+    this.breadScroll = this.breadScroll.bind(this);
+  }
+  componentWillUpdate(nextProps){
+    console.log(nextProps.children === this.props.children)
+    if(nextProps.children !== this.props.children){
+      this.props.actions.setBreadcrumbsMode(false);
+    }
+
+  }
+  breadScroll(e){
+    const {scrollTop, scrollHeight, clientHeight} = e.target;
+    const {breadcrumbsMode} = this.props.app;
+    if(scrollTop > 15){
+      if(breadcrumbsMode === false){
+        this.props.actions.setBreadcrumbsMode(true);
+      }
+    }else{
+        this.props.actions.setBreadcrumbsMode(false);
+    }
   }
   render(){
     const {app} = this.props;
+    const bareadStyle = app.breadcrumbsMode === true ? 'breadcrumbs hiden' : 'breadcrumbs';
     return(
       <div>
         <Helmet
@@ -32,10 +52,11 @@ export default class App extends React.Component {
         <Header/>
         <Nav/>
 
-        <div className="container">
+        <div className="container" onScroll={this.breadScroll}>
           <Breadcrumbs
             routes={this.props.routes}
             params={this.props.params}
+            wrapperClass={bareadStyle}
             />
           {this.props.children}
 

@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 const initialState ={
   title: '',
+  breadcrumbsMode:false,
   meta:[{
     name: "description",
     content: "最完整的遊戲王卡牌查詢網站（組牌、禁卡表、最新消息）"
@@ -57,5 +58,9 @@ export default handleActions({
       return data;
     })
     return Object.assign({},state);
+  },'set breadcrumbsMode'(state, action){
+    state.breadcrumbsMode = action.payload;
+    return Object.assign({},state);
   }
+
 }, initialState);
