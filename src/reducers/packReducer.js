@@ -3,7 +3,7 @@ import ButtonStateEnum from '../enums/buttonStateEnum';
 import moment from 'moment';
 
 const initialState ={
-  current_pack:'all',
+  current_pack:'',
   isEdit: false,
   group:[],
   groupForm:{

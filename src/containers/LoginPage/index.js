@@ -33,8 +33,6 @@ export default class LoginPage extends React.Component {
     const {actions} = this.props;
     if(code){
       actions.changeMode({mode:LoginStateEnum.RegisterSetPassword});
-    }else{
-      actions.changeMode({mode:LoginStateEnum.Loging});
     }
   }
   render(){

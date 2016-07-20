@@ -26,7 +26,9 @@ if (process.env.BROWSER) {
   promise: async ({params,store: {dispatch,getState},location}) => {
     let {group} = params;
     await dispatch(packActions.requestPackList());
-    await dispatch(packActions.setPack(group));
+    if(group){
+      await dispatch(packActions.setPack(group));
+    }
 
     dispatch(appActions.setTitle('卡表區'));
     dispatch(appActions.setDescription('最完整的遊戲王卡表'));
@@ -54,25 +56,31 @@ export default class PackListPage extends React.Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.moveUp = this.moveUp.bind(this);
     this.moveDown = this.moveDown.bind(this);
-    this.go = this.go.bind(this);
   }
   componentWillMount(){
 
     this.props.packActions.requestPackList();
     const {group} = this.props.params;
-
-    this.props.packActions.setPack(group);
+    if(group){
+      this.props.packActions.setPack(group);
+    }else{
+      this.props.packActions.setPack('');
+    }
     this.props.appActions.setTitle('卡表區');
 
   }
   componentWillUpdate(nextProps){
-
+    if(!nextProps.params.group){
+      if(nextProps.params.group !== this.props.params.group){
+        this.props.packActions.setPack('');
+      }
+    }
   }
   changePack(name){
     this.props.packActions.setPack(name);
   }
   renderList(data){
-    const href = `/packlist/${data.value}`
+    const href = `/pack/${data.value}`
     const key = `${data.value}-list`
     return(
       <li key={key}>
@@ -140,7 +148,7 @@ export default class PackListPage extends React.Component {
           <table>
             <tbody>
               {this.renderClass()}
-              {data.items.map((item)=>this.renderPackItem(item,data.key))}
+              {data.items.map((item)=>this.renderPackItem(item,data))}
             </tbody>
           </table>
       </div>
@@ -189,11 +197,9 @@ export default class PackListPage extends React.Component {
     }
     this.props.packActions.requestUpdatePack(updateData);
   }
-  go(id){
-    this.props.nav.push(`/pack/${id}`)
-  }
-  renderPackItem(data,groupId){
+  renderPackItem(data,groupData){
     const showDate = data.date? moment(data.date) :moment();
+    const groupId = groupData.key;
     if(this.props.pack.isEdit === true){
       return(
         <tr key={data.id} className="item">
@@ -215,13 +221,17 @@ export default class PackListPage extends React.Component {
         </tr>
       )
     }else{
+      const h1 = `${data.number? data.number :''}${data.nick_name ? `-${data.nick_name}`:''}-${data.pack_name}`
+      const g= `/pack/${groupData.value}/${data.id}/${h1}`
       return(
-        <tr key={data.pack_name} className="item" onClick={()=>this.go(data.id)}>
+        <tr key={data.pack_name} className="item">
 
           <td>{data.nick_name}</td>
           <td>{data.number}</td>
           <td className="name">
-            {data.pack_name}
+            <Link to={g}>
+              {data.pack_name}
+            </Link>
           </td>
           <td>{showDate.format('YYYY.MM.DD')}</td>
         </tr>
@@ -272,7 +282,7 @@ export default class PackListPage extends React.Component {
     }else{
       return (
         <ul>
-          <Link onClick={()=>this.changePack('all')} to='/packlist/all'>
+          <Link onClick={()=>this.changePack('')} to='/pack'>
             <Icon name="tasks"/>
             全部
           </Link>
@@ -283,7 +293,7 @@ export default class PackListPage extends React.Component {
   }
   render(){
     const current_pack = this.props.pack.current_pack;
-    const packList = current_pack === 'all'? this.props.pack.group : this.props.pack.group.filter((data)=>data.value===current_pack);
+    const packList = current_pack === ''? this.props.pack.group : this.props.pack.group.filter((data)=>data.value===current_pack);
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block',float:'right',margin:'5px'}:{display:'none'};
 
     return (

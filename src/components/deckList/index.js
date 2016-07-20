@@ -8,9 +8,13 @@ if (process.env.BROWSER) {
 }
 
 class DeckList extends React.Component{
+  constructor(){
+    super();
+    this.renderData = this.renderData.bind(this);
+  }
   renderData(data){
     const {id, name, main_count, extra_count, preparation_count, deck_kind, deck_ben} = data;
-    const href = `/deckdetail/${id}/${name}`;
+    const href = `/deck/${this.props.deck.name}/${id}/${name}`;
     const date = moment(deck_ben).format("YYYY.MM");
 
     return(

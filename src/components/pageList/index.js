@@ -22,7 +22,7 @@ class PageList extends React.Component {
     for (let i=start; i <=current; i++) {
       if(i===0)
         continue;
-      const href = `${url}${query}/${i}`;
+      const href = `${url}${i}/${query}`;
       li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
@@ -32,7 +32,7 @@ class PageList extends React.Component {
         break;
       if(i===0)
         continue;
-      const href = `${url}${query}/${i}`;
+      const href = `${url}${i}/${query}`;
       li.push(<Link activeClassName="active" to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
       count++;
     }
@@ -40,15 +40,15 @@ class PageList extends React.Component {
       for (let i = current-Math.floor(showCount/2)-1; i >0; i--) {
         if(count>=showCount)
           break;
-          const href = `${url}${query}/${i}`;
+          const href = `${url}${i}/${query}`;
           li.splice(0,0,<Link to={href} key={i} onClick={()=>this.click(i)}>{i}</Link>);
           count++;
       }
     }
     const prevStyle = current-1 <=0 ? 'disabled' : null;
     const nextStyle = current+1 >totalPage ? 'disabled' : null;
-    const prevHref =  prevStyle ? `${url}${query}/${current}`:`${url}${query}/${current-1}`;
-    const nextHref = nextStyle ? `${url}${query}/${current}`: `${url}${query}/${current+1}`;
+    const prevHref =  prevStyle ? `${url}/${current}/${query}`:`${url}/${current-1}/${query}`;
+    const nextHref = nextStyle ? `${url}/${current}/${query}`: `${url}/${current+1}/${query}`;
     const spanStyle = hideText ? {display:'none'} :{};
     const pageStyle = this.props.totalPage <=1 ?{display:'none'} :{};
     return(

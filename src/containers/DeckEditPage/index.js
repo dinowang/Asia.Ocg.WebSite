@@ -215,7 +215,7 @@ class DeckEditPage extends React.Component {
       type_default = this.props.deck.deckform.type_id;
     }
     return (
-      <div className="deck-detailedit" style={{paddingBottom:'200px'}}>
+      <div className="deck-detailedit" style={{paddingBottom:'200px',paddingTop:'5px'}}>
         <input className="name" value={deck.deckform.name} onChange={this.changeName} placeholder="牌組名稱"/>
         <div className="deck">
           <div className="func-bar">

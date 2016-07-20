@@ -30,7 +30,7 @@ export default class Nav extends React.Component {
   handleInputFoucs(){
     if(this.props.deck.edit_mode === false){
       if(this.props.search.query){
-        this.props.nav.push(`/search/${this.props.search.query}/${this.props.search.current_page}`);
+        this.props.nav.push(`/search/${this.props.search.current_page}/${this.props.search.query}`);
       }
     }
 
@@ -74,7 +74,7 @@ export default class Nav extends React.Component {
        <Single title="首頁" icon="home" href="/"/>
        <Single title="牌組區" icon="list" href="/deck/日本牌組/1"/>
        <Single title="禁卡表" icon="ban" href="/ban"/>
-       <Single title="卡表區" icon="building-o" href="/packlist/all"/>
+       <Single title="卡表區" icon="building-o" href="/pack"/>
 
        <Multi style={adminStyle} title="管理功能" icon="search-plus" values={manageList}/>
 

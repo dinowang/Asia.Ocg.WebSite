@@ -6,6 +6,7 @@ import Header from './header';
 import Nav from './nav';
 import * as actions from '../actions/appActions';
 import { asyncConnect } from 'redux-async-connect';
+import Breadcrumbs from 'react-breadcrumbs';
 
 
 @asyncConnect([{
@@ -30,9 +31,16 @@ export default class App extends React.Component {
           />
         <Header/>
         <Nav/>
+
         <div className="container">
+          <Breadcrumbs
+            routes={this.props.routes}
+            params={this.props.params}
+            />
           {this.props.children}
+
         </div>
+
       </div>
     )
   }

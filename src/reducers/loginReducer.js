@@ -18,7 +18,7 @@ const initialState ={
   }
 };
 export default handleActions({
-  'change mode' (state, action){
+  'change loginMode' (state, action){
     state.process = LoginProcessEnum.None;
     state.message = '';
     return Object.assign({},state,action.payload);

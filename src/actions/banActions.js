@@ -53,7 +53,7 @@ export const requestBanList = (id, nav) => {
           await dispatch(requestBan(id));
         }else{
           await dispatch(requestBan(json.data[0].id));
-          nav.push(`/ban/${json.data[0].id}`);
+          nav.push(`/ban/${json.data[0].id}/${json.data[0].name}`);
         }
       }
     });

@@ -3,7 +3,7 @@ import {Host} from './url';
 import StatusCode from '../enums/statusCode';
 import {LoginProcessEnum, LoginStateEnum} from '../enums/loginState';
 import {setUserData,initUserData} from './userActions';
-export const changeMode = createAction('change mode');
+export const changeMode = createAction('change loginMode');
 export const changeProcess = createAction('change process');
 export const changeProcessForm = createAction('change processform');
 export const setMessage = createAction('set message');
