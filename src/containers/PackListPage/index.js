@@ -56,6 +56,7 @@ export default class PackListPage extends React.Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.moveUp = this.moveUp.bind(this);
     this.moveDown = this.moveDown.bind(this);
+    this.go = this.go.bind(this);
   }
   componentWillMount(){
 
@@ -224,7 +225,7 @@ export default class PackListPage extends React.Component {
       const h1 = `${data.number? data.number :''}${data.nick_name ? `-${data.nick_name}`:''}-${data.pack_name}`
       const g= `/pack/${groupData.value}/${data.id}/${h1}`
       return(
-        <tr key={data.pack_name} className="item">
+        <tr key={data.pack_name} className="item" onClick={()=>this.go(g)}>
 
           <td>{data.nick_name}</td>
           <td>{data.number}</td>
@@ -237,6 +238,9 @@ export default class PackListPage extends React.Component {
         </tr>
       )
     }
+  }
+  go(href){
+    this.props.nav.push(href);
   }
   changeMode(){
     this.props.packActions.setEditMode();
