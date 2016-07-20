@@ -57,6 +57,7 @@
         &:hover .user-menu{
           transition: height .5s;
           height: 45px;
+          z-index: 1000;
         }
         .user-menu{
           border-radius: 0 0 0 5px ;

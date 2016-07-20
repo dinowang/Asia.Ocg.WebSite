@@ -21,7 +21,6 @@ export default class App extends React.Component {
     this.breadScroll = this.breadScroll.bind(this);
   }
   componentWillUpdate(nextProps){
-    console.log(nextProps.children === this.props.children)
     if(nextProps.children !== this.props.children){
       this.props.actions.setBreadcrumbsMode(false);
     }

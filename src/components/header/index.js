@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as userActions from '../../actions/userActions';
 import * as loginActions from '../../actions/loginActions';
+import {LoginStateEnum, LoginProcessEnum} from '../../enums/loginState';
 
 if (process.env.BROWSER) {
   require('./index.scss');
@@ -13,12 +14,8 @@ if (process.env.BROWSER) {
 class Header extends React.Component {
   constructor(){
     super();
-    this.changeMode = this.changeMode.bind(this);
     this.clickLogout = this.clickLogout.bind(this);
 
-  }
-  changeMode(){
-    this.props.loginActions.changeMode({mode:0});
   }
   clickLogout(){
     this.props.loginActions.requestLogout();
@@ -26,7 +23,7 @@ class Header extends React.Component {
   renderLogin(){
     return(
       <div className="login">
-        <Link to="/login" onClick={this.changeMode}>
+        <Link to="/login">
           <Icon name="sign-in"/>
           登入
         </Link>
