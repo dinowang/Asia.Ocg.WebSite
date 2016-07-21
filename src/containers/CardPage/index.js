@@ -63,10 +63,35 @@ export default class CardPage extends React.Component {
       }
     }
   }
+  getRutenUrl(){
+    const { card } = this.props;
+
+    let rutenURL = 'http://search.ruten.com.tw/search/s000.php?enc=u&searchfrom=searchf&t=0&k=';
+    let cardNumber = [];
+    card.pack.map((type)=>{
+      type.items.map((cardData)=>{
+        if(cardNumber.indexOf(cardData.card_number) === -1){
+          cardNumber.push(cardData.card_number)
+        }
+      })
+    })
+    console.log();
+    if(cardNumber.length > 5){
+      rutenURL += card.name;
+    }else{
+      rutenURL +=cardNumber.join('+or+');
+    }
+    return rutenURL;
+  }
   render(){
     const { card, cardActions, user } = this.props;
     const editCardHref = `/cardManage/Form/${card.id}`;
     const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
+
+
+    let rutenURL = this.getRutenUrl();
+    
+
 
     return (
       <div className="card" onScroll={this.handleScroll}>
@@ -75,7 +100,11 @@ export default class CardPage extends React.Component {
           <div className="info">
             <img src={card.image_url}></img>
               <ul>
-                <li>價格情報</li>
+                <li>
+                  <a className="ruten" href={rutenURL} target="_blank">
+                  價格情報
+                  </a>
+                </li>
                 <li>
                   準備中
                   <Icon name="check-circle"/>
