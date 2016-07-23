@@ -47,8 +47,8 @@ class PageList extends React.Component {
     }
     const prevStyle = current-1 <=0 ? 'disabled' : null;
     const nextStyle = current+1 >totalPage ? 'disabled' : null;
-    const prevHref =  prevStyle ? `${url}/${current}/${query}`:`${url}/${current-1}/${query}`;
-    const nextHref = nextStyle ? `${url}/${current}/${query}`: `${url}/${current+1}/${query}`;
+    const prevHref =  prevStyle ? `${url}${current}/${query}`:`${url}${current-1}/${query}`;
+    const nextHref = nextStyle ? `${url}${current}/${query}`: `${url}${current+1}/${query}`;
     const spanStyle = hideText ? {display:'none'} :{};
     const pageStyle = this.props.totalPage <=1 ?{display:'none'} :{};
     return(

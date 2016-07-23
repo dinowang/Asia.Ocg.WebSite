@@ -69,9 +69,9 @@ export default class SearchPage extends React.Component {
             <div className="board">
               <div className="sort">
                 排列方式：
+                <Icon className={search.display_mode=== SearchDisplayEnum.Image ? 'active' :''}  onMouseOver={()=>this.changeMode(SearchDisplayEnum.Image)} name="picture-o"/>
                 <Icon className={search.display_mode=== SearchDisplayEnum.ImageText ? 'active' :''} onMouseOver={()=>this.changeMode(SearchDisplayEnum.ImageText)} name="list-alt"/>
                 <Icon className={search.display_mode=== SearchDisplayEnum.Text ? 'active' :''}  onMouseOver={()=>this.changeMode(SearchDisplayEnum.Text)} name="th-list"/>
-                <Icon className={search.display_mode=== SearchDisplayEnum.Image ? 'active' :''}  onMouseOver={()=>this.changeMode(SearchDisplayEnum.Image)} name="picture-o"/>
 
               </div>
               <Icon style={loadingStyle} name="spinner" spin={true} size="2x"/>
