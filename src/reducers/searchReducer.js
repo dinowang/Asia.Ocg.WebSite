@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import SearchDisplayEnum from '../enums/SearchDisplayEnum';
+import SearchDisplayEnum from '../enums/searchDisplayEnum';
 
 const initialState ={
     loading: false,
