@@ -9,16 +9,14 @@ import { asyncConnect } from 'redux-async-connect';
 import Breadcrumbs from 'react-breadcrumbs';
 
 
-@asyncConnect([{
-  promise: async ({store: {dispatch}}) => {
-    await dispatch(actions.requestGetInfo());
-  }
-}])
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends React.Component {
   constructor(){
     super();
     this.breadScroll = this.breadScroll.bind(this);
+  }
+  componentWillMount(){
+    this.props.actions.requestGetInfo()
   }
   componentWillUpdate(nextProps){
     if(nextProps.children !== this.props.children){
