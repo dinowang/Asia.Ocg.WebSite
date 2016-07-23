@@ -1,5 +1,6 @@
 .deck-detailedit{
   margin-bottom:200px;
+  margin-top:40px;
   .func-bar{
     float: right;
   }
@@ -126,11 +127,14 @@
       }
     }
     .col{
+      span{
+
+      }
       &.close{
         max-height: 0;
         overflow: hidden;
         transition: all .2s linear;
-        >span{
+        >.fa{
           transition: all .2s linear;
           transform: rotate(0deg)
         }
@@ -138,7 +142,7 @@
       &.open{
         max-height: 500px;
         transition: all .5s linear;
-        >span{
+        >.fa{
           transition: all .2s linear;
           transform: rotate(180deg)
         }

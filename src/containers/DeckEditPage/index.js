@@ -19,7 +19,8 @@ if (process.env.BROWSER) {
   require('./index.scss');
 }
 
-class DeckEditPage extends React.Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class DeckEditPage extends React.Component {
   constructor(){
     super();
     this.changeName = this.changeName.bind(this);
@@ -193,7 +194,7 @@ class DeckEditPage extends React.Component {
   }
   render(){
     const {deck, search} = this.props;
-    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'block'}:{display:'none'};
+    const adminStyle = this.props.user.privilege === PermissionEnum.Admin ? {display:'inline'}:{display:'none'};
     const monster = CardHelper.Monster(this.props.deck.deckform.main_list);
     const magic = CardHelper.filter(this.props.deck.deckform.main_list,'魔');
     const trap = CardHelper.filter(this.props.deck.deckform.main_list,'罠');
@@ -266,26 +267,33 @@ class DeckEditPage extends React.Component {
           <h2>牌組資訊</h2>
             <div className={deck.collapse.info ? 'col close':'col open'}>
               <Icon value="info" onClick={this.triggerCollapse} name={deck.collapse.info? 'plus-square-o' : 'minus-square-o'} size="2x"/>
-              <p>禁卡表：<DropDown
+              <span>禁卡表：</span>
+              <DropDown
                 getValue={this.changeBan}
-                style={{top:'1px',width:"20%"}}
+                style={{top:'1px',width:"20%",marginTop:'10px'}}
                 default={ban_default}
-                values={deck.ban}/></p>
+                values={deck.ban}/>
+              <br/>
 
-              <p style={adminStyle}>分類：<DropDown
+              <span style={adminStyle}>分類：</span>
+              <DropDown
                 getValue={this.changeType}
-                style={{top:'1px',width:"70%"}}
+                style={{top:'1px',width:"70%",marginTop:'10px'}}
                 default={type_default}
-                values={deck.type}/></p>
-              <p className="kind-p">種類：
-                  <DropDown
-                    getValue={this.changeKind}
-                    style={deck.kindMode?{top:'1px',width:"73%"} :{display:'none'}}
-                    default={kind_default}
-                    values={deck.kind}/>
-                  <input onChange={this.changeKindName} style={deck.kindMode ? {display:'none'}: {}} className="kind" value={deck.deckform.kind_name}/>
-                  <span className="other" onClick={this.changeKintdDislay}>其他種類</span>
-              </p>
+                values={deck.type}/>
+              <br/>
+
+
+              <span className="kind-p">種類：</span>
+              <DropDown
+                getValue={this.changeKind}
+                style={deck.kindMode?{top:'1px',width:"73%",marginTop:'10px'} :{display:'none'}}
+                default={kind_default}
+                values={deck.kind}/>
+              <input onChange={this.changeKindName} style={deck.kindMode ? {display:'none'}: {}} className="kind" value={deck.deckform.kind_name}/>
+              <span className="other" onClick={this.changeKintdDislay}>其他種類</span>
+              <br/>
+
 
               <p>怪獸：<span>{monster.mCount} 枚 / {monster.tCount}種類</span></p>
               <p>魔法：<span>{magic.mCount} 枚 / {magic.tCount}種類</span></p>
@@ -324,8 +332,3 @@ DeckEditPage.propTypes ={
   actions:PropTypes.object.isRequired,
   deck:PropTypes.object.isRequired
 };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeckEditPage);
