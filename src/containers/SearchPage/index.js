@@ -13,7 +13,7 @@ import {
 import * as searchActions from '../../actions/searchActions';
 import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
-import SearchDisplayEnum from '../../enums/SearchDisplayEnum';
+import SearchDisplayEnum from '../../enums/searchDisplayEnum';
 if (process.env.BROWSER) {
   require('./index.scss');
 }
