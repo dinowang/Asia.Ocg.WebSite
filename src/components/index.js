@@ -7,6 +7,7 @@ import PageList from './pageList';
 import LinkButton from './linkButton';
 import SearchRText from './searchRText';
 import SearchRImage from './searchRImage';
+import SearchRImageText from './searchRImageText';
 import LoginForm from './loginForm';
 import ForgetForm from './forgetForm';
 import RegisterForm from './registerForm';
@@ -32,6 +33,7 @@ export {
   PageList,
   LinkButton,
   SearchRText,
+  SearchRImageText,
   SearchRImage,
   ForgetForm,
   RegisterForm,

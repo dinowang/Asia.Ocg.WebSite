@@ -1,8 +1,10 @@
 import { handleActions } from 'redux-actions';
+import SearchDisplayEnum from '../enums/SearchDisplayEnum';
+
 const initialState ={
     loading: false,
     query:"",
-    display_mode: 0,
+    display_mode: SearchDisplayEnum.ImageText,
     current_page:1,
     total_page:0,
     total_count: null,

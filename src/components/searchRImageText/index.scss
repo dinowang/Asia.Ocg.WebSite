@@ -1,0 +1,53 @@
+.search-RImageText{
+  // border:1px solid #;
+  .card-list{
+    height:125px;
+    margin-bottom: 15px;
+    img{
+      height: 120px;
+      min-height: 120px;
+      min-width:85px;
+    }
+    .card-info{
+      display: inline-block;
+      height:125px;
+      width:calc(100% - 118px);
+    }
+    a{
+      line-height: 1.5rem;
+      padding-left: 10px;
+      font-size: 1.3rem;
+      color:#3c8dbc;
+      text-decoration: none;
+    }
+    ul{
+      li{
+        display: inline-block;
+        border:1px solid #ddd;
+        border-bottom: none;
+        padding: 10px;
+        width:16.666%;
+        &:empty{
+          background-color: red;
+          display: none;
+        }
+
+      }
+      .number{
+        top: 5px;
+        height: 42px;
+        line-height: 20px;
+        vertical-align:top;
+        // min-height: 42.5px;
+      }
+    }
+    span{
+      border: 1px solid #ddd;
+      overflow: hidden;
+      display: block;
+      padding: 10px;
+      height: 49%;
+    }
+  }
+
+}

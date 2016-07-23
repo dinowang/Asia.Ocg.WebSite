@@ -7,12 +7,13 @@ import {
         Icon,
         PageList,
         SearchRText,
+        SearchRImageText,
         SearchRImage
       } from '../../components';
 import * as searchActions from '../../actions/searchActions';
 import * as cardActions from '../../actions/cardActions';
 import * as appActions from '../../actions/appActions';
-
+import SearchDisplayEnum from '../../enums/SearchDisplayEnum';
 if (process.env.BROWSER) {
   require('./index.scss');
 }
@@ -68,8 +69,10 @@ export default class SearchPage extends React.Component {
             <div className="board">
               <div className="sort">
                 排列方式：
-                <Icon className={search.display_mode=== 0 ? 'active' :''} onMouseOver={()=>this.changeMode(0)} name="picture-o"/>
-                <Icon className={search.display_mode=== 1 ? 'active' :''}  onMouseOver={()=>this.changeMode(1)} name="th-list"/>
+                <Icon className={search.display_mode=== SearchDisplayEnum.ImageText ? 'active' :''} onMouseOver={()=>this.changeMode(SearchDisplayEnum.ImageText)} name="list-alt"/>
+                <Icon className={search.display_mode=== SearchDisplayEnum.Text ? 'active' :''}  onMouseOver={()=>this.changeMode(SearchDisplayEnum.Text)} name="th-list"/>
+                <Icon className={search.display_mode=== SearchDisplayEnum.Image ? 'active' :''}  onMouseOver={()=>this.changeMode(SearchDisplayEnum.Image)} name="picture-o"/>
+
               </div>
               <Icon style={loadingStyle} name="spinner" spin={true} size="2x"/>
               <PageList
@@ -83,8 +86,9 @@ export default class SearchPage extends React.Component {
               <div className="clear"></div>
                 {(() => {
               switch (search.display_mode) {
-                case 0:   return <SearchRImage data={search.items} actions={cardActions}/>;
-                case 1:   return <SearchRText data={search.items} actions={cardActions}/>;
+                case SearchDisplayEnum.ImageText:   return <SearchRImageText data={search.items} actions={cardActions}/>;
+                case SearchDisplayEnum.Image:   return <SearchRImage data={search.items} actions={cardActions}/>;
+                case SearchDisplayEnum.Text:   return <SearchRText data={search.items} actions={cardActions}/>;
               }
                 })()}
                 <PageList
