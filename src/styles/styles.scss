@@ -41,6 +41,7 @@ html,div[data-reactroot],#app{
     position: absolute;
     width: 100%;
     z-index: 999;
+    overflow-x: hidden;
     a{
       color:#3c8dbc;
     }
