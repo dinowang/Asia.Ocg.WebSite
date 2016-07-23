@@ -35,9 +35,12 @@ class DeckPage extends React.Component {
   }
 
   changeType(value){
+
     this.props.actions.changeType(value);
     this.props.actions.requestDeckTypePage(parseInt(1));
-    this.props.appActions.setTitle(`${value}-牌組區`);
+    setTimeout(()=>{
+      this.props.appActions.setTitle(`${value}-牌組區`);
+    })
   }
   componentWillMount(){
     this.props.actions.requestDeckList();
