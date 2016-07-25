@@ -51,7 +51,7 @@ export default class BanPage extends React.Component {
         this.props.banActions.requestBan(data.id);
   }
   renderBanList(data){
-    const href = `/ban/${data.id}`
+    const href = `/ban/${data.id}/${data.name}`
     return(
       <li key={data.id}>
         <Link onClick={()=>this.changeBan(data)} to={href}>
